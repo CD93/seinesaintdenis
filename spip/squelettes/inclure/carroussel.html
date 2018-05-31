@@ -1,0 +1,34 @@
+<div class="actuemag">
+	<div class="notreactussd lienblank">
+		<a href="http://lemag.seinesaintdenis.fr" target="_blank">À LA UNE</a>
+    <button class="btn btn-xs" id="play-carousel" ><span class="texte">lancer le carousel</span><span class="glyphicon glyphicon-play"></span></button>
+    <button class="btn btn-xs" id="pause-carousel" ><span class="texte">arrêter le carousel</span><span class="glyphicon glyphicon-pause"></span></button>
+	</div>
+	<div id="carousel-actu-emag" class="carousel slide" data-interval="6000" data-ride="carousel">
+		<!-- Indicators -->
+		[(#REM)<INCLURE{fond=inclure/flux/fluxcarrousselssd}{env} />]
+		<!-- Wrapper for slides -->
+		<div class="carousel-inner">
+			<INCLURE{fond=inclure/flux/fluxcarrousselssdsuite}{env} />
+		</div>
+
+		[(#REM)
+		<div id="carousel-actu-emag2" class="carousel slide visible-xs">
+			<!-- Wrapper for slides -->
+			<div class="carousel-inner">
+				<INCLURE{fond=inclure/flux/fluxcarrousselssdter}{env} />
+			</div>
+		</div>
+		]
+		<!-- Left and right controls -->
+	  <a class="left carousel-control" href="#carousel-actu-emag" data-slide="prev">
+	    <span class="glyphicon glyphicon-chevron-left"></span>
+	    <span class="sr-only">Précédent</span>
+	  </a>
+	  <a class="right carousel-control" href="#carousel-actu-emag" data-slide="next">
+	    <span class="glyphicon glyphicon-chevron-right"></span>
+	    <span class="sr-only">Suivant</span>
+	  </a>
+	</div>
+	<div class="break"></div>
+</div>

@@ -1,0 +1,14 @@
+#SET{url,http://www.facebook.com/feeds/page.php?format=rss20&id=1394171967487483}
+<B_podcasts>
+	<h2>Derni&egrave;res nouvelles de Facebook</h2>
+<ul id="flux_rss">
+	<BOUCLE_podcasts(DATA){source rss, #GET{url}|copie_locale{modif}}{0,5}{"<hr class='sepacool'/>"}>
+	<li>
+		<strong>Le [(#VALEUR{date}|timestamp2datespip|affdate)]</strong>
+		<h4><a href="#VALEUR{url}">#VALEUR{titre}</a></h4>
+		[<p>(#VALEUR{descriptif}|nettoyer_url_fb)</p>]
+
+	</li>
+	</BOUCLE_podcasts>
+</ul>
+<//B_podcasts>

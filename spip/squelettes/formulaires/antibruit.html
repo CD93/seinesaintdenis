@@ -1,0 +1,55 @@
+<div class='formulaire_spip formulaire_antibruit'>
+	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	
+	[(#ENV{editable}|oui)
+		<form action='#ENV{action}' method='post'>
+		<div>
+			<h3>Estimez votre subvention</h3>
+			<br />
+					
+			#ACTION_FORMULAIRE{#ENV{action}}			
+			
+					
+			<fieldset>
+			<legend>Votre type d'habitation</legend>
+				<ul>
+					<li>
+						<input class='radio' type='radio' name='type' value='appart' [(#ENV{type}|=={appart}|oui)checked="checked"] />
+						<label class='radio'>Vous habitez en appartement</label>
+					</li>
+					<li>
+						<input class='radio' type='radio' name='type' value='maison' [(#ENV{type}|=={maison}|oui)checked="checked"] />
+						<label class='radio'>vous habitez en pavillon</label>
+					</li>
+				</ul>
+			</fieldset>
+			<fieldset>
+			<legend>Votre exposition au bruit</legend>
+				<ul>
+					<li>
+						<input class='radio' type='radio' name='cas' value='1' [(#ENV{cas}|=={1}|oui)checked="checked"] />
+						<label class='radio'>Vous appartenez au cas 1 : c'est le cas le plus fr&eacute;quent</label>
+						<br/><em>Seuils équivalents au PNB (supérieur à 70 db(A) de jour ou 65 dB(A) de nuit)</em>
+					</li>
+					<li>
+						<input class='radio' type='radio' name='cas' value='2' [(#ENV{cas}|=={2}|oui)checked="checked"] />
+						<label class='radio'>Vous appartenez au cas 2 : très peu de logements sont concern&eacute;s par ce cas</label>
+						<br/><em>Seuils sup&eacute;rieurs au PNB (supérieur à 80 db(A) de jour ou 75 dB(A) de nuit)</em>
+					</li>
+				</ul>
+			</fieldset>
+			<label class='piece'>Nombre de pièce(s) principale(s) expos&eacute;e(s) au bruit de l'ex-RN 3</label>
+			<br />					
+			<input class='text' type='text' name='piece' id='piece' value='#ENV{piece}' /><br/>
+			<label class='cuisine'>Nombre de cuisine(s) exposée(s) au bruit de l'ex-RN 3</label>
+			<br />					
+			<input class='text' type='text' name='cuisine' id='cuisine' value='#ENV{cuisine}' /><br/>
+			<label class='devis'>Montant du devis TTC</label>
+			<br />					
+			<input class='text' type='text' name='devis' id='devis' value='#ENV{devis}' /><br/>
+			<p class='boutons'><input type='submit' class='submit' value="Lancer l'estimation" /></p>
+		</div>
+		</form>
+	]
+	[<p class='reponse_formulaire reponse_formulaire_ok texteencadre-spip'><strong>(#ENV*{message_ok})</strong></p>]
+</div>

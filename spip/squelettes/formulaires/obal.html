@@ -1,0 +1,262 @@
+<script type="text/javascript">
+function deplie(id) {
+	$("#"+id).show();
+}
+</script>
+<div class="ajax">
+<div class='formulaire_spip formulaire_obal salim'>
+	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	[(#ENV*{message_ok})]
+	[(#ENV{editable}|oui)
+		<form action='#ENV{action}' method='post'>
+			<h3>Saisie des ressources et de la composition de vos obligés alimentaires.</h3>
+			<br />
+			<em>Pour remplir l’estimation, il faut les ressources mensuelles de chaque obligé alimentaire ainsi que le nombre de personnes au foyer.
+			Attention le nombre d’obligé alimentaire intégré à cette estimation est limité à 10.</em>
+			<br />
+			<br />
+			#ACTION_FORMULAIRE{#ENV{action}}
+			<h3>&nbsp;&nbsp;1er Obligé alimentaire</h3>
+				<ul>
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{ressources1}}
+					<li class="editer_ressources1 obligatoire[(#GET{erreurs}|oui)erreur]">	
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						<label class='text'><a href="javascript:deplie('ressourcesMensuelles');">Ressources mensuelles</a></label>
+						<br />
+						<input class='text' type='text' name='ressources1' id='ressources1' value='#ENV{ressources1}' />					
+						<p id="ressourcesMensuelles" style='display: none;'>
+							<em>
+								<br />
+								Pour les obligés alimentaires, les ressources mensuelles prises en compte sont : les salaires et assimilés, les pensions, les retraites, les rentes, les bénéfices industriels et commerciaux (BIC), les revenus de capitaux mobiliers, les revenus fonciers... (se baser sur les revenus figurant sur le dernier avis d'imposition).
+								<br />
+								<br />
+								Il convient de spécifier que ce sont les revenus du foyer qui sont pris en compte quand l’obligé alimentaire est marié mais non les revenus de la personne avec laquelle il a conclu un PACS ou ceux de son concubin lorsqu’il a conclu un PACS ou vit en concubinage.	
+							</em>
+						</p>
+					</li>
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{nbrPersonnes1}}
+					<li class="editer_nbrPersonnes1 obligatoire[(#GET{erreurs}|oui)erreur]">
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						<label class='text'><a href="javascript:deplie('nbrPersonnesFoyer');">Nombre de personnes au foyer</a></label>
+						<br />					
+							<input class='text' type='text' name='nbrPersonnes1' id='nbrPersonnes1' value='#ENV{nbrPersonnes1}' />					
+						<p id="nbrPersonnesFoyer" style='display: none;'>
+							<em><br />Seuls les enfants de 0 à 16 ans sont pris en compte. Quand ils sont âgés de 17 à 25 ans il est nécessaire de fournir un certificat de scolarité (ex : un enfant vivant chez ses parents à 23 ans mais n'étant pas scolarisé ne sera pas pris en compte dans le calcul).</em>
+						</p>
+					</li>
+				</ul>
+			<br />
+			<br />
+			
+			<h3><a href="javascript:deplie('obal2');">&nbsp;&nbsp;2ème Obligé alimentaire</a></h3>
+			<div id="obal2" style='display: none;'>
+				<ul>
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{ressources2}}
+					<li class="editer_ressources2 obligatoire[(#GET{erreurs}|oui)erreur]">	
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						<label class='text'>Ressources mensuelles</label>
+						<br />
+						<input class='text' type='text' name='ressources2' id='ressources2' value='#ENV{ressources2}' />
+					</li>
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{nbrPersonnes2}}
+					<li class="editer_nbrPersonnes2 obligatoire[(#GET{erreurs}|oui)erreur]">
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						<label class='text'>Nombre de personnes au foyer</label>
+						<br />					
+						<input class='text' type='text' name='nbrPersonnes2' id='nbrPersonnes2' value='#ENV{nbrPersonnes2}' />
+					</li>
+				</ul>
+			<br />
+			<br />
+
+			<h3><a href="javascript:deplie('obal3');">&nbsp;&nbsp;3ème Obligé alimentaire</a></h3>
+			<div id="obal3" style='display: none;'>
+				<ul>
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{ressources3}}
+					<li class="editer_ressources3 obligatoire[(#GET{erreurs}|oui)erreur]">	
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						<label class='text'>Ressources mensuelles</label>
+						<br />
+						<input class='text' type='text' name='ressources3' id='ressources3' value='#ENV{ressources3}' />
+					</li>
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{nbrPersonnes3}}
+					<li class="editer_nbrPersonnes3 obligatoire[(#GET{erreurs}|oui)erreur]">
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						<label class='text'>Nombre de personnes au foyer</label>
+						<br />					
+						<input class='text' type='text' name='nbrPersonnes3' id='nbrPersonnes3' value='#ENV{nbrPersonnes3}' />
+					</li>
+				</ul>
+			<br />
+			<br />
+			
+			<h3><a href="javascript:deplie('obal4');">&nbsp;&nbsp;4ème Obligé alimentaire</a></h3>
+			<div id="obal4" style='display: none;'>
+				<ul>
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{ressources4}}
+					<li class="editer_ressources4 obligatoire[(#GET{erreurs}|oui)erreur]">	
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						<label class='text'>Ressources mensuelles</label>
+						<br />
+						<input class='text' type='text' name='ressources4' id='ressources4' value='#ENV{ressources4}' />
+					</li>
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{nbrPersonnes4}}
+					<li class="editer_nbrPersonnes4 obligatoire[(#GET{erreurs}|oui)erreur]">
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						<label class='text'>Nombre de personnes au foyer</label>
+						<br />					
+						<input class='text' type='text' name='nbrPersonnes4' id='nbrPersonnes4' value='#ENV{nbrPersonnes4}' />
+					</li>
+				</ul>
+			<br />
+			<br />
+				
+			<h3><a href="javascript:deplie('obal5');">&nbsp;&nbsp;5ème Obligé alimentaire</a></h3>
+			<div id="obal5" style='display: none;'>
+				<ul>
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{ressources5}}
+					<li class="editer_ressources5 obligatoire[(#GET{erreurs}|oui)erreur]">	
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						<label class='text'>Ressources mensuelles</label>
+						<br />
+						<input class='text' type='text' name='ressources5' id='ressources5' value='#ENV{ressources5}' />
+					</li>
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{nbrPersonnes5}}
+					<li class="editer_nbrPersonnes5 obligatoire[(#GET{erreurs}|oui)erreur]">
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						<label class='text'>Nombre de personnes au foyer</label>
+						<br />					
+						<input class='text' type='text' name='nbrPersonnes5' id='nbrPersonnes5' value='#ENV{nbrPersonnes5}' />
+					</li>
+				</ul>
+			<br />
+			<br />
+				
+			<h3><a href="javascript:deplie('obal6');">&nbsp;&nbsp;6ème Obligé alimentaire</a></h3>
+			<div id="obal6" style='display: none;'>
+				<ul>
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{ressources6}}
+					<li class="editer_ressources6 obligatoire[(#GET{erreurs}|oui)erreur]">	
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						<label class='text'>Ressources mensuelles</label>
+						<br />
+						<input class='text' type='text' name='ressources6' id='ressources6' value='#ENV{ressources6}' />
+					</li>
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{nbrPersonnes6}}
+					<li class="editer_nbrPersonnes6 obligatoire[(#GET{erreurs}|oui)erreur]">
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						<label class='text'>Nombre de personnes au foyer</label>
+						<br />					
+						<input class='text' type='text' name='nbrPersonnes6' id='nbrPersonnes6' value='#ENV{nbrPersonnes6}' />
+					</li>
+				</ul>
+			<br />
+			<br />
+				
+			<h3><a href="javascript:deplie('obal7');">&nbsp;&nbsp;7ème Obligé alimentaire</a></h3>
+			<div id="obal7" style='display: none;'>
+				<ul>
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{ressources7}}
+					<li class="editer_ressources7 obligatoire[(#GET{erreurs}|oui)erreur]">	
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						<label class='text'>Ressources mensuelles</label>
+						<br />
+						<input class='text' type='text' name='ressources7' id='ressources7' value='#ENV{ressources7}' />
+					</li>
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{nbrPersonnes7}}
+					<li class="editer_nbrPersonnes7 obligatoire[(#GET{erreurs}|oui)erreur]">
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						<label class='text'>Nombre de personnes au foyer</label>
+						<br />					
+						<input class='text' type='text' name='nbrPersonnes7' id='nbrPersonnes7' value='#ENV{nbrPersonnes7}' />
+					</li>
+				</ul>
+			<br />
+			<br />
+				
+			<h3><a href="javascript:deplie('obal8');">&nbsp;&nbsp;8ème Obligé alimentaire</a></h3>
+			<div id="obal8" style='display: none;'>
+				<ul>
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{ressources8}}
+					<li class="editer_ressources8 obligatoire[(#GET{erreurs}|oui)erreur]">	
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						<label class='text'>Ressources mensuelles</label>
+						<br />
+						<input class='text' type='text' name='ressources8' id='ressources8' value='#ENV{ressources8}' />
+					</li>
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{nbrPersonnes8}}
+					<li class="editer_nbrPersonnes8 obligatoire[(#GET{erreurs}|oui)erreur]">
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						<label class='text'>Nombre de personnes au foyer</label>
+						<br />					
+						<input class='text' type='text' name='nbrPersonnes8' id='nbrPersonnes8' value='#ENV{nbrPersonnes8}' />
+					</li>
+				</ul>
+			<br />
+			<br />
+
+			<h3><a href="javascript:deplie('obal9');">&nbsp;&nbsp;9ème Obligé alimentaire</a></h3>
+			<div id="obal9" style='display: none;'>
+				<ul>
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{ressources9}}
+					<li class="editer_ressources9 obligatoire[(#GET{erreurs}|oui)erreur]">	
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						<label class='text'>Ressources mensuelles</label>
+						<br />
+						<input class='text' type='text' name='ressources9' id='ressources9' value='#ENV{ressources9}' />
+					</li>
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{nbrPersonnes9}}
+					<li class="editer_nbrPersonnes9 obligatoire[(#GET{erreurs}|oui)erreur]">
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						<label class='text'>Nombre de personnes au foyer</label>
+						<br />					
+						<input class='text' type='text' name='nbrPersonnes9' id='nbrPersonnes9' value='#ENV{nbrPersonnes9}' />
+					</li>
+				</ul>
+			<br />
+			<br />
+					
+			<h3><a href="javascript:deplie('obal10');">10ème Obligé alimentaire</a></h3>
+			<div id="obal10" style='display: none;'>
+					<ul>
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{ressources10}}
+					<li class="editer_ressources10 obligatoire[(#GET{erreurs}|oui)erreur]">	
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						<label class='text'>Ressources mensuelles</label>
+						<br />
+						<input class='text' type='text' name='ressources10' id='ressources10' value='#ENV{ressources10}' />
+					</li>
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{nbrPersonnes10}}
+					<li class="editer_nbrPersonnes10 obligatoire[(#GET{erreurs}|oui)erreur]">
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						<label class='text'>Nombre de personnes au foyer</label>
+						<br />					
+						<input class='text' type='text' name='nbrPersonnes10' id='nbrPersonnes10' value='#ENV{nbrPersonnes10}' />
+					</li>
+				</ul>
+			<br />
+			<br />
+			</div>
+			</div>
+			</div>
+			</div>
+			</div>
+			</div>
+			</div>
+			</div>
+			</div>
+	
+			<br />
+			<br />
+			<p class='boutons'><input type='submit' class='submit' value="Lancer l'estimation" /></p>		
+		</form>
+	]
+	[(#ENV{editable}|non)
+		<form action='#ENV{action}' method='post'>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input class='text' type='hidden' name='editable' id='editable' value='true' />
+		<p class='boutons'><input type='submit' class='submit' value="Refaire une estimation" /></p>	
+		</form>
+	]
+</div>
+</div>

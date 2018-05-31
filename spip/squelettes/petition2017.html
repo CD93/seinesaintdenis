@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<BOUCLE_article(ARTICLES){id_article=13817}>
+<head>
+<INCLURE{fond=inc/head}{env} />
+<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" rel="stylesheet">
+<style>
+	#central {
+
+
+	}
+	#central container {
+		max-width: 650px;
+}
+
+#lien_p {
+	//max-width: 800px;
+	//text-align: center;
+	//margin: 0 auto;
+	
+}
+	#lien_p a {
+	color: #05519e;
+	font-weight: 700;
+	font-size: 1.2em;
+	margin: 0;
+	font-weight: 400;
+}
+
+#central h1 {
+	font-size: 2.5em;
+	line-height: 1.1em;
+	font-weight: 900;
+	font-family: 'Roboto Slab', serif;
+}
+</style>
+</head>
+<body>
+<div class="main" id="central">
+	<div class="contenu" id="pagesecteur#ID_SECTEUR">
+		<div class="container">
+			<div class="col-md-24"> <!-- début dossier une  -->
+				<h1 class="#EDIT{titre}">#TITRE</h1>
+				[<div class="chapoune">
+					<span class="glyphicon glyphicon-minus"></span>
+					<div class="#EDIT{chapo}">(#CHAPO)</div>
+					<span class="glyphicon glyphicon-minus"></span>
+				</div>]
+				[(#SOUSTITRE)]
+				<div class="#EDIT{texte}">#TEXTE</div>
+				<INCLURE{fond=inclure/bouton-partage}{env} />
+			</div> <!-- fin dossier une  -->
+		</div>
+	</div>
+</div>
+<INCLURE{fond=inclure/visites}{env} />
+</body>
+</html>
+</BOUCLE_article>

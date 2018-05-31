@@ -1,0 +1,20 @@
+#pagepfr h3 {
+	//background-color: #E2E44A;
+	padding:  5px 10px;
+	margin-bottom: 0;
+}
+#pagepfr .infodefi img {
+	float:left;
+	margin-right: 10px;
+}
+a.btn {
+	float:right;
+	display: inline-block;
+}
+#pagepfr .blocdefi {
+    border: 1px solid #e0d9cf;
+    padding: 10px;
+    margin-bottom: 15px;
+    margin-top: 0;
+   background-color: #eee;
+}

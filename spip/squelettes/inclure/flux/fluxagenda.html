@@ -1,0 +1,24 @@
+#SET{url,http://lemag.seinesaintdenis.fr/spip.php?page=fluxagenda}
+<BOUCLE_art_rdv(DATA)
+{source simplexml, #GET{url}|copie_locale{modif}}
+{datapath root/children/article}{0,1}>
+<div class="col-md-24 rdv-item">
+  <a class="rdv-lien" href="#VALEUR{children/link/0/text}">
+    <div class="rdv">
+      <div class="imgwrap">
+        [<img src="(#VALEUR{children/image/0/text}|copie_locale)" />]
+      </div>
+      <div class="caption-front par1">
+        <span class="date">#VALEUR{children/theme/0/text}</span>
+        <h3 class="date" >#VALEUR{children/titre/0/text}</h3>
+        <span class="date">#VALEUR{children/eve/0/text}</span>
+        <span>#VALEUR{children/description/0/text}</span>
+      </div>
+      <div class="caption-back">
+        <div class="trianglerdvtest">#VALEUR{children/theme/0/text}</div>
+      </div>
+    </div>
+    <div class="lienrdv">#VALEUR{children/titre/0/text}</div>
+  </a>
+</div>
+</BOUCLE_art_rdv>

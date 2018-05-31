@@ -1,0 +1,40 @@
+<BOUCLE_doc(DOCUMENTS){id_document=#ENV{id_image}}>
+#SET{doc,#URL_DOCUMENT}
+</BOUCLE_doc>
+#SET{debut_artquiz,#ENV{debut_artquiz}|plus{1}}
+	<div class="formulaire_spip formulaire_quiz_choix_simple">
+		[<div class='reponse_formulaire reponse_formulaire_ok'><h3>(#ENV*{message_ok})</h3></div>]
+		<BOUCLE_cond(CONDITION){si #ENV{editform}|=={oui}}>
+		<form action='[(#ENV{action}|parametre_url{'debut_artquiz',#GET{debut_artquiz,1}})]' method='post' role="form" name="formulaire_quiz_choix_simple">
+			#ACTION_FORMULAIRE{#ENV{action},#FORM}
+			<div class="form-group">
+				<div id="pos_g_#ENV{id_image}" class="relative-position-admin" style="position: relative;" >
+					<img id="image_bg_#ENV{id_image}" class="image_bg" src="#GET{doc}" alt=""/>
+					<img alt="to_place" id="image_tp_#ENV{id_image}" class="image_tp ui-draggable" src="#CHEMIN{images/devisu/marqueur_valide.png}" style="position: absolute; left: 55px; top: 55px;">
+				</div>
+				<br/>
+				<input type="hidden" name="position_x_public_#ENV{id_image}" value="" />
+				<input type="hidden" name="position_y_public_#ENV{id_image}" value="" />
+				<input type="hidden" name="taille_x_img_#ENV{id_image}" value="" />
+				<input type="hidden" name="taille_y_img_#ENV{id_image}" value="" />
+				<input type="submit" class="fleche_valider" name="valider" value="Valider"/>
+				<input type="hidden" value="non" name="editform" />
+			</div>
+		</form>
+		</BOUCLE_cond>
+	</div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	var id= #ENV{id_image};
+	$("#image_tp_"+id).draggable({
+		drag : function(evt , ui) {
+			$("input[name='position_x_public_"+id+"']").val(parseInt( $(this).css('left').split('px') ) + ( $("#image_tp_"+id).width()/2 ) );
+			$("input[name='position_y_public_"+id+"']").val(parseInt( $(this).css('top').split('px') ) + $("#image_tp_"+id).height() );
+			$("input[name='taille_x_img_"+id+"']").val(parseInt( $("#image_bg_"+id).width() ) );
+			$("input[name='taille_y_img_"+id+"']").val(parseInt( $("#image_bg_"+id).height() ) );
+		},
+	    containment: "parent"
+	 });
+});
+</script>

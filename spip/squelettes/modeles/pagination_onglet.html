@@ -1,0 +1,10 @@
+<BOUCLE_art(ARTICLES){id_rubrique}{par num titre}>
+	<BOUCLE_doc(DOCUMENTS){id_article}{extension=csv}>
+	#SET{doc,#ID_DOCUMENT}
+	</BOUCLE_doc>
+	[(#COMPTEUR_BOUCLE|=={1}|?{'',' '})
+	[(#COMPTEUR_BOUCLE|=={22}|?{'',' '})
+	<a id="pagequestion#COMPTEUR_BOUCLE" rel="nofollow" class="lien_pagination [(#ENV{position}|plus{1}|=={#COMPTEUR_BOUCLE}|?{' encours',''})] [(#SESSION{quiz#GET{doc}}|is_null|?{'no',''})]" href="#URL_RUBRIQUE?debut_artquiz=[(#COMPTEUR_BOUCLE|moins{1})]#pagination_artquiz">[(#COMPTEUR_BOUCLE|moins{1}|<{10}|?{0})][(#COMPTEUR_BOUCLE|moins{1})]</a>
+]]
+</BOUCLE_art>
+

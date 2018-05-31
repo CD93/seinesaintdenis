@@ -1,0 +1,23 @@
+<paquet
+	prefix="devisu"
+	categorie="communication"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.19;3.1.*]"
+	logo=""
+	documentation=""
+>
+	<!--
+		Paquet genere le 2015-06-10 10:33:09
+	-->
+
+	<nom>devisu</nom>
+
+	<auteur>samuel</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<pipeline nom="autoriser" inclure="devisu_autorisations.php" /> 
+
+
+</paquet>

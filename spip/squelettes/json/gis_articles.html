@@ -1,0 +1,14 @@
+		<BOUCLE_art(ARTICLES){gis}{id_article ?}{id_rubrique ?}{id_secteur ?}{id_mot ?}{id_groupe ?}{id_auteur ?}{recherche ?}{0, #ENV{limit}}{","}>
+		#SET{titre,"<a href='"}
+		#SET{titre,#GET{titre}|concat{#URL_ARTICLE|url_absolue}|concat{"'>"}}
+		#SET{titre,#GET{titre}|concat{#TITRE_GIS*|sinon{#TITRE*}|concat{#LOGO_ARTICLE|image_reduire{64,64}|image_recadre{64,64,center}}|extraire_multi|supprimer_numero}}
+		#SET{titre,#GET{titre}|concat{"</a>"}}
+		{"type": "Feature",
+		"geometry": {"type": "Point", "coordinates": [#LON, #LAT]},
+		"id":"#ID_GIS",
+		"properties": {
+			"url":[(#URL_ARTICLE|url_absolue|json_encode)],
+			"title":[(#GET{titre}|json_encode)],
+			"description":[(#DESCRIPTIF_GIS|sinon{#DESCRIPTIF}|json_encode)][
+			(#LOGO_GIS|gis_icon_properties)]
+		}}</BOUCLE_art>

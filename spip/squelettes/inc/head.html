@@ -1,0 +1,65 @@
+[(#REM)
+	Head standard de toutes les pages ;
+	les elements specifiques (title, description) figurent dans chaque squelette
+]
+<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+
+[(#REM) Lien vers le flux RSS du site ]
+[<link rel="alternate" type="application/rss+xml" title="<:syndiquer_site:>" href="(#URL_PAGE{backend})" />]
+
+[(#REM) 1. Base CSS ]
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+[(#REM) 2. Style SPIP et ses plugins ]
+[<link rel="stylesheet" href="(#CHEMIN{css/spip.css}|direction_css)" type="text/css" />]
+#INSERT_HEAD_CSS
+<BOUCLE_article(ARTICLES){id_article=#ID_ARTICLE}>
+#SET{intro,(#DESCRIPTIF)}
+<link rel="image_src" href="#URL_SITE_SPIP/[(#LOGO_ARTICLE|image_passe_partout{300,300}
+    |image_recadre{300,300,'center','transparent'}|extraire_attribut{src})]" />
+	<meta property="og:title" content="#TITRE"/>
+    <meta property="og:url" content="[(#URL_ARTICLE|url_absolue)]"/>
+    <meta property="og:image" content="#URL_SITE_SPIP/[(#LOGO_ARTICLE|image_passe_partout{300,300}|image_recadre{300,300,'center','transparent'}|extraire_attribut{src})]"/>
+    <meta property="og:site_name" content="#NOM_SITE_SPIP"/>
+    <meta property="og:description" content="[(#DESCRIPTIF|attribut_html)]"/>
+</BOUCLE_article>
+<BOUCLE_rubtete(RUBRIQUES){id_rubrique=#ID_RUBRIQUE}>
+#SET{intro,(#DESCRIPTIF)}
+<link rel="image_src" href="#URL_SITE_SPIP/[(#LOGO_RUBRIQUE|image_passe_partout{300,300}|image_recadre{300,300,'top left','transparent'}|extraire_attribut{src})]" />
+	<meta property="og:title" content="#TITRE"/>
+    <meta property="og:url" content="[(#URL_RUBRIQUE|url_absolue)]"/>
+    <meta property="og:image" content="#URL_SITE_SPIP/[(#LOGO_RUBRIQUE|image_passe_partout{300,300}|image_recadre{300,300,'center','transparent'}|extraire_attribut{src})]"/>
+    <meta property="og:site_name" content="#NOM_SITE_SPIP"/>
+    <meta property="og:description" content="[(#DESCRIPTIF|attribut_html)]"/>
+</BOUCLE_rubtete>
+[<link rel="stylesheet" href="(#CHEMIN{bootstrap/css/bootstrap.min.css})" type="text/css" />]
+[<link rel="stylesheet" href="(#CHEMIN{bootstrap/css/bootstrap-responsive.min.css})" type="text/css" />]
+[<link rel="stylesheet" href="(#CHEMIN{css/habillage.css}|direction_css|timestamp)" type="text/css" />]
+[<link rel="stylesheet" href="(#CHEMIN{css/revenge.css})" type="text/css" />]
+#SET{urlcssbootstrap,(#URL_SITE_SPIP|issecure|?{"https://","http://"}|concat{"netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"})}
+<link href='[(#GET{urlcssbootstrap}|copie_locale)]' rel='stylesheet' type='text/css'>
+#SET{urlcssgoogle,(#URL_SITE_SPIP|issecure|?{"https://","http://"}|concat{"fonts.googleapis.com/css?family=Merriweather:400,700,900,300italic,300"})}
+<link href='[(#GET{urlcssgoogle}|copie_locale)]' rel='stylesheet' type='text/css'>
+
+
+[(#REM)
+	Balise permettant aux plugins d'inserer des appels javascript ;
+	4. C'est ici que SPIP va inserer l'appel de la librairie jQuery
+	5. Et appeler a la fin compacte_head pour agreger et compacter tout le head dans des fichiers statiques si l'option est cochee dans Configuration
+]
+#INSERT_HEAD
+
+[(#REM) 6. Vos scripts ]
+[<script src="(#CHEMIN{bootstrap/js/bootstrap.min.js})" type="text/javascript"></script>]
+[<script src="(#CHEMIN{js/modernizr.js})" type="text/javascript"></script>]
+[(#REM)[<script src="(#CHEMIN{js/respond.min.js})" type="text/javascript"></script>]]
+[<script src="(#CHEMIN{js/jquery.fitvids.js})" type="text/javascript"></script>]
+[<script src="(#CHEMIN{js/jquery.cookie.js})" type="text/javascript"></script>]
+[<script src="(#CHEMIN{js/script.js}|timestamp)" type="text/javascript"></script>]
+
+[(#REM) Fierement fabrique avec SPIP ]
+<meta name="generator" content="SPIP[ (#SPIP_VERSION)]" />
+
+[(#REM) Favicon ]
+[<link rel="icon" type="image/x-icon" href="(#CHEMIN{favicon.ico})" />
+[<link rel="shortcut icon" type="image/x-icon" href="(#CHEMIN{favicon.ico})" />]]

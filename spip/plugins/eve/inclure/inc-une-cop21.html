@@ -1,0 +1,57 @@
+<B_une>
+<BOUCLE_une(RUBRIQUES){id_rubrique}>
+<h1>#DESCRIPTIF</h1>
+<div class="fondune">
+	<h2 class="alaune bleu">À LA UNE</h2>
+	<BOUCLE_artdossune(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=#ID_RUBRIQUE}{0,1}>
+	[<a href="#URL_ARTICLE">(#LOGO_ARTICLE|vider_attribut{height}|vider_attribut{width})</a>]
+	<div class="paddunemag">
+		<a href="#URL_ARTICLE" >
+			<h4>#TITRE</h4>
+		</a>
+		<p>#CHAPO* <BOUCLE_type3(MOTS){id_groupe=3}{id_article}>
+		[(#ID_MOT|=={3}|?{/// <span class="glyphicon glyphicon-facetime-video"></span>})]
+		</BOUCLE_type3>
+		<BOUCLE_type3s(MOTS){id_groupe=3}{id_article}>
+		[(#ID_MOT|=={10051}|?{///&nbsp;<span class="glyphicon glyphicon-volume-up"></span>})]
+		</BOUCLE_type3s>
+		</p>
+	</BOUCLE_artdossune>
+	</div>
+		<BOUCLE_rubune2(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=#ID_RUBRIQUE}{0,1}>
+		<B_diapo>
+			<div class="row">
+			<BOUCLE_diapo(DOCUMENTS){id_rubrique}{extension==jpg|png|gif}{0,4}{par date}>
+				<div class="col-md-6" id="documents_portfolio">
+					<a href="#URL_DOCUMENT" class="mediabox">#LOGO_DOCUMENT</a>
+				</div>
+			</BOUCLE_diapo>
+			</div>
+			<hr class="sepacool" />
+		</B_diapo>
+		</BOUCLE_rubune2>
+	<div class="row">
+		<BOUCLE_selection(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=#ID_RUBRIQUE}{1,15}>	
+			<BOUCLE_testmot(MOTS){id_article}{id_groupe=10003}>
+				<div class="#DESCRIPTIF**">
+			</BOUCLE_testmot>
+				<div class="col-md-24">
+			<//B_testmot>
+			<BOUCLE_testvideo(MOTS){id_article}{id_mot=3}>
+				<BOUCLE_lavideo(DOCUMENTS){id_article}{extension=swf}>
+					<INCLURE{fond=modeles/dailymotion}{id=#ID_DOCUMENT} />
+				</BOUCLE_lavideo>
+			</BOUCLE_testvideo>
+			</B_testvideo>
+				<BOUCLE_testbadge(MOTS){id_article}{id_mot=10033}>
+					<INCLURE{fond=inclure/badge}{id_article=#ID_ARTICLE} />
+				</BOUCLE_testbadge>
+				</B_testbadge>
+			<INCLURE{fond=inclure/inc-artune}{id_article=#ID_ARTICLE} />
+			<//B_testbadge>
+			<//B_testvideo>	
+			</div>
+		</BOUCLE_selection>
+		</div>
+</div>
+</BOUCLE_une>

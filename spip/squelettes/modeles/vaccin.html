@@ -1,0 +1,108 @@
+<?php if (isset($_POST['envoie'])) { ?>
+#SET{ville,#EVAL{$_POST['ville']}}
+	<B_resultat1>
+	<div id="vaccin_reponse"></div>
+		#PS<br/><br/>
+	<BOUCLE_resultat1 (vaccin){ville == #GET{ville,'555'}}>
+		<div class="reponse">
+			<h2><span>#STRUCTURE</span></h2>
+			<p>Adresse : #ADRESSE #CP #VILLE</p>
+			<p>T&eacute;l&eacute;phone : #TEL</p>
+			<p>Accueil : #SEANCES / #HORAIRES / #MODALITES / #PUBLIC</p>
+			<p>Informations complémentaires : #INFOS</p>
+		</div><br/>
+	</BOUCLE_resultat1>
+	</B_resultat1>
+	<strong>Il n'y a aucune structure dans cette commune.</strong>
+	<//B_resultat1>
+<?php } ?>    
+<div class="columnBordee"></div>
+<form action="#SELF#vaccin_reponse" method="post" name="form1">
+  <fieldset>
+  <legend>Votre recherche</legend>
+  <label for="ville">Choisissez votre ville : </label><br/>
+  <select name="ville" id="ville">
+							<option value="Aubervilliers" >Aubervilliers</option>
+            
+                            <option value="Aulnay-sous-Bois" >Aulnay-sous-Bois</option>
+            
+                            <option value="Bagnolet" >Bagnolet</option>
+            
+                            <option value="Bobigny" >Bobigny</option>
+            
+                            <option value="Bondy" >Bondy</option>
+            
+                            <option value="Clichy-sous-Bois" >Clichy-sous-Bois</option>
+            
+                            <option value="Coubron" >Coubron</option>
+            
+                            <option value="Drancy" >Drancy</option>
+            
+                            <option value="Dugny" >Dugny</option>
+            
+                            <option value="Epinay-sur-Seine" >Epinay-sur-Seine</option>
+            
+                            <option value="Gagny" >Gagny</option>
+            
+                            <option value="Gournay-sur-Marne" >Gournay-sur-Marne</option>
+            
+                            <option value="L'Ile-Saint-Denis" >L'Ile-Saint-Denis</option>
+            
+                            <option value="La Courneuve" >La Courneuve</option>
+            
+                            <option value="Le Blanc-Mesnil" >Le Blanc-Mesnil</option>
+            
+                            <option value="Le Bourget" >Le Bourget</option>
+            
+                            <option value="Le Pré-Saint-Gervais" >Le Pré-Saint-Gervais</option>
+            
+                            <option value="Le Raincy" >Le Raincy</option>
+            
+                            <option value="Les Lilas" >Les Lilas</option>
+            
+                            <option value="Les Pavillons-sous-Bois" >Les Pavillons-sous-Bois</option>
+            
+                            <option value="Livry-Gargan" >Livry-Gargan</option>
+            
+                            <option value="Montfermeil" >Montfermeil</option>
+            
+                            <option value="Montreuil-sous-Bois" >Montreuil-sous-Bois</option>
+            
+                            <option value="Neuilly-Plaisance" >Neuilly-Plaisance</option>
+            
+                            <option value="Neuilly-sur-Marne" >Neuilly-sur-Marne</option>
+            
+                            <option value="Noisy-le-Grand" >Noisy-le-Grand</option>
+            
+                            <option value="Noisy-le-Sec" >Noisy-le-Sec</option>
+            
+                            <option value="Pantin" >Pantin</option>
+            
+                            <option value="Pierrefitte-sur-Seine" >Pierrefitte-sur-Seine</option>
+            
+                            <option value="Romainville" >Romainville</option>
+            
+                            <option value="Rosny-sous-Bois" >Rosny-sous-Bois</option>
+            
+                            <option value="Saint-Denis" >Saint-Denis</option>
+            
+                            <option value="Saint-Ouen" >Saint-Ouen</option>
+            
+                            <option value="Sevran" >Sevran</option>
+            
+                            <option value="Stains" >Stains</option>
+            
+                            <option value="Tremblay-en-France" >Tremblay-en-France</option>
+            
+                            <option value="Vaujours" >Vaujours</option>
+            
+                            <!--<option value="Villemomble" >Villemomble</option>-->
+            
+                            <option value="Villepinte" >Villepinte</option>
+            
+                            <option value="Villetaneuse" >Villetaneuse</option>
+    </select>
+	<br/><input type="submit" value="rechercher" name="rechercher">
+	</fieldset>
+	<input type="hidden" name="envoie">
+</form>

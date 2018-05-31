@@ -1,0 +1,57 @@
+<div class="leform ajax" id="adpa">
+<span class='bugajaxie'></span>
+<div class='formulaire_spip formulaire_adpa'>
+	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	[<p class='reponse_formulaire reponse_formulaire_ok'>(#ENV*{message_ok}|table_valeur{retour})</p>]
+
+		<form action='#ENV{action}' method='post'>
+		<div class="form-group">
+			#ACTION_FORMULAIRE{#ENV{action}}
+				<fieldset>
+				<legend>Estimez-vous-même les effets de la loi ASV sur votre plan d'aide ADPA !</legend>
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{aide}}
+					<div class="form-group obligatoire">	
+						<label for="revenus" class="control-label obligatoire">[<span class='erreur_message'>(#ENV*{erreurs}|table_valeur{revenus}) : </span>]Quels sont les revenus annuels de votre foyer ?</label>
+						<input class="form-control" type='text' name='revenus' id='revenus' value='#ENV{revenus}' />	
+					</div>
+					<div class="form-group obligatoire">
+					<label for="couple">[<span class='erreur_message'>(#ENV*{erreurs}|table_valeur{couple}) : </span>]Vivez-vous en couple ?</label>
+						<div class="checkbox">
+						<label>
+							<input type='radio' name='couple' value='oui'> oui
+						</label>
+						</div>
+						<div class="checkbox" >
+							<label>
+							<input type='radio' name='couple' value='non'> non
+							</label>
+						</div>
+						
+					</div>
+					<div class="form-group obligatoire">
+						<label for="gir" class="control-label">[<span class='erreur_message'>(#ENV*{erreurs}|table_valeur{gir}) : </span>]Quel est votre niveau de dépendance (information indiquée sur votre plan d'aide APA)</label>
+						<select name="gir" id="gir" class="form-control">
+							<option value="1">GIR 1</option>
+							<option value="2">GIR 2</option>
+							<option value="3">GIR 3</option>
+							<option value="4">GIR 4</option>
+						</select>					
+					</div>
+					<div class="form-group obligatoire">
+						<label for="heure" class="control-label">[<span class='erreur_message'>(#ENV*{erreurs}|table_valeur{heure}) : </span>]De combien d'heures d'aide à domicile avez-vous besoin chaque semaine ?</label>
+						<input class="form-control" type='text' name='heure' id='heure' value='#ENV{heure}' />
+					</div>
+					<div class="form-group obligatoire">
+					<label for="inter" class="control-label">[<span class='erreur_message'>(#ENV*{erreurs}|table_valeur{inter}) : </span>]A quel mode d'intervention avez-vous recours ?</label>	
+					<select name="inter" id="inter" class="form-control">
+						<option value="presta">un service d'aide à domicile prestataire</option>
+						<option value="manda">un service d'aide à domicile mandataire</option>
+						<option value="gre">un salarié en emploi direct</option>
+					</select>
+					</div>
+					<button type="submit" class="btn btn-default">Lancer l'estimation</button>
+			
+		</div>
+		</form>
+</div>
+</div>

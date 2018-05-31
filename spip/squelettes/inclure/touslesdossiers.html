@@ -1,0 +1,27 @@
+				<div class="grandangle">Grands Angles</div>
+					<B_une>
+					#ANCRE_PAGINATION
+					<BOUCLE_une(UNES){!par date}{id_dossier!=#ID_RUBRIQUE}{date>=2013}{pagination 8}>
+					<BOUCLE_lesdossier(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=#ID_DOSSIER}{0,1}>
+					[(#_une:COMPTEUR_BOUCLE|moins{1}|modulo{2}|=={0}|?{' ',''})<div class="row">]
+						<div class="col-md-12">	
+						<BOUCLE_motart(MOTS){id_article}{type='emag - type d information'}>
+							#SET{type,#TITRE}
+							#SET{desc,#DESCRIPTIF*}
+						</BOUCLE_motart>
+						<h2 class="bleu">[(#SURTITRE|?{#SURTITRE,#GET{desc}})]</h2>
+							<a href="#URL_RUBRIQUE">#LOGO_ARTICLE</a>
+							<div class="datecarrou">[(#_une:DATE|affdate)]</div>
+							<h4><a href="#URL_RUBRIQUE">#TITRE_RUBRIQUE</a></h4>
+							[(#DESCRIPTIF*|typo)]<BOUCLE_type(MOTS){id_groupe=3}{id_article}>
+							[(#ID_MOT|=={3}|?{///&nbsp;<span class="glyphicon glyphicon-facetime-video"></span>})]
+						 	</BOUCLE_type>
+						</div>
+					[(#_une:COMPTEUR_BOUCLE|=={#_une:GRAND_TOTAL}|?{' ',''})</div><div class="col-md-12"></div><hr class="sepacool"/>]	
+					[(#_une:COMPTEUR_BOUCLE|moins{1}|modulo{2}|=={1}|?{' ',''})</div><hr class="sepacool"/>]	
+					</BOUCLE_lesdossier>
+					</BOUCLE_une>
+					<div class="pagination col-md-24">
+						#PAGINATION
+					</div>
+					</B_une>

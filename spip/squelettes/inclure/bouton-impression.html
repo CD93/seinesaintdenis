@@ -1,0 +1,65 @@
+<BOUCLE_info1(ARTICLES){id_article ?}{id_article=#ENV{id_article}}{0,1}>
+
+<div class=printmail>
+	<a href="#URL_PAGE{imprimer,id_article=#ID_ARTICLE}" target="_blank" class="print">print</a>
+	[(#REM)
+	<button class="mail" data-toggle="modal" data-target="#myModal">
+		mail
+	</button>
+	<div class="texte"><span>&nbsp;</span></div>
+	]
+</div>
+<!-- Modal -->
+[(#REM)
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Envoyer cette page par mail </h4>
+      </div>
+      <div class="modal-body">
+      	<div class="ajax">
+       	#FORMULAIRE_RECOMMANDER{#TITRE,#URL_ARTICLE,#INTRODUCTION}
+       	</div>
+      </div>
+      <div class="modal-footer">
+
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+]
+</BOUCLE_info1>
+<BOUCLE_info2(RUBRIQUES){id_rubrique ?}{id_rubrique=#ENV{id_rubrique}}{0,1}>
+<div class=printmail>
+	<a href="#URL_PAGE{imprimer,id_rubrique=#ID_RUBRIQUE}" target="_blank" class="print">print</a>
+	[(#REM)
+	<button class="mail" data-toggle="modal" data-target="#myModal">
+		mail
+	</button>
+	<div class="texte"><span>&nbsp;</span></div>
+	]
+</div>
+[(#REM)
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Envoyer cette page par mail </h4>
+      </div>
+      <div class="modal-body">
+      	<div class="ajax">
+       	#FORMULAIRE_RECOMMANDER{#TITRE,#URL_ARTICLE,#INTRODUCTION}
+       	</div>
+      </div>
+      <div class="modal-footer">
+
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+]
+</BOUCLE_info2>

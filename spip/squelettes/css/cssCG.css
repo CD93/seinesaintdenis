@@ -1,0 +1,305 @@
+/* --------------------------------------------------------
+ * 
+ *        Conseil Général de Seine-Saint-Denis
+ *
+ *        bleu: #00ABE2
+ *		  bleu nuit: #005AAA
+ *        gris:   #e0d9cf
+ *
+ * ----------------------------------------------------- */
+
+/* global layout
+ * ----------------------------------------------------- */
+@font-face {
+  font-family: 'Merriweather';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Merriweather'), url(merriweather/v6/RFda8w1V0eDZheqfcyQ4EKRDOzjiPcYnFooOUGCOsRk.woff) format('woff');
+} 
+html { background: #fff; }
+body {
+	  font-family: tahoma,arial,sans-serif;
+	  min-width:  600px;
+	}
+#bd  { background-color: #e0d9cf; }
+#hd .top form {background-color: #e0d9cf; }
+h1, h2, h3, h4 {
+	font-family: Merriweather;
+}
+a {
+  color: #005AAA;
+   text-decoration: none;
+}
+
+
+
+/* menus
+ * ----------------------------------------------------- */
+
+#capnav {
+	margin:  auto;
+	max-width:  960px;
+	padding-top: 15px;
+}
+
+#menu a, #menu a span                 { color:  #000; background-color: #fff; }
+#menu a:hover, #menu a:hover span     { color: #000; background-color: #e0d9cf; }
+#menu a.current, #menu a.current span { color: #000; background-color: #e0d9cf; top: 0px; }
+#menu a.disable ,#menu a.disable span { background-color: #e0d9cf !important; }
+
+#caplogin {
+	background-color: #DCDFE2;
+}
+#caplogin #hd {
+	height: 1.6em;
+	margin:  0;
+	padding: 0;
+	margin:  auto;
+	max-width:  960px;
+}
+#caplogin #hd .top a.menu:hover {
+  background-color: #005AAA;
+  color: #000;
+}
+#caplogin #hd .top a.menu {
+  background: none;
+  color: #666;
+  font-size: 0.8em;
+  font-weight: 400;
+  height: 1.4em;
+  margin: 0;
+  padding: 0.3em 0.5em;
+  text-decoration: none;
+  top: 0;
+}
+
+#hd .top form input[type=text],
+#hd .top form input[type=password] { border: 1px solid #00ABE2 !important; }
+
+#capcontents {
+	margin:  auto;
+	max-width:  960px;
+}
+/* boxes
+ * ----------------------------------------------------- */
+
+.box h2, .box h3 { color: #00ABE2 !important; }
+
+.list-box               { border-color: #00ABE2; }
+.list-box h2            { color: #00ABE2; border-color: #00ABE2; }
+.list-box h3            { color: #00ABE2; }
+.list-box p.paginator a, 
+.list-box p.see-all a { color: #00ABE2; }
+.list-box p.see-all a:hover,
+.list-box p.paginator a:hover,
+.list-box p.paginator span.currentStep { color: #ffffff; background: #00ABE2; }
+
+.list-box.creation a:hover { background: #00ABE2 !important; }
+.list-box.creation img { background: #00ABE2 !important; }
+
+.group-box h3      { background-color: #00ABE2; color: #fff !important; }
+.group-box a:hover { background: #00ABE2; }
+
+.summary-box.created { border-color: #00ABE2; }
+.summary-box h2      { color: #00ABE2; border-color: #00ABE2; }
+.summary-box h3      { border-bottom-color:  #00ABE2 !important; }
+.summary-box dl      { border-bottom-color: #00ABE2 !important; }
+.summary-box dl dt,
+.summary-box dl dd   { border-top-color: #00ABE2 !important; }
+
+.main-box         { border-color: #00ABE2; }
+.main-box h2      { color: #00ABE2; border-color: #00ABE2; }
+.main-box a:hover { color: #ffffff !important; background: #00ABE2 !important; }
+
+.narrow-box h3           { color: #fff; background: #00ABE2; }
+.narrow-box .body        { background: #FFFFFF; }
+.narrow-box .body select { border-top-color: #00ABE2; }
+
+
+/* forms
+ * ----------------------------------------------------- */
+
+form input[type="text"],
+form input[type="password"],
+form select,
+form textarea { 
+	border-top-color: #00ABE2 !important; 
+	color:  #005AAA;
+}
+
+
+/* family account
+/* ----------------------------------------------------- */
+
+.individual form .address { border-color: #00ABE2 !important; }
+
+
+/* request creation
+ * ----------------------------------------------------- */
+
+#request div.help h3 { border-bottom-color: #00ABE2 !important; }
+
+#request h3       { border-bottom-color:  #00ABE2 !important; }
+#request legend   { color: #00ABE2 !important; }
+#request .address { border-color: #00ABE2 !important; }
+
+#request form ul.dataTree,
+#request form fieldset,
+#request form div .captcha img { border-color: #00ABE2 !important; }
+
+#request form div input[type="text"],
+#request form div input[type="password"],
+#request form div select,
+#request form div textarea { border-top-color: #00ABE2 !important; }
+
+
+/* document and activities
+ * ----------------------------------------------------- */
+ 
+#docs h4 { color: #e0d9cf !important; }
+
+.data-detail .yui-g { border-color: #e0d9cf !important; }
+.data-detail dl     { border-color: #e0d9cf !important; }
+.data-detail dd,
+.data-detail dt     { border-color: #e0d9cf !important; }
+
+table.activity-calendar,
+table.activity-calendar th,
+table.activity-calendar td { border-color: #e0d9cf !important; }
+
+/*  header  */
+#tophead {
+	margin: auto;
+	max-width: 960px;
+}
+#tophead .logoCG a {
+  background-image: url("../images/emag-pictos.png");
+  background-position: 0 -62px;
+  background-repeat: no-repeat;
+  content: "";
+  display: block;
+  font-size: 0;
+  height: 88px;
+  position: relative;
+  width: 290px;
+  z-index: 50;
+}
+#tophead .titre {
+	display: inline-block;
+	font-size: 4em;
+	font-weight: 700;
+}
+@media (max-width: 800px) {
+	#tophead .titre {
+		font-size: 2.5em;
+	}
+}
+#tophead .titre h1{
+	margin: 10px;
+	float: right;
+	font-weight: 400;
+	color: #00abe2;
+}
+#tophead .titre h1{
+	background: url("../images/casecap.png") no-repeat right transparent;
+	padding-right : 40px;
+	-moz-background-origin: padding-box;
+	-webkit-background-origin: padding-box;
+	-ms-background-origin: padding-box;
+	-o-background-origin: padding-box;
+	background-origin: padding-box;
+}
+
+/*    footer   */
+
+#footer {
+  margin-top: 20px;
+}
+#footer h2 {
+	letter-spacing : 0px;
+	margin-left: 10px;
+	margin-bottom: 10px;
+}
+#footer .content_footer {
+  background-color: #DCDFE2;
+  height: auto;
+  padding: 20px 0;
+}
+#footer .content_footer .contenu{
+	margin: auto;
+	max-width: 960px;
+}
+#footer .bottom_footer {
+  background-color: #FFFFFF;
+  border-top: 3px solid #333333;
+  margin-bottom: 10px;
+  padding-top: 10px;
+}
+#footer .rubrique h3 {
+  border-bottom: 1px solid #BEBEBE;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 12px;
+  margin-bottom: 0;
+  margin-top: 10px;
+  padding-bottom: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
+  text-transform: uppercase;
+}
+
+#footer a:hover {
+	text-decoration: underline;
+}
+#footer .contenu ul {
+  list-style: none outside none;
+  padding: 0;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+#footer .rubrique ul li {
+  border-bottom: 1px solid #BEBEBE;
+  line-height: 20px;
+}
+#footer .sous-rubrique a {
+  color: #666666;
+  display: block;
+  font-size: 11px;
+  padding-left: 5px;
+  text-decoration: none;
+}
+#footer .sous-rubrique a:hover {
+  background-color: #005aaa;
+  color: #fff;
+}
+#footer .reseaux-sociaux {
+  margin-top: 15px;
+}
+#footer .reseaux-sociaux li {
+  height: 22px;
+  margin-bottom: 15px;
+}
+#footer .reseaux-sociaux li a {
+  color: #000000;
+  font-size: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+#footer .liens {
+  text-align: center;
+}
+#footer .liens a:first-child {
+  border: medium none;
+}
+#footer .liens a {
+  border-left: 1px solid #CCCCCC;
+  color: #000000;
+  display: inline-block;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 0 19px;
+}
+#footer #capfooter {
+    margin: auto;
+    max-width: 960px;
+}

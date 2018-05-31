@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+[(#REM) Cf.: http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+]<!--[if lt IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie6"> <![endif]-->
+<!--[if IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie7"> <![endif]-->
+<!--[if IE 8 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie8"> <![endif]-->
+<!--[if IE 9 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js"> <!--<![endif]-->
+<head>
+<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+<title>[(#NOM_SITE_SPIP|textebrut)] / recherche</title>
+[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
+<INCLURE{fond=inc/head} />
+</head>
+<body>
+<INCLURE{fond=inclure/menu}{env} />
+<div class="main" id="pagerecherche">
+	<div class="contenu">
+		<div class="container">
+			<div class="col-md-15 fondune">
+				<h1>Votre recherche : #RECHERCHE</h1>
+				<div class="row">
+					<B_les_aides_rub>
+					#ANCRE_PAGINATION
+					<BOUCLE_les_aides_rub(RUBRIQUES){id_secteur IN 2,3,4,5,6,1}{id_parent !=109}{recherche}{!par points}{pagination 6}>
+						<div class="col-md-12">
+						<a class="gbouton" href="#URL_RUBRIQUE">
+							<div class="artsuite_par2">
+								<div class="logoart">
+									<div class="triangleblanc"></div>
+								</div>
+								#LOGO_RUBRIQUE
+								<div class="corps">
+									<h4>#TITRE</h4>
+									#DESCRIPTIF
+								</div>
+							</div>
+						</a>
+						</div>
+					</BOUCLE_les_aides_rub>	
+					<div class="col-md-24">#PAGINATION</div>
+					</B_les_aides_rub>		
+				</div>
+				<div class="row">
+					<BOUCLE_les_aides_art1(ARTICLES){id_secteur IN 2,3,4,5,6}{recherche}{!par points}{doublons rechart}>
+					</BOUCLE_les_aides_art1>
+					<BOUCLE_les_aides_art2(ARTICLES){id_rubrique=68}{recherche}{!par points}{doublons rechart}>
+					</BOUCLE_les_aides_art2>
+					<B_les_aides_art>
+					<div id="pagerubriqueliste">
+					#ANCRE_PAGINATION
+					<BOUCLE_les_aides_art(ARTICLES){!doublons rechart}{recherche}{!par points}{pagination 5}>
+						<div class="col-md-24">
+						<a class="gbouton" href="#URL_ARTICLE" points="#POINTS">
+							<div class="artsuite_par1">
+								<div class="logoart">
+									<div class="trianglenoir"></div>
+								</div>
+								<div class="corps">
+									<h4>#TITRE</h4>
+
+									[<strong>(#ID_RUBRIQUE|!={68}|?{#TITRE_PARENT})</strong>#CHAPO]
+								</div>
+							</div>
+						</a>
+						</div>
+					</BOUCLE_les_aides_art>
+					
+					<div class="col-md-24">#PAGINATION</div>
+					</div>
+					</B_les_aides_art>								
+				</div>
+				<div class="row">
+					<B_rechaut>
+					#ANCRE_PAGINATION
+					<div class="titrepoledep">
+						<div class="triangleblanc"></div>
+						<div><center>Dans l'essentiel du D&eacute;partement</center></div>
+					</div>
+					<div class="fondbleuciel lireaussi">
+						<BOUCLE_rechaut(ARTICLES){id_secteur=1}{recherche}{id_parent !=109}{!par points}{'<hr/>'}{pagination 5}>
+						<div class="artpol">
+							<div>
+								<h4><a href="#URL_ARTICLE">#TITRE</a></h4>
+								<a href="#URL_RUBRIQUE">#TITRE_PARENT</a>
+								#DESCRIPTIF
+							</div>
+						</div>
+						</BOUCLE_rechaut>
+						<div class="col-md-24">#PAGINATION</div>
+					</div>
+					</B_rechaut>
+				</div>
+			</div>
+			<div class="col-md-9 degrader">
+			<B_rubune>
+				<h2>Dans les dossiers de l'emag</h2>
+				<BOUCLE_rubune(RUBRIQUES){id_secteur=10002}{recherche}{"<hr class='sepacool'/>"}{0,5}>
+					<BOUCLE_artprinc(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=#ID_RUBRIQUE}{0,1}{doublons}>
+					<a href="#URL_RUBRIQUE">#LOGO_ARTICLE</a>
+					</BOUCLE_artprinc>
+					<div>
+						<h4><a href="#URL_RUBRIQUE">#TITRE</a></h4>
+						#TEXTE
+					</div>
+				</BOUCLE_rubune>
+					<hr class="sepacool"/>
+			</B_rubune>
+			<B_rechemag>
+				<h2>Dans l'actualit&eacute;</h2>
+				#ANCRE_PAGINATION
+				<div>
+				<BOUCLE_rechemag(ARTICLES){id_rubrique=10026}{recherche}{!par points}{'<hr class="sepacool"/>'}{doublons emagart}{pagination 5}>
+					[(#COMPTEUR_BOUCLE|<={2}|?{<a href="#URL_ARTICLE">#LOGO_ARTICLE</a>})]
+					<div>
+						<h4><a href="#URL_ARTICLE">#TITRE</a></h4>
+						#DESCRIPTIF
+					</div>
+				</BOUCLE_rechemag>
+				</div>
+				<div class="col-md-24">#PAGINATION</div>
+				<div class="col-md-24"><hr class="sepacool"/></div>
+				</B_rechemag>
+				
+				<BOUCLE_rubuneart(ARTICLES){id_secteur=10002}{recherche}{"<hr class='sepacool'/>"}{doublons emagart}{pagination 5}>
+					<div>
+						<h4><a href="#URL_ARTICLE">#TITRE</a></h4>
+						#DESCRIPTIF
+					</div>
+				</BOUCLE_rubuneart>
+				#PAGINATION
+				</B_rubuneart>
+
+				<B_art_rdv>
+				<a class="rdvtit col-md-24" href="#URL_RUBRIQUE{73}">Rendez-vous</a>
+				<div class="hoverimg row">
+					<BOUCLE_art_rdv(ARTICLES){id_rubrique=73}{recherche}{!par points}{0,1}{doublons}>
+					<div class="col-md-24 rdv-item">
+						<a class="rdv-lien" href="#URL_ARTICLE">
+							<div class="rdv">
+								<div class="imgwrap">
+									[(#LOGO_ARTICLE|vider_attribut{height}|vider_attribut{width})]
+								</div>
+								<div class="caption-front par1">
+									<span class="date">#SURTITRE</span>
+									<h3 class="date" >#TITRE</h3>
+									<span class="date">
+										<BOUCLE_eve1(EVENEMENTS){id_article}{0,1}>
+										[(#DATE_DEBUT|=={#DATE_FIN}|?{" ",""})
+											[(#DATE_DEBUT|affdate)]
+										]
+										[(#DATE_DEBUT|=={#DATE_FIN}|?{""," "})
+											[du (#DATE_DEBUT|affdate)] [au (#DATE_FIN|affdate)]
+										]
+										</BOUCLE_eve1>
+									</span>
+									<span>#DESCRIPTIF</span>
+								</div>
+								<div class="caption-back">
+									<div class="trianglerdvtest">#SURTITRE</div>
+								</div>
+							</div>
+							<div class="lienrdv">#TITRE</div>
+						</a>
+					</div>
+					</BOUCLE_art_rdv>
+				</div>
+				</B_art_rdv>
+				<B_art_rdv_2>
+			<div class="hoverimg row">
+				#ANCRE_PAGINATION
+				<BOUCLE_art_rdv_2(ARTICLES){id_rubrique=73}{recherche}{!par points}{pagination 6}{doublons}>
+				[(#COMPTEUR_BOUCLE|plus{1}|modulo{2}|=={0}|?{"<hr class='col-md-24 sansmarge' />",""})]
+				<div class="col-md-12 rdv-item">
+					<a class="rdv-lien" href="#URL_ARTICLE">
+						<div class="rdv">
+							<div class="imgwrap">
+								[(#LOGO_ARTICLE|vider_attribut{height}|vider_attribut{width})]
+							</div>
+							<div class="caption-front par2">
+								<span class="date">#SURTITRE</span>
+								<h3 class="date" >#TITRE</h3>
+								<span class="date">
+								<BOUCLE_eve2(EVENEMENTS){id_article}{0,1}>
+								[(#DATE_DEBUT|=={#DATE_FIN}|?{" ",""})
+									[(#DATE_DEBUT|affdate)]
+								]
+								[(#DATE_DEBUT|=={#DATE_FIN}|?{""," "})
+									[du (#DATE_DEBUT|affdate)] [au (#DATE_FIN|affdate)]
+								]
+								</BOUCLE_eve2>
+								</span>
+								<span>#DESCRIPTIF</span>
+							</div>
+							<div class="caption-back">
+								<div class="trianglerdvtest">#SURTITRE</div>
+							</div>
+						</div>
+						<div class="lienrdv">#TITRE</div>
+					</a>
+				</div>
+				</BOUCLE_art_rdv_2>
+				#PAGINATION
+			</div>
+			</B_art_rdv_2>
+			</div>
+			
+		</div>
+	</div>	
+</div>
+<INCLURE{fond=inclure/footer}{env} />
+<script type="text/javascript">
+	$('.hoverimg .rdv-lien').hover(
+		function() {
+			$(this).find('.caption-front').stop(true, true).slideToggle(500);
+			$(this).find('.caption-back').stop(true, true).hide();
+		},
+		function() {
+			$(this).find('.caption-front').stop(true, true).slideToggle(500);
+			$(this).find('.caption-back').stop(true, true).show();
+		}
+	);
+
+</script>
+</body>
+</html>

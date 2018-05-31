@@ -1,0 +1,23 @@
+#CACHE{24*3600}
+<BOUCLE_flux(DATA)
+  {source json,https://geoportail93.fr/SERV/DATA/?LAYERS=771&FORMAT=GEOJSON&SERVICE=wfs&SRS=4326&COL=ALL&MODE_GEO=POINT&FILTRE=id_centre!=6}{datapath features}{","}>
+{
+  "type": "Feature",
+  "geometry": [(#VALEUR{geometry}|json_encode)],
+  "id":[(#VALEUR{properties/id_centre}|json_encode)],
+  "tout" : [(#VALEUR|json_encode)],
+  "properties": {
+    "title":[(#VALEUR{properties/nom_centre}|concat{<br/>}|json_encode)],
+    "description":[(#VALEUR{properties/adresse_postale}|concat{<br/>}|concat{"tél : "}|concat{#VALEUR{properties/telephone}}|concat{<br/>}|concat{"Horaires d'accueil : "}|concat{#VALEUR{properties/horaires_accueil}}|concat{<br/>}|concat{"accès : "}|concat{#VALEUR{properties/acces_centre}|replace{^\*,"",S}|replace{\*,"<br/>",S}|replace{\.,".<br/>",S}}|concat{<br/>}|json_encode)]
+  }
+}</BOUCLE_flux>
+ {
+  "type": "Feature",
+  "geometry": {"type":"Point","crs":{"type":"name","properties":{"name":"EPSG:4326"}},"coordinates":[2.44911,48.906]},
+  "id":"1",
+  "properties": {
+    "title":"Les informations ne sont pas chargées<br\/>",
+    "description":"veuillez recharger la page ou contacter <a href='mailto:contact@seinesaintdenis.fr'>le webmaster<\/a>, <br\/>Merci"
+  }
+}
+<//B_flux>

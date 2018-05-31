@@ -1,0 +1,25 @@
+[(#SET{id,#ENV{monid,#ENV{id,1}}})]
+<BOUCLE_tableau(cataloguepdi){id=#GET{id}}>
+	<p><strong>#PRESTATAIRE</strong> / #COMMUNE<br/>
+	Num&eacute;ro de convention : #NUMERO</p>
+	<h3>[(#CLI) / ][(#DESCRIPTION)]</h3>
+	[(#DEBUT|ou{#FIN}|oui)<p><strong>Dates prévisionnelles : </strong>#DEBUT - #FIN<br/>]
+	<strong>Dur&eacute;e de l'action : </strong>#DUREE mois</p>
+	[<h4>Public :</h4>(#COMMENTAIRES|nl2br)<br/>]
+	[<strong>filière : </strong>(#FILIERE)<br/>]
+	[<br/><h4>Objectif :</h4>
+		(#OBJECTIFS|nl2br)]
+	[<br/><h4>Contenu :</h4>
+		(#CONTENU|nl2br)]
+	[(#ADRESSE|ou{#CP}|ou{#COMMUNE}|oui)<br/><h4>Localisation :</h4>
+		<strong>Adresse : </strong>#ADRESSE
+		#CP #COMMUNE<br/>]
+	<br/><h4>Information :</h4>
+	[<strong>Encadrant : </strong>(#ENCADRANT)<br/>]
+	[<strong>Téléphone : </strong>(#TEL)<br/>]
+	[<strong>adresse de la structure : </strong><br/>(#ADRESSESTRUCTURE)<br/>]
+	[#CPSTRUCTURE (#COMMUNESTRUCTURE)<br/>]
+	[<h3>effectif :</h3>
+	(#PLACE)]
+	  			<br/><br/>
+</BOUCLE_tableau>

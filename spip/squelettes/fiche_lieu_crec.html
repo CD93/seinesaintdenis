@@ -1,0 +1,15 @@
+[(#SET{id,#ENV{monid,#ENV{id,1}}})]
+[(#SET{layer,#ENV{layer_id,886}})]
+#SET{urlgeo,http://geoportail93.fr/SERV/DATA/?LAYERS=#GET{layer}&FORMAT=json&SERVICE=wfs&SRS=4326&COL=all&FILTRE=id=#GET{id}}
+<BOUCLE_tableau(DATA){source json, #GET{urlgeo}|copie_locale{modif}}>
+#SET{adresse,#ADRESSE|concat{" "}|concat{#VILLE}}
+<h2>Créche #NOM (#VILLE)</h2>
+	<p><strong>#TYPE_ACCUE</strong></p>
+	<h4>Localisation :</h4>
+	<strong>Adresse : </strong>#GET{adresse}<br/>
+	<br/>
+		<h4>Information :</h4>
+	<strong>Téléphone : </strong>[(#TEL)][ - (#TEL2)]<br/>
+	<strong>Nombre de places : </strong>#NBR_PLACE<br/>
+	<br/><br/>
+</BOUCLE_tableau>

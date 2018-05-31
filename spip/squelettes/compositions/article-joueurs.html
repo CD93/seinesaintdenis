@@ -1,0 +1,49 @@
+<BOUCLE_article(ARTICLES){id_article}>
+<!DOCTYPE html>
+[(#REM) Cf.: http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+]<!--[if lt IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie6"> <![endif]-->
+<!--[if IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie7"> <![endif]-->
+<!--[if IE 8 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie8"> <![endif]-->
+<!--[if IE 9 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js"> <!--<![endif]-->
+<head>
+<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+<title>[(#NOM_SITE_SPIP|textebrut)][ / (#TITRE_PARENT|textebrut)][ / (#TITRE|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
+<INCLURE{fond=inc/head}{env} />
+<body>
+<div class="main" id="pagesuivezall">
+	<div class="container">
+		[(#TEXTE|nb_joueurs|foreach)]
+	</div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	var hasTouch = 'ontouchstart' in document.documentElement;
+	var isMobile = {
+	    Android: function() {
+	        return navigator.userAgent.match(/Android/i);
+	    },
+	    iOS: function() {
+	        return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+	    }
+	};
+	if (isMobile=="Android" || isMobile=="iOS" ) startMyApp(isMobile);
+	//alert(navigator.userAgent);
+
+});
+function startMyApp(os)
+{
+  setTimeout( function()
+  {
+      if( confirm( "L'appli Seine-Saint-Denis semble ne pas être installée sur votre appareil, souhaitez vous la télécharger maintenant ?"))
+      {
+        if (os=="iOS") document.location = 'http://itunes.apple.com/us/app/seine-st-denis/id532171111';
+        if (os=="Android") document.location = "https://play.google.com/store/apps/details?id=com.cg93&hl=fr";
+      }
+  }, 300);
+ }
+</script>
+</body>
+</html>
+</BOUCLE_article>

@@ -1,0 +1,19 @@
+#SET{rub,#ENV{id_secteur}}
+<B_autresarts>
+#ANCRE_PAGINATION
+<div class="titrepoledep">
+	<div class="triangleblanc"></div>
+	<div><center>&Agrave; LIRE AUSSI</center></div>
+</div>	
+<div class="fondbleuciel lireaussi">
+	<BOUCLE_autresarts(ARTICLES){id_rubrique=#GET{rub,#ENV{id_rubrique}}}{id_article != #ENV{id_article}}{"<hr/>"}{pagination 5}{!par date}>
+	<div class="artpol">
+		<div>
+			<h4><a href="#URL_ARTICLE">#TITRE</a></h4>
+			#DESCRIPTIF
+		</div>
+	</div>
+	</BOUCLE_autresarts>
+	<p class="pagination">#PAGINATION</p>
+</div>
+</B_autresarts>

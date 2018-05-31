@@ -1,0 +1,100 @@
+<header class="enhaut">
+	<div class="entete">
+		<div class="container">
+			<div class="col-md-9 col-md-offset-15 hidden-xs">
+				<BOUCLE_header(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=10043}>
+					<a href="#URL_ARTICLE">#TITRE</a>
+				</BOUCLE_header>
+				<a href="#URL_RUBRIQUE{10024}">Presse</a>
+				<a href="#URL_RUBRIQUE{19}">Offres d'emploi</a>
+				<a href="#URL_RUBRIQUE{20}">March&eacute;s Publics</a>
+			</div>
+		</div>
+	</div>
+	<div class="nmt">
+		<div class="container">
+			<div class="col-md-9 col-sm-12 col-xs-24">
+				<div class="logoCG"><a href="#URL_SITE_SPIP">logoCG</a></div>
+			</div>
+			<div class="col-md-6 col-sm-12 hidden-xs recherche-menu">
+				#FORMULAIRE_RECHERCHE
+			</div>
+			<div class="col-md-9 col-sm-24 col-xs-24">
+				<ul class="reseausoc">
+					<li class="jemabo"><a href="#URL_ARTICLE{10332}" target="_blank" >je m'abonne</a></li>
+					<li class="newsletter"><a href="#URL_ARTICLE{10732}" >newsletter</a></li>
+					<li class="twitter"><a target="_blank" href="http://www.twitter.com/@seinesaintdenis">twitter</a></li>
+					<li class="facebook"><a target="_blank" href="http://www.facebook.com/seinesaintdenisledepartement">facebook</a></li>
+					<li class="instagram"><a target="_blank" href="http://www.instagram.com/seine_saint_denis">instagram</a></li>
+					<li class="dailymotion"><a target="_blank" href="http://www.dailymotion.com/Seine-Saint-Denis">dailymotion</a></li>
+				</ul>
+				<div class="modal fade bs-modal-lg" id="myModalabtTop" tabindex="-1" role="dialog" aria-labelledby="myModalLabelabtTop" aria-hidden="true">
+				  <div class="modal-dialog modal-lg">
+				    <div class="modal-content">
+				    </div><!-- /.modal-content -->
+				  </div><!-- /.modal-dialog -->
+				</div><!-- /.modal -->
+			</div>
+		</div>
+	</div>
+	<div class="menu" id="menuemag">
+		<div class="container">
+		<div class="col-md-9 col-xs-24">
+			<ul id="menup2" class="row">
+				<li class="col-md-12"><a href="#URL_RUBRIQUE{10002}" class="emagmag"><div class="tdroit"><span>L'emag</span></div></a></li>
+				<li class="col-md-12"><a href="#URL_RUBRIQUE{1}" class="eddmag"><div class="tdroit"><span>L'essentiel<br/></span> du D&eacute;partement</div></a></li>
+			</ul>
+		</div>
+			<div class="col-md-15 hidden-xs">
+				<ul id="menup">
+					<BOUCLE_menu(RUBRIQUES){id_parent=0}{id_rubrique IN 2,3,4,5,6}{tous}>
+					<li class="dropdown">
+						<a class="dropdown-toggle [(#EXPOSE)]" data-target="#URL_RUBRIQUE" data-hover="dropdown" title="#TITRE" href="#URL_RUBRIQUE"><div class="tdroit">#TITRE</div></a>
+							<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+								<BOUCLE_sousmenu(RUBRIQUES){id_parent=#ID_RUBRIQUE}{par num titre}>
+									<li><a title="#TITRE" href="#URL_RUBRIQUE">#TITRE</a></li>
+								</BOUCLE_sousmenu>
+							</ul>
+					</li>
+					</BOUCLE_menu>
+				</ul>
+			</div>
+			<div class="col-xs-24 visible-xs">
+				<nav class="navbar navbar-default" role="navigation">
+				  <div class="container-fluid">
+				    <!-- Brand and toggle get grouped for better mobile display -->
+				    <div class="navbar-header">
+				      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				        <span class="sr-only">changer de navigation</span>
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				      </button>
+				      <a class="navbar-brand" href="#">menu</a>
+				    </div>
+				
+				    <!-- Collect the nav links, forms, and other content for toggling -->
+				    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				      <ul class="nav navbar-nav">
+				          <BOUCLE_menui(RUBRIQUES){id_parent=0}{id_rubrique IN 2,3,4,5,6}{tous}>
+				          <li class="dropdown"><a title="#TITRE" href="#URL_RUBRIQUE" class="dropdown-toggle" data-toggle="dropdown">#TITRE</a>
+				         	 <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+				          		<BOUCLE_sousmenui(RUBRIQUES){id_parent=#ID_RUBRIQUE}{par num titre}>
+				          			<li><a title="#TITRE" href="#URL_RUBRIQUE">#TITRE</a></li>
+				          		</BOUCLE_sousmenui>
+				          	</ul>
+				           </BOUCLE_menui>
+				           </li>
+				          </ul>
+				        </li>
+				      </ul>
+				      <div class="recherche-menu">
+				      	#FORMULAIRE_RECHERCHE
+				      </div>
+				    </div><!-- /.navbar-collapse -->
+				  </div><!-- /.container-fluid -->
+				</nav>
+			</div>
+		</div>
+	</div>
+</header>

@@ -1,0 +1,139 @@
+<form action="#SELF#outil_sommaire_4" method="post" name="form1" id="form1">
+  <fieldset>
+  <label for="ville"><strong>Votre ville : </strong></label><br/>
+  <select name="ville" id="ville">
+							<option value="rien" >...Choisir...</option>
+							
+							<option value="Aubervilliers" >Aubervilliers</option>
+            
+                            <option value="Aulnay-sous-Bois" >Aulnay-sous-Bois</option>
+            
+                            <option value="Bagnolet" >Bagnolet</option>
+            
+                            <option value="Bobigny" >Bobigny</option>
+            
+                            <option value="Bondy" >Bondy</option>
+            
+                            <option value="Clichy-sous-Bois" >Clichy-sous-Bois</option>
+            
+                            <option value="Coubron" >Coubron</option>
+            
+                            <option value="Drancy" >Drancy</option>
+            
+                            <option value="Dugny" >Dugny</option>
+            
+                            <option value="Epinay-sur-Seine" >Epinay-sur-Seine</option>
+            
+                            <option value="Gagny" >Gagny</option>
+            
+                            <option value="Gournay-sur-Marne" >Gournay-sur-Marne</option>
+            
+                            <option value="Ile-Saint-Denis" >L'Ile-Saint-Denis</option>
+            
+                            <option value="La Courneuve" >La Courneuve</option>
+            
+                            <option value="Le Blanc-Mesnil" >Le Blanc-Mesnil</option>
+            
+                            <option value="Le Bourget" >Le Bourget</option>
+            
+                            <option value="Le Pre Saint-Gervais" >Le Pré-Saint-Gervais</option>
+            
+                            <option value="Le Raincy" >Le Raincy</option>
+            
+                            <option value="Les Lilas" >Les Lilas</option>
+            
+                            <option value="Les Pavillons-sous-Bois" >Les Pavillons-sous-Bois</option>
+            
+                            <option value="Livry-Gargan" >Livry-Gargan</option>
+            
+                            <option value="Montfermeil" >Montfermeil</option>
+            
+                            <option value="Montreuil-sous-Bois" >Montreuil-sous-Bois</option>
+            
+                            <option value="Neuilly-Plaisance" >Neuilly-Plaisance</option>
+            
+                            <option value="Neuilly-sur-Marne" >Neuilly-sur-Marne</option>
+            
+                            <option value="Noisy-le-Grand" >Noisy-le-Grand</option>
+            
+                            <option value="Noisy-le-Sec" >Noisy-le-Sec</option>
+            
+                            <option value="Pantin" >Pantin</option>
+            
+                            <option value="Pierrefitte-sur-Seine" >Pierrefitte-sur-Seine</option>
+            
+                            <option value="Romainville" >Romainville</option>
+            
+                            <option value="Rosny-sous-Bois" >Rosny-sous-Bois</option>
+            
+                            <option value="Saint-Denis" >Saint-Denis</option>
+            
+                            <option value="Saint-Ouen" >Saint-Ouen</option>
+            
+                            <option value="Sevran" >Sevran</option>
+            
+                            <option value="Stains" >Stains</option>
+            
+                            <option value="Tremblay-en-France" >Tremblay-en-France</option>
+            
+                            <option value="Vaujours" >Vaujours</option>
+            
+                            <option value="Villemomble" >Villemomble</option>
+            
+                            <option value="Villepinte" >Villepinte</option>
+            
+                            <option value="Villetaneuse" >Villetaneuse</option>
+    </select>
+    <br /><br/><label for="rue"><em>Vous pouvez affiner votre recherche avec le nom de votre rue (ex: republique pour rechercher avenue de la Republique): </em></label><br/><input type="text" id="rue" name="rue" />
+	<br/><br /><input type="submit" name="envoyer" value="rechercher">
+	</fieldset>
+	<input type="hidden" name="envoie">
+</form>
+<?php if ((isset($_POST['envoie'])) AND ($_POST['ville']=='rien')) { ?>
+#SET{ville,#EVAL{$_POST['ville']}}	
+#SET{rue,#EVAL{$_POST['rue']}}
+<strong>Vous devez sélectionner votre ville</strong>
+<?php } ?>
+<?php if ((isset($_POST['envoie'])) AND ($_POST['ville']!='rien')) { ?>
+#SET{ville,#EVAL{$_POST['ville']}}	
+#SET{rue,#EVAL{$_POST['rue']}}
+
+	
+<table width="100%" cellspacing="0" cellpadding="5px" border="0" id="tableautri">
+<thead>
+<tr valign="top">
+<th width="40%">Ma rue</th>
+<th width="40%"></th>
+<th width="20%">Mon Coll&egrave;ge</th>
+</tr>
+</thead><tbody>
+	<BOUCLE_resultat2 (sectorisation){ville == #GET{ville,'^'}}{rue LIKE %(#GET{rue})%}{par rue}>
+		<tr style="background-color:[(#COMPTEUR_BOUCLE|alterner{white, #ccc})];">
+			<td>#RUE</td>
+			<td>#SEGMENT</td>
+			<td>#COLLEGE</td>
+		</tr>
+	</BOUCLE_resultat2>
+	<h3>Sectorisation :</h3>
+	</B_resultat2>
+	<h3>Nous n'avons trouvé aucun résultat avec la rue "#GET{rue}", voici la liste complète des rues de votre commune :</h3>
+		<BOUCLE_resultat3 (sectorisation){ville == #GET{ville,'^'}}{par rue}>
+			<tr style="background-color:[(#COMPTEUR_BOUCLE|alterner{white, #ccc})];">
+				<td>#RUE</td>
+				<td>#SEGMENT</td>
+				<td>#COLLEGE</td>
+			</tr>
+		</BOUCLE_resultat3>
+	<//B_resultat2>
+	</tbody>
+</table>
+<hr/>
+<h3>Les adresses des collèges de <em>#GET{ville}</em></h3>
+<BOUCLE_resultat1 (sectorisation_adresse){ville == #GET{ville,'^'}}{par college}>
+	<div class="reponse">
+		<strong>#COLLEGE</strong><br/>
+		#ADRESSE<br/>
+		Téléphone : #TEL<br/><br/>
+	</div>
+</BOUCLE_resultat1>
+<?php } ?>

@@ -1,0 +1,24 @@
+<paquet
+	prefix="geoportail93"
+	categorie="divers"
+	version="1.0.5"
+	etat="dev"
+	compatibilite="[3.0.19;3.1.*]"
+	logo=""
+	documentation=""
+>
+	<!--
+		Paquet genere le 2015-10-30 17:20:16
+	-->
+
+	<nom>Geoportail93</nom>
+
+	<auteur>damien</auteur>
+
+	<licence>GNU/GPL</licence>
+	<necessite nom="saisies"  compatibilite="[1.24.0;]" />
+	<pipeline nom="header_prive" inclure="geoportail93_pipelines.php" />
+	<pipeline nom="recuperer_fond" inclure="geoportail93_pipelines.php" />
+    <pipeline nom="insert_head_css" inclure="geoportail93_pipelines.php" />
+    <pipeline nom="jqueryui_plugins" inclure="geoportail93_pipelines.php" />
+</paquet>

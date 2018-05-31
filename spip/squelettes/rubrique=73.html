@@ -1,0 +1,166 @@
+<BOUCLE_rub(RUBRIQUES){id_rubrique}>
+<!DOCTYPE html>
+[(#REM) Cf.: http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+]<!--[if lt IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie6"> <![endif]-->
+<!--[if IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie7"> <![endif]-->
+<!--[if IE 8 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie8"> <![endif]-->
+<!--[if IE 9 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js"> <!--<![endif]-->
+<head>
+<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+<title>[(#NOM_SITE_SPIP|textebrut)][ / (#TITRE|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
+<INCLURE{fond=inc/head} />
+</head>
+<body>
+<INCLURE{fond=inclure/menu} {env}/>
+<div class="main" id="pageagenda">
+	<div class="contenu">
+		<div class="container">
+			<div class="col-md-15 fondune row"> <!-- début dossier une  -->
+				<br/>
+				<div class="corps">
+					[(#ENV{dateve}|?{""," "})
+					#SET{datenv,#ENV{date}|affdate{'Y-m-d'}}
+					]
+					[(#ENV{dateve}|?{" ",""})
+					#SET{datenv,#ENV{dateve}|affdate{'Y-m-d'}}
+					]
+					<B_dujour>
+					<span class="rdvtit">RENDEZ-VOUS</span>
+					[(#REM)
+					<div class="chapoune" >
+						<span class="glyphicon glyphicon-minus"></span>
+						<a href="#myModalpropEve" data-toggle="modal" data-target="#myModalpropEve">Proposez un &eacute;v&eacute;nement</a>
+						<div class="modal fade bs-modal-lg" id="myModalpropEve" tabindex="-1" role="dialog" aria-labelledby="myModalpropEve" aria-hidden="true">
+						  <div class="modal-dialog modal-lg">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						        <h4 class="modal-title" id="myModalLabelabtTop">Proposez un &eacute;v&eacute;nement</h4>
+						      </div>
+						      <div class="modal-body">
+						      	#FORMULAIRE_PROPOSER_EVENEMENT{id_article=10025}
+						      </div>
+						    </div><!-- /.modal-content -->
+						  </div><!-- /.modal-dialog -->
+						</div><!-- /.modal -->
+						<span class="glyphicon glyphicon-minus"></span>
+					</div>
+					]
+					<div class="hoverimg row">
+						<h1 class="col-md-24">
+						[(#ENV{date}|affdate{'Y-m-d'}|=={#GET{datenv}}|?{""," "})
+							[(#GET{datenv}|nom_jour)] [(#GET{datenv}|affdate)]
+						]							
+						[(#ENV{date}|affdate{'Y-m-d'}|=={#GET{datenv}}|?{" ",""})
+							Aujourd'hui
+						]
+						<hr/></h1>
+					<BOUCLE_dujour(EVENEMENTS){evenement_en_cours #GET{datenv}}>
+						<BOUCLE_art_rdv_3(ARTICLES){id_article}>
+						<div class="col-md-8 rdv-item">
+							<a class="rdv-lien" href="#URL_ARTICLE">
+								<div class="rdv">
+									<div class="imgwrap">
+										[(#LOGO_ARTICLE|vider_attribut{height}|vider_attribut{width})]
+									</div>
+									<div class="caption-front">
+										<span class="date">#SURTITRE</span>
+										<h3 class="date" >#TITRE</h3>
+										<span class="date">
+											[(#DATE_DEBUT|=={#DATE_FIN}|?{" ",""})
+												[(#DATE_DEBUT|affdate)]
+											]
+											[(#DATE_DEBUT|=={#DATE_FIN}|?{""," "})
+												[du (#DATE_DEBUT|affdate)] [au (#DATE_FIN|affdate)]
+											]
+										</span>
+										<span>#DESCRIPTIF</span>
+									</div>
+									<div class="caption-back">
+										<div class="trianglerdvtest">#SURTITRE</div>
+									</div>
+								</div>
+								<div class="lienrdv">#TITRE</div>
+							</a>
+						</div>
+						</BOUCLE_art_rdv_3>
+						[(#COMPTEUR_BOUCLE|moins{#GET{compte}}|modulo{3}|=={0}|?{"<hr class='col-md-24 sansmarge' />",""})] 
+					</BOUCLE_dujour>
+					<hr/>
+				</div>
+				<hr/>
+				</B_dujour>
+				<span class="rdvtit">TOUS LES RENDEZ-VOUS</span>
+				<div class="hoverimg row">
+					<BOUCLE_mois(DATA){source table, (#ENV{date}|affdate{"Y-m"}|creer_date_liste)}>
+						<B_eve>
+						[<h1 class="col-md-24"><hr/>(#VALEUR|affdate_mois_annee)<hr/></h1>]
+						<BOUCLE_eve(EVENEMENTS){par date_debut}{agendafull date_debut, date_fin, mois, #VALEUR|affdate{Y},#VALEUR|affdate{m}}{age_fin <= 0}>
+						<BOUCLE_art_rdv_2(ARTICLES){id_article}>
+						<div class="col-md-8 rdv-item">
+							<a class="rdv-lien" href="#URL_ARTICLE">
+								<div class="rdv">
+									<div class="imgwrap">
+										[(#LOGO_ARTICLE|vider_attribut{height}|vider_attribut{width})]
+									</div>
+									<div class="caption-front">
+										<span class="date">#SURTITRE</span>
+										<h3 class="date" >#TITRE</h3>
+										<span class="date">
+											[(#DATE_DEBUT|=={#DATE_FIN}|?{" ",""})
+												[(#DATE_DEBUT|affdate)]
+											]
+											[(#DATE_DEBUT|=={#DATE_FIN}|?{""," "})
+												[du (#DATE_DEBUT|affdate)] [au (#DATE_FIN|affdate)]
+											]
+										</span>
+										<span>#DESCRIPTIF</span>
+									</div>
+									<div class="caption-back">
+										<div class="trianglerdvtest">#SURTITRE</div>
+									</div>
+								</div>
+								<div class="lienrdv">#TITRE</div>
+							</a>
+						</div>
+						</BOUCLE_art_rdv_2>
+						[(#COMPTEUR_BOUCLE|moins{#GET{compte}}|modulo{3}|=={0}|?{"<hr class='col-md-24 sansmarge' />",""})] 
+						</BOUCLE_eve>
+					</BOUCLE_mois>
+					</div>	
+				</div>
+				<INCLURE{fond=inclure/bouton-partage}{env} />
+			</div><!-- fin dossier une  -->
+			<div class="col-md-9">
+				<INCLURE{fond=inclure/carroussel}{id_rubrique=999999}{env}/>
+					<div class="titreagenda">
+						<div class="triangleblanc"></div>
+						<div class="fondpale lireaussi">
+							#CALENDRIER_MINI{#ENV{date},'dateve',#SELF, #URL_PAGE{calendrier_mini_event.json}}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<INCLURE{fond=inclure/footer}{env} />
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('.hoverimg .rdv-lien').hover(
+			function() {
+				$(this).find('.caption-front').stop( true, true ).slideToggle(500);
+				$(this).find('.caption-back').stop( true, true ).hide();
+			},
+			function() {
+				$(this).find('.caption-front').stop( true, true ).slideToggle(500);
+				$(this).find('.caption-back').stop( true, true ).show();
+			}
+		);
+	});
+</script>
+</body>
+</html>
+</BOUCLE_rub>

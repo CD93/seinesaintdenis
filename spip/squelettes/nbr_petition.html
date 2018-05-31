@@ -1,0 +1,11 @@
+
+<BOUCLE_petition(petition_departement){tout}>
+	<h1>#TOTAL_BOUCLE</h1>
+</BOUCLE_petition>
+<BOUCLE_petition2(petition_departement){email LIKE %@cg93.fr}{doublons A} />
+<BOUCLE_petition3(petition_departement){email LIKE %@seinesaintdenis.fr}{doublons A} />
+<B_petagent>
+<h2>#TOTAL_BOUCLE</h2>
+<BOUCLE_petagent(petition_departement){!doublons A}>
+</BOUCLE_petagent>
+

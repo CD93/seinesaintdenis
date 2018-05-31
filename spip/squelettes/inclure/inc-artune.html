@@ -1,0 +1,30 @@
+<BOUCLE_art(ARTICLES){id_article=#ENV{id_article}}>
+	<BOUCLE_motart(MOTS){id_article}{type='emag - type d information'}>
+		#SET{type,#TITRE}
+		#SET{desc,#DESCRIPTIF*}
+	</BOUCLE_motart>
+	<BOUCLE_type3(MOTS){id_mot=3}{id_article}>
+	#SET{ico,'&nbsp;///&nbsp;<span class="glyphicon glyphicon-facetime-video"></span>'}
+	</BOUCLE_type3>
+	[(#GET{type}|=={lechiffre}|?{' ',''})
+		<div class="pointille">
+			<center>
+				<h4>#TITRE</h4>
+				[<hr class="sepacool"/>
+				<strong>(#DESCRIPTIF)</strong>]
+				[<hr class="sepacool"/>
+				<strong>(#CHAPO)</strong>]
+				[<hr class="sepacool"/>
+				<strong>(#TEXTE)</strong>]
+			</center>
+		</div>
+	]
+	[(#GET{type}|=={lechiffre}|?{'',' '})
+	<h2 class="bleu #GET{type}">[(#SURTITRE|?{#SURTITRE,#GET{desc}})]</h2>
+	<a href="#URL_ARTICLE">
+		[(#LOGO_ARTICLE|vider_attribut{height}|vider_attribut{width})]
+		<h4>#TITRE</h4>
+	</a>
+	[(#DESCRIPTIF*|concat{#GET{ico}}|propre)]
+	]
+</BOUCLE_art>

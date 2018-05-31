@@ -1,0 +1,34 @@
+<script type="text/javascript">
+$(document).ready(function() { 
+	$("#tableautri2").dataTable({
+		"oLanguage": {"sUrl": "#CHEMIN{js/dataTables/dataTables.french.txt}"},
+		"aaSorting": [[ 0, "asc" ]],
+		"bLengthChange": false,
+        "bPaginate": false,
+        "bInfo": false
+	}); 
+});
+</script>
+<div class="table-responsive">
+<table class="table table-striped" id="tableautri2">
+    <thead>
+        <tr valign="top">
+            <th>Nom</th>
+            <th>adresse</th>
+            <th>ville</th>
+            <th>contact</th>
+        </tr>
+    </thead>
+    <tbody>
+    <BOUCLE_assosparent(asso_paej)>
+                <tr>
+                    <td>#NOM</td>
+                    <td>#ADRESSE<br/>#CP</td>
+                    <td>#VILLE</td>
+                    <td>Tel :#TEL<br/>fax :#FAX<br/>
+                    <a href="mailto:#COURRIEL">#COURRIEL</a></td>
+                </tr>
+    </BOUCLE_assosparent>
+       </tbody>
+</table>
+</div>

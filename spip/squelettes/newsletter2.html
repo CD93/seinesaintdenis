@@ -1,0 +1,194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Newletter</title>
+
+<style type="text/css">
+  body {
+   padding-top: 0 !important;
+   padding-bottom: 0 !important;
+   padding-top: 0 !important;
+   padding-bottom: 0 !important;
+   margin:0 !important;
+   width: 100% !important;
+   -webkit-text-size-adjust: 100% !important;
+   -ms-text-size-adjust: 100% !important;
+   -webkit-font-smoothing: antialiased !important;
+ }
+ .tableContent img {
+   border: 0 !important;
+   display: block !important;
+   outline: none !important;
+ }
+ a{
+  color:#000;
+}
+
+p, h1{
+  color:#000;
+  margin:0;
+}
+
+div,p,ul,h1{
+  margin:0;
+}
+.l20 { width:20px !important; }
+.l70 { width:70px !important; }  
+.l260 { width:260px !important; }
+.l430 { width:430px !important; }
+.l540 { width:580px !important; }
+.l860 { width:860px !important; }
+.l1000 { width:1000px !important; }
+table[class=l20], td[class=l20], img[class=l20] { width:70px !important; }  
+table[class=l70], td[class=l70], img[class=l70] { width:70px !important; }  
+table[class=l260], td[class=l260], img[class=l260] { width:260px !important; }
+table[class=l430], td[class=l430], img[class=l430] { width:430px !important; }
+table[class=l540], td[class=l540], img[class=l540] { width:580px !important; }
+table[class=l860], td[class=l860], img[class=l860] { width:860px !important; }
+table[class=l1000], td[class=l1000], img[class=l1000] { width:1000px !important; }
+@media only screen and (max-width: 480px) { 
+        img{ height:auto;}
+        td.response { 
+            width:380px !important; 
+            display:block;
+        } 
+        td.response_sup{ display:none; }      
+    } 
+
+</style>
+
+
+</head>
+
+<body paddingwidth="0" paddingheight="0" style="padding-top: 0; padding-bottom: 0; padding-top: 0; padding-bottom: 0; background-repeat: repeat; width: 100% !important; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; -webkit-font-smoothing: antialiased;" offset="0" toppadding="0" leftpadding="0">
+<table class="global" width="1000" class="l1000" border="0" cellspacing="0" cellpadding="0" style="font-family:tahoma;">
+  <tr>
+    <td colspan="5" width="800" class="l800"><center><img src="#URL_SITE_SPIP/squelettes/images/tetiere_nl.png" width="600px" height="98px"/></td>
+  </tr>
+  <tr>
+    <td colspan="5" bgcolor="#e8e35a" style="font-family: Georgia, Times, serif;
+	font-size: 30px;
+	text-align: center;
+	font-style: italic;
+	padding:10px;
+	"><strong>Lettre d'information</strong> de la seine-Saint-Denis</td>
+  </tr>
+  <tr>
+  <td width="70" class="l70">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="70" class="response_sup l70">&nbsp;</td>
+    <td class="response l260" width="260"  style="font-family: Tahoma, Geneva, sans-serif;	font-weight: bold;font-size: 35px;color:#e8e35a;width:260px;">ACTUALITÉ</td>
+    <td width="20" class="response_sup">&nbsp;</td>
+    <td class="response l540" width="540" bgcolor="#eeeae0" style="font-family: Tahoma, Geneva, sans-serif;	font-weight: bold;font-size: 35px;color: #FFF;width:440px;">GRAND ANGLE</td>
+    <td width="70" class="response_sup l70">&nbsp;</td>
+  </tr>
+  <tr>
+    <td class="response_sup">&nbsp;</td>
+    <td class="response l260" valign="top" style="color:#000" width="260">
+    <BOUCLE_artactu(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=10034}>
+    <table width="260" class="l260" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td align="center" bgcolor="#000000" style="padding:5px;font-family: Tahoma, Geneva, sans-serif;color:#ffffff;font-weight:bold;text-transform:uppercase;">[(#SURTITRE|sinon{EVENEMENT})]</td>
+      </tr>
+      <tr>
+        <td><a href="[(#URL_ARTICLE|url_absolue)]"><img src="#URL_SITE_SPIP/[(#LOGO_ARTICLE|image_reduire{260,140}|extraire_attribut{src})]" width="260px" height="140px"/></a></td>
+      </tr>
+      <tr>
+        <td><a href="[(#URL_ARTICLE|url_absolue)]" style="font-family: Georgia; font-weight: bold;font-size: 20px;color:#000;text-decoration:none;">#TITRE</a></td>
+      </tr>
+      <tr>
+        <td style="font-family: Tahoma;padding:10px 0 15px 0;">#CHAPO</td>
+      </tr>
+    </table>
+    </BOUCLE_artactu>
+    </td>
+    <td class="response_sup">&nbsp;</td>
+    <td class="response l540" valign="top" bgcolor="#eeeae0" width="540">
+    <BOUCLE_grandtitre(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=130}{0,1}>
+    <BOUCLE_gt_trouverub(RUBRIQUES){id_rubrique=#ID_RUBRIQUE}>
+    <table width="540" class="l540" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td><a href="[(#URL_RUBRIQUE|url_absolue)]" style="font-family: Georgia; font-weight: bold;font-size: 30px;color:#000;text-decoration:none;padding: 0 10px;">#TITRE</a></td>
+      </tr>
+      <tr>
+        <td style="font-family: Georgia; font-size:18px;padding: 10px 10px; 15px 10px">#DESCRIPTIF</td>
+      </tr>
+    </table>
+    </BOUCLE_gt_trouverub>
+    </BOUCLE_grandtitre>
+      <BOUCLE_le_articles(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=130}>
+      <table width="540" class="l540" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td><a href="[(#URL_ARTICLE|url_absolue)]"><img src="#URL_SITE_SPIP/[(#LOGO_ARTICLE|image_reduire{580,350}|extraire_attribut{src})]" width="580px" height="350px"/></a></td>
+        </tr>
+        <tr>
+          <td style="padding: 0 10px;"><a href="[(#URL_ARTICLE|url_absolue)]" style="font-family: Georgia; font-weight: bold;font-size: 20px;color:#000;text-decoration:none;">#TITRE</td>
+        </tr>
+        <tr>
+          <td style="font-family: Tahoma;padding: 10px 10px; 15px 10px">#CHAPO</td>
+        </tr>
+    </table>
+    </BOUCLE_le_articles>
+    <hr/>
+    
+    </td>
+    <td>&nbsp;</td>
+    
+    
+  </tr>
+</table>
+<table width="1000" class="l1000" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="70" class="l70">&nbsp;</td>
+    <td width="260" class="l260" style="color:#E12D38;font-family: Tahoma, Geneva, sans-serif;font-weight: bold;font-size: 26px">RENDEZ-VOUS</td>
+    <td width="20" class="l20">&nbsp;</td>
+    <td width="540" class="l540">&nbsp;</td>
+    <td width="70" class="l70">&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+   <td colspan="2">
+    <BOUCLE_le_rdv(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=10031}{0,1}>
+	   <a href="[(#URL_ARTICLE|url_absolue)]"><img src="#URL_SITE_SPIP/[(#LOGO_ARTICLE|image_reduire{330,330}|extraire_attribut{src})]" width="330px" height="330px"/></a>
+	 
+   </td>
+    <td valign="top" bgcolor="#E12D38" style="padding-left:15px; padding-top:15px">
+    <div style="color:#fff;font-family:Tahoma;font-weight:bold;font-size:20px">#SURTITRE</div>
+    <h3><a style="font-family: Georgia, Times, serif;font-size: 22px;color:#000;text-decoration:none;" href="[(#URL_ARTICLE|url_absolue)]">#TITRE</a></h3>
+    <div style="color:#fff;font-family: Tahoma;">#CHAPO</div>
+    
+    </td>
+    </BOUCLE_le_rdv>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+<table width="1000" class="l1000" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+  <td width="70" class="l70">&nbsp;</td>
+    <td colspan="2" width="860" class="l860"><hr style="color=#ddd"/></td>
+    <td width="70" class="l70">&nbsp;</td>
+  </tr>
+  <tr>
+  <td width="70" class="l70">&nbsp;</td>
+    <td width="430" class="l430" style="color:#000;font-family:Tahoma;font-weight:bold;font-size:12px;font-style: italic;">si vous ne souhaitez plus recevoir de courriers électroniques de la part du Conseil Général de la Seine-Saint-Denis /// <a href="">cliquez ici</a><br/>
+    </td>
+    <td width="430" class="l430">
+    <center><a href="http://www.seine-saint-denis.fr" target="_blank"><img src="http://www.seine-saint-denis.fr/IMG/VisuSSD.png" alt="logo ssd" /></a>
+    <a href="http://www.facebook.com/seinesaintdenisledepartement" target="_blank"><img src="#URL_SITE_SPIP/squelettes/images/facebookNL.png" alt="logo facebook" width="50px" height="50px"/></a>
+    <a href="http://www.twitter.com/seinesaintdenis" target="_blank"><img src="#URL_SITE_SPIP/squelettes/images/twitterNL.png" alt="logo twitter" width="50px" height="50px"/></a>
+    <a href="http://www.instagrame.com/seine_saint_denis" target="_blank"><img src="#URL_SITE_SPIP/squelettes/images/instagrameNL.png" alt="logo instagrame" width="50px" height="50px"/></a>
+    </td>
+    <td width="70" class="l70">&nbsp;</td>
+  </tr>
+</table>
+</body>
+</html>

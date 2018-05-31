@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+[(#REM) Cf.: http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+]<!--[if lt IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie6"> <![endif]-->
+<!--[if IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie7"> <![endif]-->
+<!--[if IE 8 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie8"> <![endif]-->
+<!--[if IE 9 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js"> <!--<![endif]-->
+<head>
+<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+<title>[(#NOM_SITE_SPIP|textebrut)][ - (#SLOGAN_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
+<INCLURE{fond=inc/head} />
+</head>
+<body>
+<INCLURE{fond=inclure/menu} />
+<INCLURE{fond=inclure/splash-petition2017-2} />
+<div class="main" id="pagesommaire">
+	<div class="actu">
+		<div class="container">
+			<div id="abnmtemag">
+				<a class="abmnt" href="#URL_ARTICLE{10732}"></a>
+				<span class="buttonclose"></span>
+			</div>
+			
+			<div class="col-md-15 fondune">
+				<BOUCLE_artdossune(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=7}{0,1}>
+					<a class="gbouton" href="#URL_ARTICLE">
+					<div class="artune">
+							<div class="logogune">
+							<div class="triangle"></div>
+							[(#LOGO_ARTICLE)]</div>
+						<div class="corpsune">
+							<h4>#TITRE</h4>
+							<div class="sous-rub">
+								<BOUCLE_stag(RUBRIQUES){parents}>
+								<div class="tag">#TITRE</div>
+								</BOUCLE_stag>
+							</div>
+							<div class="break"></div>
+							#CHAPO
+						</div>
+					</div>
+					</a>
+				</BOUCLE_artdossune>
+			</div>
+			<div class="col-md-9">
+				<INCLURE{fond=inclure/carroussel,id_rubrique=#ID_SECTEUR}{env}/>
+			</div>
+		</div>
+	</div>
+	<div class="lesbreves">
+		<div class="container">
+			<div class="col-md-24 brevessd">
+				<div id="carousel-breve" class="labreve carousel slide vertical" data-interval="7000" data-pause="hover" data-ride="carousel">
+					<B_breve>
+					<div class="carousel-inner">
+						<BOUCLE_breve(BREVES){id_rubrique=23}{!par date}{0,1}>
+						<div class="item [(#COMPTEUR_BOUCLE|=={1}|?{'active',''})]" id="info#COMPTEUR_BOUCLE">
+							<BOUCLE_motbreve(MOTS){id_breve}>
+							[(#ID_MOT|=={206}|?{
+								[(#URL_SITE|?{' ',''})
+								<a href='#URL_SITE'><img src='squelettes/images/breve_ssd.png'/>#_breve:TEXTE</a>]
+								[(#URL_SITE|?{'',' '})
+								<img src='squelettes/images/breve_ssd.png'/>EN BREF&nbsp;&nbsp;#_breve:TEXTE]
+							})]
+							[(#ID_MOT|=={211}|?{
+								<a href='#URL_SITE' target="_blank"><img src='squelettes/images/main.png'/>#_breve:TEXTE</a>
+							})]
+							[(#ID_MOT|=={207}|?{<a href='https://twitter.com/@seinesaintdenis' target='_blank'><img src='squelettes/images/breve_twitter.png'/>#_breve:TEXTE</a>})]
+							[(#ID_MOT|=={205}|?{
+								[(#URL_SITE|?{' ',''})
+								<a href='#URL_SITE' target='_blank'><img src='squelettes/images/breve_fb.png'/>#_breve:TEXTE</a>]
+								[(#URL_SITE|?{'',' '})
+								<a href='https://www.facebook.com/seinesaintdenisledepartement' target='_blanck'><img src='squelettes/images/breve_fb.png'/>#_breve:TEXTE</a>]
+							})]
+							</BOUCLE_motbreve>
+								<a href='#URL_SITE'><span>EN BREF&nbsp;&nbsp;</span>#_breve:TEXTE*</a>
+							<//B_motbreve>
+						</div>
+						</BOUCLE_breve>
+					</div>
+					</B_breve>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="sousbreve">
+		<div class="container">
+			<div class="col-md-15 fondune">
+				<div class="row">
+					<BOUCLE_art_par2(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=7}{1,2}>
+					<div class="col-md-12">
+					<a class="gbouton" href="#URL_ARTICLE">
+						<div class="artsuite_par2">
+							<div class="logoart">
+							<div class="triangle"></div>
+							#LOGO_ARTICLE
+							</div>
+							<div class="corps">
+								<h4>#TITRE</h4>
+								<div class="sous-rub">
+									<BOUCLE_stag2(RUBRIQUES){parents}>
+									<div class="tag">#TITRE</div>
+									</BOUCLE_stag2>
+								</div>
+								<div class="break"></div>
+								#CHAPO
+							</div>
+						</div>
+							</a>
+					</div>
+					</BOUCLE_art_par2>
+				</div>
+				<div class="row">
+					<BOUCLE_art_par3(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=7}{3,3}>
+					<div class="col-md-8">
+					<a class="gbouton" href="#URL_ARTICLE">
+						<div class="artsuite_par3">
+							<div class="logoart">
+							<div class="triangle"></div>
+							#LOGO_ARTICLE
+							</div>
+							
+							<div class="corps">
+								<h4>#TITRE</h4>
+								<div class="sous-rub">
+									<BOUCLE_stag3(RUBRIQUES){parents}>
+									<div class="tag">#TITRE</div>
+									</BOUCLE_stag3>
+								</div>
+								<div class="break"></div>
+								#DESCRIPTIF
+							</div>
+						</div>
+						</a>
+					</div>
+					</BOUCLE_art_par3>
+				</div>
+				<div class="row">
+					<BOUCLE_art_par6_1(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=7}{6,3}>
+					<div class="col-md-8">
+					<a class="gbouton" href="#URL_ARTICLE">
+						<div class="artsuite_par3">
+							<div class="triangle"></div>
+							<div class="corps">
+									<h4>#TITRE</h4>
+									<div class="sous-rub">
+										<BOUCLE_stag4(RUBRIQUES){parents}>
+										<div class="tag">#TITRE</div>
+										</BOUCLE_stag4>
+									</div>
+									<div class="break"></div>
+								#DESCRIPTIF
+							</div>
+						</div>
+					</a>
+					</div>
+					</BOUCLE_art_par6_1>
+				</div>
+				<div class="row">
+					<BOUCLE_art_par6_2(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=7}{9,3}>
+					<div class="col-md-8">
+					<a class="gbouton" href="#URL_ARTICLE">
+						<div class="artsuite_par3">
+							<div class="triangle"></div>
+							<div class="corps">
+									<h4>#TITRE</h4>
+									<p class="tag">
+									<BOUCLE_tr3(RUBRIQUES){id_rubrique}>
+										#TITRE
+									</BOUCLE_tr3>
+									</p>
+								<p>#DESCRIPTIF</p>
+							</div>
+						</div>
+						</a>
+					</div>
+					</BOUCLE_art_par6_2>
+				</div>
+				<a href="#URL_PAGE{rubrique-ttaide}" class="retrouvez">
+					<div class="triangle"></div>
+					<div>retrouvez tous les services, aides et démarches</div>
+				</a>
+			</div>
+			<div class="col-md-9">
+				<a class="rdvtit" href="#URL_RUBRIQUE{73}">Rendez-vous</a>
+				<div class="hoverimg row">
+					<BOUCLE_art_rdv(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=73}{0,1}>
+					<div class="col-md-24 rdv-item">
+						<a class="rdv-lien" href="#URL_ARTICLE">
+							<div class="rdv">
+								<div class="imgwrap">
+									[(#LOGO_ARTICLE|vider_attribut{height}|vider_attribut{width})]
+								</div>
+								<div class="caption-front par1">
+									<span class="date">#SURTITRE</span>
+									<h3 class="date" >#TITRE</h3>
+									<span class="date">
+										<BOUCLE_eve1(EVENEMENTS){id_article}{0,1}>
+										[(#DATE_DEBUT|=={#DATE_FIN}|?{" ",""})
+											[(#DATE_DEBUT|affdate)]
+										]
+										[(#DATE_DEBUT|=={#DATE_FIN}|?{""," "})
+											[du (#DATE_DEBUT|affdate)] [au (#DATE_FIN|affdate)]
+										]
+										</BOUCLE_eve1>
+									</span>
+									<span>#DESCRIPTIF</span>
+								</div>
+								<div class="caption-back">
+									<div class="trianglerdvtest">#SURTITRE</div>
+								</div>
+							</div>
+							<div class="lienrdv">#TITRE</div>
+						</a>
+					</div>
+					</BOUCLE_art_rdv>
+				</div>
+				<div class="hoverimg row">
+					<BOUCLE_art_rdv_2(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=73}{1,4}>
+					[(#COMPTEUR_BOUCLE|plus{1}|modulo{2}|=={0}|?{"<hr class='col-md-24 sansmarge' />",""})]
+					<div class="col-md-12 rdv-item">
+						<a class="rdv-lien" href="#URL_ARTICLE">
+							<div class="rdv">
+								<div class="imgwrap">
+									[(#LOGO_ARTICLE|vider_attribut{height}|vider_attribut{width})]
+								</div>
+								<div class="caption-front par2">
+									<span class="date">#SURTITRE</span>
+									<h3 class="date" >#TITRE</h3>
+									<span class="date">
+									<BOUCLE_eve2(EVENEMENTS){id_article}{0,1}>
+									[(#DATE_DEBUT|=={#DATE_FIN}|?{" ",""})
+										[(#DATE_DEBUT|affdate)]
+									]
+									[(#DATE_DEBUT|=={#DATE_FIN}|?{""," "})
+										[du (#DATE_DEBUT|affdate)] [au (#DATE_FIN|affdate)]
+									]
+									</BOUCLE_eve2>
+									</span>
+									<span>#DESCRIPTIF</span>
+								</div>
+								<div class="caption-back">
+									<div class="trianglerdvtest">#SURTITRE</div>
+								</div>
+							</div>
+							<div class="lienrdv">#TITRE</div>
+						</a>
+					</div>
+					</BOUCLE_art_rdv_2>
+				</div>
+				<a class="aideset" href="#URL_RUBRIQUE{73}">
+					<div class="triangleblanc"></div>
+					<div>retrouvez tous nos rendez-vous</div>
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
+<INCLURE{fond=inclure/footer}{env} />
+<script type="text/javascript">
+$(document).ready(function() {
+	var dejavu = 0;
+	if  ($.cookie('dejavu')==1) {dejavu = 1}
+	$(window).scroll(function() {
+		if (dejavu == 0) {
+			$('#abnmtemag').show();
+			$('#abnmtemag').animate({left:'0px'},600);
+			$('#abnmtemag .buttonclose, #abnmtemag .abmnt').hover(function() {
+				$(this).css('cursor','pointer');
+			}, function() {
+				$(this).css('cursor','auto');
+			});
+			$('#abnmtemag .buttonclose,#abnmtemag .abmnt').click(function() {
+				$('#abnmtemag').hide();
+				dejavu = 1;
+				$.cookie('dejavu',1);
+			});
+		}
+	});
+	$('.hoverimg .rdv-lien').hover(
+		function() {
+			$(this).find('.caption-front').stop(true, true).slideToggle(500);
+			$(this).find('.caption-back').stop(true, true).hide();
+		},
+		function() {
+			$(this).find('.caption-front').stop(true, true).slideToggle(500);
+			$(this).find('.caption-back').stop(true, true).show();
+		}
+	);
+});
+</script>
+</body>
+</html>

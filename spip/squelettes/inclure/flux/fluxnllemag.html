@@ -1,0 +1,4 @@
+#SET{url,http://lemag.seinesaintdenis.fr/spip.php?page=fluxnllemag}
+<BOUCLE_nllemag(DATA) {source simplexml, #GET{url}|copie_locale{modif}}{datapath root/children/article}{0,2}>
+  <li class="sous-rubrique"><a title="#VALEUR{children/titre/0/text}" href="#VALEUR{children/link/0/text}">#VALEUR{children/titre/0/text}</a></li>
+</BOUCLE_nllemag>

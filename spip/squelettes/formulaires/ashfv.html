@@ -1,0 +1,188 @@
+<div class="ajax">
+<div class='formulaire_spip'>
+	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	[<p class='reponse_formulaire reponse_formulaire_ok'>(#ENV*{message_ok})</p>]
+	[(#ENV{editable}|oui)
+		<form action='#ENV{action}' method='post'>
+		<div>
+			<h3>Estimation de vos droits à bénéficier à l’Aide Sociale à l’Hébergement en foyer de vie ou FAM</h3>
+			<br />
+			<em>Pour remplir l'estimation, vous devez vous munir de votre dernier avis d'imposition sur le revenu et autres ressources.</em>
+			<br />
+			<br />		
+			#ACTION_FORMULAIRE{#ENV{action}}
+			<fieldset>
+			<legend>Vérifiez que vous remplissez les conditions suivantes d'attribution de l'A.S.H. en foyer de vie ou FAM</legend>
+				Vérifiez que vous remplissez les conditions suivantes
+				<ul>
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{travailleur}}
+					<li class="editer_travailleur obligatoire[(#GET{erreurs}|oui)erreur]">			
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						<input class='checkbox' type='checkbox' name='travailleur' id='travailleur' value='true' [(#ENV{travailleur}|oui)checked="checked"] />
+						<label class='checkbox'>Vous bénéficiez d'une reconnaissance de la qualité de travailleur handicapé et avez été orienté en établissement d'ébergement par la CDAPH</label>
+					</li>
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{reside93}}
+					<li class="editer_reside93 obligatoire[(#GET{erreurs}|oui)erreur]">			
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						<input class='checkbox' type='checkbox' name='reside93' id='reside93' value='true' [(#ENV{reside93}|oui)checked="checked"] />
+						<label class='checkbox'>Votre <a href="javascript:deplie('domicileSecours');">domicile de secours</a> est situé en <a href="javascript:deplie('Seine-Saint-Denis');">Seine-Saint-Denis</a></label>
+						<p id="domicileSecours" style='display: none;'>
+                            <em>En matière d’aide sociale, le domicile de secours permet d’identifier le Département qui va prendre en charge financièrement les prestations légales d’aide sociale. Le domicile de secours s’acquiert par une résidence habituelle de 3 mois ininterrompus dans un département.</em>
+                        </p>
+						<p id="Seine-Saint-Denis" style='display: none;'>
+							<em>Si votre résidence est située dans un département autre que la Seine-Saint-Denis, veuillez vous adresser au Conseil Général du département dans lequel vous résidez.</em>
+						</p>
+					</li>
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{heberge}}
+					<li class="editer_heberge obligatoire[(#GET{erreurs}|oui)erreur]">			
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						<input class='checkbox' type='checkbox' name='heberge' id='heberge' value='true' [(#ENV{heberge}|oui)checked="checked"] />
+						<label class='checkbox'>Vous êtes ou allez être hébergé(e) dans un établissement autorisé à accueillir des personnes handicapées, habilité à l'aide sociale départementale</label>
+					</li>
+				</ul>					
+				<br />
+                <em>Si vous êtes <b>ressortissant étranger:</b> vous justifiez d'une carte de résident ou d'un titre de séjour en cours de validité attestant de la régularité de votre séjour en France.</em>
+            </fieldset>
+				
+			<fieldset>
+			<legend>Saisissez votre tarif en hébergement au jour</legend>
+				<ul>
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{jour}}
+					<li class="editer_jour obligatoire[(#GET{erreurs}|oui)erreur]">	
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						<label>Prix de journée de l'établissement</label>
+						<br />
+						<input class='text' type='text' name='jour' id='jour' value='#ENV{jour}' />
+					</li>
+				</ul>
+			</fieldset>
+
+			<fieldset>
+			<legend>Saisissez vos ressources mensuelles</legend>
+				<ul>
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{allocation}}
+					<li class="editer_allocation obligatoire[(#GET{erreurs}|oui)erreur]">
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						<label>Allocation Adulte Handicapé mensuelle</label>
+						<br />
+						<input class='text' type='text' name='allocation' id='allocation' value='#ENV{allocation}' />
+					</li>
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{apl}}
+					<li class="editer_apl obligatoire[(#GET{erreurs}|oui)erreur]">
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						<label>Allocation logement ou Aide Personnalisée au Logement mensuelle</label>
+						<br />
+						<input class='text' type='text' name='apl' id='apl' value='#ENV{apl}' />
+					</li>
+				</ul>
+			</fieldset>
+
+			<fieldset>
+			<legend>Saisissez vos ressources annuelles</legend>
+				<ul>
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{retraites}}
+					<li class="editer_retraites obligatoire[(#GET{erreurs}|oui)erreur]">
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						<label>Pensions, <a href="javascript:deplie('retraitesDetail');">retraites</a>, rentes annuelles</label>
+						<br />			
+						<input class='text' type='text' name='retraites' id='retraites' value='#ENV{retraites}' />					
+						<p id="retraitesDetail" style='display: none;'>
+							<em><br />Il síagit de toutes les pensions et retraites ‡ líexception de la retraite du combattant et des pensions attachÈes aux distinctions honorifiques qui ne sont pas prises en compte dans le calcul des ressources.</em>
+						</p>
+					</li>
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{revenusic}}
+					<li class="editer_revenusic obligatoire[(#GET{erreurs}|oui)erreur]">
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						<label>Revenus industriels et commerciaux annuels</label>
+						<br />
+						<input class='text' type='text' name='revenusic' id='revenusic' value='#ENV{revenusic}' />
+					</li>	
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{viageres}}
+					<li class="editer_viageres obligatoire[(#GET{erreurs}|oui)erreur]">
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						<label>Rentes viagères annuelles</label>
+						<br />
+						<input class='text' type='text' name='viageres' id='viageres' value='#ENV{viageres}' />
+					</li>
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{revenuscm}}
+					<li class="editer_revenuscm obligatoire[(#GET{erreurs}|oui)erreur]">
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						<label>Revenus de capitaux mobiliers annuels</label>
+						<br />
+						<input class='text' type='text' name='revenuscm' id='revenuscm' value='#ENV{revenuscm}' />
+					</li>
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{revenusf}}
+					<li class="editer_revenusf obligatoire[(#GET{erreurs}|oui)erreur]">
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						<label>Revenus fonciers annuels</label>
+						<br />
+						<input class='text' type='text' name='revenusf' id='revenusf' value='#ENV{revenusf}' />
+					</li>
+				</ul>
+			</fieldset>
+				
+			<fieldset>
+			<legend>Saisissez vos charges annuelles</legend>
+				<ul>
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{mutuelle}}
+					<li class="editer_mutuelle obligatoire[(#GET{erreurs}|oui)erreur]">
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						<label>Frais de mutuelle mensuels</label>
+						<br />
+						<input class='text' type='text' name='mutuelle' id='mutuelle' value='#ENV{mutuelle}' />
+					</li>
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{tutelle}}
+					<li class="editer_tutelle obligatoire[(#GET{erreurs}|oui)erreur]">
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						<label>Frais de tutelle annuels</label>
+						<br />
+						<input class='text' type='text' name='tutelle' id='tutelle' value='#ENV{tutelle}' />
+					</li>
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{impot}}
+					<li class="editer_impot obligatoire[(#GET{erreurs}|oui)erreur]">
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						<label>Impôts sur le revenu annuels</label>
+						<br />
+						<input class='text' type='text' name='impot' id='impot' value='#ENV{impot}' />
+					</li>
+				    #SET{erreurs,#ENV**{erreurs}|table_valeur{fonciere}}
+					<li class="editer_fonciere obligatoire[(#GET{erreurs}|oui)erreur]">
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						<label>Taxe fonciére anuelle</label>
+						<br />
+						<input class='text' type='text' name='fonciere' id='fonciere' value='#ENV{fonciere}' />
+					</li>
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{habitation}}
+					<li class="editer_habitation obligatoire[(#GET{erreurs}|oui)erreur]">
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						<label>Taxe d'habitation annuelle</label>
+						<br />
+						<input class='text' type='text' name='habitation' id='habitation' value='#ENV{habitation}' />
+					</li>
+				</ul>
+			</fieldset>
+
+			<fieldset>
+			<legend>Situation de l'usager</legend>
+				<ul>
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{charge}}
+					<li class="editer_charge obligatoire[(#GET{erreurs}|oui)erreur]">			
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						<input class='checkbox' type='checkbox' name='charge' id='charge' value='true' [(#ENV{charge}|oui)checked="checked"] />
+						<label class='checkbox'>Vous avez des personnes à charge : enfant (de 0 à 16 ans, les enfants scolarisés au-delà de 16 ans) ou parent</label>
+					</li>
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{conjoint}}
+					<li class="editer_conjoint obligatoire[(#GET{erreurs}|oui)erreur]">			
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						<input class='checkbox' type='checkbox' name='conjoint' id='conjoint' value='true' [(#ENV{conjoint}|oui)checked="checked"] />
+						<label class='checkbox'>Vous êtes marié et votre conjoint ne peut travailler</label>
+					</li>
+				</ul>
+			</fieldset>
+
+			<p class='boutons'><input type='submit' class='submit' value="Lancer l'estimation" /></p>
+		</div>
+		</form>
+	]
+</div>
+</div>

@@ -1,0 +1,32 @@
+<div class="ajax">
+<div class='formulaire_spip formulaire_ashmr salim'>
+	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	[<p class='reponse_formulaire reponse_formulaire_ok'>(#ENV*{message_ok})</p>]
+		<form action='#ENV{action}' method='post'>
+		<div>
+			#ACTION_FORMULAIRE{#ENV{action}}
+			<fieldset>
+			<legend>&Eacute;valuer ma participation pour l&rsquo;accueil de mon enfant en cr&egrave;che d&eacute;partementale</legend>
+			<p><strong>Attention :</strong> Cette simulation n'est valable que pour l'accueil des enfants dans une cr&egrave;che d&eacute;partementale.</p>
+				<ul>
+					<li>
+						<label for="enfantcharge">Enfant(s) &agrave; charge</label>
+						[<p class='erreur'>(#ENV**{erreurs}|table_valeur{enfantcharge})</p>]
+						<input class='text' type='text' name='enfantcharge'  value='#ENV{enfantcharge}' />
+					</li>
+					<li>
+						<label for="enfantcharge">Enfant(s) avec handicap</label>
+						<input class='text' type='text' name='enfanthandicap'  value='#ENV{enfanthandicap}' />
+					</li>
+					<li>
+						<label for="revenus">Vos revenus mensuels</label>
+						[<p class='erreur'>(#ENV**{erreurs}|table_valeur{revenus})</p>]
+						<input class='text' type='text' name='revenus'  value='#ENV{revenus}' />
+					</li>
+				</ul>					
+			<fieldset>
+			<p class='boutons'><input type='submit' class='submit' value="Lancer l'estimation" /></p>
+		</div>
+		</form>
+</div>
+</div>

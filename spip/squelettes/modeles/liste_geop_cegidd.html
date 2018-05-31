@@ -1,0 +1,15 @@
+#CACHE{0}
+#SET{url,https://geoportail93.fr/SERV/DATA/?LAYERS=771&FORMAT=GEOJSON&SERVICE=wfs&SRS=4326&COL=ALL&MODE_GEO=POINT&FILTRE=id_centre!=6}
+<B_flux>
+<ul id="listedroite">
+<BOUCLE_flux(DATA)
+  {source json,#GET{url}|copie_locale{modif}}{datapath features}{"<br/>"}>
+	<li class="marker#VALEUR{properties/id_centre}"><a href="#" class="titre infowindow[(#VALEUR{properties/id_centre})]">#VALEUR{properties/nom_centre}</a>
+    	<p>#VALEUR{properties/adresse_postale}<br/>
+    	[<strong>tél : </strong>(#VALEUR{properties/telephone})<br/>]
+      [<strong>Horaires d'accueil :</strong> (#VALEUR{properties/horaires_accueil})<br/>]
+    	[<strong>Accès : </strong>(#VALEUR{properties/acces_centre}|replace{^\*,"",S}|replace{\*,"<br/>",S}|replace{\.,".<br/>",S})]
+    </p></li>
+</BOUCLE_flux>
+</ul>
+</B_flux>

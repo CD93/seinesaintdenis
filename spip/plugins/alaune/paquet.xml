@@ -1,0 +1,29 @@
+<paquet
+	prefix="alaune"
+	categorie="navigation"
+	version="1.0.2"
+	etat="dev"
+	compatibilite="[3.0.13;3.1.*]"
+	logo=""
+	documentation=""
+	schema="1.0.0" 
+>
+	<!--
+		Paquet genere le 2013-12-10 12:35:10
+	-->
+
+	<nom>gestion une</nom>
+
+	<auteur>samuel et damien</auteur>
+
+	<licence>GNU/GPL</licence>
+	<necessite nom="saisies" compatibilite="[1.24.0;]" /> 
+
+	<pipeline nom="autoriser" inclure="alaune_autorisations.php" /> 
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/alaune.php" /> 
+	<pipeline nom="declarer_tables_interfaces" inclure="base/alaune.php" /> 
+
+	<menu nom="unes" titre="une:titre_unes" parent="menu_edition" icone="images/une-16.png" action="unes" /> 
+	<menu nom="une_creer" titre="une:icone_creer_une" parent="outils_rapides" icone="images/une-new-16.png" action="une_edit" parametres="new=oui" /> 
+</paquet>

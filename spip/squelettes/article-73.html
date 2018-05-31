@@ -1,0 +1,191 @@
+<BOUCLE_article(ARTICLES){id_article}>
+<!DOCTYPE html>
+[(#REM) Cf.: http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+]<!--[if lt IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie6"> <![endif]-->
+<!--[if IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie7"> <![endif]-->
+<!--[if IE 8 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie8"> <![endif]-->
+<!--[if IE 9 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js"> <!--<![endif]-->
+<head>
+<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+<title>[(#NOM_SITE_SPIP|textebrut)][ / (#TITRE_PARENT|textebrut)][ / (#TITRE|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
+<INCLURE{fond=inc/head}{env} />
+</head>
+<body>
+<INCLURE{fond=inclure/menu}{edd=#ID_SECTEUR}{env}/>
+<div class="main" id="pagearticle">
+	<div class="contenu">
+		<div class="container">
+			<div class="col-md-15"> <!-- début dossier une  -->
+			<INCLURE{fond=inclure/bouton-impression}{env} />
+			<div class="sous-rub">
+				<BOUCLE_stag(RUBRIQUES){parents}>
+				<h4><a [(#TITRE|=={#_article:TITRE_RUBRIQUE}|?{'class="on"',''})] href="#URL_RUBRIQUE"> #TITRE </a></h4>
+				</BOUCLE_stag>
+			</div>
+			<div class="break"></div>
+			<h1>#TITRE</h1>
+
+			[<div class="chapoune">
+				<span class="glyphicon glyphicon-minus"></span>
+				(#CHAPO)
+				<span class="glyphicon glyphicon-minus"></span>
+			</div>]
+			<div id="sommaire">
+			 	#CS_SOMMAIRE
+			</div>
+			<div class="form-group">
+			#TEXTE
+			<BOUCLE_cond(CONDITION){si id_rubrique IN 86,105}>
+			[(#INCLURE{fond=inclure/documentsraad,id_article, env})]
+			</BOUCLE_cond>
+			</div>
+
+
+			<BOUCLE_mot(MOTS){id_article ?}{id_groupe=9}{0,1}>
+
+			<button onclick="geoloc()" class="btn btn-lg"> <span id="animload"></span> itin&eacute;raire</button>
+				[(#INCLURE{fond=modeles/carte_gis,
+				autocenterandzoom=oui,
+				objets=articlesmots,
+				id=#ID_ARTICLE}{env})]
+			<div id="infoposition"></div>
+			</BOUCLE_mot>
+
+			[<hr/>(#PS)]
+			<INCLURE{fond=inclure/bouton-partage}{env} />
+			<BOUCLE_tag(MOTS){id_groupe=6}{id_article}>
+			<div class="titrepoledep">
+				<div class="triangleblanc"></div>
+				<div><center>#TITRE</center></div>
+			</div>
+			<div class="fondbleuciel lireaussi">
+				<BOUCLE_alaffiche(EVENEMENTS){age_fin<=0}{age_debut>=-30}{0,10}{"<hr/>"}>
+				<div class="artpol">
+					<div>
+						<h4><a href="#URL_ARTICLE">#TITRE</a></h4>
+						<strong><BOUCLE_desc(ARTICLES){id_evenement}>#DESCRIPTIF</BOUCLE_desc></strong>
+
+						[(#DATE_DEBUT|=={#DATE_FIN}|?{" ",""})
+							[Le (#DATE_DEBUT|affdate)]
+						]
+						[(#DATE_DEBUT|=={#DATE_FIN}|?{""," "})
+							[Du (#DATE_DEBUT|affdate)] [au (#DATE_FIN|affdate)]
+						]
+						<BOUCLE_geo(MOTS){id_groupe=9}{id_article}>
+							- #TITRE_MOT
+						</BOUCLE_geo>
+
+					</div>
+				</div>
+				</BOUCLE_alaffiche>
+				</div>
+			</BOUCLE_tag>
+			</div> <!-- fin dossier une  -->
+			<div class="col-md-9">
+			<INCLURE{fond=inclure/carroussel}{id_rubrique=999999}{env}/>
+			<div class="titreagenda">
+				<div class="triangleblanc"></div>
+				<div class="fondpale lireaussi">
+					#CALENDRIER_MINI{#ENV{date},'dateve',#URL_RUBRIQUE{73},#URL_PAGE{calendrier_mini_event.json}}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<INCLURE{fond=inclure/footer}{env} />
+<script>
+function suppmarker(){
+	map#ID_ARTICLE.removeAllMarkers();
+}
+function addmarker(){
+	map#ID_ARTICLE.parseGeoJson({"type": "FeatureCollection",	"features": [<INCLURE{fond=json/gis_articlesmots}{id_article=#ID_ARTICLE}{limit=200}>]});
+}
+function geoloc(){
+	map#ID_ARTICLE.locate({setView: true, maxZoom: 18});
+	$("#animload").addClass("glyphicon glyphicon-refresh glyphicon-refresh-animate");
+	map#ID_ARTICLE.on('locationfound', onLocationFound);
+
+}
+
+function onLocationFound(e) {
+	$("#animload").removeClass("glyphicon glyphicon-refresh glyphicon-refresh-animate");
+    L.circleMarker(e.latlng).addTo(map#ID_ARTICLE)
+    .bindPopup("Vous êtes ici");
+	<BOUCLE_lonlat2(MOTS){gis}{id_groupe=9}{id_article}{0,1}>
+	var dist = distance_gps(e.latlng.lng, e.latlng.lat,#LON,#LAT);
+    infopos = "Vous etes à "+dist+" km à vol d'oiseau.";
+    document.getElementById("infoposition").innerHTML = infopos;
+    traceroute(e.latlng.lng, e.latlng.lat,#LON,#LAT);
+    </BOUCLE_lonlat2>
+    map#ID_ARTICLE.fitBounds([
+    <BOUCLE_lonlatb(MOTS){gis}{id_groupe=9}{id_article}{0,1}>
+        [e.latlng.lat,e.latlng.lng],
+        [#LAT,#LON ]
+    </BOUCLE_lonlatb>
+    ]);
+
+
+}
+function distance_gps(lon1, lat1, lon2, lat2)
+{
+    // Distance en mètre entre 2 points GPS en Degrés décimaux
+
+    // conversion des dégré en radian
+    var lat1 = (lat1 / 180) * Math.PI;
+    var lon1 = (lon1 / 180) * Math.PI;
+
+    var lat2 = (lat2 / 180) * Math.PI;
+    var lon2 = (lon2 / 180) * Math.PI;
+
+    var dist = Math.acos( Math.sin(lat1) * Math.sin(lat2) + Math.cos(lat1) * Math.cos(lat2) * Math.cos(lon1-lon2) );
+        dist = Math.round(dist * 6366);
+
+	return dist;
+}
+$('.btnpmi').click(function(){
+	map#ID_ARTICLE.removeAllMarkers();
+	geoportail(888);
+	})
+$('.btnpmi2').click(function(){
+	map#ID_ARTICLE.removeAllMarkers();
+	geoportail(887);
+	})
+function traceroute(lon1, lat1, lon2, lat2)
+{
+	$("#infoposition").addClass("texteencadre-spip");
+	$("#infoposition").html("<h3>Mon itinéraire</h3>");
+	var maroute = L.polyline([
+		[lat1,lon1],
+		[lat1,lon1]
+	]).addTo(map#ID_ARTICLE);
+	var monchemin = "" ;
+ 	var mapquestAPI = "http://www.mapquestapi.com/directions/v2/route?key=Fmjtd%7Cluur2908ng%2C80%3Do5-90z200&ambiguities=ignore&outFormat=json&inFormat=json&json={locations:[{latLng:{lng:"+lon1+",lat:"+lat1+"}},{latLng:{lng:"+lon2+",lat:"+lat2+"}}],options:{avoids:[],avoidTimedConditions:false,doReverseGeocode:false,shapeFormat:raw,generalize:0,routeType:fastest,timeType:1,locale:fr_FR,unit:k,enhancedNarrative:false,drivingStyle:2,highwayEfficiency:21.0}}";
+	$.getJSON(mapquestAPI, function(data) {
+	 	for(i=0 ; i < data.route.shape.shapePoints.length ; i=i+2)
+	 	{
+	 	   maroute.addLatLng([data.route.shape.shapePoints[i],data.route.shape.shapePoints[i+1]])
+	 	}
+	 	for(j=0 ; j < data.route.legs[0].maneuvers.length ; j=j+1)
+	 	{
+	 	   monchemin += "<li>"+ data.route.legs[0].maneuvers[j].narrative+" ("+Math.round(data.route.legs[0].maneuvers[j].distance*100)/100+" Km)</li><hr/>";
+	 	}
+	 	$("#infoposition").append("<h4> Vous êtes à "+Math.round(data.route.distance*100)/100+" Kms</h4><hr/>");
+	 	$("#infoposition").append("<ul>"+monchemin+"</ul>");
+	});
+}
+function geoportail(layer)
+{
+	$("#infoposition").addClass("texteencadre-spip");
+ 	var geoportailAPI = "http://carto3-cg93.integra.fr/geoportail93_2.1.b1/SERV/data.php?LAYERS="+layer+"&FORMAT=GEOJSON&SRS=4326";
+ 	$.getJSON( geoportailAPI, function( data ) {
+
+ 		map#ID_ARTICLE.parseGeoJson(data);
+ 		$("#infoposition").html(data);
+ 	});
+}
+</script>
+</body>
+</html>
+</BOUCLE_article>

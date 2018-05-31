@@ -1,0 +1,126 @@
+@import 'reset.css';
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,800');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab:400,700');
+/* style voeux 2018*/
+strong {
+  font-weight: bold; }
+em {
+  font-style: italic; }
+
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+a {
+  text-decoration: none;
+}
+a:focus,a:hover {
+  text-decoration: underline;
+  color: inherit;
+}
+h1,h2 {
+  font-size: 2em;
+  color: #EF4F5F;
+  font-weight: 800;
+  text-transform: uppercase;
+  text-align: center;
+  margin:1em auto;
+}
+h2 {
+  color: #000;
+  font-size: 1.4em;
+  padding: 1em 0 0.5em 0;
+  text-align: left;
+}
+.chapo {
+  font-size: 1.1em;
+  color: #000000;
+  line-height: 18px;
+  font-weight: 400;
+  margin: 0.5em 0;
+  font-family: 'Roboto Slab', serif;
+  line-height: 1.2em;
+  text-align: justify;
+
+}
+.sign {
+  font-size: 1.2em;
+}
+.texte {
+  font-size: 1em;
+  color: #113572;
+}
+h3 {
+  font-size: 1em;
+  font-weight: 500;
+  line-height:1.3em;
+}
+.rouge{
+  color:#EF4F5F;
+  padding-bottom: 0.3em;
+  text-align: center;
+}
+
+@media screen and (min-width: 800px) {
+    h1 {
+      font-size: 3em;
+    }
+    .chapo {
+      font-size: 1.5em;
+      text-align: center;
+    }
+    .texte {
+      font-size: 1.1em;
+    }
+    h3 {
+      font-size: 1.1em;
+    }
+    .rouge{
+      font-size: 1.2em;
+    }
+
+}
+#main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 3em;
+  margin: 1em auto;
+  max-width: 800px;
+  width: 100%;
+  padding: 10px;
+}
+img {
+  width: 100%;
+  height: auto;
+}
+p {
+  margin-bottom: 1em;
+  line-height:1.5em;
+}
+footer {
+  position: fixed;
+  background-color: #00AACE;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  bottom: 0px;
+  width: 100%;
+
+  font-size:0.8em; }
+  footer ul {
+    display: flex;
+    align-items: center; }
+    footer ul li a {
+      display: flex;
+      color: #FFF;
+      align-items: stretch;
+      justify-content: center;
+      margin: 1em 0; }
+    footer ul li a:before {
+      content: " \2212 ";
+      color: #FFF; }
+    footer ul li:first-child a:before {
+      content: normal;
+      content: "";
+      /* pour Safari */ }

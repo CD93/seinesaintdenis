@@ -1,0 +1,88 @@
+<style>
+.splashBack {
+    position: absolute;
+    display: none;
+    top: 0px;
+    left: 0px;
+    z-index: 1501;
+    width: 100%;
+    max-height: 200%;
+    background-color: #000000;
+    opacity: 0.75;
+}
+#splashModal {
+    display: none;
+    width: 100%;
+    top: 0;
+    left: 0px;
+    position: absolute;
+}
+#splashModal .splash2 {
+    position: relative;
+    z-index: 1501;
+    margin: 0px auto;
+    max-width: 290px;
+    max-height: 200%;
+    top: 22px;
+    left: -410px;
+}
+#splashModal .splash {
+    position: relative;
+    margin: 0 auto;
+    z-index: 1501;
+    max-width: 1200px;
+    max-height: 200%;
+    top: 22px;
+}
+#splashModal .splashImg {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    z-index: 1504;
+}
+#splashModal .splashImg button {
+    position: absolute;
+    right: 3px;
+    top: 0px;
+    z-index: 1505;
+}
+#splashModal .splashImg a {
+    max-width: 1200px;
+    display: block;
+    margin: 0 auto;
+    z-index: 1504;
+}
+</style>
+<div class="splashBack"></div>
+<div id="splashModal">
+	<div class="splash2">
+	<div id="logossd"><img src="#CHEMIN{images/logossd.png}" /></div>
+	</div>
+ 	<div class="splash">
+		<div class="splashImg">
+     	<button type="button" class="close"><span aria-hidden="true">&times;</span><span class="sr-only">Fermer</span></button>
+   	   	<iframe width="100%" frameborder="0" height="800px" src="[(#URL_SITE_SPIP|issecure|?{"https://seine-saint-denis.fr","http://seinesaintdenis.fr"})]/?page=petition2017-2" title="pétition pour la sauvegarde des services publics de proximité"></iframe>
+	</div>
+	</div>
+</div>
+<script type="text/javascript">
+$(document).ready(function() {
+	var dejavusplash = 0;
+	if ($.cookie('dejavusplash')==1) {dejavusplash = 1}
+	// Attention version debug passer dejavusplash à 1 sur la ligne précédente
+	//alert("correction à faire");
+	if (dejavusplash == 0) {
+		$('#splashModal, .splashBack').show();
+		$('#splashModal .close, .splashBack').hover(function() {
+			$(this).css('cursor','pointer');
+		}, function() {
+			$(this).css('cursor','auto');
+		});
+		$('#splashModal .close,.splashBack, #splashLien').click(function() {
+			$('#splashModal,.splashBack').fadeOut(1200);
+			dejavusplash = 1;
+			$.cookie('dejavusplash',1, {expires: 365});
+		});
+	}
+}); 
+</script>

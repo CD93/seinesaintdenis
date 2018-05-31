@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+[(#REM) Cf.: http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+]<!--[if lt IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie6"> <![endif]-->
+<!--[if IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie7"> <![endif]-->
+<!--[if IE 8 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie8"> <![endif]-->
+<!--[if IE 9 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js"> <!--<![endif]-->
+<head>
+<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+<title>[(#NOM_SITE_SPIP|textebrut)] / sommaire</title>
+[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
+<INCLURE{fond=inc/head} />
+</head>
+<body id="pagerentree">
+<div class="container_global">
+	<INCLURE{fond=inclure/menu} />
+	<div class="main" id="pagesommaire">
+		<div class="actu">
+			<div class="container">
+				<div id="abnmtemag">
+					<a class="abmnt" href="#URL_ARTICLE{10732}"></a>
+					<span class="buttonclose"></span>
+				</div>
+
+				<div class="col-md-15 fondune">
+					<BOUCLE_artdossune(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=7}{0,1}>
+						<a class="gbouton" href="#URL_ARTICLE">
+						<div class="artune">
+								<div class="logogune">
+								<div class="triangle"></div>
+								[(#LOGO_ARTICLE)]</div>
+							<div class="corpsune">
+								<h4 class="#EDIT{titre}">#TITRE</h4>
+
+								<div class="break"></div>
+								<span class="#EDIT{chapo} chapo">#CHAPO</span>
+							</div>
+						</div>
+						</a>
+					</BOUCLE_artdossune>
+				</div>
+				<div class="col-md-9">
+					<INCLURE{fond=inclure/carroussel,id_rubrique=#ID_SECTEUR}{env}/>
+				</div>
+
+			</div>
+		</div>
+		<div class="lesbreves">
+			<div class="container">
+			<div class="row">
+				<div class="col-md-24 brevessd">
+					<div id="carousel-breve" class="labreve carousel slide vertical" data-interval="7000" data-pause="hover" data-ride="carousel">
+						<B_breve>
+						<div class="carousel-inner">
+							<BOUCLE_breve(BREVES){id_rubrique=23}{!par date}{0,1}>
+							<div class="item [(#COMPTEUR_BOUCLE|=={1}|?{'active',''})]" id="info#COMPTEUR_BOUCLE">
+								<BOUCLE_motbreve(MOTS){id_breve}>
+								[(#ID_MOT|=={206}|?{
+									[(#URL_SITE|?{' ',''})
+									<a href='#URL_SITE'><img src='squelettes/images/breve_ssd.png'/>#_breve:TEXTE</a>]
+									[(#URL_SITE|?{'',' '})
+									<img src='squelettes/images/breve_ssd.png'/>EN BREF&nbsp;&nbsp;#_breve:TEXTE]
+								})]
+								[(#ID_MOT|=={211}|?{
+									<a href='#URL_SITE' target="_blank"><img src='squelettes/images/main.png'/>#_breve:TEXTE</a>
+								})]
+								[(#ID_MOT|=={207}|?{<a href='https://twitter.com/@seinesaintdenis' target='_blank'><img src='squelettes/images/breve_twitter.png'/>#_breve:TEXTE</a>})]
+								[(#ID_MOT|=={205}|?{
+									[(#URL_SITE|?{' ',''})
+									<a href='#URL_SITE' target='_blank'><img src='squelettes/images/breve_fb.png'/>#_breve:TEXTE</a>]
+									[(#URL_SITE|?{'',' '})
+									<a href='https://www.facebook.com/seinesaintdenisledepartement' target='_blanck'><img src='squelettes/images/breve_fb.png'/>#_breve:TEXTE</a>]
+								})]
+								</BOUCLE_motbreve>
+									<a href='#URL_SITE'><span>EN BREF&nbsp;&nbsp;</span>#_breve:TEXTE*</a>
+								<//B_motbreve>
+							</div>
+							</BOUCLE_breve>
+						</div>
+						</B_breve>
+					</div>
+				</div>
+			</div>
+			</div>
+		</div>
+		<div class="sousbreve">
+			<div class="container">
+				<div class="col-md-15 fondune">
+					<div class="row">
+						<BOUCLE_art_par2(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=7}{1,2}>
+						<div class="col-md-12">
+						<a class="gbouton" href="#URL_ARTICLE">
+							<div class="artsuite_par2">
+								<div class="logoart">
+								<div class="triangle"></div>
+								<span class="#EDIT{logo}">#LOGO_ARTICLE</span>
+								</div>
+								<div class="corps">
+									<h4 class="#EDIT{titre}">#TITRE</h4>
+
+									<div class="break"></div>
+									<span class="#EDIT{chapo}">#CHAPO</span>
+								</div>
+							</div>
+								</a>
+						</div>
+						</BOUCLE_art_par2>
+					</div>
+					<div class="row">
+						<BOUCLE_art_par3(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=7}{3,3}>
+						<div class="col-md-8">
+						<a class="gbouton" href="#URL_ARTICLE">
+							<div class="artsuite_par3">
+								<div class="logoart">
+								<div class="triangle"></div>
+								<span class="#EDIT{logo}">#LOGO_ARTICLE</span>
+								</div>
+
+								<div class="corps">
+									<h4 class="#EDIT{titre}">#TITRE</h4>
+
+									<div class="break"></div>
+									<span class="#EDIT{descriptif}">#DESCRIPTIF</span>
+								</div>
+							</div>
+							</a>
+						</div>
+						</BOUCLE_art_par3>
+					</div>
+					<div class="row">
+						<BOUCLE_art_par6_1(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=7}{6,3}>
+						<div class="col-md-8">
+						<a class="gbouton" href="#URL_ARTICLE">
+							<div class="artsuite_par3">
+								<div class="logoart">
+								<div class="triangle"></div>
+								<span class="#EDIT{logo}">#LOGO_ARTICLE</span>
+								</div>
+								<div class="corps">
+										<h4 class="#EDIT{titre}">#TITRE</h4>
+
+										<div class="break"></div>
+									<span class="#EDIT{descriptif}">#DESCRIPTIF</span>
+								</div>
+							</div>
+						</a>
+						</div>
+						</BOUCLE_art_par6_1>
+					</div>
+
+					<a href="#URL_PAGE{rubrique-ttaide}" class="retrouvez">
+						<div class="triangle"></div>
+						<div>retrouvez tous les services, aides et démarches</div>
+					</a>
+				</div>
+				<div class="col-md-9">
+				<INCLURE{fond=inclure/travaux}/>
+				</div>
+				<div class="col-md-9">
+				<INCLURE{fond=inclure/grandangle}/>
+				</div>
+				<div class="col-md-9">
+					<a class="rdvtit" href="http://lemag.seinesaintdenis.fr/-Agenda-">Rendez-vous</a>
+					<INCLURE{fond=inclure/agenda}/>
+					<a class="aideset" href="http://lemag.seinesaintdenis.fr/-Agenda-">
+						<div class="triangleblanc"></div>
+						<div>retrouvez tous nos rendez-vous</div>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<INCLURE{fond=inclure/footer}{env} />
+</body>
+</html>

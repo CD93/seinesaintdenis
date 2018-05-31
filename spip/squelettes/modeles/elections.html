@@ -1,0 +1,176 @@
+	<link rel="stylesheet" href="#CHEMIN{elections_fichiers/leaflet.css}" ></link>
+	<style>
+	.leaflet-marker-pane {
+	    z-index: 3;
+	}
+	.leaflet-shadow-pane {
+		z-index: 2;
+	}
+	</style>
+	<div tabindex="0" class="map leaflet-container leaflet-fade-anim" id="map" style="width: 100%; height: 600px; position: relative;"></div>
+	<script src="#CHEMIN{elections_fichiers/leaflet.js}" type="text/javascript"></script>
+	<script>
+			var map = L.map('map',{scrollWheelZoom:false}).setView([48.90903,2.45506 ], 11);
+
+		L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
+			maxZoom: 18,
+			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+			'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+			'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+			id: 'examples.map-20v6611k'
+		}).addTo(map);
+		var cantonsLayer, communeLayer;
+		function getColor(d) {
+		    return d == 18 ? '#edf8fb' :
+		           d == 16  ? '#ccece6' :
+		           d == 9  ? '#99d8c9' :
+		           d == 17  ? '#66c2a4' :
+		           d == 1   ? '#2ca25f' :
+		           d == 7   ? '#006d2c' :
+		           d == 4 ? '#edf8fb' :
+		           d == 8  ? '#ccece6' :
+		           d == 5  ? '#99d8c9' :
+		           d == 15  ? '#66c2a4' :
+		           d == 12   ? '#2ca25f' :
+		           d == 2   ? '#006d2c' :
+					d == 6 ? '#edf8fb' :
+					d == 12  ? '#ccece6' :
+					d == 21  ? '#99d8c9' :
+					d == 11  ? '#66c2a4' :
+					d == 14   ? '#2ca25f' :
+					d == 20   ? '#006d2c' :
+					d == 10 ? '#edf8fb' :
+					d == 19  ? '#ccece6' :
+					d == 13  ? '#99d8c9':
+					       '#99d8c9';
+			}
+		function style(feature) {
+		    return {
+		        fillColor: getColor(feature.properties.numcanton),
+		        weight: 2,
+		        opacity: 1,
+		        color: "#555",
+		        fillOpacity: 0.2
+		    };
+		}
+		function resetHighlight(e) {
+			cantonsLayer.resetStyle(e.target);
+		}
+
+		function highlightFeature(e) {
+			var layer = e.target;
+		    layer.setStyle({
+		        weight: 3,
+		        fillColor: "#516395",
+		        color: '#fff',
+		        fillOpacity: 0.5
+		    });
+		//#a6bddb
+		//#fee8c8
+		    if (!L.Browser.ie && !L.Browser.opera) {
+		        layer.bringToFront();
+		    }
+		}
+
+function affichePopup(feature,layer) {
+	$.ajax({
+		url: "#CHEMIN{elections_fichiers/resultats.php}",
+		method: "GET",
+		data: { id_canton: feature.properties.numcanton },
+		dataType: 'html'
+		}).done(function(data) {
+			var popupContent = "<p>Canton numero " +feature.properties.numcanton + " : <strong>"+feature.properties.nomcanton+"</strong></p>"
+			popupContent += data ;
+			layer.bindPopup(popupContent).openPopup();
+	});
+	
+}
+function preparePopUp(e) {
+	affichePopup(e.target.feature, e.target);
+}
+function onEachFeature(feature, layer) {
+	 layer.on({
+	 	mouseover: highlightFeature,
+	 	mouseout: resetHighlight,
+	 	click: preparePopUp
+	 });
+}
+		var canton20 = L.latLng(48.98705526620432, 2.549514770507812);
+		var canton19 = L.latLng(48.949190737361185, 2.5381851196289062);
+		var canton11 = L.latLng(48.92054787119236, 2.5399017333984375);
+		var canton10 = L.latLng(48.8754810584611, 2.545909881591797);
+		var canton14 = L.latLng(48.842954920199396, 2.5620460510253906);
+		var canton2 = L.latLng(48.95099446218932, 2.493896484375);
+		var canton6 = L.latLng(48.905430445463075, 2.4914932250976562);
+		var canton21 = L.latLng(48.886922295898685, 2.5103759765625);
+		var canton12 = L.latLng(48.8769882686177, 2.470550537109375);
+		var canton13 = L.latLng(48.86185766438846, 2.4564743041992188);
+		var canton3 = L.latLng(48.88082664942512, 2.4327850341796875);
+		var canton15 = L.latLng(48.89775716626464, 2.4084091186523438);
+		var canton5 = L.latLng(48.903399397969565, 2.4533843994140625);
+		var canton8 = L.latLng(48.92573638057003, 2.4451446533203125);
+		var canton4 = L.latLng(48.94242618850301, 2.4640274047851562);
+		var canton1 = L.latLng(48.91242564389959, 2.3830032348632812);
+		var canton7 = L.latLng(48.93814149993499, 2.4111557006835938);
+		var canton17 = L.latLng(48.94783790094817, 2.3809432983398438);
+		var canton16 = L.latLng(48.92257822166665, 2.3500442504882812);
+		var canton9 = L.latLng(48.95753241808396, 2.3486709594726562);
+		var canton18 = L.latLng(48.91107181095356, 2.332191467285156);
+		for (i=1;i<=21;i++) {
+			 var picto = L.icon({
+			    iconUrl: 'squelettes/elections_fichiers/images/icon'+i+'.png',
+			    shadowUrl: 'squelettes/elections_fichiers/images/icon-shadow.png',
+			    iconSize:     [26, 20], // size of the icon    
+			    shadowSize:   [26, 20], // size of the shadow
+			    iconAnchor:   [13, 10], // point of the icon which will correspond to marker's location
+			    shadowAnchor: [13, 10],  // the same for the shadow
+			    popupAnchor:  [17, 13] // point from which the popup should open relative to the iconAnchor
+			});
+			var lat = eval("canton" + i + ".lat");
+			var lng = eval("canton" + i + ".lng");
+			L.marker([lat,lng], { opacity: 1, icon : picto, clickable: false, zIndexOffset: -1000 }).addTo(map);
+		}			
+		$.ajax({
+			url: "#CHEMIN{elections_fichiers/communes93.geojson}",
+			dataType: 'json',
+			}).done(function(data) {
+				var communesOptions = {
+				    radius: 2,
+				    fillColor: "#ffffff",
+				    color: "#444",
+				    weight: 0.5,
+				    opacity: 0.8,
+				    fillOpacity: 0
+				};
+				
+				// Add the geojson layer to the map
+				communeLayer = L.geoJson(data,{
+				style: communesOptions
+				}).addTo(map);
+			}).fail(function(jqXHR, textStatus, errorThrown) {
+			// Nothing to do, there simply will be no overlay
+			});
+
+
+		$.ajax({
+			url: "#CHEMIN{elections_fichiers/cantons.geojson}",
+			dataType: 'json',
+			}).done(function(data) {
+				var cantonsOptions = {
+				    radius: 2,
+				    fillColor: "#ffffff",
+				    color: "#222",
+				    weight: 2,
+				    opacity: 1,
+				    fillOpacity: 0
+				};
+				// Add the geojson layer to the map
+				cantonsLayer = L.geoJson(data, {
+					onEachFeature: onEachFeature,
+					style: style
+				}).addTo(map);
+			}).fail(function(jqXHR, textStatus, errorThrown) {
+			// Nothing to do, there simply will be no overlay
+			});
+//map.on('click', function(e) { alert("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng) })
+	</script>

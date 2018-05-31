@@ -1,0 +1,36 @@
+<script src="#CHEMIN{js/dataTables/js/jquery.dataTables.min.js}" type="text/javascript"></script>
+<link href="#CHEMIN{js/dataTables/css/jquery.dataTables.css}" type="text/css" rel="stylesheet"></style>
+<script type="text/javascript">
+$(document).ready(function() { 
+	$("#tableautri").dataTable({
+		"oLanguage": {"sUrl": "#CHEMIN{js/dataTables/dataTables.french.txt}"},
+		"aaSorting": [[ 0, "asc" ]],
+		"bLengthChange": false,
+        "bPaginate": false,
+        "bInfo": false
+	}); 
+});
+</script>
+<div class="table-responsive">
+<table class="table table-striped" id="tableautri">
+    <thead>
+        <tr valign="top">
+            <th>Nom</th>
+            <th>adresse</th>
+            <th>ville</th>
+            <th>contact</th>
+        </tr>
+    </thead>
+    <tbody>
+    <BOUCLE_assosparent(asso_parentalite)>
+                <tr>
+                    <td>#NOM</td>
+                    <td>#ADRESSE<br/>#CP</td>
+                    <td>#VILLE</td>
+                    <td>Tel :#TEL<br/>fax :#FAX<br/>
+                    <a href="mailto:#COURRIEL">#COURRIEL</a></td>
+                </tr>
+    </BOUCLE_assosparent>
+       </tbody>
+</table>
+</div>

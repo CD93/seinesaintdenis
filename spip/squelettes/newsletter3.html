@@ -1,0 +1,196 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Lettre d'information de la Seine-Saint-Denis</title>
+
+<style type="text/css">
+  body {
+   padding-top: 0 !important;
+   padding-bottom: 0 !important;
+   padding-top: 0 !important;
+   padding-bottom: 0 !important;
+   margin:0 !important;
+   width: 100% !important;
+   -webkit-text-size-adjust: 100% !important;
+   -ms-text-size-adjust: 100% !important;
+   -webkit-font-smoothing: antialiased !important;
+ }
+ .tableContent img {
+   border: 0 !important;
+   display: block !important;
+   outline: none !important;
+ }
+ a{
+  color:#000;
+}
+
+p, h1{
+  color:#000;
+  margin:0;
+}
+
+div,p,ul,h1{
+  margin:0;
+}
+.l16 { width:16px !important; }
+.l56 { width:56px !important; }  
+.l168 { width:168px !important; }
+.l344 { width:344px !important; }
+.l432 { width:464px !important; }
+.l688 { width:688px !important; }
+.l800 { width:800px !important; }
+table[class=l16], td[class=l16], img[class=l16] { width:56px !important; }  
+table[class=l56], td[class=l56], img[class=l56] { width:56px !important; }  
+table[class=l168], td[class=l168], img[class=l168] { width:168px !important; }
+table[class=l344], td[class=l344], img[class=l344] { width:344px !important; }
+table[class=l432], td[class=l432], img[class=l432] { width:464px !important; }
+table[class=l688], td[class=l688], img[class=l688] { width:688px !important; }
+table[class=l800], td[class=l800], img[class=l800] { width:800px !important; }
+@media only screen and (max-width: 480px) { 
+        img{ height:auto;}
+        td.response { 
+            width:380px !important; 
+            display:block;
+        } 
+        td.response_sup{ display:none; }      
+    } 
+
+</style>
+
+
+</head>
+
+<body paddingwidth="0" paddingheight="0" style="padding-top: 0; padding-bottom: 0; padding-top: 0; padding-bottom: 0; background-repeat: repeat; width: 100% !important; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; -webkit-font-smoothing: antialiased;" offset="0" toppadding="0" leftpadding="0">
+<table class="global" width="800" class="l800" border="0" cellspacing="0" cellpadding="0" style="font-family:tahoma;">
+	<tr>
+		<td colspan="4" style="text-align:center;"><a style="font-family: Georgia,color:#888888;font-size:10px;" href="[(#URL_PAGE{newsletter3}|url_absolue)]">Voir cette lettre dans votre navigateur</a><br/><br/></td>
+	</tr>
+  <tr>
+    <td colspan="5" width="800" class="l800"><center><img src="#URL_SITE_SPIP/squelettes/images/tetiere_nl480.png" width="480px" height="78px"/></td>
+  </tr>
+  <tr>
+    <td colspan="5" bgcolor="#e8e35a" style="font-family: Georgia, Times, serif;
+	font-size: 30px;
+	text-align: center;
+	font-style: italic;
+	padding:10px;
+	"><strong>Lettre d'information</strong> de la Seine-Saint-Denis</td>
+  </tr>
+  <tr>
+  <td width="56" class="l56">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="56" class="response_sup l56">&nbsp;</td>
+    <td class="response l168" width="168"  style="font-family: Tahoma, Geneva, sans-serif;	font-weight: bold;font-size: 35px;color:#e8e35a;width:168px;">ACTUALITÉ</td>
+    <td width="16" class="response_sup">&nbsp;</td>
+    <td class="response l432" width="432" bgcolor="#eeeae0" style="font-family: Tahoma, Geneva, sans-serif;	font-weight: bold;font-size: 35px;color: #FFF;width:440px;padding-left:10px">GRAND ANGLE</td>
+    <td width="56" class="response_sup l56">&nbsp;</td>
+  </tr>
+  <tr>
+    <td class="response_sup">&nbsp;</td>
+    <td class="response l168" valign="top" style="color:#000" width="168">
+    <BOUCLE_artactu(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=10040}>
+    <table width="210" class="l210" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td align="center" bgcolor="#000000" style="padding:5px;font-family: Tahoma, Geneva, sans-serif;color:#ffffff;font-weight:bold;text-transform:uppercase;">[(#SURTITRE|sinon{ÉVÉNEMENT})]</td>
+      </tr>
+      <tr>
+        <td><a href="[(#URL_ARTICLE|url_absolue)]"><img src="#URL_SITE_SPIP/[(#LOGO_ARTICLE|image_reduire{210,112}|extraire_attribut{src})]" width="210px" height="112px"/></a></td>
+      </tr>
+      <tr>
+        <td style="padding-top:5px;"><a href="[(#URL_ARTICLE|url_absolue)]" style="font-family: Georgia; font-weight: bold;font-size: 18px;color:#000;text-decoration:none;"><span style="color:#000000;">#TITRE</span></a></td>
+      </tr>
+      <tr>
+        <td style="font-family: Tahoma;padding:5px 0 15px 0;">#DESCRIPTIF</td>
+      </tr>
+    </table>
+    </BOUCLE_artactu>
+    </td>
+    <td class="response_sup">&nbsp;</td>
+    <td class="response l432" valign="top" bgcolor="#eeeae0" width="432">
+    <BOUCLE_grandtitre(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=130}{0,1}>
+    <BOUCLE_gt_trouverub(RUBRIQUES){id_rubrique=#ID_RUBRIQUE}>
+    <table width="432" class="l432" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td style="padding: 0 10px;"><a href="[(#URL_ARTICLE|url_absolue)]" style="font-family: Georgia; font-weight: bold;font-size: 28px;color:#000;text-decoration:none;">#TITRE</a></td>
+      </tr>
+      <tr>
+        <td style="font-family: Georgia; font-size:18px;padding: 5px 10px; 15px 10px">#DESCRIPTIF</td>
+      </tr>
+    </table>
+    </BOUCLE_gt_trouverub>
+    </BOUCLE_grandtitre>
+      <BOUCLE_le_articles(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=130}>
+      <table width="432" class="l432" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td><a href="[(#URL_ARTICLE|url_absolue)]"><img src="#URL_SITE_SPIP/[(#LOGO_ARTICLE|image_reduire{474,260}|extraire_attribut{src})]" width="474px" height="260px"/></a></td>
+        </tr>
+        <tr>
+          <td style="padding: 10px 0 0 10px;"><a href="[(#URL_ARTICLE|url_absolue)]" style="font-family: Georgia; font-weight: bold;font-size: 20px;color:#000;text-decoration:none;"><span style="color:#000000;">#TITRE</span></td>
+        </tr>
+        <tr>
+          <td style="font-family: Tahoma;padding: 5px 10px 15px 10px">#CHAPO</td>
+        </tr>
+    </table>
+    </BOUCLE_le_articles>
+    
+    </td>
+    <td>&nbsp;</td>
+    
+    
+  </tr>
+</table>
+<table width="800" class="l800" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="56" class="l56">&nbsp;</td>
+    <td width="168" class="l168"><a href="[(#URL_PAGE{agenda}|url_absolue)]" style="color:#E12D38;font-family: Tahoma, Geneva, sans-serif;font-weight: bold;font-size: 26px;text-decoration:none;"><span style="color:#E12D38;">RENDEZ-VOUS</span></a></td>
+    <td width="16" class="l16">&nbsp;</td>
+    <td width="432" class="l432">&nbsp;</td>
+    <td width="56" class="l56">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="56" class="l56">&nbsp;</td>
+   <td colspan="2">
+    <BOUCLE_le_rdv(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=73}{0,1}>
+	   <a href="[(#URL_ARTICLE|url_absolue)]"><img src="#URL_SITE_SPIP/[(#LOGO_ARTICLE|image_reduire{300,300}|extraire_attribut{src})]" width="300px" height="300px"/></a>
+	 
+   </td>
+    <td valign="top" bgcolor="#E12D38" style="padding-left:15px; padding-top:15px">
+    <div style="color:#fff;font-family:Tahoma;font-weight:bold;font-size:16px">#SURTITRE</div>
+    <h3><a style="font-family: Georgia, Times, serif;font-size: 22px;color:#000;text-decoration:none;" href="[(#URL_ARTICLE|url_absolue)]">#TITRE</a></h3>
+    <div style="color:#fff;font-family: Tahoma;">#CHAPO</div>
+    
+    </td>
+    </BOUCLE_le_rdv>
+    <td width="56" class="l56">&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+<table width="800" class="l800" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+  <td width="56" class="l56">&nbsp;</td>
+    <td colspan="2" width="688" class="l688"></td>
+    <td width="56" class="l56">&nbsp;</td>
+  </tr>
+  <tr>
+  <td width="56" class="l56">&nbsp;</td>
+    <td width="344" class="l344" style="color:#000;font-family:Tahoma;font-weight:bold;font-size:12px;font-style: italic;">Si vous ne souhaitez plus recevoir de courriers électroniques de la part du Conseil Général <br/>de la Seine-Saint-Denis /// <a href="!_desaclientall_!">cliquez ici</a><br/>
+    </td>
+    <td width="344" class="l344">
+    <center><a href="http://www.seine-saint-denis.fr" target="_blank"><img src="http://www.seine-saint-denis.fr/IMG/VisuSSD.png" alt="logo ssd" /></a>
+    <a href="http://www.facebook.com/seinesaintdenisledepartement" target="_blank"><img src="#URL_SITE_SPIP/squelettes/images/facebookNL.png" alt="logo facebook" width="50px" height="50px"/></a>
+    <a href="http://www.twitter.com/seinesaintdenis" target="_blank"><img src="#URL_SITE_SPIP/squelettes/images/twitterNL.png" alt="logo twitter" width="50px" height="50px"/></a>
+    <a href="http://www.instagrame.com/seine_saint_denis" target="_blank"><img src="#URL_SITE_SPIP/squelettes/images/instagrameNL.png" alt="logo instagrame" width="50px" height="50px"/></a>
+    </td>
+    <td width="56" class="l56">&nbsp;</td>
+  </tr>
+</table>
+</body>
+</html>

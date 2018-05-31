@@ -1,0 +1,13 @@
+#SET{url,https://cg93.ecdys.fr/api/challenges/public_widget.json?token=cpnf5sgzxgvi}
+<div class="infodefi">
+<BOUCLE_liste(DATA){source json, #GET{url}|copie_locale{modif}}>
+<h3><a href="https://cg93.ecdys.fr/#/challenges/#VALEUR{id}" target="_blank">#VALEUR{name}</a></h3>
+	<div class="blocdefi">
+	#SET{logo,https://cg93.ecdys.fr#VALEUR{logo_url}}
+	<p><img src="#GET{logo}|copie_locale{modif}" />
+	[(#VALEUR{description}|couper{500})]</p>
+	<a  class="btn" href="https://cg93.ecdys.fr/#/challenges/#VALEUR{id}" target="_blank" ><button >Je participe</button></a>
+	<br class="break" />
+</div>
+</BOUCLE_liste>
+</div>

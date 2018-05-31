@@ -1,0 +1,32 @@
+#CACHE{24*3600}
+<BOUCLE_flux(DATA)
+  {source json,https://geoportail93.fr/SERV/DATA/?LAYERS=1014&FORMAT=GEOJSON&SERVICE=wfs&SRS=4326&COL=ALL}{datapath features}{","}>
+  #SET{photo,""}#SET{titre,""}#SET{supleant_titre,""}#SET{nom_canton,""}#SET{observation,""}#SET{civilite,""}#SET{supleant_civilite,""}
+  [(#VALEUR{properties/photo}|oui) #SET{photo,#GET{photo,"<img src='"}|concat{#VALEUR{properties/photo}}|concat{"' alt='' width='50px' />"}]
+  [(#VALEUR{properties/civilite}|=={"F"}|oui) #SET{civilite,#GET{civilite,"e"}]
+  [(#VALEUR{properties/supleant_civilite}|=={"F"}|oui) #SET{supleant_civilite,#GET{supleant_civilite,"e"}]
+  [(#VALEUR{properties/nom}|oui) #SET{titre,#GET{titre,""}|concat{#VALEUR{properties/prenom}}|concat{" "}|concat{#VALEUR{properties/nom}}}]
+  [(#VALEUR{properties/supleant_nom}|oui) #SET{supleant_titre,#GET{supleant_titre,"suppléant"}|concat{#GET{supleant_civilite}}|concat{" : "}|concat{#VALEUR{properties/supleant_prenom}}|concat{" "}|concat{#VALEUR{properties/supleant_nom}}}]
+  [(#VALEUR{properties/nom_canton}|oui) #SET{nom_canton,#GET{nom_canton,"élu"}|concat{#GET{civilite}}|concat{" du canton "}|concat{#VALEUR{properties/nom_canton}}]
+  [(#VALEUR{properties/observation}|oui) #SET{observation,#GET{observation,""}|concat{#VALEUR{properties/observation}|concat{<br/>}}]
+  {
+  "type": "Feature",
+  "geometry": [(#VALEUR{geometry}|json_encode)],
+  "id":[(#VALEUR{properties/id_elus}|json_encode)],
+  "tout" : [(#VALEUR|json_encode)],
+  "properties": {
+    "title":[(#GET{titre}|concat{<br/>}|concat{#GET{photo}}|concat{<br/>}|json_encode)],
+    "description":[(#GET{nom_canton}|concat{<br/>}|concat{#VALEUR{properties/groupe_politique}}|concat{<br/>}|concat{#GET{supleant_titre}}|concat{<br/>}|concat{#GET{observation}}|concat{#GET{tel}}|concat{#GET{fax}}|json_encode)]
+  }
+}</BOUCLE_flux>
+ {
+  "type": "Feature",
+  "geometry": {"type":"Point","crs":{"type":"name","properties":{"name":"EPSG:4326"}},"coordinates":[2.44911,48.906]},
+  "id":"1",
+  "properties": {
+    "title":"Les informations ne sont pas chargées<br\/>",
+    "description":"veuillez recharger la page ou contacter <a href='mailto:contact@seinesaintdenis.fr'>le webmaster<\/a>, <br\/>Merci",
+    "icon":""
+  }
+}
+<//B_flux>

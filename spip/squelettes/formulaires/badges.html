@@ -1,0 +1,36 @@
+<div class="ajax">
+	<div class="col-md-8">
+		<BOUCLE1(ARTICLES){id_article=#ENV{id_article}}>
+			#LOGO_ARTICLE
+		</BOUCLE1>
+	</div>
+	<div class="col-md-16">
+		<div class="formulaire_spip formulaire_badges">
+			[<div class='reponse_formulaire reponse_formulaire_ok'><h3>(#ENV*{message_ok})</h3></div>]
+			[(#ENV*{editform}|=={non}|?{'',' '})
+			<form action='#ENV{action}' method='post' role="form" name="formulaire_badges" >
+				#ACTION_FORMULAIRE{#ENV{action}}
+				<div class="form-group">
+				<input type="text" name="nom" class="form-control" placeholder="Votre nom" /></div>
+				<div class="form-group">
+				<input type="text" name="email" class="form-control" placeholder="votre email" /></div>
+				<div class="form-group">
+				<input type="text" name="adresse" class="form-control" placeholder="Votre adresse" /></div>
+				<div class="form-group">
+				<input type="text" name="cp" class="form-control" placeholder="Votre code postal" /></div>
+				<div class="form-group">
+				<input type="text" name="ville" class="form-control" placeholder="Votre ville" /></div>
+
+				    <label>
+				      <input type="checkbox" name="abo" value="1">   Je souhaite recevoir l'emag, l'actualité du Conseil général de la Seine-Saint-Denis.
+				    </label>
+
+				 <br/>
+				<button type="submit" class="btn btn-default">envoyer</button>
+				<input type="hidden" value="non" name="editform" />
+			</form>]
+		</div>
+	</div>
+</div>
+<br class="break"/>
+

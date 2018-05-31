@@ -1,0 +1,32 @@
+
+<div class="splashBack"></div>
+<div id="splashModal">
+	<div class="splash2">
+	<div id="logossd"><img src="#CHEMIN{images/logossd.png}" /></div>
+	</div>
+ 	<div class="splash">
+		<div class="splashImg">
+     	<button type="button" class="close"><span aria-hidden="true">&times;</span><span class="sr-only">Fermer</span></button>
+   	   	<a id="splashLien" href="#URL_ARTICLE{4463}"><img src="#CHEMIN{images/splash-voeux2015.jpg}" title="Voeux 2015"/></a>
+	</div>
+	</div>
+</div>
+<script type="text/javascript">
+$(document).ready(function() {
+	var dejavusplash = 0;
+	if ($.cookie('dejavusplash')==1) {dejavusplash = 1}
+	if (dejavusplash == 0) {
+		$('#splashModal, .splashBack').show();
+		$('#splashModal .close, .splashBack').hover(function() {
+			$(this).css('cursor','pointer');
+		}, function() {
+			$(this).css('cursor','auto');
+		});
+		$('#splashModal .close,.splashBack, #splashLien').click(function() {
+			$('#splashModal,.splashBack').fadeOut(1200);
+			dejavusplash = 1;
+			$.cookie('dejavusplash',1);
+		});
+	}
+}); 
+</script>

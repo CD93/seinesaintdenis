@@ -1,0 +1,91 @@
+#CACHE{86400}
+#SET{urlgeo,"http://geoportail93.fr/SERV/DATA/?LAYERS=1619&FORMAT=json&SERVICE=wfs&SRS=4326&COL=oid;ville_lieu_action;type_action;structure_referente;referent_action"}
+<div class="form-group">
+  	<label for="ville_lieu_action">Choisissez une ville</label>
+	<select class="form-control" id="ville_lieu_action" name="ville_lieu_action">
+			<option value="">toutes</option>
+		<BOUCLE_ville(DATA){source json, #GET{urlgeo}|copie_locale{modif}}{fusion ville_lieu_action}{par ville_lieu_action}>
+		  	<option value="[(#VILLE_LIEU_ACTION|entites_html|strtolower|ucfirst)]">[(#VILLE_LIEU_ACTION|entites_html|strtolower|ucfirst)]</option>
+		</BOUCLE_ville>
+	</select>
+</div>
+<div class="form-group">
+  	<label for="cate">Choisissez un type d'action</label>
+	<select class="form-control" id="type_action" name="type_action">
+			<option value="">toutes</option>
+		<BOUCLE_theme(DATA){source json, #GET{urlgeo}|copie_locale{modif}}{fusion type_action}{par type_action}>
+		  	<option value="[(#TYPE_ACTION|entites_html|strtolower|ucfirst)]">[(#TYPE_ACTION|entites_html|strtolower|ucfirst)]</option>
+		</BOUCLE_theme>
+	</select>
+</div>
+
+<div class="table-responsive"><table class="table table-striped display" id="tableaupdi">
+        <thead>
+            <tr>
+				<th>Prestataire</th>
+                <th>Ville</th>
+                <th>Type d'action</th>
+            </tr>
+        </thead>
+        <tbody>
+		<BOUCLE_tableau(DATA){source json, #GET{urlgeo}|copie_locale{modif}}>
+		#SET{id,(#VALEUR{oid}|entites_html)}
+			<tr>
+				<td><a href="#" monid="case#GET{id}" class="detail" data-toggle="modal" data-target="#detaill">[(#VALEUR{structure_referente}|entites_html)]</a></td>
+				<td>[(#VALEUR{ville_lieu_action}|strtolower|ucfirst|entites_html)]</td>
+				<td>[(#VALEUR{type_action}|strtolower|ucfirst|entites_html)]</td>
+			</tr>
+
+		</BOUCLE_tableau>
+</tbody>
+</table>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="detaill" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel"></h4>
+      </div>
+      <div class="modal-body">
+      </div>
+    </div>
+  </div>
+</div>
+<script src="#CHEMIN{js/DataTables/datatables.min.js}" type="text/javascript"></script>
+<link href="#CHEMIN{js/DataTables/datatables.min.css}" type="text/css" rel="stylesheet" >
+<script>
+$(document).ready(function() {
+
+	$('.detail').click(function() {
+		var monid = $(this).attr("monid").substr(4);
+		//$( ".modal-body" ).load( "https://geoportail93.fr/SERV/DATA/?SERVICE=WFS&REQUEST=getfeature&TYPENAME=1619&OUTPUTFORMAT=form&PROPERTYNAME=ALL&FEATUREID="+monid);
+	    $(".modal-body").load( "#URL_PAGE{fiche_lieu_aci}",{monid:monid});
+	});
+
+    $('#tableaupdi').DataTable( {
+    "language": {"url": "#CHEMIN{js/DataTables/fr_FR.txt}"},
+    "bLengthChange": false,
+    "bInfo": false,
+
+
+        initComplete: function () {
+            var api = this.api();
+ 			var cville = api.column( 1 );
+ 			var ccat = api.column( 2 );
+
+           	$("#ville_lieu_action").on( 'change', function () {
+           		var val = $(this).val();
+           		cville.search( val ? '^'+val+'$' : '', true, false ).draw();
+            } );
+            $("#type_action").on( 'change', function () {
+            		var val = $(this).val();
+            		ccat.search( val ? '^'+val+'$' : '', true, false ).draw();
+            } );
+         }
+
+      } );
+
+} );
+</script>

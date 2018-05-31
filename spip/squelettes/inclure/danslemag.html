@@ -1,0 +1,29 @@
+<BOUCLE_rubmag(RUBRIQUES){id_parent=10032}{!par id_rubrique}{0,1}>
+<BOUCLE_artprinc(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=#ID_RUBRIQUE}{0,1}>
+<div class="actumag">
+	<div class="row">
+		<div class="col-xs-10">
+			<BOUCLE_doc(DOCUMENTS){mode=document}{id_article}{extension=pdf}{0,1}>
+				<div class="imgmag">[(#LOGO_DOCUMENT|#URL_DOCUMENT)]</div>
+			</BOUCLE_doc>
+		</div>
+		<div class="col-xs-14">
+			<div class="notreactumag">
+				<a href="#URL_ARTICLE">Dans le magazine</a>
+			</div>
+			<div class="txtmag">
+				#DESCRIPTIF
+			</div>
+			<div class="media ttmag">
+				<div class=" media-left media-middle pull-left">
+					<i class="glyphicon glyphicon-play"></i>
+				</div>
+				<div class="media-body">
+					<a href="#URL_RUBRIQUE{10032}">Voir tous<br/>les magazines</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</BOUCLE_artprinc>
+</BOUCLE_rubmag>

@@ -1,0 +1,22 @@
+<BOUCLE_motclefemag(MOTS){id_article}{id_groupe=10001}{0,0}>
+<div class="toutpicto">
+	<a class="lepicto" href="[(#URL_RUBRIQUE{10026}|parametre_url{id_mot,#ID_MOT})]">
+		<div class="toutle #TITRE">tout</div>
+		<i class="#TITRE"></i> 
+		<div class="descript">[(#DESCRIPTIF*|typo)]</div>
+	</a>
+</div>
+</BOUCLE_motclefemag>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$(".toutle").hover(
+			function () {$(".descript").addClass("souligne");},
+			function () {$(".descript").removeClass("souligne");}
+		);
+		$(".descript").hover(
+			function () {$(".toutle").addClass("souligne");}, 
+			function () {$(".toutle").removeClass("souligne");}
+		); 
+	});
+</script>
+</B_motclefemag>

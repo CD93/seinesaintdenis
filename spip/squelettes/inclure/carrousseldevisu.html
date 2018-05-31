@@ -1,0 +1,13 @@
+<div class="actuemag">
+	<BOUCLE_idrub(RUBRIQUES){id_rubrique=#ENV{id_rubrique}}{tout}>
+	#SET{idrub,#ID_RUBRIQUE}
+	</BOUCLE_idrub>
+	<div class="notreactussd"><a href="#URL_RUBRIQUE{10026}">actualit&eacute;</a></div>
+	<div id="carousel-actu-emag" class="carousel slide hidden-xs" data-interval="5000" data-pause="hover" data-ride="carousel">
+		<div class="carousel-inner">
+		<h2 class="evenement">EVENEMENT</h2>
+			<a href="#URL_RUBRIQUE{10057}" ><img src="#CHEMIN{images/devisu/carrou_devisu.jpg}" /></a>
+		</div>
+	</div>
+	<div class="break"></div>
+</div>

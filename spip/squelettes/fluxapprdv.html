@@ -1,0 +1,20 @@
+[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]<?xml 
+version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+	<BOUCLE_rub(RUBRIQUES){id_rubrique=73}>
+    <channel>
+        <title>[(#TITRE|texte_backend)]</title>
+        <description>[(#TEXTE|supprimer_tags|texte_backend)]</description>
+        <lastBuildDate>Sat, 07 Sep 2002 00:00:01 GMT (non utilisé dans l’application)</lastBuildDate>
+        <link>[(#URL_RUBRIQUE|url_absolue)]</link>
+        <BOUCLE_art(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=73}>
+        <item>
+            <title>[(#TITRE|texte_backend)]</title>
+            <description>[(#LOGO_ARTICLE|image_passe_partout{390,212}|image_recadre{390,212,center}|texte_backend)] [(#CHAPO|texte_backend)]</description>
+            <pubDate>[(#DATE|date_iso)]</pubDate>
+            <link>[(#URL_ARTICLE|url_absolue)]</link>
+        </item>
+        </BOUCLE_art>
+       </channel>
+    </BOUCLE_rub>
+</rss>

@@ -1,0 +1,9 @@
+		<BOUCLE_artmot(MOTS){gis}{id_groupe=9}{id_article}{","}>
+		{"type": "Feature",
+		"geometry": {"type": "Point", "coordinates": [#LON, #LAT]},
+		"id":"#ID_GIS",
+		"properties": {
+			"title":[(#TITRE|json_encode)],
+			"description":[(#DESCRIPTIF_GIS|sinon{#DESCRIPTIF}|json_encode)][
+			(#LOGO_GIS|gis_icon_properties)]
+		}}</BOUCLE_artmot>

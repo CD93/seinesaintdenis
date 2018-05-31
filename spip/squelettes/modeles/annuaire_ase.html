@@ -1,0 +1,30 @@
+<div id="ase">
+#SET{sel_ville,#EVAL{$_POST['ville']}}
+<div class="alire">
+<div class="tetiere_vide"><h1>Annuaire ASE</h1></div>
+<div class="lire">
+<a href="spip.php?page=carto_pmi&x=272264&y=6259782&nom=tout&zoom=12" class="iframe_carto suite" style="display:block;">
+Toutes les circonscriptions d'aide social &agrave; l'enfance</a>
+<form action="#SELF#ase" method="post" class="ajax">
+			<select name="ville" id="ville">
+			<option value="">Choissisez votre Ville</option>
+			<BOUCLE_ville(MOTS){id_groupe=5}>
+				<option value="#TITRE">#TITRE</option>
+			</BOUCLE_ville>
+			</select>           
+</select>
+<input type="submit" class="ajax" value="rechercher" />
+</form>
+<ul class="sanspoint">
+<BOUCLE_coll(carto_sigd:social.dcom_def_equipements){type_1= ASE}{nom_ville=(#GET{sel_ville}|sinon{abcd})}>
+	<li><a href="spip.php?page=carto_ase&x=#X&y=#Y&nom=#TYPE_2" class="iframe_carto" style="display:block;">
+	[(#TYPE_2)]<br/>
+	[(#NOM_EQUIPEMENT|strtolower|ucwords)]</a>
+	[(#ADRESSE|strtolower|ucwords)]<br/>
+	[(#CODE_POSTAL)] [ (#NOM_VILLE)]
+	</li>
+</BOUCLE_coll>
+</ul>
+</div>
+</div>
+</div>

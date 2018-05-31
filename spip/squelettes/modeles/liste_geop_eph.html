@@ -1,0 +1,26 @@
+#CACHE{0}
+#SET{url,https://geoportail93.fr/SERV/DATA/?LAYERS=953&FORMAT=GEOJSON&SERVICE=wfs&SRS=4326&COL=ALL&MODE_GEO=POINT}
+<B_flux>
+<ul id="listedroite">
+<BOUCLE_flux(DATA)
+  {source json,#GET{url}|copie_locale{modif}}{datapath features}{par properties/type}>
+	[<h3>(#VALEUR{properties/type}|unique)</h3>]
+	<li class="marker#VALEUR{properties/id_etbt}"><a href="#" class="titre infowindow[(#VALEUR{properties/id_etbt})]">#VALEUR{properties/etablissement}</a>
+    	<p>
+    		[(#VALEUR{properties/adresse})<br/>]
+    		[(#VALEUR{properties/code_postal})<br/>]
+    		[(#VALEUR{properties/ville})<br/>]
+
+    		[tél : (#VALEUR{properties/telephone})<br/>]
+    		[fax : (#VALEUR{properties/fax})<br/>]
+
+			[type : (#VALEUR{properties/type})<br/>]
+			[finess : (#VALEUR{properties/num_finess})<br/>]
+			[nom de l'association : (#VALEUR{properties/association_nom_complet})<br/>]
+			[type de public : (#VALEUR{properties/public_concerne})<br/>]
+			[accueil temporaire : (#VALEUR{properties/accueil_temporaire})<br/>]
+    	</p>
+    </li>
+</BOUCLE_flux>
+</ul>
+</B_flux>[(#REM) https://geoportail93.fr/SERV/DATA/?TYPENAME=953&FORMAT=GEOJSON&FILTRE=%22type%22%20IN%20%28%27Foyers%20d%27%27accueil%20m%E9dicalis%E9%27%29&COL=id_etbt;etablissement;&key=0.4146596176016055]

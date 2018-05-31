@@ -1,0 +1,70 @@
+<BOUCLE_rubrique(RUBRIQUES){id_rubrique}{tous}>
+<!DOCTYPE html>
+[(#REM) Cf.: http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+]<!--[if lt IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie6"> <![endif]-->
+<!--[if IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie7"> <![endif]-->
+<!--[if IE 8 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie8"> <![endif]-->
+<!--[if IE 9 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js"> <!--<![endif]-->
+<head>
+<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+<title>[(#NOM_SITE_SPIP|textebrut)] / Actualité</title>
+[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
+<INCLURE{fond=inc/head} />
+</head>
+<body id="emag">
+<INCLURE{fond=inclure/menu-emag}{env} />
+<div class="main">
+	<div class="actu">
+		<div class="container degrader">
+			<div class="col-md-15 col-md-push-9" id="tousles"> <!-- début tous les  -->
+				<INCLURE{fond=inclure/tous-les}{env}{ajax}{titre=#TITRE} />
+			</div> <!-- fin tous les  -->
+			<div class="col-md-9 col-md-pull-15" id="actune">
+				<INCLURE{fond=inclure/carroussel-ssd}{id_rubrique}{env}/>
+				<div class="fondune">
+					<div class="notreactu">actualit&eacute;</div>
+					<BOUCLE_selevenement(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=10026}{0,1}>
+					<h2 class="evenement">[(#SURTITRE|?{#SURTITRE,&Eacute;V&Eacute;NEMENT})]</h2>
+					<div class="pointillehaut">
+						[(#LOGO_ARTICLE|#URL_ARTICLE)]
+						  <h4><a href="#URL_ARTICLE">#TITRE</a></h4>
+						  #DESCRIPTIF*<BOUCLE_type1(MOTS){id_groupe=3}{id_article}>
+						   [(#ID_MOT|=={3}|?{///&nbsp;<span class="glyphicon glyphicon-facetime-video"></span>})]
+						   </BOUCLE_type1>
+						 <br class="break"/>
+					</div>
+					</BOUCLE_selevenement>
+					<div class="boiteactu">
+						<h2 class="">ON Y &Eacute;TAIT</h2>
+						<div class="pointillehaut">
+							<BOUCLE_onyetait(ARTICLES pb_selection){par date}{spip_pb_selection.id_rubrique=10027}{0,2}{'<hr class="sepacool"/>'}>
+								[<a href="#URL_ARTICLE">(#LOGO_ARTICLE|vider_attribut{height}|vider_attribut{width})</a>]
+								<p class="datecarrou">[(#DATE|affdate)]</p>
+								<h3><a href="#URL_ARTICLE">#TITRE</a></h3>
+							</BOUCLE_onyetait>
+							<div class="break" ></div>
+						</div>							
+					</div><!--fin onyetaitboite -->
+					<BOUCLE_selevenement1(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=10026}{1,20}>
+					<div class="boiteactu">
+						<a href="#URL_RUBRIQUE{10026}" title="tous les '&eacute;v&eacute;nements'"><h2 class="evenement">&Eacute;V&Eacute;NEMENT</h2></a>
+						<div class="pointillehaut">
+							[(#LOGO_ARTICLE|#URL_ARTICLE)]
+							<h4><a href="#URL_ARTICLE">#TITRE</a></h4>
+							#DESCRIPTIF*<BOUCLE_type3(MOTS){id_groupe=3}{id_article}>
+							 [(#ID_MOT|=={3}|?{///&nbsp;<span class="glyphicon glyphicon-facetime-video"></span>})]
+							 </BOUCLE_type3>
+					 		<br class="break"/>
+						</div>
+					</div>
+					</BOUCLE_selevenement1>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<INCLURE{fond=inclure/footer}{env} />
+</body>
+</html>
+</BOUCLE_rubrique>

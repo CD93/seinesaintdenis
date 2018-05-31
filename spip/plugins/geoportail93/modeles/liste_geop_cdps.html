@@ -1,0 +1,13 @@
+#CACHE{0}
+<B_flux>
+<ul id="listedroite">
+<BOUCLE_flux(DATA)
+  {source json,https://geoportail93.fr/SERV/DATA/?LAYERS=771&FORMAT=GEOJSON&SERVICE=wfs&SRS=4326&COL=ALL&MODE_GEO=POINT}{datapath features}{"<br/>"}>
+	<li class="marker#VALEUR{properties/id_centre}"><a href="#" class="titre infowindow[(#VALEUR{properties/id_centre})]">#VALEUR{properties/nom_centre}</a>
+    	<p>#VALEUR{properties/adresse_postale}<br/>
+    	[tél : (#VALEUR{properties/telephone})<br/>]
+    	[(#VALEUR{properties/acces_centre}|replace{\*,"<br/>"})]
+    </p></li>
+</BOUCLE_flux>
+</ul>
+</B_flux>

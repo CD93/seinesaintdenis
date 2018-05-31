@@ -1,0 +1,24 @@
+<div id="flux_rss">
+<B_podcasts>
+#ANCRE_PAGINATION
+<div class="titrepoledep">
+	<div class="triangleblanc"></div>
+	<div>
+		<center>Jeux de Pistes et Balades De Visu</center>
+	</div>
+</div>
+<div class="fondbleuciel lireaussi">
+	#SET{urlcdt,http://www.tourisme93.com/visites/modules/feeder/rss.php?tag=De%20Visu}
+	<BOUCLE_podcasts(DATA){source rss, #GET{urlcdt}|copie_locale{modif}}{"<hr class='break' />"}{pagination 5}>
+	<div class="artpol">
+		<div>
+			<div class="imgrss" >#VALEUR{descriptif}</div>
+			<a class="blank" onclick="ga('send','event', 'clic-sortie', 'sortie vers CDT','#VALEUR{url}');" href="#VALEUR{url}">#VALEUR{titre}</a>
+		</div>
+	</div>
+	</BOUCLE_podcasts>
+	<hr class="break" />
+	<div class="pagination">#PAGINATION</div>
+</div>
+</B_podcasts>
+</div>

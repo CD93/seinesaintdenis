@@ -1,0 +1,56 @@
+[(#SET{id,#ENV{monid,#ENV{id,1}}})]
+[(#SET{layer,#ENV{layer_id,1619}})]
+#SET{urlgeo,http://geoportail93.fr/SERV/DATA/?LAYERS=#GET{layer}&FORMAT=json&SERVICE=wfs&SRS=4326&COL=ALL&FILTRE=oid=#GET{id}}
+<style type="text/css">
+	.ligne {
+		display: block;
+	}
+	.alias,.texte {
+		display: inline;
+	}
+	.alias {
+		font-weight: 700;
+		padding-right: 5px;
+	}
+	.alias::after {
+		content: ":";
+	}
+	.nivinfo {
+		border-bottom: 1px solid #333;
+		font-size: 1.1em;
+		margin:10px 0 5px 0;
+		display:block;
+	}
+	.titremodale {
+		text-align: center;
+		font-weight: 700;
+		font-size: 1.2em;
+		margin: 0 auto;
+		padding : 0 0 10px 0;
+	}
+</style>
+<div class="titremodale">Actions contre l'isolement des personnes âgées</div>
+<BOUCLE_tableau(DATA){source json, #GET{urlgeo}|copie_locale{modif}}>
+<div class="ligne" style=";"><div class="alias" title="Champ : type_action">Type d'action</div><div class="texte" style="position:relative">#TYPE_ACTION</div></div>
+<div class="nivinfo">Informations sur le référent de l'action</div>
+<div id="informations_sur_le_referent_de_l_action" style="display:block;position:relative">
+	<div class="ligne" style=";"><div class="alias" title="Champ : referent_action">Nom</div><div class="texte" style="position:relative">#REFERENT_ACTION</div></div>
+	<div class="ligne" style=";"><div class="alias" title="Champ : tel_referent_action">Téléphone</div><div class="texte" style="position:relative">#TEL_REFERENT_ACTION</div></div>
+	<div class="ligne" style=";"><div class="alias" title="Champ : mail_referent_action">Mail</div><div class="texte" style="position:relative">#MAIL_REFERENT_ACTION</div></div>
+</div>
+<div class="nivinfo">Informations sur le lieu de l'action</div>
+<div id="informations_sur_le_lieu_de_l_action" style="display:block;position:relative">
+	<div class="ligne" style=";"><div class="alias" title="Champ : cp_lieu_action">Code postal</div><div class="texte" style="position:relative">#CP_LIEU_ACTION</div></div>
+	<div class="ligne" style=";"><div class="alias" title="Champ : ville_lieu_action">Ville</div><div class="texte" style="position:relative">#VILLE_LIEU_ACTION</div></div>
+</div>
+<div class="nivinfo">Informations sur la structure référente</div>
+<div id="informations_sur_la_structure_referente" style="display:block;position:relative">
+	<div class="ligne" style=";"><div class="alias" title="Champ : structure_referente">Nom de la structure référente</div><div class="texte" style="position:relative">#STRUCTURE_REFERENTE</div></div>
+	<div class="ligne" style=";"><div class="alias" title="Champ : tel_structure_referente">Téléphone</div><div class="texte" style="position:relative">#TEL_STRUCTURE_REFERENTE</div></div>
+	<div class="ligne" style=";"><div class="alias" title="Champ : mail_structure_referente">Mail</div><div class="texte" style="position:relative">#MAIL_STRUCTURE_REFERENTE</div></div>
+	<div class="ligne" style=";"><div class="alias" title="Champ : adresse_structure_referente">Adresse</div><div class="texte" style="position:relative">#ADRESSE_STRUCTURE_REFERENTE</div></div>
+	<div class="ligne" style=";"><div class="alias" title="Champ : cp_structure_referente">Code postal</div><div class="texte" style="position:relative">#CP_STRUCTURE_REFERENTE</div></div>
+	<div class="ligne" style=";"><div class="alias" title="Champ : ville_structure_referente">Ville</div><div class="texte" style="position:relative">#VILLE_STRUCTURE_REFERENTE</div></div>
+	<div class="ligne" style=";"><div class="alias" title="Champ : structures_partenaires">Structure(s) partenaire(s)</div><div class="texte" style="position:relative">#STRUCTURES_PARTENAIRES</div></div>
+</div>
+</BOUCLE_tableau>

@@ -1,0 +1,48 @@
+<div class="ajax">
+[<p class='formulaire_ok'><strong>(#ENV*{message_ok})</strong></p>]
+[<p class='formulaire_erreur'><strong>(#ENV*{message_erreur})</strong></p>]
+<img src="#CHEMIN{images/voeux2017/E-Carte-2017.jpg}"/>
+<br/>
+<hr/>
+<br/>
+
+<form action='#ENV{action}' method='post'>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<label>Votre pr&eacute;nom et votre nom</label><br/>
+	[<span class='erreur'><em><small>(#ENV**{erreurs}|table_valeur{nom_exp})</small></em></span><br/>]
+	<input type='text' name='nom_exp' id='nom_exp' value='#ENV{nom_exp}' />
+	<br />
+	<label>Votre courriel</label><br/>
+	[<span class='erreur'><em><small>(#ENV**{erreurs}|table_valeur{mail_exp})</small></em></span><br/>]
+	<input type='text' name='mail_exp' id='mail_exp'value='#ENV{mail_exp}' />
+	<br />
+	<label>Le prénom et nom de votre destinataire</label><br/>
+	[<span class='erreur'><em><small>(#ENV**{erreurs}|table_valeur{nom_dest})</small></em></span><br/>]
+	<input type='text' name='nom_dest' id='nom_dest' value='#ENV{nom_dest}' />
+	<br />
+	<label>Le courriel de votre destinataire</label><br/>
+	[<span class='erreur'><em><small>(#ENV**{erreurs}|table_valeur{mail_des})</small></em></span><br/>]
+	<input type='text' name='mail_dest' id='mail_dest' value='#ENV{mail_dest}' />
+	<br />
+	<label>Votre message...</label><br/>
+	[<span class='erreur'><em><small>(#ENV**{erreurs}|table_valeur{mot})</small></em></span><br/>]
+	<textarea name="message" rows="5"cols="80" id="message"></textarea>
+	<br />	
+	<input type='submit' name='ok' value='envoyer' />
+</form>
+</div>
+<br/>
+<script>
+$("#message").keyup(function () {
+      var value = $(this).val();
+      $("p.texte").text(value);
+    }).keyup();
+$("#nom_exp").keyup(function () {
+      var value = $(this).val();
+      $(".nom_exp").text(value);
+    }).keyup();
+$("#nom_dest").keyup(function () {
+      var value = $(this).val();
+      $(".nom_dest").text(value);
+    }).keyup();
+</script>

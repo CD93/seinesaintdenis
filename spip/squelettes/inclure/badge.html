@@ -1,0 +1,33 @@
+<BOUCLE_art(ARTICLES){id_article=#ENV{id_article}}>
+	
+	<a data-toggle="modal" data-target="#myModal" class="badges">
+		[(#LOGO_ARTICLE|vider_attribut{height}|vider_attribut{width})]
+	</a>
+	<a data-toggle="modal" data-target="#myModal">
+		<BOUCLE_nbbadge(spip_badges){id_article=#ID_ARTICLE}>
+		[(#TOTAL_BOUCLE|>{0}|?{' ',''})
+			<h4>Déjà <span style="color:#000;">#TOTAL_BOUCLE</span> badge[(#TOTAL_BOUCLE|>{1}|?{s})] gagné[(#TOTAL_BOUCLE|>{1}|?{s})]&nbsp;!</h4>
+			]
+		</BOUCLE_nbbadge>
+	</a>
+	[(#DESCRIPTIF*|concat{#GET{ico}}|propre)]
+
+
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Remportez le badge du #SOUSTITRE</h4>
+      </div>
+      <div class="modal-body">
+        #FORMULAIRE_BADGES{#ID_ARTICLE}
+      </div>
+    </div>
+  </div>
+</div>
+</BOUCLE_art>

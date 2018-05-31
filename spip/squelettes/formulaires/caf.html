@@ -1,0 +1,25 @@
+<div class='formulaire_spip formulaire_caf'>
+	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	[<h2>(#ENV*{message_ok})</h2>]
+	[(#ENV{editable}|oui)
+		<form action='#ENV{action}' method='post'>
+		<div>
+			<br />
+			<br />			
+			#ACTION_FORMULAIRE{#ENV{action}}					
+			<fieldset>
+			<legend>Calcul de mon quotient familial</legend>
+			<label class='cuisine'>Ressources imposables de l'ann&eacute;e</label>
+			<br />				
+			<input class='text' type='text' name='revenus' id='revenus' value='#ENV{revenus}' /><br/><br/>
+			<label class='devis'>Prestations familiales mensuelles</label>
+			<br />					
+			<input class='text' type='text' name='presta' id='presta' value='#ENV{presta}' /><br/><br/>
+			<label class='devis'>Nombre de parts</label>
+			<br />	
+			<input class='text' type='text' name='parts' id='parts' value='#ENV{parts}' /><br/><br/>
+			<p class='boutons'><input type='submit' class='submit' value="Lancer le calcul" /></p>
+		</div>
+		</form>
+	]
+</div>

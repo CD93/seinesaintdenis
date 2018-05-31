@@ -1,0 +1,138 @@
+<BOUCLE_article(ARTICLES){id_article}>
+<!DOCTYPE html>
+[(#REM) Cf.: http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+]<!--[if lt IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie6"> <![endif]-->
+<!--[if IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie7"> <![endif]-->
+<!--[if IE 8 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie8"> <![endif]-->
+<!--[if IE 9 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js"> <!--<![endif]-->
+<head>
+<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+<title>[(#NOM_SITE_SPIP|textebrut)][ / (#TITRE|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
+<INCLURE{fond=inc/head}{env} />
+<link media="all" type="text/css" href="#CHEMIN{css/suivez.css}" rel="stylesheet" />
+</head>
+<body>
+<div class="main" id="pagesuivez">
+	<div class="tete">
+		<div class="container">
+			<div class="suivez-nous-titre col-md-24 col-xs-24">
+				<a href="http://seine-saint-denis.fr" class="col-md-24 col-xs-24" >
+					<img src="#CHEMIN{images/suivez-nous/suivez-titre-G.png}" class="hidden-xs" />
+					<img src="#CHEMIN{images/suivez-nous/suivez-titre-S.png}" class="visible-xs" />
+					Suivez-nous pour être informé !
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="break" >&nbsp;</div>
+	<div class="emag">
+		<div class="container">
+			<div class="suivez-nous-emag col-md-24 col-xs-24">
+				<div class="col-md-12 col-xs-24">
+					<img src="#CHEMIN{images/suivez-nous/bandeau-nl-emag.png}" />
+				</div>
+				<div class="col-md-12 col-xs-24 fdbleunl">
+					<a href="http://www.seine-saint-denis.fr/newsletter/" title="abonnez-vous à l'emag" class="aboemag">
+					<img src="#CHEMIN{images/suivez-nous/suivez-jemabonne.png}"/>
+					Suivez l'Emag !
+					</a>
+					<img src="#CHEMIN{images/suivez-nous/suivez-voir-emag.png}"/>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="break" >&nbsp;</div>
+	<div class="hidden-xs">
+		<div class="container" id="newsletter-inc">
+			<div >
+				<INCLURE{fond=newsletter-inclure} />
+			</div>
+		</div>
+	</div>
+	<div class="visible-xs">
+	<div class="lemagavoir">
+		<div class="container">
+		<div class="col-md-24 col-xs-24">
+			<img src="#CHEMIN{images/suivez-nous/tetiere-emagnl.png}" />
+		</div>
+			<div class="col-md-24 col-xs-24 fdgris">
+				<div class="col-md-offset-3 col-md-18 col-xs-24">
+
+					<div class="col-md-24 col-xs-24">
+						<div class="fdgris">
+							<h1 class="blanc">GRAND ANGLE</h1>
+							<BOUCLE_grandtitre(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=130}{0,1}>
+								<BOUCLE_gt_trouverub(RUBRIQUES){id_rubrique=#ID_RUBRIQUE}{0,1}><br/>
+								<a href="#URL_ARTICLE">
+									<h3>#TITRE</h3>
+						 			 #DESCRIPTIF
+								</BOUCLE_gt_trouverub>
+								#LOGO_ARTICLE
+								</a>
+							</BOUCLE_grandtitre>
+						</div>
+					</div>
+				</div>
+				<div class="break" >&nbsp;</div>
+				<div class="col-md-offset-3 col-md-18 col-xs-24">
+					<div class="col-md-24 col-xs-24">
+						<h1 class="jaune">ACTUALIT&Eacute;</h1>
+						<BOUCLE_artactu(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=10034}{"<hr class='sepacool'/>"}>
+							<h2>[(#SURTITRE|sinon{EVENEMENT})]</h2>
+							<a href="#URL_ARTICLE">
+								#LOGO_ARTICLE
+								<h3 class="petith3">#TITRE</h3>
+								#DESCRIPTIF
+							</a>
+						</BOUCLE_artactu>
+					</div>
+				</div>
+				<div class="break" >&nbsp;</div>
+				<div class="col-md-offset-3 col-md-18 col-xs-24">
+					<div class="col-md-24 col-xs-24">
+						<h1 class="rouge">RENDEZ-VOUS</h1>
+						<BOUCLE_le_rdv(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=10031}{0,4}>
+						[(#COMPTEUR_BOUCLE|>{1}|?{' ',''})<div class="hidden-xs">]
+						<div class="col-md-12 col-xs-24">
+							#LOGO_ARTICLE
+							<div class="fdrouge">
+								#SURTITRE
+								<h3 class="petith3"><a href="#URL_ARTICLE">#TITRE</a></h3>
+								#DESCRIPTIF
+							</div>
+						</div>
+						[(#COMPTEUR_BOUCLE|>{1}|?{' ',''})</div>]
+						</BOUCLE_le_rdv>
+					</div>
+				</div>
+				<div class="break" >&nbsp;</div>
+			</div>
+		</div>
+	</div>
+	</div>
+	<div class="break" >&nbsp;</div>
+	<div class="reseausoc">
+		<div class="container">
+			<div class="suivez-nous-resosoc col-md-24 col-xs-24">
+				<a href="https://www.facebook.com/seinesaintdenisledepartement" title="suivez nous sur facebook" class="col-xs-12 col-md-6">
+					<img src="#CHEMIN{images/suivez-nous/suivez-facebook.png}" />
+				</a>
+
+				<a href="http://instagram.com/seine_saint_denis#" title="suivez nous sur instagram" class="col-xs-12 col-md-6">
+					<img src="#CHEMIN{images/suivez-nous/suivez-instagram.png}" />
+				</a>
+				<a href="https://twitter.com/@seinesaintdenis" title="suivez nous sur twitter" class="col-xs-12 col-md-6">
+					<img src="#CHEMIN{images/suivez-nous/suivez-twitter.png}" />
+				</a>
+				<a href="http://www.dailymotion.com/Seine-Saint-Denis" title="suivez nous sur dailymotion" class="col-xs-12 col-md-6">
+					<img src="#CHEMIN{images/suivez-nous/suivez-dailymotion.png}" />
+					Suivez sur les r&eacute;seaux sociaux !
+				</a>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+</BOUCLE_article>

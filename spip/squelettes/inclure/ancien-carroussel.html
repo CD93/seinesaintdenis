@@ -1,0 +1,78 @@
+<div class="actuemag">
+	<BOUCLE_idrub(RUBRIQUES){id_rubrique=#ENV{id_rubrique}}{tout}>
+	#SET{idrub,#ID_RUBRIQUE}
+	</BOUCLE_idrub>
+	<div class="notreactussd"><a href="#URL_RUBRIQUE{10026}">actualit&eacute;</a></div>
+	<div id="carousel-actu-emag" class="carousel slide hidden-xs" data-interval="6000" data-pause="hover" data-ride="carousel">
+		<!-- Indicators -->
+		<B_compteurpub>
+		<ol class="carousel-indicators">
+		<BOUCLE_compteurpub(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=#GET{idrub,10029}}{0,5}>
+		[(#TOTAL_BOUCLE|>{1}|?{" ",""})
+		<li data-target="#carousel-actu-emag" data-slide-to="[(#COMPTEUR_BOUCLE|moins{1})]" [(#COMPTEUR_BOUCLE|=={1}|?{'class="active"',''})]></li>
+		]
+		</BOUCLE_compteurpub>
+		</ol>
+		</B_compteurpub>
+		<!-- Wrapper for slides -->
+		<div class="carousel-inner">
+		
+		<BOUCLE_actu_emagpub(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=#GET{idrub,10029}}{0,5}>
+		#SET{titremot,""}
+			<BOUCLE_mots(MOTS){id_article}{id_groupe='10001'}>
+				#SET{titremot,#TITRE}
+				#SET{desc,(#DESCRIPTIF*|typo)}
+			</BOUCLE_mots>
+			<div class="item [(#COMPTEUR_BOUCLE|=={1}|?{'active',''})]">
+			<h2 class="#GET{titremot}">[(#SURTITRE|?{[(#SURTITRE*|typo)],#GET{desc}})]</h2>
+			[<a href="#URL_ARTICLE">(#LOGO_ARTICLE_NORMAL|vider_attribut{height}|vider_attribut{width})</a>]
+			<h4><a href="#URL_ARTICLE">#TITRE</a></h4>
+			[<p class="datecarrou">(#DATE_REDAC|affdate)</p>]
+			<p class="cop">[(#DESCRIPTIF*|couper{40}|typo)]</p>
+			<p class="pascop">[(#DESCRIPTIF*|typo)]</p>
+			<BOUCLE_type(MOTS){id_groupe=3}{id_article}>
+			[(#ID_MOT|=={3}|?{///&nbsp;<span class="glyphicon glyphicon-facetime-video"></span>})]
+			</BOUCLE_type>
+			<BOUCLE_types(MOTS){id_groupe=3}{id_article}>
+			[(#ID_MOT|=={10051}|?{///&nbsp;<span class="glyphicon glyphicon-volume-up"></span>})]
+			</BOUCLE_types>
+			
+			</div>
+		</BOUCLE_actu_emagpub>
+		</div>
+	</div>
+	<div id="carousel-actu-emag" class="carousel slide visible-xs">
+		<!-- Wrapper for slides -->
+		<div class="carousel-inner">
+		
+		<BOUCLE_actu_emagpub2(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=#GET{idrub,10029}}{0,1}>
+		#SET{titremot,""}
+			<BOUCLE_mots2(MOTS){id_article}{id_groupe='10001'}>
+				#SET{titremot,#TITRE}
+				#SET{desc,(#DESCRIPTIF*|typo)}
+			</BOUCLE_mots2>
+			<div class="item [(#COMPTEUR_BOUCLE|=={1}|?{'active',''})]">
+			<h2 class="#GET{titremot}">[(#SURTITRE|?{[(#SURTITRE*|typo)],#GET{desc}})]</h2>
+			[<a href="#URL_ARTICLE">(#LOGO_ARTICLE_NORMAL|vider_attribut{height}|vider_attribut{width})</a>]
+			<h4><a href="#URL_ARTICLE">#TITRE</a></h4>
+			[<p class="datecarrou">(#DATE_REDAC|affdate)</p>]
+			<p class="cop">[(#DESCRIPTIF*|couper{40}|typo)]</p>
+			<p class="pascop">[(#DESCRIPTIF*|typo)]</p>
+			<BOUCLE_type2(MOTS){id_groupe=3}{id_article}>
+			[(#ID_MOT|=={3}|?{///&nbsp;<span class="glyphicon glyphicon-facetime-video"></span>})]
+			</BOUCLE_type2>
+			<BOUCLE_type2s(MOTS){id_groupe=3}{id_article}>
+			[(#ID_MOT|=={10051}|?{///&nbsp;<span class="glyphicon glyphicon-volume-up"></span>})]
+			</BOUCLE_type2s>
+			</div>
+		</BOUCLE_actu_emagpub2>
+		</div>
+	</div>
+	<div class="break"></div>
+	<div class="break"></div>
+</div>
+	[(#PLUGIN{eve}|oui)
+	[(#ID_RUBRIQUE|=={10155}|non)
+	 <INCLURE{fond=inclure/eve-button}{env} />
+	 ]
+	 ]

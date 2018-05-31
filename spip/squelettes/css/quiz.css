@@ -1,0 +1,98 @@
+#pagequiz .questionquiz .formulaire_spip {
+	border-style: solid;
+	border-width:25px;
+	  -webkit-border-image: url("../images/angle.png") 25 repeat;
+	   -moz-border-image: url("../images/angle.png") 25 repeat;
+	   -o-border-image: url("../images/angle.png") 25 repeat;
+	    border-image: url("../images/angle.png") 25 fill repeat;
+	padding: 0px;
+	margin-bottom:  10px;
+	//background-color: #FDE90E;
+}
+#pagequiz h3 {
+	//background-color: #FDE90E;
+	padding:  5px 10px;
+}
+#pagequiz .questionquiz ul {
+	list-style-type: none;
+	padding-left: 0;
+}
+#pagequiz .radio, #pagequiz .checkbox {
+	display: block;
+}
+
+#pagequiz .relative-position-admin {
+	position: relative;
+}
+#pagequiz .image_bg {
+	width: 100%;
+}
+#pagequiz li span.ui-icon {
+	display:  inline-block;
+}
+#pagequiz .question .formulaire_spip li {
+	height:  200px;
+}
+#pagequiz .question #formulaire_inscription li, #pagequiz .question #formulaire_login li{
+	height:  auto;
+}
+#pagequiz .question .formulaire_spip li img{
+   	max-height:  200px;
+}
+#pagequiz .questionquiz a.lien_pagination {
+    display: inline-block;
+    padding: 3px 6px;
+    border-radius: 5px;
+    background-color: #eee;
+    border: 1px solid #dedede;
+    margin: 0 0 8px 5px;
+    color:  #bbbbbb;
+    box-shadow: inset 1px 3px 3px #999 ;
+}
+#pagequiz a.lien_pagination.no {
+   // background-color:#FDE90E ;
+    box-shadow: none;
+    color:  #000;
+    border: none;
+}
+#pagequiz a.lien_pagination.no:hover {
+	background-color: #000;
+	color: #fff;
+}
+#pagequiz a.lien_pagination.encours {
+    font-weight: bold;
+    background-color:#000 ;
+    border: 2px solid #000;
+    box-shadow: 1px 3px 3px #999;
+    color: #fff;
+}
+.chapo {
+	font-size: 1.3em;
+	font-weight: 300;
+	line-height: 1.2em;
+	font-family: Merriweather;
+	margin-bottom: 10px;
+}
+.chapo p {
+	margin:  0;
+}
+.chapo span {
+	margin-bottom: 10px;
+}
+
+@media (max-width: 991px) {
+	#pagequiz .question .formulaire_spip li img{
+	   	max-height:  100px;
+	}
+	#pagequiz .question .formulaire_spip li{
+	   	height:  100px;
+	}
+}
+@media (max-width: 1200px) {
+	#pagequiz .question .formulaire_spip li{
+	   	height:  159px;
+	}
+	#pagequiz .question .formulaire_spip li img{
+	   	max-height:  159px;
+	}
+}

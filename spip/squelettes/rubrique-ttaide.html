@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+[(#REM) Cf.: http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+]<!--[if lt IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie6"> <![endif]-->
+<!--[if IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie7"> <![endif]-->
+<!--[if IE 8 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie8"> <![endif]-->
+<!--[if IE 9 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js"> <!--<![endif]-->
+<head>
+<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+<title>[(#NOM_SITE_SPIP|textebrut)][ / (#TITRE|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
+<INCLURE{fond=inc/head} />
+</head>
+<body>
+<INCLURE{fond=inclure/menu} {env}/>
+<div class="main" id="pagerubrique">
+	<div class="contenu">
+		<div class="container">
+			<div class="col-md-15 fondune"> <!-- début dossier une  -->
+				<div class=printmail>
+					<a href="" class="print">print</a>
+					<a href="" class="mail">mail</a>
+					<div class="texte"><span>&nbsp;</span></div>
+				</div>
+				<div class="corpsune">
+					<h1>Tous les services, aides et d&eacute;marches</h1>
+					[<div class="chapoune">
+						<span class="glyphicon glyphicon-minus"></span>
+						<p>(#CHAPO)</p>
+						<span class="glyphicon glyphicon-minus"></span>
+					</div>]
+				<BOUCLE_tt_aides(RUBRIQUES){id_rubrique IN 2,3,4,5,6}>
+					<h3>#TITRE</h3>
+					<BOUCLE_st_aides(RUBRIQUES){id_parent}>
+						<h4>#TITRE</h4>
+						<div class="row">
+						<BOUCLE_les_aides(ARTICLES){id_rubrique}{par titre}>
+							<div class="col-md-8">
+							<a class="gbouton" href="#URL_ARTICLE">
+								<div class="artsuite_par3">
+									<div class="triangleblanc"></div>
+									<div class="corps corpstoutes" >
+										<h4>#TITRE</h4>
+										<p>#DESCRIPTIF</p>
+									</div>
+								</div>
+							</a>
+							</div>
+						</BOUCLE_les_aides>	
+						</div>
+					</BOUCLE_st_aides>
+				</BOUCLE_tt_aides>		
+				</div>
+				<div class="printmail reseausoc">
+					<a href="" class="google">google+</a>
+					<a href="" class="facebook">facebook</a>
+					<a href="" class="twitter">twitter</a>
+					<div class="texte"><span>PARTAGEZ</span></div>
+				</div>
+			</div><!-- fin dossier une  -->
+			<div class="col-md-9">
+				<div class="actuemag">
+					<div class="notreactussd">actualité</div>
+					<div id="carousel-actu-emag" class="carousel slide" data-interval="5000" data-pause="hover" data-ride="carousel">
+						<!-- Indicators -->
+						<ol class="carousel-indicators">
+							<BOUCLE_compteur(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=10029}{0,5}>
+							<li data-target="#carousel-actu-emag" data-slide-to="[(#COMPTEUR_BOUCLE|moins{1})]" [(#COMPTEUR_BOUCLE|=={1}|?{'class="active"',''})]></li>
+							</BOUCLE_compteur>	
+						</ol>
+						<!-- Wrapper for slides -->
+						<div class="carousel-inner">
+						<BOUCLE_actu_emag2(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=10029}{0,5}>
+							<div class="item [(#COMPTEUR_BOUCLE|=={1}|?{'active',''})]">
+						    	<h2 class="bleu #GET{type}">[(#SURTITRE|?{#SURTITRE,#GET{type}})]</h2>
+						    		[(#LOGO_ARTICLE|#URL_ARTICLE)]
+						    		<span class="datecarrou">[(#DATE|affdate)]</span>
+						    		<h4><a href="#URL_ARTICLE">#TITRE</a></h4>
+						    		#DESCRIPTIF
+						      	<div class="carousel-caption"></div>
+							</div>
+					  	</BOUCLE_actu_emag2>
+						</div>
+					</div>
+					<div class="break"></div>
+				</div>
+				<div class="titrepoledep">
+					<div class="triangleblanc"></div>
+					<div>à lire aussi</div>
+				</div>			
+				<div class="fondpale lireaussi">
+					<BOUCLE_autresarts(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=7}{"<hr/>"}>
+					<div class="artpol">
+						<div>
+							<h4><a href="#URL_ARTICLE">#TITRE</a></h4>
+							#CHAPO
+						</div>
+					</div>
+					</BOUCLE_autresarts>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<INCLURE{fond=inclure/footer}{env} />
+</body>
+</html>

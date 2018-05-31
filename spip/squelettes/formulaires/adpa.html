@@ -1,0 +1,114 @@
+<div class="leform" id="adpa">
+<span class='bugajaxie'></span>
+<div class='formulaire_spip formulaire_adpa'>
+	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	[<p class='reponse_formulaire reponse_formulaire_ok'>(#ENV*{message_ok})</p>]
+	[(#ENV{editable}|oui)
+		<form action='#ENV{action}' method='post'>
+		<div>
+			#ACTION_FORMULAIRE{#ENV{action}}
+				<fieldset>
+				<legend>Vérifiez que vous remplissez les conditions suivantes d'attribution de l'A.D.P.A. à domicile</legend>
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{age}}
+					<p>
+					<em>Vous devez remplir les conditions d'attribution de cette aide sociale.</em>
+					</p>
+					<ul>
+					<li class="editer_age obligatoire[(#GET{erreurs}|oui)erreur]">			
+						
+						<div class='choix' style='display:inline'><input type='checkbox' name='age' id='age' value='true' [(#ENV{age}|oui)checked="checked"]/></div>
+						<label for="age" style='display:inline'>[<span class='erreur_message'>(#GET{erreurs}) : </span>]Vous avez 60 ans ou plus </label>
+					</li>
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{reside93}}
+					<li class="editer_reside93 obligatoire[(#GET{erreurs}|oui)erreur]">			
+						
+						<div class='choix' style='display:inline'><input type='checkbox' name='reside93' id='reside93' value='true' [(#ENV{reside93}|oui)checked="checked"]/></div>
+						<label for="reside93" style='display:inline'> [<span class='erreur_message'>(#GET{erreurs}) : </span>]Votre  résidence est située en <a href="javascript:deplie('expl1');">Seine-Saint-Denis</a></label>
+						<p id="expl1" style="display:none;"><em>Si votre résidence est située dans un département autre que la Seine-Saint-Denis, veuillez vous adresser au Conseil Général du département dans lequel vous résidez.</em></p>
+					</li>
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{aide}}
+					<li class="editer_aide obligatoire[(#GET{erreurs}|oui)erreur]">			
+						
+						<div class='choix' style='display:inline'><input type='checkbox' name='aide' id='aide' value='true' [(#ENV{aide}|oui)checked="checked"]/></div>
+						<label for="aide" style='display:inline'>[<span class='erreur_message'>(#GET{erreurs}) : </span>]Vous avez <a href="javascript:deplie('expl2');">besoin d'être aidé(e)</a> pour accomplir les actes de la vie quotidienne ou d'être surveillé(e) régulièrement</label>
+						<p id="expl2" style="display:none;"><em>
+														L'évaluation du besoin d’aide est réalisée au domicile de la personne âgées par une équipe médico-sociale au moyen
+														d'un questionnaire normalisé (la grille AGGIR «  Autonomie, Gérontologie, Groupes Iso-Ressources ») pour déterminer son degré de dépendance.
+														<br><br>Il existe six niveaux de dépendance ou GIR (Groupes Iso-Ressources) :
+														<br>&nbsp;&nbsp;•	GIR 1 : dépendance totale, mentale et corporelle.
+														<br>&nbsp;&nbsp;•	GIR 2 : grande dépendance.
+														<br>&nbsp;&nbsp;•	GIR 3 : dépendance corporelle.
+														<br>&nbsp;&nbsp;•	GIR 4 : dépendance corporelle partielle.
+														<br>&nbsp;&nbsp;•	GIR 5 : dépendance légère.
+														<br>&nbsp;&nbsp;•	GIR 6 : pas de dépendance notable ou suffisante.
+														<br><br>Seuls les GIR 1, 2, 3 et 4 ouvrent droit à l'A.D.PA.</em></p>
+														
+					</li>
+					</ul><br/>
+					<em>Si vous &ecirc;tes ressortissant &eacute;tranger : vous justifiez d'une carte de r&eacute;sident ou d'un titre de s&eacute;jour en cours de validit&eacute; attestant de la r&eacute;gularit&eacute; de votre s&eacute;jour en France.</em>
+				</fieldset>
+					
+				<fieldset>
+				<legend>Choisissez votre situation familiale</legend>		
+				<ul>
+					<li>
+						<div class='choix' style='display:inline'><input type='radio' name='etatcivil' value='seul' checked='checked'></div>
+						Vous êtes seul(e).
+					</li>
+					<li>
+						<div class='choix' style='display:inline'><input type='radio' name='etatcivil' value='conjointDomicile'></div>
+						Votre conjoint, concubin ou la personne avec qui vous avez conclu un PACS vit conjointement avec vous à domicile.
+					</li>
+					<li>
+						<div class='choix' style='display:inline'><input type='radio' name='etatcivil' value='conjointHebergement'></div>
+						Votre conjoint, concubin ou la personne avec qui vous avez conclu un PACS est hébergé en établissement.
+					</li>
+				</ul>
+				</fieldset>
+
+				<fieldset>
+				<legend>Saisissez vos ressources</legend>
+				<ul>				
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{ressources}}
+					<li class="editer_ressources obligatoire[(#GET{erreurs}|oui)erreur]">	
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						<label for="ressources"><a href="javascript:deplie('expl3');">Ressources annuelles déclarées</a></label>
+						<input type='text' name='ressources' id='ressources' value='#ENV{ressources}' class='text'>
+						<p id="expl3" style="display:none;"><em>
+						Total des ressources annuelles figurant sur l’avis d’imposition du demandeur et le cas échéant du conjoint, concubin ou personne avec laquelle le demandeur a conclu un PACS, y compris en cas de déclaration séparée.</em></p>
+					</li>
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{prelevement}}
+					<li class="editer_prelevement obligatoire[(#GET{erreurs}|oui)erreur]">
+						
+						<label for="prelevement"><a href="javascript:deplie('expl4');">Revenus soumis au prélèvement libératoire</a></label>					
+						<input type='text' name='prelevement' id='prelevement' value='#ENV{prelevement}' class='text'>
+						<p id="expl4" style="display:none;"><em>Le prélèvement forfaitaire libératoire (PFL) ou prélèvement libératoire forfaitaire (PLF) est, dans la fiscalité française, un système permettant pour certains types de placements, de payer directement l’impôt de manière forfaitaire et sans aucun lien avec la tranche d’imposition de l’impôt sur le revenu du contribuable concerné.<br/>
+						Il est forfaitaire car son taux ne dépend pas du revenu global du contribuable, et libératoire car il n'est pas intégré à l'impôt sur le revenu (mais le contribuable est tenu de le déclarer). </em></p>
+					</li>
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{valeurCapitaux}}
+					<li class="editer_valeurCapitaux obligatoire[(#GET{erreurs}|oui)erreur]">
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						<label for="valeurCapitaux">Valeur des capitaux qui ne sont pas placés</label>
+						<input type='text' name='valeurCapitaux' id='valeurCapitaux' value='#ENV{valeurCapitaux}' class='text'>
+					</li>	
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{valeurBatis}}
+					<li class="editer_valeurBatis obligatoire[(#GET{erreurs}|oui)erreur]">
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						<label for="valeurBatis">Valeur locative des immeubles bâtis (à l’exclusion de la résidence principale occupée par vous-même, votre conjoint, votre concubin, la personne avec laquelle vous avez conclu un PACS, par vos enfants ou vos petits-enfants) qui ne sont pas exploités</label>
+						<input type='text' name='valeurBatis' id='valeurBatis' value='#ENV{valeurBatis}' class='text'>
+					</li>	
+					#SET{erreurs,#ENV**{erreurs}|table_valeur{valeurNonBatis}}
+					<li class="editer_valeurNonBatis obligatoire[(#GET{erreurs}|oui)erreur]">
+						[<span class='erreur_message'>(#GET{erreurs})</span>]
+						<label for="valeurNonBatis">Valeur locative des terrains non bâtis qui ne sont pas exploités</label>
+						<input type='text' name='valeurNonBatis' id='valeurNonBatis' value='#ENV{valeurNonBatis}' class='text'>
+					</li>
+				</ul>				
+				</fieldset>			
+			
+			<p class='boutons'><input type='submit' class='submit' value="Lancer l'estimation"/></p>
+		</div>
+		</form>
+	]
+</div>
+</div>

@@ -1,0 +1,46 @@
+<BOUCLE_art(ARTICLES){id_article=13817}>
+<!doctype html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta property="og:url"           content="[(#URL_PAGE|urlencode)]" />
+  <meta property="og:type"          content="website" />
+  <meta property="og:title"         content="La Seine-Saint-Denis, on y tient !" />
+  <meta property="og:description"   content="Acteurs du monde de la culture, de l’entreprise, de l’éducation, de la société civile, nous sommes attachés à la Seine-Saint-Denis." />
+  <meta id="imagefb" property="og:image"         content="#URL_SITE_SPIP/plugins/appel/images/laSeineSaintDenisJyTiensRouge.png" />
+	<meta id="imagefburl" property="og:image:url" content="#URL_SITE_SPIP/plugins/appel/images/laSeineSaintDenisJyTiensRouge.png" />
+	<meta property="og:image:width" content="760" />
+	<meta property="og:image:height" content="412" />
+	<!-- Twitter meta cards -->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="@seinesaintdenis">
+	<meta name="twitter:title" content="La Seine-Saint-Denis, on y tient !">
+	<meta name="twitter:description" content="Acteurs du monde de la culture, de l’entreprise, de l’éducation, de la société civile, nous sommes attachés à la Seine-Saint-Denis.">
+	<meta name="twitter:image" content="#CHEMIN{images/laSeineSaintDenisJyTiensRouge.png}">
+	#INSERT_HEAD
+	<link rel="stylesheet" href="#CHEMIN{css/appel.css}" type="text/css">
+	<script src="#CHEMIN{js/respond.min.js}"></script>
+	<!--[if lt IE 9]>
+		<script src="#CHEMIN{js/html5shiv.min.js}"></script>
+	<![endif]-->
+	<title>La Seine-Saint-Denis, on y tient !</title>
+</head>
+<style type="text/css">
+	#icone_travaux {
+		display:none;
+	}
+</style>
+<body class="accueil">
+	<main role="main" id="main">
+		#LOGO_ARTICLE
+		<h1>#TITRE</h1>
+		[<div class="chapo">(#CHAPO)</div>]
+		[<div class="texte">(#TEXTE)</div>]
+		[<div class="ps">(#PS)</div>]
+	</main>
+</body>
+</html>
+</BOUCLE_art>

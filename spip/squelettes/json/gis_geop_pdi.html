@@ -1,0 +1,25 @@
+#CACHE{24*3600}
+#SET{url,https://geoportail93.fr/SERV/DATA/?LAYERS=1569&FORMAT=GEOJSON&SERVICE=wfs&SRS=4326&COL=ALL&MODE_GEO=POINT}
+<BOUCLE_flux(DATA)
+  {source json,#GET{url}|copie_locale{modif}}{datapath features}{","}>
+  #SET{nom,""}#SET{tel,""}#SET{tel2,""}#SET{fax,""}#SET{type_accue,""}
+  [(#VALEUR{properties/nom}|oui) #SET{nom,#GET{nom,""}|concat{#VALEUR{properties/nom}}}][(#VALEUR{properties/tel}|oui) #SET{tel,#GET{tel,"tél : "}|concat{#VALEUR{properties/tel}}|concat{<br/>}][(#VALEUR{properties/tel2}|oui) #SET{tel2,#GET{tel2,"autre : "}|concat{#VALEUR{properties/tel2}}][(#VALEUR{properties/type_accue}|oui) #SET{type_accue,#GET{type_accue,"("}|concat{#VALEUR{properties/type_accue}|concat{)<br/>}}]{
+  "type": "Feature",
+  "geometry": [(#VALEUR{geometry}|json_encode)],
+  "id":[(#VALEUR{properties/id}|json_encode)],
+  "tout" : [(#VALEUR|json_encode)],
+  "properties": {
+    "title":[(#GET{nom}|concat{<br/>}|json_encode)],
+    "description":[(#GET{type_accue}|concat{#VALEUR{properties/adresse}}|concat{<br/>}|concat{#VALEUR{properties/ville}}|concat{<br/>}|concat{#GET{tel}}|concat{#GET{tel2}}|json_encode)]
+  }
+}</BOUCLE_flux>
+ {
+  "type": "Feature",
+  "geometry": {"type":"Point","crs":{"type":"name","properties":{"name":"EPSG:4326"}},"coordinates":[2.44911,48.906]},
+  "id":"1",
+  "properties": {
+    "title":"Les informations ne sont pas chargées<br\/>",
+    "description":"veuillez recharger la page ou contacter <a href='mailto:contact@seinesaintdenis.fr'>le webmaster<\/a>, <br\/>Merci"
+  }
+}
+<//B_flux>

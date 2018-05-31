@@ -1,0 +1,40 @@
+[(#SET{id,#ENV{monid,#ENV{id,1}}})]
+[(#SET{layer,#ENV{layer_id,3}})]
+#SET{urlgeo,http://geoportail93.fr/SERV/DATA/?LAYERS=#GET{layer}&FORMAT=json&SERVICE=wfs&SRS=4326&COL=all&FILTRE=id=#GET{id}}
+<BOUCLE_tableau(DATA){source json, #GET{urlgeo}|copie_locale{modif}}>
+	<h2>#CATEGORIE</h2>
+	<br/>
+	<p><em>[(#TYPELIEU)][ [(#TYPELIEU|oui)- ](#DISCIPLINE)]</em></p>
+	<h3>#NOMEQUIPEM</h3>
+	<p>#ADRESSE1</p>
+	<p>#CODEPOSTAL #COMMUNE</p>
+	[<p><a href="#SITEINTERN">(#SITEINTERN)</a></p>]
+	<p>#TEL</p>
+	[<p><a href="mailto:#EMAIL">(#EMAIL)</a></p>]
+	<hr/>
+	[(#ACCESSLIEU|?{' ',''})<img src="#CHEMIN{images/pictogrammemoteur.png}" alt="Acces handicap moteur" height="40px" width="40px" />
+	]
+	[(#ACCESSLI_1|?{' ',''})
+	<img src="#CHEMIN{images/pictogrammeyeux.png}" alt="Acces non-voyant" height="40px" width="40px" />
+	]
+	[(#ACCESLIEUH|?{' ',''})
+	<img src="#CHEMIN{images/pictogrammeoreille.png}" alt="Acces mal-entendant" height="40px" width="40px" />
+	]
+	[(#ACCESLIE_1|?{' ',''})
+	<img src="#CHEMIN{images/pictogrammevisage.png}" alt="Acces handicap mental"height="40px" width="40px" />
+	]
+	<p>[(#AMENAGEMEN)<br/>][ (#AMENAGBATI)<br/>][ (#AMENAGBA_1)<br/>][ (#AMENAGLIEU)<br/>]</p>
+	<p>[(#SERVICEOUT)<br/>][ (#SERVICEO_1)<br/>][ (#SERVICESOU)<br/>][ (#SERVICES_1)<br/>]</p>
+	[<p>Accueil : (#ACCUEIL)</p>]
+[(#ENV{mini}|non)
+	<hr/>
+	[<p>(#JOURSHORAI)</p>]
+	[<p>(#TARIFSPREF)</p>]
+	[<hr/><p>Animation et festival : (#FESTIVALEV)</p>]
+	[(#REM)[<p>(#LABELTOURI)</p>]]
+	<hr/>
+	[(#PARKING|?{parking})]
+	[ - (#PLACESGIC|?{Place GIC [(#PLACESGIC|substr{2})]})]
+	[<p>(#TC)</p>]
+]
+</BOUCLE_tableau>

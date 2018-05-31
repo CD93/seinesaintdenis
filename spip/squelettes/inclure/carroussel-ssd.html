@@ -1,0 +1,48 @@
+<div class="pubssd">
+	<BOUCLE_idrub(RUBRIQUES){id_parent=#ENV{id_rubrique}}{titre=selecteurSAD}{tout}>
+	#SET{idrub,#ID_RUBRIQUE}
+	</BOUCLE_idrub>
+
+	<div id="carousel-actu-ssd" class="carousel slide hidden-xs" data-interval="5000" data-pause="hover" data-ride="carousel">
+		<div class="carousel-titre-ssd">SERVICES, AIDES ET D&Eacute;MARCHES</div>
+
+			<!-- Indicators -->
+			<B_compteurpub>
+			<ol class="carousel-indicators">
+			<BOUCLE_compteurpub(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=#GET{idrub,7}}{0,5}>
+				[(#TOTAL_BOUCLE|>{1}|?{" ",""})
+				<li data-target="#carousel-actu-ssd" data-slide-to="[(#COMPTEUR_BOUCLE|moins{1})]" [(#COMPTEUR_BOUCLE|=={1}|?{'class="active"',''})]></li>
+				]
+			</BOUCLE_compteurpub>
+			</ol>
+			</B_compteurpub>
+			<!-- Wrapper for slides -->
+			<div class="carousel-inner">
+			<BOUCLE_actu_emagpub(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=#GET{idrub,7}}{0,5}>
+				<div class="item [(#COMPTEUR_BOUCLE|=={1}|?{'active',''})]">
+						[<a href="#URL_ARTICLE">(#LOGO_ARTICLE|vider_attribut{height}|vider_attribut{width})</a>]
+						<h4><a href="#URL_ARTICLE">#TITRE</a></h4>
+						<p class="cop">[(#DESCRIPTIF*|couper{40}|typo)]</p>
+						<p class="pascop">[(#DESCRIPTIF*|typo)]</p>
+				</div>
+			</BOUCLE_actu_emagpub>
+			</div>
+		</div>
+	</div>
+	<div id="carousel-actu-ssd" class="carousel slide visible-xs" data-interval="5000" data-pause="hover" data-ride="carousel">
+		<div class="carousel-titre-ssd">SERVICES, AIDES ET D&Eacute;MARCHES</div>
+
+		<div class="carousel-inner">
+		<BOUCLE_actu_emagpub2(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=#GET{idrub,7}}{0,1}>
+			<div class="item active">
+					[<a href="#URL_ARTICLE">(#LOGO_ARTICLE|vider_attribut{height}|vider_attribut{width})</a>]
+					<h4><a href="#URL_ARTICLE">#TITRE</a></h4>
+					<p class="cop">[(#DESCRIPTIF*|couper{40}|typo)]</p>
+					<p class="pascop">[(#DESCRIPTIF*|typo)]</p>
+			</div>
+		</BOUCLE_actu_emagpub2>
+	</div>
+	
+	<div class="break"></div>
+</div>
+[(#PLUGIN{eve}|oui) <INCLURE{fond=inclure/eve-button} />]

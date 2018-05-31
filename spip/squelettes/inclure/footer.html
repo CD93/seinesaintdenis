@@ -1,0 +1,76 @@
+<footer id="footer">
+	<div class="top_footer"></div>
+	<div class="content_footer">
+		<div class="container">
+			<div class="row contenu">
+			<BOUCLE_menu(RUBRIQUES){id_parent=0}{id_rubrique IN 2,3,4,5,6}{tous}>
+				<div class="col-md-4 rubrique">
+					<h3><a href="#URL_RUBRIQUE">#TITRE</a></h3>
+					<ul>
+					<BOUCLE_sousmenu(RUBRIQUES){id_parent=#ID_RUBRIQUE}{par num titre}>
+						<li class="sous-rubrique"><a title="#TITRE" href="#URL_RUBRIQUE">#TITRE</a></li>
+					</BOUCLE_sousmenu>
+					</ul>
+				</div>
+			</BOUCLE_menu>
+				<div class="col-md-4">
+					<ul class="reseaux-sociaux">
+						<li class="twitter"><a target="_blank" href="http://www.twitter.com/@seinesaintdenis">twitter</a></li>
+						<li class="facebook"><a target="_blank" href="http://www.facebook.com/seinesaintdenisledepartement">facebook</a></li>
+						<li class="instagram"><a target="_blank" href="http://www.instagram.com/seine_saint_denis">instagram</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row contenu">
+			<BOUCLE_menu_suite2(RUBRIQUES){id_rubrique=1}{tous}>
+				<div class="col-md-4 rubrique">
+					<h3><a href="#URL_RUBRIQUE">#TITRE</a></h3>
+					<ul>
+					<BOUCLE_sousmenu_suite(RUBRIQUES){id_parent=#ID_RUBRIQUE}{!par date,num titre}{0,6}>
+						<li class="sous-rubrique"><a title="#TITRE" href="#URL_RUBRIQUE">#TITRE</a></li>
+					</BOUCLE_sousmenu_suite>
+					</ul>
+				</div>
+			</BOUCLE_menu_suite2>
+				<div class="col-md-6 rubrique">
+          <h3><a href="http://lemag.seinesaintdenis.fr">Le Magazine</a></h3>
+        	<ul>
+            <INCLURE{fond=inclure/flux/fluxdossierssd}{env} />
+          </ul>
+        </div>
+        <div class="col-md-6 rubrique">
+					<h3><a href="#URL_ARTICLE{10732}">Les Newsletters</a></h3>
+					<ul>
+            <INCLURE{fond=inclure/flux/fluxnllemag}{env} />
+            <INCLURE{fond=inclure/flux/fluxnl}{env} />
+          </ul>
+        </div>
+        <div class="col-md-8 rubrique">
+          <h3><a href="#URL_ARTICLE{651}">Accéder aux sites du Département</a></h3>
+          <ul class="col-md-12">
+            <BOUCLE_liens(SITES){id_rubrique=68}{par num nom_site}{1/2}>
+              <li class="sous-rubrique"><a target="_blank" title="#NOM_SITE" href="#URL_SITE">#NOM_SITE</a></li>
+            </BOUCLE_liens>
+          </ul>
+          <ul class="col-md-12">
+            <BOUCLE_liens2(SITES){id_rubrique=68}{par num nom_site}{2/2}>
+              <li class="sous-rubrique"><a target="_blank" title="#NOM_SITE" href="#URL_SITE">#NOM_SITE</a></li>
+            </BOUCLE_liens2>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="bottom_footer">
+    <div class="container">
+      <div class="col-md-24 liens">
+        <BOUCLE_menufoot(ARTICLES){id_rubrique=68}>
+          <a title="#TITRE" href="#URL_ARTICLE">#TITRE</a>
+        </BOUCLE_menufoot>
+      </div>
+    </div>
+  </div>
+</footer>
+<INCLURE{fond=inclure/visites}{env} />

@@ -1,0 +1,24 @@
+#CACHE{24*3600}
+#SET{url,https://geoportail93.fr/SERV/DATA/?LAYERS=1601&FORMAT=GEOJSON&SERVICE=wfs&SRS=4326&COL=ALL}
+<BOUCLE_flux(DATA)
+  {source json,#GET{url}|copie_locale{modif}}{datapath features}{","}>
+  #SET{image,'<img src="https://geoportail93.fr/SERV/FICHIER/?TYPE=DOCS&NEW_L=300&LAYER=1601&FILE='}[(#VALEUR{properties/photo}|oui) #SET{image,#GET{image,""}|concat{#VALEUR{properties/photo}}|concat{'" />'}}]#SET{oeuvre,'<a href="'}[(#VALEUR{properties/lien}|oui) #SET{oeuvre,#GET{oeuvre,""}|concat{#VALEUR{properties/lien}}|concat{'">'}|concat{#VALEUR{properties/titre}}|concat{'</a><br/>par '}|concat{#VALEUR{properties/artiste}}|concat{"<br/>"}}]{
+  "type": "Feature",
+  "geometry": [(#VALEUR{geometry}|json_encode)],
+  "id":[(#VALEUR{properties/id}|json_encode)],
+  "tout" : [(#VALEUR|json_encode)],
+  "properties": {
+    "title":[(#GET{image}|concat{#GET{oeuvre}}|json_encode)],
+    "description":[(#VALEUR{properties/lieux}|concat{<br/>}|concat{#VALEUR{properties/ville}}|json_encode)]
+  }
+}</BOUCLE_flux>
+ {
+  "type": "Feature",
+  "geometry": {"type":"Point","crs":{"type":"name","properties":{"name":"EPSG:4326"}},"coordinates":[2.44911,48.906]},
+  "id":"1",
+  "properties": {
+    "title":"Les informations ne sont pas chargées<br\/>",
+    "description":"veuillez recharger la page ou contacter <a href='mailto:contact@seinesaintdenis.fr'>le webmaster<\/a>, <br\/>Merci"
+  }
+}
+<//B_flux>

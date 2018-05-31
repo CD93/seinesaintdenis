@@ -1,0 +1,13 @@
+#SET{url,http://lemag.seinesaintdenis.fr/spip.php?page=fluxcarousselssd}
+<B_compteurpub>
+<ol class="carousel-indicators">
+<BOUCLE_compteurpub(DATA)
+{source simplexml, #GET{url}|copie_locale{modif}}
+{datapath root/children/article}
+>
+[(#TOTAL_BOUCLE|>{1}|?{" ",""})
+<li data-target="#carousel-actu-emag" data-slide-to="[(#COMPTEUR_BOUCLE|moins{1})]" [(#COMPTEUR_BOUCLE|=={1}|?{'class="active"',''})]></li>
+]
+</BOUCLE_compteurpub>
+</ol>
+</B_compteurpub>

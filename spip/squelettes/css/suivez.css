@@ -1,0 +1,95 @@
+#pagesuivezall .break {
+	font-size: 6px;
+}
+#pagesuivez .suivez-nous-titre, .suivez-nous-emag, .suivez-nous-jemabonne, .suivez-nous-resosoc {
+	content: "";
+	position: relative;
+	font-size: 0px;
+}
+
+.suivez-nous-emag .aboemag {
+    background-color: #F6F6C6;
+    margin-bottom: 15px;
+    width: 100%;
+}
+#pagesuivez .suivez-nous-titre a, .suivez-nous-emag a, .suivez-nous-jemabonne a, .suivez-nous-resosoc a {
+    display: inline-block;
+    text-align: center;
+}
+#pagesuivez #newsletter-inc {
+    margin: 0 auto;
+    width: 800px;
+}
+#pagesuivez .suivez-nous-resosoc {
+    background-color: #53568C;
+    display: inline-block;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+
+.suivez-nous-titre a{
+	max-width: 1140px;
+}
+.suivez-nous-table {
+	display: table;
+	width: 100%;
+}
+.suivez-nous-table .newsl{
+	display: table-row;
+}
+.suivez-nous-table .newslemag{
+	display: table-row;
+}
+
+.suivez-nous-table .voir{
+	display: table-cell;
+	width: 67%;
+}
+.suivez-nous-table .voir img{
+	width: 100%;
+}
+.suivez-nous-table .newsl .voirrs {
+	display: table-cell;
+	background-color: #535689;
+}
+.suivez-nous-table .newsl .voirrs img{
+	width:  100%;
+}
+
+.suivez-nous-table .abonnez, .suivez-nous-table .abonnezemag{
+	display: table-cell;
+	width: 33%;
+	vertical-align: middle;
+	text-align: center;
+}
+.suivez-nous-table .abonnezemag {
+	background-color: #F6F5C6;
+}
+.suivez-nous-table .abonnez {
+	background-color: #A5DFF9;
+}
+.suivez-nous-table .abonnez img, .suivez-nous-table .abonnezemag img{
+	width: 80%;
+}
+
+@media (max-width: 992px) {
+	.suivez-nous-titre a{
+		max-width: 940px;
+	}
+	#pagesuivezall .break {
+		font-size: 3px;
+	}
+}
+@media (max-width: 768px) {
+	.suivez-nous-table .voir{
+		width: 100%;
+	}
+	.suivez-nous-table .newsl .voirrs {
+		width: 50%;
+	}
+
+	.suivez-nous-table .abonnez img, .suivez-nous-table .abonnezemag img{
+		width: 50%;
+	}
+}

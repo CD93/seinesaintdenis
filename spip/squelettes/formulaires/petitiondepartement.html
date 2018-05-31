@@ -1,0 +1,35 @@
+<div class="ajax">
+<div class="formulaire_spip formulaire_#FORM" id="formulaire_petitiondepartement">
+
+[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+[(#ENV{editable})
+<form method="post" action="#ENV{action}" role="form"><div>
+	#ACTION_FORMULAIRE{#ENV{action}}
+	<ul>
+		<li class="[(#ENV**{erreurs}|table_valeur{nom}|oui)erreur]">
+			<label for='nom'>Votre nom</label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{nom})</span>
+			]<input type='text' class='text form-control' id='nom' name='nom' value='#ENV*{nom}' />
+		</li>
+		<li class="[(#ENV**{erreurs}|table_valeur{prenom}|oui)erreur]">
+			<label for='prenom'>Votre prénom</label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{prenom})</span>
+			]<input type='text' class='text form-control' id='prenom' name='prenom' value='#ENV*{prenom}' />
+		</li>
+		<li class="[(#ENV**{erreurs}|table_valeur{email}|oui)erreur]">
+			<label for='email'>Votre email</label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{email})</span>
+			]<input type='text' class='text form-control' id='email' name='email' value='#ENV*{email}' />
+		</li>
+		<li class="[(#ENV**{erreurs}|table_valeur{profession}|oui)erreur]">
+			<label for='ville'><em>Votre profession / fonction (facultatif)</em></label>[
+				<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{profession})</span>
+			]<input type='text' class='text form-control' id='profession' name='profession' value='#ENV*{profession}' />
+		</li>
+		</ul>
+	<p class='boutons spip_bouton'><input type='submit' class='submit' name='envoyer' value='je signe la p&eacute;tition' /></p>
+	</div></form>
+]
+</div>
+</div>

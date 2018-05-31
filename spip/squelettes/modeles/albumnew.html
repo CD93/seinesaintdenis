@@ -1,0 +1,34 @@
+[(#REM) Album d'images ]
+<B_album>
+<div class="album clearfix p #ENV{align} toto">
+	[<h2>(#ENV{titre})</h2>]
+	<ul>
+		<BOUCLE_album(DOCUMENTS) {id_document IN (#ENV{id}|explode{','})}>[
+		<li><a href="(#URL_DOCUMENT)" type="#MIME_TYPE" rel="album"[ class="(#EXPOSER)"][ title="(#TITRE|attribut_html|couper{80})"]>[(#LOGO_DOCUMENT
+		|image_reduire{0,100}
+		|inserer_attribut{class,spip_logos}
+		|inserer_attribut{alt,[(#TITRE|attribut_html)]})]</a></li>
+		]</BOUCLE_album>
+	</ul>
+</div>
+</B_album>
+
+[(#REM) Portfolio d'article bis ]
+<B_articleb>
+<div class="album clearfix p #ENV{align} toto3">
+	[<h2>(#ENV{titre})</h2>]
+	<ul>
+		<BOUCLE_articleb(DOCUMENTS) {id_article=#ENV{id_article}} {mode=document}{extension IN png,jpg,gif} {par num titre, date}{doublons}{vu=non}>[
+		[(#HAUTEUR|<{400}|?{#SET{hauteur,460},#SET{hauteur,#HAUTEUR|plus{60}}})]
+		[(#LARGEUR|>{800}|?{#SET{largeur,75pc},(#LARGEUR|<{650}|?{#SET{largeur,700px},#SET{largeur,700px}})]
+		#SET{largeur,75pc}
+		<li><a href="[(#URL_PAGE{colorbox}|parametre_url{id_document,#ID_DOCUMENT})]" rel="albumtest(#ID_ARTICLE)" class="[(#EXPOSER) ]mediabox boxIframe boxWidth-75pc boxHeight-90pc" title="[(#TITRE|attribut_html)]" >[(#FICHIER
+		|image_reduire{0,100}
+		|inserer_attribut{class,spip_logos}
+		|inserer_attribut{alt,[(#TITRE|attribut_html)]})]</a></li>
+		]</BOUCLE_articleb>
+	</ul>
+</div>
+</B_articleb>
+
+<//B_album>

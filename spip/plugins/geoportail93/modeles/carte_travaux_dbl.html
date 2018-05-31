@@ -1,0 +1,398 @@
+<link rel="stylesheet" href="#CHEMIN{lib/leaflet/leaflet.css}" ></link>
+<link rel="stylesheet" href="#CHEMIN{lib/leaflet/plugins/leaflet.fullscreen.css}" ></link>
+[<link rel="stylesheet" href="(#CHEMIN{css/cartetrav.css})" type="text/css" />]
+<link rel="stylesheet" href="#CHEMIN{lib/leaflet/plugins/Leaflet.markercluster/dist/MarkerCluster.css}" ></link>
+<link rel="stylesheet" href="#CHEMIN{lib/leaflet/plugins/Leaflet.markercluster/dist/MarkerCluster.Default.css}" ></link>
+<link rel="stylesheet" href="#CHEMIN{lib/leaflet/plugins/Leaflet.defaultextent/dist/leaflet.defaultextent.css}" ></link>
+<link rel="stylesheet" href="#CHEMIN{lib/leaflet/plugins/leaflet-fusesearch-master/src/leaflet.fusesearch.css}" ></link>
+
+<script src="#CHEMIN{lib/leaflet/leaflet.js}" type="text/javascript"></script>
+<script src="#CHEMIN{lib/leaflet/plugins/leaflet.snogylop.js}" type="text/javascript"></script>
+<script src="#CHEMIN{lib/leaflet/plugins/Leaflet.fullscreen.min.js}" type="text/javascript"></script>
+<script src="#CHEMIN{lib/leaflet/plugins/SliderControl.js}" type="text/javascript"></script>
+<script src="#CHEMIN{lib/leaflet/plugins/Leaflet.markercluster/dist/leaflet.markercluster.js}" type="text/javascript"></script>
+<script src="#CHEMIN{lib/leaflet/plugins/Leaflet.defaultextent/dist/leaflet.defaultextent.js}" type="text/javascript"></script>
+<script src="#CHEMIN{lib/leaflet/plugins/Leaflet.FeatureGroup.SubGroup/leaflet.featuregroup.subgroup.js}" type="text/javascript"></script>
+<script src="#CHEMIN{lib/jquery.ui.touch-punch.min.js}" type="text/javascript"></script>
+
+<script src="#CHEMIN{lib/Fuse-master/src/fuse.min.js}" type="text/javascript"></script>
+<script src="#CHEMIN{lib/leaflet/plugins/leaflet-fusesearch-master/src/leaflet.fusesearch.js}" type="text/javascript"></script>
+
+<div>
+	<div tabindex="0" class="map leaflet-container leaflet-fade-anim" id="maptrav" style="width: 100%; height: 600px; position: relative;"></div>
+</div>
+
+<script>
+    $(document).ready(function () {
+		var maptrav = L.map('maptrav',{scrollWheelZoom:false,zoomControl:true,opacity:0.5,fullscreenControl: true}).setView([48.90903,2.45506 ], 12);
+var mbAttr = '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors' + ' | <a href="http://geoportail93.fr">geoportail93.fr</a>';
+//url des TMS de fond
+		var osm = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: mbAttr, maxZoom: 18});		// option pour le selecteur de couche
+		var baseMaps = {
+		    "OSM": osm
+		};
+		var mapbox = L.tileLayer('https://api.mapbox.com/styles/v1/guillaume93/cisiwudlv00202yjm5s8s5fyc/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZ3VpbGxhdW1lOTMiLCJhIjoiY2lrcXYwcnowMDAxOXcwbTJrMmRpdG44YSJ9.sCawV-4lhUJ0cM3ObR9hAA');
+		//on ajoute le fond OMS au départ
+		mapbox.addTo(maptrav);
+		var Travaux = L.featureGroup().addTo(maptrav); // feature group ou on va inserer les travaux
+		var fondCD = L.featureGroup().addTo(maptrav); // feature group ou on va inserer les fonds de cartes
+		var geojson1,geojson11,geojson2,geojson3,geojson31,geojson32;
+
+
+		//on ajoute la limite départementale
+		$.getJSON("https://geoportail93.fr/SERV/DATA/?LAYERS=1049&FORMAT=geojson&SERVICE=wfs&SRS=4326&COL=all&FILTRE=depart%20LIKE%20%27SEINE-SAINT-DENIS%%27", function (geoJson1) {
+		    geojson1 = L.geoJson(geoJson1, {
+		    	style: { color: "#0AABA4", fillColor: "#FFF", weight: 1, fillOpacity:0.9, clickable: false },
+		    	invert: true,
+		    	worldLatLngs: [ L.latLng([90, 360]), L.latLng([90, -180]), L.latLng([-90, -180]), L.latLng([-90, 360]) ]
+		    }).addTo(fondCD);
+		  	geojson11 = L.geoJson(geoJson1,{
+		  		style: { color: "#0AABA4", fillColor: "#FFF", weight: 3, opacity: 0.9, fillOpacity:0.6, clickable: false }
+		  	}).addTo(fondCD);  
+		});
+
+		//on ajoute les limites communales
+		$.getJSON("https://geoportail93.fr/SERV/DATA/?LAYERS=1458&FORMAT=geojson&SERVICE=wfs&SRS=4326&COL=all&FILTRE=depart%20LIKE%20%27SEINE-SAINT-DENIS%%27", function (geoJson2) {
+		    geojson2 = L.geoJson(geoJson2, {
+		    	style: { color: "#888", weight: 1, opacity: 0.8, fill: false, clickable: false }
+		    }).addTo(fondCD);
+		});
+
+		//ajout couche dbl points
+		var pointsCluster = L.markerClusterGroup({
+			spiderfyOnMaxZoom: true,
+			showCoverageOnHover: false,
+			zoomToBoundsOnClick: true,
+			maxClusterRadius: 1,
+			spiderfyDistanceMultiplier: 2,
+			//singleMarkerMode: true,
+			iconCreateFunction: defineClusterIcon
+		}).on('clusterclick', function (a) {
+			var markers = a.layer.getAllChildMarkers();
+			var popuptxt ='<div class="popupclust"><h3>' + markers[0].feature.properties.libelle_usuel_bat + "</h3>";
+		    popuptxt += '<span class="adresse">' + markers[0].feature.properties.adresse + ' ' + markers[0].feature.properties.ville +'</span>';
+			popuptxt += "<ul>";
+			for (var i = 0; i < markers.length; i++) {
+				var fermeture = false;
+				var arr = markers[i].feature.properties;
+				if (arr.besoin_fermeture=="OUI") fermeture = true;
+			}
+			if (fermeture == true) popuptxt +='<li class="encours">Site fermé durant les travaux</li>';
+			else popuptxt +='<li class="passe">Site ouvert durant les travaux</li>';
+			for (var i = 0; i < markers.length; i++) {
+				var arr = markers[i].feature.properties;
+				popuptxt += '<li class="point">' + arr.reformulation_pour_dircom + '</li>';
+			}
+			popuptxt += "</ul></div>";
+			a.layer.bindPopup(popuptxt).openPopup();
+		}).on('clustermouseover', function (a) {
+			/*
+			var markers = a.layer.getAllChildMarkers();
+			a.layer.bindPopup('<div class="popupclust"><h3>' + markers[0].feature.properties.etablissement_commune+ '</h3></div>').openPopup();
+			*/
+		}).on('clustermouseout', function (a) {
+		});
+		
+		var group3 = L.featureGroup.subGroup(pointsCluster),
+		group31 = L.featureGroup.subGroup(pointsCluster),
+		//group32 = L.featureGroup.subGroup(pointsCluster),
+		control = L.control.layers(null, null, { collapsed: false, position: 'bottomleft' });
+		
+		control.addOverlay(group3, '<i class="ouvert"><img src="#CHEMIN{images/travaux-30-bleu.png}" width="20px" height="20px" /></i><span>site ouvert durant les travaux</span>');
+		control.addOverlay(group31, '<i class="ferme"><img src="#CHEMIN{images/travaux-30-orange.png}" width="20px" height="20px" /></i><span>site fermé durant les travaux</span>');
+		//control.addOverlay(group32, '<i class="futur"><img src="#CHEMIN{images/travaux-30-vert.png}" width="20px" height="20px" /></i><span>travaux futurs</span>');
+		control.addTo(maptrav);
+		group3.addTo(maptrav); // Adding to map now adds all child layers into the parent group.
+		group31.addTo(maptrav);
+		//group32.addTo(maptrav);
+		
+		// ajouter un select pour les communes
+				var select_options = '<select id="choixcommune"><option value="0">Choisir une commune</option><option value="1">Aubervilliers</option><option value="2">Aulnay-sous-Bois</option><option value="3">Bagnolet</option><option value="4">Bobigny</option><option value="5">Bondy</option><option value="6">Clichy-sous-Bois</option><option value="7">Coubron</option><option value="8">Drancy</option><option value="9">Dugny</option><option value="10">Epinay-sur-Seine</option><option value="11">Gagny</option><option value="12">Gournay-sur-Marne</option><option value="13">L Ile-Saint-Denis</option><option value="14">La Courneuve</option><option value="15">Le Blanc-Mesnil</option><option value="16">Le Bourget</option><option value="17">Le Pré-Saint-Gervais</option><option value="18">Le Raincy</option><option value="19">Les Lilas</option><option value="20">Les Pavillons-sous-Bois</option><option value="21">Livry-Gargan</option><option value="22">Montfermeil</option><option value="23">Montreuil</option><option value="24">Neuilly-Plaisance</option><option value="25">Neuilly-sur-Marne</option><option value="26">Noisy-le-Grand</option><option value="27">Noisy-le-Sec</option><option value="28">Pantin</option><option value="29">Pierrefitte-sur-Seine</option><option value="30">Romainville</option><option value="31">Rosny-sous-Bois</option><option value="32">Saint-Denis</option><option value="33">Saint-Ouen</option><option value="34">Sevran</option><option value="35">Stains</option><option value="36">Tremblay-en-France</option><option value="37">Vaujours</option><option value="38">Villemomble</option><option value="39">Villepinte</option><option value="40">Villetaneuse</option></select>';
+				
+				var ctrl = L.control({position: 'topright'});
+				ctrl.onAdd = function(maptrav) {
+					this._div = L.DomUtil.create('div', 'ctrl_category');
+					this._div.innerHTML = select_options;
+					L.DomEvent.disableClickPropagation(this._div);
+					L.DomEvent.addListener(this._div, 'change', changeHandler);
+					return this._div;
+				}
+				ctrl.addTo(maptrav);
+				function changeHandler(e){
+					switch (e.target.value) {
+						case "1":
+							maptrav.setView([48.9131, 2.3832], 14);
+							break;
+						case "2":
+							maptrav.setView([48.9386, 2.4906], 14);
+							break;
+						case "3":
+							maptrav.setView([48.8692, 2.4181], 14);
+							break;
+						case "4":
+							maptrav.setView([48.9106, 2.4397], 14);
+							break;
+						case "5":
+							maptrav.setView([48.9022, 2.48278], 14);
+							break;
+						case "6":
+							maptrav.setView([48.9167, 2.55], 14);
+							break;
+						case "7":
+							maptrav.setView([48.9167, 2.5833], 14);
+							break;
+						case "8":
+							maptrav.setView([48.9233, 2.445], 14);
+							break;
+						case "9":
+							maptrav.setView([48.9536, 2.4164], 14);
+							break;
+						case "10":
+							maptrav.setView([48.95528, 2.30917], 14);
+							break;
+						case "11":
+							maptrav.setView([48.8833, 2.5333], 14);
+							break;
+						case "12":
+							maptrav.setView([48.860555, 2.577222], 14);
+							break;
+						case "13":
+							maptrav.setView([48.9358, 2.3397], 14);
+							break;
+						case "14":
+							maptrav.setView([48.9388, 2.4636], 14);
+							break;
+						case "15":
+							maptrav.setView([48.932222, 2.396666], 14);
+							break;
+						case "16":
+							maptrav.setView([48.935277, 2.425555], 14);
+							break;
+						case "17":
+							maptrav.setView([48.885, 2.4039], 14);
+							break;
+						case "18":
+							maptrav.setView([48.9, 2.5167], 14);
+							break;
+						case "19":
+							maptrav.setView([48.88, 2.4169], 14);
+							break;
+						case "20":
+							maptrav.setView([48.9058, 2.5106], 14);
+							break;
+						case "21":
+							maptrav.setView([48.91916, 2.53611], 14);
+							break;
+						case "22":
+							maptrav.setView([48.9, 2.5667], 14);
+							break;
+						case "23":
+							maptrav.setView([48.8603, 2.4431], 14);
+							break;
+						case "24":
+							maptrav.setView([48.8619, 2.5064], 14);
+							break;
+						case "25":
+							maptrav.setView([48.85, 2.5333], 14);
+							break;
+						case "26":
+							maptrav.setView([48.847751, 2.552791], 14);
+							break;
+						case "27":
+							maptrav.setView([48.8894, 2.4503], 14);
+							break;
+						case "28":
+							maptrav.setView([48.89658, 2.40168], 14);
+							break;
+						case "29":
+							maptrav.setView([48.965555, 2.361388], 14);
+							break;
+						case "30":
+							maptrav.setView([48.8836, 2.4361], 14);
+							break;
+						case "31":
+							maptrav.setView([48.8731, 2.4853], 14);
+							break;
+						case "32":
+							maptrav.setView([48.9356, 2.3539], 14);
+							break;
+						case "33":
+							maptrav.setView([48.912149, 2.334251], 14);
+							break;
+						case "34":
+							maptrav.setView([48.9333, 2.5333], 14);
+							break;
+						case "35":
+							maptrav.setView([48.95, 2.3833], 14);
+							break;
+						case "36":
+							maptrav.setView([48.95, 2.572222], 14);
+							break;
+						case "37":
+							maptrav.setView([48.9333, 2.5667], 14);
+							break;
+						case "38":
+							maptrav.setView([48.8903, 2.5111], 14);
+							break;
+						case "39":
+							maptrav.setView([48.9667, 2.5333], 14);
+							break;
+						case "40":
+							maptrav.setView([48.965277, 2.345], 14);
+							break;
+						default:
+							maptrav.setView([48.90903,2.45506 ], 12);
+							break;	
+					}
+				};
+		
+				// ajouter le controle fuse search
+				var optionsSearch = {
+					position: 'topright',
+					title: 'Chercher',
+					placeholder: 'ex: crèche',
+					maxResultLength: 20,
+					threshold: 1,
+					showInvisibleFeatures: false,
+					/*showResultFct: function(feature, container) {}*/
+					showResultFct: function(feature, container) {
+					    var props = feature.properties;
+					    var name = L.DomUtil.create('h3', null, container);
+			            name.innerHTML = props.libelle_usuel_bat;
+			            var adress = L.DomUtil.create('span', 'adresse', container);
+			            adress.innerHTML = props.adresse + ' ' + props.ville;
+			            var ladate = L.DomUtil.create('div', null, container);
+			            var info = "<ul>";
+		            	if (props.besoin_fermeture=="OUI") info +='<li class="encours">Site fermé durant les travaux</li>';
+			            info += '<li class="point">' + props.reformulation_pour_dircom + ' :</li>';
+			            info += "</ul>";
+			            ladate.innerHTML = info;
+			        }
+				};
+				var searchCtrl = L.control.fuseSearch(optionsSearch);
+				searchCtrl.addTo(maptrav);				
+		
+		
+		function defineClusterIcon(cluster) {
+			var fermeture = false;
+			var nbre = cluster.getChildCount();
+			var markers = cluster.getAllChildMarkers();
+			for (var i = 0; i < markers.length; i++) {
+				var arr = markers[i].feature.properties;
+				if (arr.besoin_fermeture == "OUI") fermeture = true;
+			}
+			if (fermeture == true) {
+				return L.icon({
+					iconUrl: '#CHEMIN{images/ppep_j_.png}',
+					iconRetinaUrl: '#CHEMIN{images/ppep_j_g.png}',
+					iconSize: [eval(20+(nbre*2)), eval(20+(nbre*2))],
+					iconAnchor: [10, 10],
+					popupAnchor: [0, -25],
+					fillOpacity:0.8,
+					zIndex: 1600,
+					riseOnHover: true,
+					riseOffset: 3000
+				});
+			} else {
+				return L.icon({
+					iconUrl: '#CHEMIN{images/ppep_p.png}',
+					iconRetinaUrl: '#CHEMIN{images/ppep_g.png}',
+					iconSize: [eval(20+(nbre*2)), eval(20+(nbre*2))],
+					iconAnchor: [10, 10],
+					popupAnchor: [0, -25],
+					fillOpacity:0.8,
+					zIndex: 1600,
+					riseOnHover: true,
+					riseOffset: 3000
+				});
+			}
+		}
+	
+		$.getJSON("https://geoportail93.fr/SERV/DATA/?LAYERS=1516&FORMAT=geojson&SERVICE=wfs&SRS=4326&COL=ALL&FILTRE=communication='t'", function (geoJson3) {
+			geojson3 = L.geoJson(geoJson3, {
+				filter: function (feature, layer) {
+					if (feature.properties) {
+						if (feature.properties.besoin_fermeture=="OUI") return true;
+						else return false;
+					}
+					return false;
+				},
+				pointToLayer: function (feature, latlng) {
+					return L.marker(latlng, {
+						icon: L.icon({
+							iconUrl: '#CHEMIN{images/ppep_j_p.png}',
+							iconRetinaUrl: '#CHEMIN{images/ppep_j_g.png}',
+							iconSize: [60, 55],
+							iconAnchor: [30, 26],
+							popupAnchor: [0, -15],
+							fillOpacity:1,
+							zIndex: 1500
+						}),
+						zIndexOffset: 1800,
+						riseOnHover: true,
+						riseOffset: 3000,
+						title: "fermé"
+					});
+				},
+				onEachFeature: bindPopup
+			});
+			geojson3.eachLayer(function (layer) {
+				layer.addTo(group3);					
+			});
+			geojson31 = L.geoJson(geoJson3, {
+				filter: function (feature, layer) {
+					if (feature.properties) {
+						if (feature.properties.besoin_fermeture!="OUI") return true;
+						else return false;
+					}
+					return false;
+				},
+				pointToLayer: function (feature, latlng) {
+					return L.marker(latlng, {
+						icon: L.icon({
+							iconUrl: '#CHEMIN{images/ppep_j_p.png}',
+							iconRetinaUrl: '#CHEMIN{images/pepp_j_g.png}',
+							iconSize: [60, 74],
+							iconAnchor: [30, 36],
+							popupAnchor: [0, -15],
+							fillOpacity:1,
+							zIndex: 1500
+						}),
+						zIndexOffset: 1800,
+						riseOnHover: true,
+						riseOffset: 3000,
+						title: "ouvert"
+					});
+				},
+				onEachFeature: bindPopup
+			});
+			geojson31.eachLayer(function (layer) {
+				layer.addTo(group31);	
+			});
+			// indexation pour le moteur de recherche
+			searchCtrl.indexFeatures(geoJson3, ['libelle_usuel_bat', 'adresse', 'ville', 'reformulation_pour_dircom']);
+			
+		});
+
+		maptrav.addLayer(pointsCluster);
+		        
+        var zoomHome = L.control.defaultExtent({position: 'topleft'});
+		zoomHome.addTo(maptrav);
+		
+		//pour chaque point à cliquer
+		function bindPopup (feature, layer) {
+	        feature.layer = layer;
+			//on lui fait afficher une popup lors d'un click	    
+	    	var arr = feature.properties;
+		    var popuptxt ='<div class="popupclust"><h3>' + arr.libelle_usuel_bat + "</h3>";
+		    popuptxt += '<span class="adresse">' + arr.adresse + ' ' + arr.ville +'</span>';
+		    popuptxt += "<ul>";
+		    if (arr.besoin_fermeture=="OUI") popuptxt +='<li class="encours">Site fermé durant les travaux</li>';
+		    else popuptxt +='<li class="passe">Site ouvert durant les travaux</li>';
+	    	popuptxt += '<li class="point">' + arr["reformulation_pour_dircom"] + '</li>';
+		    popuptxt += '</ul>';
+		    popuptxt += '</div>';
+		    layer.bindPopup(popuptxt);
+		}
+	});
+</script>

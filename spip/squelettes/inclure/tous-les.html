@@ -1,0 +1,39 @@
+<B_motpicto>
+<div class="filtres">
+	<div class="tout">Tout</div>
+	<BOUCLE_motpicto(MOTS){id_groupe=10001}{id_mot!=10006}{0,0}>
+		<BOUCLE_artmot(ARTICLES){id_mot}{0,1}>
+		<a href="[(#SELF|parametre_url{id_mot,#ID_MOT})]" class="[(#ENV{id_mot}|=={#ID_MOT}|?{#_motpicto:TITRE,#_motpicto:TITRE off})]" title="[(#_motpicto:DESCRIPTIF*|typo)]">[(#_motpicto:DESCRIPTIF*|typo)]</a>
+		</BOUCLE_artmot>
+		[(#ENV{id_mot}|=={#ID_MOT}|?{#SET{motpicto,#DESCRIPTIF*},""})]
+	</BOUCLE_motpicto>
+	<div class="motpicto">#GET{motpicto}</div>
+</div>
+</B_motpicto>
+#SET{listeartsel,#ARRAY}
+<BOUCLE_onyetait(ARTICLES pb_selection){spip_pb_selection.id_rubrique IN '10027','10026'}>
+	#SET{listeartsel,#GET{listeartsel}|push{#ID_ARTICLE}}
+</BOUCLE_onyetait>
+<div class="tousles break">#ENV{titre}</div>
+<B_tousles>
+	#ANCRE_PAGINATION
+	<BOUCLE_tousles(ARTICLES){!par date}{pagination 10}{enfants 10026}>
+		<div class="col-md-12">
+			<a href="#URL_ARTICLE" >
+				#LOGO_ARTICLE
+			</a>
+			<a href="#URL_ARTICLE" >
+				<h4>#TITRE</h4>
+			</a>
+			<div class="datecarrou">[(#DATE|affdate)]</div>
+		
+		[(#DESCRIPTIF*|typo)]<BOUCLE_type(MOTS){id_groupe=3}{id_article}>
+		 [(#ID_MOT|=={3}|?{///&nbsp;<span class="glyphicon glyphicon-facetime-video"></span>})]
+		 </BOUCLE_type>
+		</div>
+		[<div class="col-md-24">(#COMPTEUR_BOUCLE|plus{1}|modulo{2}|?{<hr class="sepacool">,""})</div>]
+	</BOUCLE_tousles>
+	<div class="col-md-24 pagination">
+	#PAGINATION
+	</div>
+</B_tousles>

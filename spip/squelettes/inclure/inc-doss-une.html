@@ -1,0 +1,18 @@
+<B_une>
+#ANCRE_PAGINATION
+<BOUCLE_une(UNES){!par date}{"<hr/>"}{id_dossier!=#ID_RUBRIQUE}{date>=2013}{pagination 5}>
+<BOUCLE_lesdossier(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=#ID_DOSSIER}{0,1}>
+<div>
+[(#_une:COMPTEUR_BOUCLE|moins{1}|modulo{5}|<{2}|?{' ',''})
+	<a href="#URL_RUBRIQUE">#LOGO_ARTICLE</a>
+]
+	<h4><a href="#URL_RUBRIQUE">#TITRE</a></h4>
+[(#DESCRIPTIF*|typo)]<BOUCLE_type(MOTS){id_groupe=3}{id_article}>
+ [(#ID_MOT|=={3}|?{///&nbsp;<span class="glyphicon glyphicon-facetime-video"></span>})]
+ </BOUCLE_type>
+</div>
+</BOUCLE_lesdossier>
+</BOUCLE_une>
+<hr/>
+#PAGINATION
+</B_une>

@@ -1,0 +1,93 @@
+<BOUCLE_doc(DOCUMENTS){id_document=#ENV{id_document}}>
+#SET{doc,#URL_DOCUMENT}
+</BOUCLE_doc>
+#SET{debut_artquiz,#ENV{debut_artquiz}|plus{1}}
+	<div class="formulaire_spip formulaire_quiz_association">
+		[<div class='reponse_formulaire reponse_formulaire_ok'><h3>(#ENV*{message_ok})</h3></div>]
+		<BOUCLE_cond(CONDITION){si #ENV{editform}|=={oui}}>
+		<form action='[(#ENV{action}|parametre_url{'debut_artquiz',#GET{debut_artquiz,1}})]' method='post' role="form" name="formulaire_quiz_association">
+			#ACTION_FORMULAIRE{#ENV{action},#FORM}
+			<div class="form-group">
+				#SET{deux,2}
+				<ul class="col-md-12 col-xs-12" id="nonsortable#ENV{id_document}">
+					<BOUCLE_csv(DATA){datasource #CHEMIN{#GET{doc}}, csv}{par #VALEUR{0}}{cle>0}>
+						<BOUCLE_docimgg(DOCUMENTS){id_document=#VALEUR{0}}>
+							#SET{img_url_g,#URL_DOCUMENT}
+						</BOUCLE_docimgg>
+					<li>
+						[(#ENV{type_assoc}|=={img_txt}|ou{#ENV{type_assoc}|=={img_img}}|?{" ",""})
+							<img src="#GET{img_url_g}" alt="" />
+						]
+						[(#ENV{type_assoc}|=={txt_img}|ou{#ENV{type_assoc}|=={txt_txt}}|?{" ",""})
+							#VALEUR{2}
+						]
+						[(#ENV{type_assoc}|=={img_txt_img_txt}|?{" ",""})
+							<img src="#GET{img_url_g}" alt="" />
+							#VALEUR{2}
+						]
+					</li>
+					<input type="hidden" name="g#COMPTEUR_BOUCLE" value="#VALEUR{0}"/>
+					</BOUCLE_csv>
+				</ul>
+				<ul class="col-md-12 col-xs-12" id="sortable#ENV{id_document}">
+					<BOUCLE_csv2(DATA){datasource #CHEMIN{#GET{doc}}, csv}{par hasard}{cle>0}>
+						<BOUCLE_docimgd(DOCUMENTS){id_document=#VALEUR{1}}>
+							#SET{img_url_d,#URL_DOCUMENT}
+						</BOUCLE_docimgd>
+						[(#ENV{type_assoc}|=={img_txt}|ou{#ENV{type_assoc}|=={txt_txt}}|?{" ",""})
+							<li class="ui-state-default">
+								<span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
+								#VALEUR{3}
+								<input type="hidden" name="d#COMPTEUR_BOUCLE" value="#VALEUR{1}"/>
+								<span class="count"></span>
+							</li>
+						]
+						[(#ENV{type_assoc}|=={img_img}|ou{#ENV{type_assoc}|=={txt_img}}|?{" ",""})
+							<li>
+								<img src="#GET{img_url_d}" alt="" />
+								<input type="hidden" name="d#COMPTEUR_BOUCLE" value="#VALEUR{1}"/>
+								<span class="count"></span>
+							</li>
+						]
+						[(#ENV{type_assoc}|=={img_txt_img_txt}|?{" ",""})
+							<li>
+								<span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
+								#VALEUR{3}
+								<img src="#GET{img_url_d}" alt="" />
+								<input type="hidden" name="d#COMPTEUR_BOUCLE" value="#VALEUR{1}"/>
+								<span class="count"></span>
+							</li>
+						]
+					</BOUCLE_csv2>
+					<input type="hidden" value="#TOTAL_BOUCLE" name="totalAssoc" />
+					</B_csv2>
+				</ul>
+				<div class="break">&nbsp;</div>
+				<input type="submit" class="fleche_valider" name="valider" value="Valider"/>
+				<input type="hidden" value="non" name="editform" />
+			</div>
+		</form>
+		</BOUCLE_cond>
+	</div>
+
+<div class="break"></div>
+<script>
+$(function() {
+	$("#sortable#ENV{id_document}").sortable({
+		placeholder: "ui-state-highlight",
+		axis: "y",
+		// Evenement appelé lorsque l'élément est relaché
+		stop: function(event, ui){
+		    // Pour chaque item de liste
+		    $(this).find("li").each(function(){
+		        // On actualise sa position
+		        index = parseInt($(this).index()+1);
+		        // On la met à jour dans la page
+		        $(this).find("input").attr('name', 'd' + index);
+		    });
+		}
+
+	});
+	$("#sortable#ENV{id_document}").disableSelection();
+});
+</script>

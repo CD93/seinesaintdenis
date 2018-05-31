@@ -1,0 +1,70 @@
+[(#ENV{categorie}|=={toutes}|?{#SET{categorie,'%'} , #SET{categorie,#ENV{categorie}} })]
+<ul class="no-print">
+<BOUCLE_theme(cataloguepdi){fusion thematique}>
+	<li><h4><a href="" id="thema#COMPTEUR_BOUCLE">#THEMATIQUE</a></h4>
+	<B_cat>
+		<ul class="sthema" id="sthema#_theme:COMPTEUR_BOUCLE">
+		<BOUCLE_cat(cataloguepdi){thematique=#THEMATIQUE}{fusion categorie}>
+			<li><a class="ajax" href="[(#SELF|parametre_url{categorie,#CATEGORIE})]">#CATEGORIE
+			<BOUCLE_decompte(cataloguepdi){categorie LIKE #CATEGORIE}>(#TOTAL_BOUCLE)</BOUCLE_decompte>
+			</a></li>
+		</BOUCLE_cat>
+		</ul>
+	</B_cat>
+	</li>
+</BOUCLE_theme>
+</ul>
+<a class="ajax" href="[(#SELF|parametre_url{categorie,toutes})]">toutes les actions</a>
+<br/>
+<br/>
+<B_resultat>
+	<h3>Cat&eacute;gorie d'actions : #ENV{categorie}</h3>
+	#ANCRE_PAGINATION
+<BOUCLE_resultat (cataloguepdi){categorie LIKE #GET{categorie}}{par thematique,categorie}{pagination 5}{"<hr class='sepacool'>"}>
+	<div class="texteencadre-spip">														
+  			<p><strong>#PRESTATAIRE</strong> / #COMMUNE<br/>
+  			Num&eacute;ro de convention : #NUMERO</p>
+  			<h3>[(#CLI) / ][(#DESCRIPTION)]</h3>
+  			[(#DEBUT|ou{#FIN}|oui)<p><strong>Dates prévisionnelles : </strong>#DEBUT - #FIN<br/>]
+  			<strong>Dur&eacute;e de l'action : </strong>#DUREE mois</p>
+  			[<h4>Public :</h4>(#COMMENTAIRES|nl2br)<br/>]
+  			[<strong>filière : </strong>(#FILIERE)<br/>]
+  		  	  			[<br/><h4>Objectif :</h4>
+  		  	  				(#OBJECTIFS|nl2br)]
+  		  	  			[<br/><h4>Contenu :</h4>
+  		  	  				(#CONTENU|nl2br)]
+  		  	  			[(#ADRESSE|ou{#CP}|ou{#COMMUNE}|oui)<br/><h4>Localisation :</h4>
+  		  	  				<strong>Adresse : </strong>#ADRESSE
+  		  	  				#CP #COMMUNE<br/>]
+  		  	  			<br/><h4>Information :</h4>
+  		  	  			[<strong>Encadrant : </strong>(#ENCADRANT)<br/>]
+  		  	  			[<strong>Téléphone : </strong>(#TEL)<br/>]
+  		  	  			[<strong>adresse de la structure : </strong><br/>(#ADRESSESTRUCTURE)<br/>]
+  		  	  			[#CPSTRUCTURE (#COMMUNESTRUCTURE)<br/>]
+  		  	  			[<h3>effectif :</h3>
+  		  	  			(#PLACE)]
+  		  	  			<br/><br/>
+  		</div>  			
+</BOUCLE_resultat>
+#PAGINATION
+</B_resultat>
+<//B_resultat>
+<script>
+<BOUCLE_liste(cataloguepdi){fusion thematique}>
+	$(".sthema").hide();
+	$("#thema#COMPTEUR_BOUCLE").click(function() {
+		$("#sthema#COMPTEUR_BOUCLE").toggle("slow");
+		return false;
+	});
+</BOUCLE_liste>
+$.urlParam = function(name){
+    var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+    if (results==null){
+       return null;
+    }
+    else{
+       return results[1] || 0;
+    }
+}
+$(".printmail a.print[href]").attr('href',$(".printmail a.print[href]").attr('href')+"&categorie="+$.urlParam('categorie'));
+</script>

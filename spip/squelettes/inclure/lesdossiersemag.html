@@ -1,0 +1,35 @@
+<div id="lesdossiersemag" class="fondune">
+	<div class="row">
+		<div class="lesdossiers col-md-12">GRAND ANGLE</div>
+		<div class="media ttdoss  col-md-12">
+			<div class=" media-left media-middle pull-left">
+				<i class="glyphicon glyphicon-play"></i>
+			</div>
+			<div class="media-body">
+				<a href="#URL_RUBRIQUE{10135}">Voir tous les dossiers</a>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<BOUCLE_unes(UNES){!par date}{date>=2013}{0,3}{id_dossier != #ENV{bune}}>
+		<BOUCLE_rubunes(RUBRIQUES){id_rubrique=#ID_DOSSIER}{tout}>
+			<div class="col-md-8">
+				<BOUCLE_artprinc(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=#ID_RUBRIQUE}{0,1}>
+					<BOUCLE_motart(MOTS){id_article}{type='emag - type d information'}>
+						#SET{type,#TITRE}
+						#SET{desc,#DESCRIPTIF*}
+					</BOUCLE_motart>
+					<h2 class="bleu">[(#SURTITRE|?{#SURTITRE,#GET{desc}})]</h2>
+					<a href="#_rubunes:URL_RUBRIQUE">
+						[(#LOGO_ARTICLE|vider_attribut{height}|vider_attribut{width})]
+					</a>
+					<div class="datecarrou">[(#_unes:DATE|affdate)]</div>	
+					<a href="#_rubunes:URL_RUBRIQUE">	
+						<h4>#_rubunes:TITRE</h4>
+					</a>
+				</BOUCLE_artprinc>
+			</div>
+		</BOUCLE_rubunes>
+		</BOUCLE_unes>
+	</div>
+</div>

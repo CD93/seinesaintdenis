@@ -1,0 +1,24 @@
+#CACHE{24*3600}
+<BOUCLE_flux(DATA)
+  {source json,https://geoportail93.fr/SERV/DATA/?LAYERS=935&FORMAT=GEOJSON&SERVICE=wfs&SRS=4326&COL=ALL&FILTRE=etat%20LIKE%20%27existant%27%20AND%20statut%20LIKE%20%27public%27}{datapath features}{","}>
+  #SET{email,""}#SET{telephone,""}#SET{nomcollege,""}
+  [(#VALEUR{properties/code_rne}|oui) #SET{email,#GET{email,"ce."}|concat{#VALEUR{properties/code_rne}}|concat{"@ac-creteil.fr"}|strtolower][(#VALEUR{properties/telephone}|oui) #SET{telephone,#GET{telephone,"tél : "}|concat{#VALEUR{properties/telephone}}][(#VALEUR{properties/nomcollege}|oui) #SET{nomcollege,#GET{nomcollege,"Collège "}|concat{#VALEUR{properties/nomcollege}}]{
+  "type": "Feature",
+  "geometry": [(#VALEUR{geometry}|json_encode)],
+  "id":[(#VALEUR{properties/code_rne}|json_encode)],
+  "tout" : [(#VALEUR|json_encode)],
+  "properties": {
+    "title":[(#GET{nomcollege}|concat{<br/>}|json_encode)],
+    "description":[(#VALEUR{properties/adresse}|concat{<br/>}|concat{#VALEUR{properties/code_postal}}|concat{" "}|concat{#VALEUR{properties/nom_commune}}|concat{<br/>}|concat{"mail : <a class='spip_mail' href='mailto:"}|concat{#GET{email}}|concat{"'>"}|concat{#GET{email}}|concat{</a>}|wrap{<p>}|json_encode)]
+  }
+}</BOUCLE_flux>
+ {
+  "type": "Feature",
+  "geometry": {"type":"Point","crs":{"type":"name","properties":{"name":"EPSG:4326"}},"coordinates":[2.44911,48.906]},
+  "id":"1",
+  "properties": {
+    "title":"Les informations ne sont pas chargées<br\/>",
+    "description":"veuillez recharger la page ou contacter <a href='mailto:contact@seinesaintdenis.fr'>le webmaster<\/a>, <br\/>Merci"
+  }
+}
+<//B_flux>

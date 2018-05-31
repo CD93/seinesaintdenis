@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" rel="stylesheet">
+<BOUCLE_article(ARTICLES){id_article=13817}>
+<style>
+	#central {
+		font-family: 'Roboto Slab', serif;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 700px;
+		background-color: #fff;
+		flex-direction: column;
+	}
+		#lien_p a {
+	color: #05519e;
+	font-weight: 700;
+	font-size: 1.5em;
+	margin: 0;
+	font-weight: 400;
+	padding: 0;
+}
+
+h1 {
+	font-size: 2.5em;
+	line-height: 1.0em;
+	font-weight: 900;
+	margin: 0;
+	padding: 0;
+}
+
+#bouton  {
+	color: #fff;
+	text-decoration: none;
+	background-color: #CA4757;
+	font-size: 2em;
+	border: none;
+	border-radius: 20px;
+	padding: 2px 20px;
+}
+</style>
+</head>
+<body>
+<div class="main" id="central" >
+
+
+			<center><img src="#CHEMIN{images/petition2017/pastille.png}" width="300px" height="auto" alt="" /></center>
+			<div class="col-md-24"> <!-- début dossier une  -->
+				<center><h1>#CHAPO</h1></center>
+				[<center><div id="lien_p">
+					<a href="#URL_PAGE{petition2017}"><div>(#TITRE)</div></a>
+				</div>
+				</center>]	
+			<br/><br/>	
+				<center><a href="#URL_PAGE{petition2017}" id="bouton">Je signe</a></center>
+				<INCLURE{fond=inclure/bouton-partage}{env} />
+			</div> <!-- fin dossier une  -->
+
+
+</div>
+<INCLURE{fond=inclure/visites}{env} />
+</body>
+</html>
+</BOUCLE_article>

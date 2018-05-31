@@ -1,0 +1,26 @@
+#CACHE{24*3600}
+<BOUCLE_flux(DATA)
+  {source json,https://geoportail93.fr/SERV/DATA/?LAYERS=953&FORMAT=GEOJSON&SERVICE=wfs&SRS=4326&COL=ALL&MODE_GEO=POINT}{datapath features}{","}>
+  #SET{nom,""}#SET{tel,""}#SET{tel2,""}#SET{fax,""}#SET{type_accue,""}
+  [(#VALEUR{properties/telephone}|oui) #SET{tel,#GET{tel,"tél : "}|concat{#VALEUR{properties/telephone}}|concat{<br/>}][(#VALEUR{properties/fax}|oui) #SET{fax,#GET{fax,"fax : "}|concat{#VALEUR{properties/fax}}|concat{<br/>}]
+  {
+  "type": "Feature",
+  "geometry": [(#VALEUR{geometry}|json_encode)],
+  "id":[(#VALEUR{properties/id_etbt}|json_encode)],
+  "tout" : [(#VALEUR|json_encode)],
+  "properties": {
+    "type":[(#VALEUR{properties/type}|json_encode)],
+    "title":[(#VALEUR{properties/etablissement}|concat{<br/>}|json_encode)],
+    "description":[(#VALEUR{properties/adresse}|concat{<br/>}|concat{#VALEUR{properties/code_postal}}|concat{" "}|concat{#VALEUR{properties/ville}}|concat{<br/>}|concat{#GET{tel}}|concat{#GET{fax}}|json_encode)]
+  }
+}</BOUCLE_flux>
+ {
+  "type": "Feature",
+  "geometry": {"type":"Point","crs":{"type":"name","properties":{"name":"EPSG:4326"}},"coordinates":[2.44911,48.906]},
+  "id":"1",
+  "properties": {
+    "title":"Les informations ne sont pas chargées<br\/>",
+    "description":"veuillez recharger la page ou contacter <a href='mailto:contact@seinesaintdenis.fr'>le webmaster<\/a>, <br\/>Merci"
+  }
+}
+<//B_flux>

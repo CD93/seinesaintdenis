@@ -1,0 +1,15 @@
+
+/node_modules
+/spip
+!/spip
+/spip/*
+!/spip/service-worker.js
+!/spip/sw.js
+!/spip/manifest.json
+/spip/squelettes/
+!/spip/squelettes/
+/spip/plugins/
+!/spip/plugins/
+/spip/plugins/auto
+.DS_Store
+package-lock.json

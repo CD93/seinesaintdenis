@@ -1,0 +1,25 @@
+#CACHE{24*3600}
+#HTTP_HEADER{Content-Type: application/json; charset=#CHARSET}
+#SET{tableau_col,#ENV{col}|explode{";"}}
+#SET{url, "https://geoportail93.fr/SERV/DATA/?LAYERS="}
+#SET{url,#GET{url}|concat{#ENV{layers}}|concat{"&FORMAT=json&SERVICE=wfs&SRS=4326&COL="}|concat{#ENV{col}}}
+<B_flux>
+[
+<BOUCLE_flux(DATA)
+  {source json, #GET{url}|copie_locale{modif}}{datapath /}{","}>
+  {
+  <BOUCLE_col(DATA){source table, #GET{tableau_col}}{","}>
+  "#VALEUR":[(#_flux:VALEUR{#VALEUR}|json_encode)]
+</BOUCLE_col>
+}
+</BOUCLE_flux>
+]
+</B_flux>
+ {
+  "id":"1",
+  "properties": {
+    "title":"Les informations ne sont pas chargées<br\/>",
+    "description":"veuillez recharger la page ou contacter <a href='mailto:contact@seinesaintdenis.fr'>le webmaster<\/a>, <br\/>Merci"
+  }
+}
+<//B_flux>

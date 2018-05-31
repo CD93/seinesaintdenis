@@ -1,0 +1,28 @@
+<div class="ajax">
+<div class='formulaire_spi'>
+	[<p class='reponse_formulaire reponse_formulaire_erreur'>(#ENV*{message_erreur})</p>]
+	
+	<BOUCLE_rep_cre(DATA){source table, #ENV*{message_ok}}>
+		<h3>#VALEUR{titre}</h3>
+		<p>[(#VALEUR{descriptif}|replace{'_', '<br/>'})]</p>
+	</BOUCLE_rep_cre>
+	</B_rep_cre>
+		<h3>Il n'y a pas de crèche départementale dans votre commune.</h3>
+	<//B_rep_cre>
+		<form action='#ENV{action}' method='post'>
+		<div>
+			#ACTION_FORMULAIRE{#ENV{action}}
+			<fieldset>
+			<legend>Trouver une cr&egrave;che</legend>
+				<select name="ville" id="ville">
+				<option value="">Choisissez votre Ville</option>
+				<BOUCLE_ville(MOTS){id_groupe=5}>
+					<option value="#TITRE">#TITRE</option>
+				</BOUCLE_ville>
+				</select>				
+			<fieldset>
+			<input type='submit' class='submit btn' value="Rechercher" />
+		</div>
+		</form>
+</div>
+</div>

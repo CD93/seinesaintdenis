@@ -1,0 +1,12 @@
+<div id="menu_haut">
+	<ul id="navigation">
+	<li id="ssd"><a href="#URL_SITE_SPIP" class="home"><span>home</span></a>
+		</li>
+		<BOUCLE_menu_haut (RUBRIQUES){id_mot=1}{tout}{doublons mh} {par num titre}>
+			<li class="lumiere"><a href="#URL_RUBRIQUE" title="[(#DESCRIPTIF|textebrut)]" id="id_menu_#ID_RUBRIQUE" class="effet #EXPOSE">
+           <span>#TITRE</span>
+				</a>
+			</li>
+		</BOUCLE_menu_haut>
+	</ul>
+</div>

@@ -1,0 +1,28 @@
+#CACHE{24*3600}
+[(#SET{id,#ENV{monid,#ENV{id,1}}})]
+[(#SET{layer,#ENV{layer_id,1553}})]
+#SET{urlgeo,http://geoportail93.fr/SERV/DATA/?LAYERS=#GET{layer}&FORMAT=json&SERVICE=wfs&SRS=4326&COL=all&FILTRE=id=#GET{id}}
+<BOUCLE_tableau(DATA){source json, #GET{urlgeo}|copie_locale{modif}}>
+#SET{adresse,#NUM_ADRESSE|concat{" "}|concat{#RUE}|concat{"<br/>"}|concat{#CP}|concat{" "}|concat{#VILLE}}
+<h2>#THEMATIQUE<br/>#CATEGORIE_ACTION</h2>
+	<p><strong>#PRESTATAIRE</strong> / #VILLE<br/>Num&eacute;ro de convention : #NUMERO_CONVENTION_ACTION</p>
+	[<h3>(#DESCRIPTION)</h3>]
+	[<strong>filière : </strong>(#FILIERE)<br/>]
+	<br/>
+	<h4>Informations :</h4>
+	<strong>Adresse : </strong>#GET{adresse}<br/>
+	<strong>Téléphone : </strong>[(#TELEPHONE)][ - (#TELEPHONE2)]</br>
+	<br/>
+	<h4>Détails :</h4>
+	[<strong>Contenu : </strong><br/>(#CONTENU|replace{\n,<br/>})<br/>]
+	[<strong>Date debut : </strong>(#DATE_DEBUT|affdate)<br/>]
+	[<strong>Durée stage : </strong>(#DUREE_STAGE)<br/>]
+	[<strong>Nb h centre : </strong>(#NB_H_CENTRE)<br/>]
+	[<strong>Nb h ent : </strong>(#NB_H_ENT)<br/>]
+	[<strong>Nom encadrant : </strong>(#NOM_ENCADRANT)<br/>]
+	[<strong>Objectifs : </strong><br/>(#OBJECTIFS|replace{\n,<br/>})<br/>]
+	[<strong>Places offertes : </strong>(#PLACES_OFFERTES)<br/>]
+	[<strong>Scolarité acquise : </strong>(#SCOL_ACQUISE)<br/>]
+	<h3
+	<br/>
+</BOUCLE_tableau>

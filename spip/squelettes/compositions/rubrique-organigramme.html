@@ -1,0 +1,243 @@
+<BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
+<!DOCTYPE html>
+[(#REM) Cf.: http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+]<!--[if lt IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie6"> <![endif]-->
+<!--[if IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie7"> <![endif]-->
+<!--[if IE 8 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie8"> <![endif]-->
+<!--[if IE 9 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js"> <!--<![endif]-->
+<head>
+<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+<title>[(#NOM_SITE_SPIP|textebrut)][ / (#TITRE|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
+<INCLURE{fond=inc/head} />
+</head>
+<body>
+<INCLURE{fond=inclure/menu} {env}/>
+<div class="main" id="pagerubrique">
+	<div class="contenu">
+		<div class="container">
+			<div class="col-md-15 fondune"> <!-- début dossier une  -->
+				<INCLURE{fond=inclure/bouton-impression}{env} />
+				<div class="corpsune">
+				<B_filariane>
+					<ol class="breadcrumb">
+					<BOUCLE_filariane(HIERARCHIE){id_rubrique}{tout}{si #PROFONDEUR|>{1}} >
+						<li><a href="#URL_RUBRIQUE">#TITRE</a></li>
+					</BOUCLE_filariane>
+					</ol>
+				</B_filariane>
+				
+					<h1>#TITRE</h1>
+					[<div class="chapoune">
+						<span class="glyphicon glyphicon-minus"></span>
+						(#DESCRIPTIF)
+						<span class="glyphicon glyphicon-minus"></span>
+					</div>]
+				</div>
+				<div id="organigramme">
+				<BOUCLE_pres(RUBRIQUES){id_rubrique=110}>
+				<div id="president">
+				<div id="entete_orga_bleu" class="tete_orga">
+					<a href="#"><h3>[(#TITRE|supprimer_numero)]</h3></a>
+					#DESCRIPTIF
+				</div>
+				<div id="bordure_pres" class="bordureorga">
+				<BOUCLE_art_pres(ARTICLES){id_rubrique} {par num titre}>
+				<div class="col-md-8">
+					<h3>[(#TITRE|supprimer_numero)]</h3>
+					[<div class="orga_pres">(#CHAPO)</div>]
+				</div>
+				[(#COMPTEUR_BOUCLE|modulo{3}|=={0}|?{<div class="break"></div>})]
+				[(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|?{<div class="break"></div>})]
+				
+				</BOUCLE_art_pres>
+				</div>
+				</div>
+				</BOUCLE_pres>
+
+				<BOUCLE_dgs(RUBRIQUES){id_rubrique=111}>
+				<div id="dgs">
+					<div id="entete_orga_dgs" class="tete_orga">
+					<a href="#"><h3>[(#TITRE|supprimer_numero)]</h3></a>
+					#DESCRIPTIF
+					</div>
+
+					<div id="bordure_dgs" class="bordureorga">
+
+						<BOUCLE_art_dgs(ARTICLES){id_rubrique} {par num titre}>
+						<div class="col-md-8">
+						<h4>[(#TITRE|supprimer_numero)]</h4>
+						[<div class="orga_dgs">(#CHAPO)</div><br/>]
+						[<img src="#CHEMIN{images/sepa_orga.png}" alt=""/><div class="orga_gris">(#TEXTE)</div>]
+						</div>
+						</BOUCLE_art_dgs>
+
+					<div class="break"></div>
+					</div>
+				</div>
+				</BOUCLE_dgs>
+					<BOUCLE_psi(RUBRIQUES){id_rubrique=10180}>
+					<div id="psi">
+						<div id="entete_orga_psi" class="tete_orga">
+							<a href="#"><h3>[(#TITRE|supprimer_numero)]</h3></a>
+							#DESCRIPTIF
+						</div>
+					<div id="bordure_psi" class="bordureorga">
+						<BOUCLE_art_psi(ARTICLES){id_rubrique}{par num titre}>
+							<div class="col-md-8">
+								<h4>[(#TITRE|supprimer_numero)]</h4>
+								[<div class="orga_psi">(#CHAPO)</div>]
+								[<img src="#CHEMIN{images/sepa_orga.png}" alt=""/><div class="orga_gris">(#TEXTE)</div>]
+							</div>
+						[(#COMPTEUR_BOUCLE|modulo{3}|=={0}|?{<div class="break"></div>})]
+						[(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|?{<div class="break"></div>})]
+						</BOUCLE_art_psi>
+					</div>
+					</div>
+					</BOUCLE_psi>
+				
+					<BOUCLE_aad(RUBRIQUES){id_rubrique=112}>
+					<div id="aad">
+						<div id="entete_orga_aad" class="tete_orga">
+							<a href="#"><h3>[(#TITRE|supprimer_numero)]</h3></a>
+							#DESCRIPTIF
+						</div>
+					<div id="bordure_aad" class="bordureorga">
+						<BOUCLE_art_aad(ARTICLES){id_rubrique}{par num titre}>
+							<div class="col-md-8">
+								<h4>[(#TITRE|supprimer_numero)]</h4>
+								[<div class="orga_aad">(#CHAPO)</div>]
+								[<img src="#CHEMIN{images/sepa_orga.png}" alt=""/><div class="orga_gris">(#TEXTE)</div>]
+							</div>
+						[(#COMPTEUR_BOUCLE|modulo{3}|=={0}|?{<div class="break"></div>})]
+						[(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|?{<div class="break"></div>})]
+						</BOUCLE_art_aad>
+					</div>
+					</div>
+					</BOUCLE_aad>
+					
+					<BOUCLE_sol(RUBRIQUES){id_rubrique=113}>
+					<div id="sol">
+						<div id="entete_orga_sol" class="tete_orga">
+							<a href="#"><h3>[(#TITRE|supprimer_numero)]</h3></a>
+							#DESCRIPTIF
+						</div>
+					<div id="bordure_sol" class="bordureorga">
+						<BOUCLE_art_sol(ARTICLES){id_rubrique}{par num titre}>
+							<div class="col-md-8">
+								<h4>[(#TITRE|supprimer_numero)]</h4>
+								[<div class="orga_sol">(#CHAPO)</div>]
+								[<img src="#CHEMIN{images/sepa_orga.png}" alt=""/><div class="orga_gris">(#TEXTE)</div>]
+							</div>
+						[(#COMPTEUR_BOUCLE|modulo{3}|=={0}|?{<div class="break"></div>})]
+						[(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|?{<div class="break"></div>})]
+						</BOUCLE_art_sol>
+					</div>
+					</div>
+					</BOUCLE_sol>
+					
+					<BOUCLE_sec(RUBRIQUES){id_rubrique=114}>
+					<div id="sec">
+						<div id="entete_orga_sec" class="tete_orga">
+							<a href="#"><h3>[(#TITRE|supprimer_numero)]</h3></a>
+							#DESCRIPTIF
+						</div>
+					<div id="bordure_sec" class="bordureorga">
+						<BOUCLE_art_sec(ARTICLES){id_rubrique}{par num titre}>
+							<div class="col-md-8">
+								<h4>[(#TITRE|supprimer_numero)]</h4>
+								[<div class="orga_sec">(#CHAPO)</div>]
+								[<img src="#CHEMIN{images/sepa_orga.png}" alt=""/><div class="orga_gris">(#TEXTE)</div>]
+							</div>
+						[(#COMPTEUR_BOUCLE|modulo{3}|=={0}|?{<div class="break"></div>})]
+						[(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|?{<div class="break"></div>})]
+						</BOUCLE_art_sec>
+					</div>
+					</div>
+					</BOUCLE_sec>
+			
+					<BOUCLE_rms(RUBRIQUES){id_rubrique=115}>
+					<div id="rms">
+						<div id="entete_orga_rms" class="tete_orga">
+							<a href="#"><h3>[(#TITRE|supprimer_numero)]</h3></a>
+							#DESCRIPTIF
+						</div>
+					<div id="bordure_rms" class="bordureorga">
+						<BOUCLE_art_rms(ARTICLES){id_rubrique}{par num titre}>
+							<div class="col-md-8">
+								<h4>[(#TITRE|supprimer_numero)]</h4>
+								[<div class="orga_rms">(#CHAPO)</div>]
+								[<img src="#CHEMIN{images/sepa_orga.png}" alt=""/><div class="orga_gris">(#TEXTE)</div>]
+							</div>
+						[(#COMPTEUR_BOUCLE|modulo{3}|=={0}|?{<div class="break"></div>})]
+						[(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|?{<div class="break"></div>})]
+						</BOUCLE_art_rms>
+					</div>
+					</div>
+					</BOUCLE_rms>
+					
+					<BOUCLE_dp(RUBRIQUES){id_rubrique=132}>
+					<div id="dp">
+						<div id="entete_orga_dp" class="tete_orga">
+							<a href="#"><h3>[(#TITRE|supprimer_numero)]</h3></a>
+							#DESCRIPTIF
+						</div>
+					<div id="bordure_dp" class="bordureorga">
+						<BOUCLE_art_dp(ARTICLES){id_rubrique}{par num titre}>
+							<div class="col-md-8">
+								<h4>[(#TITRE|supprimer_numero)]</h4>
+								[<div class="orga_dp">(#CHAPO)</div>]
+								[<img src="#CHEMIN{images/sepa_orga.png}" alt=""/><div class="orga_gris">(#TEXTE)</div>]
+							</div>
+						[(#COMPTEUR_BOUCLE|modulo{3}|=={0}|?{<div class="break"></div>})]
+						[(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|?{<div class="break"></div>})]
+						</BOUCLE_art_dp>
+					</div>
+					</div>
+					</BOUCLE_dp>
+					</div>
+						
+				<INCLURE{fond=inclure/bouton-partage}{env} />
+			</div><!-- fin dossier une  -->
+			<div class="col-md-9">
+				<INCLURE{fond=inclure/carroussel,id_rubrique=#ID_SECTEUR}{env}/>
+				<div class="titrepoledep">
+					<div class="triangleblanc"></div>
+					<div>Dans <span>&nbsp#TITRE_SECTEUR</span></div>
+				</div>			
+				<div class="fondpale lireaussi">
+					<BOUCLE_autresarts(RUBRIQUES){id_parent=1}{"<hr/>"}{par titre}>
+					<div class="artpol">
+						<div>
+							<h4><a href="#URL_RUBRIQUE">#TITRE</a></h4>
+							#DESCRIPTIF
+						</div>
+					</div>
+					</BOUCLE_autresarts>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<INCLURE{fond=inclure/footer}{env} />
+<script type="text/javascript">
+	$(document).ready(function() {
+		//$('#organigramme .bordureorga').hide();
+		/*
+		$('#organigramme .tete_orga').toggle(
+			function() {
+				$(this).parent().find('.bordureorga').show(300);
+			}
+			
+			,function() {
+				$(this).parent().find('.bordureorga').hide(300);
+			}
+			
+		);
+		*/
+	});
+</script>
+</body>
+</html>
+</BOUCLE_rubrique>

@@ -1,0 +1,405 @@
+[(#SET{width,#ENV{width,#ENV{largeur,100%}}})]
+[(#SET{height,#ENV{height,#ENV{hauteur,925px}}})]
+[(#SET{fullscreen,#ENV{fullscreen,#ENV{fullscreen,oui}}})]
+[(#SET{zoom_molette,#ENV{zoom_molette,#ENV{zoom_molette,non}}})]
+[(#SET{id,#ENV{id_carte_gis,#ENV{id_map,#ENV{id,1}}}})]
+[(#SET{point,#ENV{point,#ENV{point,non}}})]
+[(#SET{zoom,#ENV{zoom,#ENV{zoom,12}}})]
+[(#SET{centrer_auto,#ENV{centrer_auto,#ENV{centrer_auto,oui}}})]
+[(#SET{lat,#ENV{lat,#ENV{lat,48.908}}})]
+[(#SET{lon,#ENV{lon,#ENV{lon,2.449}}})]
+[(#SET{cluster,#ENV{cluster,#ENV{cluster,non}}})]
+
+[(#INCLURE{fond=modeles/carte_gis,
+	env,
+	width=#GET{width},
+	height=#GET{height},
+	fullscreen=#GET{fullscreen},
+	zoom_molette=#GET{zoom_molette},
+	zoom=#GET{zoom},
+	centrer_auto=#GET{centrer_auto},
+	lat=#GET{lat},
+	lon=#GET{lon},
+	point=#GET{point},
+	cluster=#GET{cluster}}
+)]
+
+
+<script type="text/javascript">/*<!\[CDATA\[*/
+	$('#map[(#GET{id})]').on('ready', function(){
+		var map[(#GET{id})] = this.map;
+		// début de personnalisation de carte_gis
+		map[(#GET{id})].attributionControl.addAttribution('<a href="https://geoportail93.fr">Géoportail93</a>');
+
+		var Travaux = L.featureGroup().addTo(map[(#GET{id})]); // feature group ou on va inserer les travaux
+		var fondCD = L.featureGroup().addTo(map[(#GET{id})]); // feature group ou on va inserer les fonds de cartes
+		var geojson1,geojson2,geojson3,geojson31,geojson32,geojson33,geojson34,geojson35,cantonsLayer;
+
+		//on ajoute la limite départementale
+		$.getJSON("#CHEMIN{json/departement-invert.json}", function (geoJson1) {
+		    geojson1 = L.geoJson(geoJson1, {
+		    	style: { color: "#FFF", fillColor: "#FFF", weight: 0, fillOpacity:0.8, clickable: false }
+		    }).addTo(fondCD); 
+		  	/*geojson11 = L.geoJson(geoJson1,{
+		  		style: { color: "#0AABA4", fillColor: "#FFF", weight: 3, opacity: 0.9, fillOpacity:0.6, clickable: false }
+		  	}).addTo(fondCD); */ 
+		});
+
+		//on ajoute les limites communales
+		/*
+		$.getJSON("https://geoportail93.fr/SERV/DATA/?LAYERS=1458&FORMAT=geojson&SERVICE=wfs&SRS=4326&COL=all&FILTRE=depart%20LIKE%20%27SEINE-SAINT-DENIS%%27", function (geoJson2) {
+		    geojson2 = L.geoJson(geoJson2, {
+		    	style: { color: "#C0DBD9", weight: 2, opacity: 0.8, fill: false, clickable: false }
+		    }).addTo(fondCD);
+		});
+		*/
+		var group3 = L.featureGroup().addTo(this.map);
+		/*
+		var group31 = L.featureGroup().addTo(this.map),
+		group32 = L.featureGroup().addTo(this.map),
+		group33 = L.featureGroup().addTo(this.map),
+		group34 = L.featureGroup().addTo(this.map),
+		group35 = L.featureGroup().addTo(this.map);
+		
+		control = L.control.layers(null, null, { collapsed: false, position: 'bottomleft' });
+		
+		control.addOverlay(group31, '<span class="Culture1">Bibliothèques Médiathèques</span>');
+		control.addOverlay(group32, '<span class="Culture2">Expositions</span>');
+		control.addOverlay(group33, '<span class="Culture3">Patrimoine</span>');
+		control.addOverlay(group34, '<span class="Culture4">Spectacles</span>');
+		control.addOverlay(group35, '<span class="Culture5">Cinémas</span>');
+		control.addTo(map[(#GET{id})]);
+		*/
+		
+		// Adding to map now adds all child layers into the parent group.
+		group3.addTo(this.map);
+		/*
+		group31.addTo(map[(#GET{id})]);
+		group32.addTo(map[(#GET{id})]);
+		group33.addTo(map[(#GET{id})]);
+		group34.addTo(map[(#GET{id})]);
+		group35.addTo(map[(#GET{id})]);
+		*/		
+		// ajouter un select pour les communes
+		var select_options = '<select id="choixcommune"><option value="0">Choisir une commune</option><option value="1">Aubervilliers</option><option value="2">Aulnay-sous-Bois</option><option value="3">Bagnolet</option><option value="4">Bobigny</option><option value="5">Bondy</option><option value="6">Clichy-sous-Bois</option><option value="7">Coubron</option><option value="8">Drancy</option><option value="9">Dugny</option><option value="10">Epinay-sur-Seine</option><option value="11">Gagny</option><option value="12">Gournay-sur-Marne</option><option value="13">L Ile-Saint-Denis</option><option value="14">La Courneuve</option><option value="15">Le Blanc-Mesnil</option><option value="16">Le Bourget</option><option value="17">Le Pré-Saint-Gervais</option><option value="18">Le Raincy</option><option value="19">Les Lilas</option><option value="20">Les Pavillons-sous-Bois</option><option value="21">Livry-Gargan</option><option value="22">Montfermeil</option><option value="23">Montreuil</option><option value="24">Neuilly-Plaisance</option><option value="25">Neuilly-sur-Marne</option><option value="26">Noisy-le-Grand</option><option value="27">Noisy-le-Sec</option><option value="28">Pantin</option><option value="29">Pierrefitte-sur-Seine</option><option value="30">Romainville</option><option value="31">Rosny-sous-Bois</option><option value="32">Saint-Denis</option><option value="33">Saint-Ouen</option><option value="34">Sevran</option><option value="35">Stains</option><option value="36">Tremblay-en-France</option><option value="37">Vaujours</option><option value="38">Villemomble</option><option value="39">Villepinte</option><option value="40">Villetaneuse</option></select>';
+		
+		var ctrl = L.control({position: 'topright'});
+		ctrl.onAdd = function(map[(#GET{id})]) {
+			this._div = L.DomUtil.create('div', 'ctrl_category');
+			this._div.innerHTML = select_options;
+			L.DomEvent.disableClickPropagation(this._div);
+			L.DomEvent.addListener(this._div, 'change', changeHandler);
+			return this._div;
+		}
+		ctrl.addTo(map[(#GET{id})]);
+		function changeHandler(e){
+			switch (e.target.value) {
+				case "1":
+					map[(#GET{id})].setView([48.9131, 2.3832], 14);
+					break;
+				case "2":
+					map[(#GET{id})].setView([48.9386, 2.4906], 14);
+					break;
+				case "3":
+					map[(#GET{id})].setView([48.8692, 2.4181], 14);
+					break;
+				case "4":
+					map[(#GET{id})].setView([48.9106, 2.4397], 14);
+					break;
+				case "5":
+					map[(#GET{id})].setView([48.9022, 2.48278], 14);
+					break;
+				case "6":
+					map[(#GET{id})].setView([48.9167, 2.55], 14);
+					break;
+				case "7":
+					map[(#GET{id})].setView([48.9167, 2.5833], 14);
+					break;
+				case "8":
+					map[(#GET{id})].setView([48.9233, 2.445], 14);
+					break;
+				case "9":
+					map[(#GET{id})].setView([48.9536, 2.4164], 14);
+					break;
+				case "10":
+					map[(#GET{id})].setView([48.95528, 2.30917], 14);
+					break;
+				case "11":
+					map[(#GET{id})].setView([48.8833, 2.5333], 14);
+					break;
+				case "12":
+					map[(#GET{id})].setView([48.860555, 2.577222], 14);
+					break;
+				case "13":
+					map[(#GET{id})].setView([48.9358, 2.3397], 14);
+					break;
+				case "14":
+					map[(#GET{id})].setView([48.9388, 2.4636], 14);
+					break;
+				case "15":
+					map[(#GET{id})].setView([48.932222, 2.396666], 14);
+					break;
+				case "16":
+					map[(#GET{id})].setView([48.935277, 2.425555], 14);
+					break;
+				case "17":
+					map[(#GET{id})].setView([48.885, 2.4039], 14);
+					break;
+				case "18":
+					map[(#GET{id})].setView([48.9, 2.5167], 14);
+					break;
+				case "19":
+					map[(#GET{id})].setView([48.88, 2.4169], 14);
+					break;
+				case "20":
+					map[(#GET{id})].setView([48.9058, 2.5106], 14);
+					break;
+				case "21":
+					map[(#GET{id})].setView([48.91916, 2.53611], 14);
+					break;
+				case "22":
+					map[(#GET{id})].setView([48.9, 2.5667], 14);
+					break;
+				case "23":
+					map[(#GET{id})].setView([48.8603, 2.4431], 14);
+					break;
+				case "24":
+					map[(#GET{id})].setView([48.8619, 2.5064], 14);
+					break;
+				case "25":
+					map[(#GET{id})].setView([48.85, 2.5333], 14);
+					break;
+				case "26":
+					map[(#GET{id})].setView([48.847751, 2.552791], 14);
+					break;
+				case "27":
+					map[(#GET{id})].setView([48.8894, 2.4503], 14);
+					break;
+				case "28":
+					map[(#GET{id})].setView([48.89658, 2.40168], 14);
+					break;
+				case "29":
+					map[(#GET{id})].setView([48.965555, 2.361388], 14);
+					break;
+				case "30":
+					map[(#GET{id})].setView([48.8836, 2.4361], 14);
+					break;
+				case "31":
+					map[(#GET{id})].setView([48.8731, 2.4853], 14);
+					break;
+				case "32":
+					map[(#GET{id})].setView([48.9356, 2.3539], 14);
+					break;
+				case "33":
+					map[(#GET{id})].setView([48.912149, 2.334251], 14);
+					break;
+				case "34":
+					map[(#GET{id})].setView([48.9333, 2.5333], 14);
+					break;
+				case "35":
+					map[(#GET{id})].setView([48.95, 2.3833], 14);
+					break;
+				case "36":
+					map[(#GET{id})].setView([48.95, 2.572222], 14);
+					break;
+				case "37":
+					map[(#GET{id})].setView([48.9333, 2.5667], 14);
+					break;
+				case "38":
+					map[(#GET{id})].setView([48.8903, 2.5111], 14);
+					break;
+				case "39":
+					map[(#GET{id})].setView([48.9667, 2.5333], 14);
+					break;
+				case "40":
+					map[(#GET{id})].setView([48.965277, 2.345], 14);
+					break;
+				default:
+					map[(#GET{id})].setView([48.90903,2.45506 ], 12);
+					break;	
+			}
+		};		
+		
+		var deptOptions = {
+		    //color: "#0AABA4",
+		    fillColor: "#FFF",
+		    weight: 1,
+		    fillOpacity:0.9,
+		    clickable: false
+		};
+		var dept93Options = {
+		    //color: "#0AABA4",
+		    fillColor: "#FFF",
+		    weight: 3,
+		    opacity: 0.9,
+		    fillOpacity:0.6,
+		    clickable: false
+		};		
+		/*
+		var cult1Icon = L.icon({
+			iconUrl: '#CHEMIN{images/picto-carto/marker-g1.png}',
+			iconSize: [12, 20],
+			iconAnchor: [6, 20],
+			popupAnchor: [0, -14],
+			fillOpacity: 0.8,
+			zIndex: 1500
+		});
+		var cult2Icon = L.icon({
+			iconUrl: '#CHEMIN{images/picto-carto/marker-g2.png}',
+			iconSize: [12, 20],
+			iconAnchor: [6, 20],
+			popupAnchor: [0, -14],
+			fillOpacity:0.8,
+			zIndex: 1500
+		});
+		var cult3Icon = L.icon({
+			iconUrl: '#CHEMIN{images/picto-carto/marker-g3.png}',
+			iconSize: [12, 20],
+			iconAnchor: [6, 20],
+			popupAnchor: [0, -14],
+			fillOpacity:0.8,
+			zIndex: 1500
+		});
+		var cult4Icon = L.icon({
+			iconUrl: '#CHEMIN{images/picto-carto/marker-g4.png}',
+			iconSize: [12, 20],
+			iconAnchor: [6, 20],
+			popupAnchor: [0, -14],
+			fillOpacity:0.8,
+			zIndex: 1500
+		});
+		var cult5Icon = L.icon({
+			iconUrl: '#CHEMIN{images/picto-carto/marker-g5.png}',
+			iconSize: [12, 20],
+			iconAnchor: [6, 20],
+			popupAnchor: [0, -14],
+			fillOpacity:0.8,
+			zIndex: 1500
+		});
+		*/
+				$.getJSON("#CHEMIN{elections_fichiers/cantons.geojson}", function (geoJson3) {
+					geojson3 = L.geoJson(geoJson3, {
+						style : style,
+						onEachFeature: onEachFeature
+					});
+					geojson3.eachLayer(function (layer) {
+						layer.addTo(group3);					
+					});
+				});
+				        
+		        var zoomHome = L.control.defaultExtent({position: 'topleft'});
+				zoomHome.addTo(map[(#GET{id})]);
+				
+				function getColor(d) {
+						    return d == 18 ? '#edf8fb' :
+						           d == 16  ? '#ccece6' :
+						           d == 9  ? '#99d8c9' :
+						           d == 17  ? '#66c2a4' :
+						           d == 1   ? '#2ca25f' :
+						           d == 7   ? '#006d2c' :
+						           d == 4 ? '#edf8fb' :
+						           d == 8  ? '#ccece6' :
+						           d == 5  ? '#99d8c9' :
+						           d == 15  ? '#66c2a4' :
+						           d == 12   ? '#2ca25f' :
+						           d == 2   ? '#006d2c' :
+									d == 6 ? '#edf8fb' :
+									d == 12  ? '#ccece6' :
+									d == 21  ? '#99d8c9' :
+									d == 11  ? '#66c2a4' :
+									d == 14   ? '#2ca25f' :
+									d == 20   ? '#006d2c' :
+									d == 10 ? '#edf8fb' :
+									d == 19  ? '#ccece6' :
+									d == 13  ? '#99d8c9':
+									       '#99d8c9';
+							}
+						function style(feature) {
+						    return {
+						        fillColor: getColor(feature.properties.numcanton),
+						        weight: 2,
+						        opacity: 1,
+						        color: "#555",
+						        fillOpacity: 0.2
+						    };
+						}
+						function resetHighlight(e) {
+							geojson3.resetStyle(e.target);
+						}
+				
+						function highlightFeature(e) {
+							var layer = e.target;
+						    layer.setStyle({
+						        weight: 3,
+						        fillColor: "#516395",
+						        color: '#fff',
+						        fillOpacity: 0.5
+						    });
+						    if (!L.Browser.ie && !L.Browser.opera) {
+						        layer.bringToFront();
+						    }
+						}
+						function affichePopup2t(feature,layer) {
+							$.ajax({
+								url: "#CHEMIN{elections_fichiers/resultatsass.php}",
+								method: "GET",
+								data: { id_canton: feature.properties.numcanton },
+								dataType: 'html'
+								}).done(function(data) {
+									var popupContent = "<p>Canton numero " +feature.properties.numcanton + " : <strong>"+feature.properties.nomcanton+"</strong></p>"
+									popupContent += data ;
+									layer.bindPopup(popupContent).openPopup();
+							});
+							
+						}
+						function preparePopUp(e) {
+							affichePopup2t(e.target.feature, e.target);
+						}
+						function onEachFeature(feature, layer) {
+							 layer.on({
+							 	mouseover: highlightFeature,
+							 	mouseout: resetHighlight,
+							 	click: preparePopUp
+							 });
+						}
+						
+						var canton20 = L.latLng(48.98705526620432, 2.549514770507812);
+						var canton19 = L.latLng(48.949190737361185, 2.5381851196289062);
+						var canton11 = L.latLng(48.92054787119236, 2.5399017333984375);
+						var canton10 = L.latLng(48.8754810584611, 2.545909881591797);
+						var canton14 = L.latLng(48.842954920199396, 2.5620460510253906);
+						var canton2 = L.latLng(48.95099446218932, 2.493896484375);
+						var canton6 = L.latLng(48.905430445463075, 2.4914932250976562);
+						var canton21 = L.latLng(48.886922295898685, 2.5103759765625);
+						var canton12 = L.latLng(48.8769882686177, 2.470550537109375);
+						var canton13 = L.latLng(48.86185766438846, 2.4564743041992188);
+						var canton3 = L.latLng(48.88082664942512, 2.4327850341796875);
+						var canton15 = L.latLng(48.89775716626464, 2.4084091186523438);
+						var canton5 = L.latLng(48.903399397969565, 2.4533843994140625);
+						var canton8 = L.latLng(48.92573638057003, 2.4451446533203125);
+						var canton4 = L.latLng(48.94242618850301, 2.4640274047851562);
+						var canton1 = L.latLng(48.91242564389959, 2.3830032348632812);
+						var canton7 = L.latLng(48.93814149993499, 2.4111557006835938);
+						var canton17 = L.latLng(48.94783790094817, 2.3809432983398438);
+						var canton16 = L.latLng(48.92257822166665, 2.3500442504882812);
+						var canton9 = L.latLng(48.95753241808396, 2.3486709594726562);
+						var canton18 = L.latLng(48.91107181095356, 2.332191467285156);
+						for (i=1;i<=21;i++) {
+							 var picto = L.icon({
+							    iconUrl: 'squelettes/elections_fichiers/images/icon'+i+'.png',
+							    shadowUrl: 'squelettes/elections_fichiers/images/icon-shadow.png',
+							    iconSize:     [26, 20], // size of the icon    
+							    shadowSize:   [26, 20], // size of the shadow
+							    iconAnchor:   [13, 10], // point of the icon which will correspond to marker's location
+							    shadowAnchor: [13, 10],  // the same for the shadow
+							    popupAnchor:  [17, 13] // point from which the popup should open relative to the iconAnchor
+							});
+							var lat = eval("canton" + i + ".lat");
+							var lng = eval("canton" + i + ".lng");
+							L.marker([lat,lng], { opacity: 1, icon : picto, clickable: false, zIndexOffset: -1000 }).addTo(this.map);
+						}	
+										
+// fin de personnalisation de carte_gis
+	});
+/*\]\]>*/
+</script>
