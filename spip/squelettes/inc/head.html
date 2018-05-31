@@ -36,11 +36,9 @@
 [<link rel="stylesheet" href="(#CHEMIN{bootstrap/css/bootstrap-responsive.min.css})" type="text/css" />]
 [<link rel="stylesheet" href="(#CHEMIN{css/habillage.css}|direction_css|timestamp)" type="text/css" />]
 [<link rel="stylesheet" href="(#CHEMIN{css/revenge.css})" type="text/css" />]
-#SET{urlcssbootstrap,(#URL_SITE_SPIP|issecure|?{"https://","http://"}|concat{"netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"})}
-<link href='[(#GET{urlcssbootstrap}|copie_locale)]' rel='stylesheet' type='text/css'>
-#SET{urlcssgoogle,(#URL_SITE_SPIP|issecure|?{"https://","http://"}|concat{"fonts.googleapis.com/css?family=Merriweather:400,700,900,300italic,300"})}
-<link href='[(#GET{urlcssgoogle}|copie_locale)]' rel='stylesheet' type='text/css'>
 
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+<link href='//fonts.googleapis.com/css?family=Merriweather:400,700,900,300italic,300' rel='stylesheet' type='text/css'>
 
 [(#REM)
 	Balise permettant aux plugins d'inserer des appels javascript ;
