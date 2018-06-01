@@ -1,0 +1,168 @@
+}
+#flux_rss .lireaussi .pagination {
+	margin-top: 10px;
+}
+#flux_rss .titrepoledep div {
+	background-color: #87cee0;
+	color: #e95d0f;
+	padding: 1em 0 1em 1em;
+	font-size: 1.2em;
+}
+#flux_rss .fondbleuciel {
+    background-color: #FFFFFF;
+    border: 2px solid #87cee0;
+}
+#flux_rss .fondbleuciel .break {
+	border: 1px solid #87cee0;
+}
+#loginquiz #spip_logo_auteur, #loginquiz legend{
+	display: none;
+}
+#loginquiz label.nofx, #loginquiz input#session_remember{
+	display: inline;
+}
+.fleche_valider {
+	display: inline-block;
+	padding: 5px 10px;
+	background-color: #87cee0;
+	border: none;
+	color:  #fff;
+
+}
+#pagedevisu .corps {
+	background-color: #ece3da;
+}
+#pagedevisu #map {
+	border: 2px solid #87cee0;
+}
+.devisu_enregistrer, #btnloginquiz, #btninscriptquiz {
+	display: inline-block;
+	padding: 5px 10px;
+	background-color: #000;
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	border-radius: 0px;
+	border: none;
+	color:  #fff;
+}
+#btnloginquiz.acti, #btninscriptquiz.acti {
+	 border: 5px solid #FDE90E;
+}
+.devisu_commencer {
+	display: block;
+	width: 285px;
+	height: 68px;
+	margin: 20px auto;
+	background: url("../images/devisu/devisu_commencer.png") no-repeat top left #fff;
+}
+.devisu_commencer:hover {
+	box-shadow: 6px 6px 10px 1px rgba(0, 0, 0, 0.5);
+}
+.devisu_commencer span {
+	display: none;
+}
+.chapoune img.intro_devisu{
+	float: none;
+}
+
+
+#pagedevisu .logoune {
+	margin-top: 15px;
+}
+
+#pagedevisu .formulaire_spip {
+	border-style: solid;
+	border-width:25px;
+	  -webkit-border-image: url("../../../squelettes/images/angle.png") 25 repeat;
+	   -moz-border-image: url("../../../squelettes/images/angle.png") 25 repeat;
+	   -o-border-image: url("../../../squelettes/images/angle.png") 25 repeat;
+	    border-image: url("../../../squelettes/images/angle.png") 25 fill repeat;
+	padding: 0px;
+	margin-bottom:  10px;
+	//background-color: #FDE90E;
+}
+#pagedevisu h3 {
+	//background-color: #FDE90E;
+	padding:  5px 10px;
+}
+#pagedevisu .questionquiz ul {
+	list-style-type: none;
+	padding-left: 0;
+}
+#pagedevisu .radio, #pagedevisu .checkbox {
+	display: block;
+}
+
+
+#pagedevisu .image_bg {
+	width: 100%;
+}
+#pagedevisu li span.ui-icon {
+	display:  inline-block;
+}
+#pagedevisu .question .formulaire_spip li {
+	height:  200px;
+}
+#pagedevisu .question #formulaire_inscription li, #pagedevisu .question #formulaire_login li{
+	height:  auto;
+}
+#pagedevisu .question .formulaire_spip li img{
+   	max-height:  200px;
+}
+#pagedevisu .questionquiz a.lien_pagination {
+    display: inline-block;
+    padding: 3px 6px;
+    border-radius: 5px;
+    background-color: #eee;
+    border: 1px solid #dedede;
+    margin: 0 0 8px 5px;
+    color:  #bbbbbb;
+    box-shadow: inset 1px 3px 3px #999 ;
+}
+#pagedevisu a.lien_pagination.no {
+   // background-color:#FDE90E ;
+    box-shadow: none;
+    color:  #000;
+    border: none;
+}
+#pagedevisu a.lien_pagination.no:hover {
+	background-color: #000;
+	color: #fff;
+}
+#pagedevisu a.lien_pagination.encours {
+    font-weight: bold;
+    background-color:#000 ;
+    border: 2px solid #000;
+    box-shadow: 1px 3px 3px #999;
+    color: #fff;
+}
+.chapo {
+	font-size: 1.3em;
+	font-weight: 300;
+	line-height: 1.2em;
+	font-family: Merriweather;
+	margin-bottom: 10px;
+}
+.chapo p {
+	margin:  0;
+}
+.chapo span {
+	margin-bottom: 10px;
+}
+
+@media (max-width: 991px) {
+	#pagedevisu .question .formulaire_spip li img{
+	   	max-height:  100px;
+	}
+	#pagedevisu .question .formulaire_spip li{
+	   	height:  100px;
+	}
+}
+@media (max-width: 1200px) {
+	#pagedevisu .question .formulaire_spip li{
+	   	height:  159px;
+	}
+	#pagedevisu .question .formulaire_spip li img{
+	   	max-height:  159px;
+	}
+}

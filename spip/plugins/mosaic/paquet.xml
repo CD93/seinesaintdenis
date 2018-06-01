@@ -1,0 +1,30 @@
+<paquet
+	prefix="mosaic"
+	categorie="multimedia"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.19;3.0.*]"
+	logo=""
+	documentation=""
+	schema="1.0.0" 
+>
+	<!--
+		Paquet genere le 2015-11-30 15:14:05
+	-->
+
+	<nom>mosaique</nom>
+
+	<auteur>samuel</auteur>
+
+	<licence>GNU/GPL</licence>
+	<necessite nom="saisies"  compatibilite="[1.24.0;]" /> 
+
+
+	<pipeline nom="autoriser" inclure="mosaic_autorisations.php" /> 
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/mosaic.php" /> 
+	<pipeline nom="declarer_tables_interfaces" inclure="base/mosaic.php" /> 
+
+	<menu nom="mosaics" titre="mosaic:titre_mosaics" parent="menu_edition" icone="images/mosaic-16.png" action="mosaics" /> 
+	<menu nom="mosaic_creer" titre="mosaic:icone_creer_mosaic" parent="outils_rapides" icone="images/mosaic-new-16.png" action="mosaic_edit" parametres="new=oui" /> 
+</paquet>

@@ -1,0 +1,25 @@
+<B_lesdossier>
+
+	#ANCRE_PAGINATION
+	<BOUCLE_lesdossier(ARTICLES){id_rubrique}{pagination 10}{!par date}>
+
+	[(#COMPTEUR_BOUCLE|moins{1}|modulo{2}|=={0}|?{' ',''})<div class="row">]
+		<div class="col-md-12">
+		<BOUCLE_motart(MOTS){id_article}{type='emag - type d information'}>
+			#SET{type,#TITRE}
+			#SET{desc,#DESCRIPTIF*}
+		</BOUCLE_motart>
+		
+			<a href="#URL_ARTICLE">#LOGO_ARTICLE</a>
+			<h4><a href="#URL_ARTICLE">#TITRE</a></h4>
+			[(#DESCRIPTIF*|typo)]<BOUCLE_type(MOTS){id_groupe=3}{id_article}>
+			[(#ID_MOT|=={3}|?{///&nbsp;<span class="glyphicon glyphicon-facetime-video"></span>})]
+		 	</BOUCLE_type>
+		</div>
+	[(#COMPTEUR_BOUCLE|=={#GRAND_TOTAL}|?{' ',''})</div><div class="col-md-12"></div><hr class="sepacool"/>]	
+	[(#COMPTEUR_BOUCLE|moins{1}|modulo{2}|=={1}|?{' ',''})</div><hr class="sepacool"/>]	
+	</BOUCLE_lesdossier>
+	<div class="pagination col-md-24">
+		#PAGINATION
+	</div>
+</B_lesdossier>

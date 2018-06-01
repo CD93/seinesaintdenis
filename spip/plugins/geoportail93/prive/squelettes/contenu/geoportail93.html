@@ -1,0 +1,46 @@
+[(#AUTORISER{voir,geoportail93,#ID_GEOPORTAIL93}|sinon_interdire_acces)]
+<BOUCLE_geoportail93(GEOPORTAIL93S){id_geoportail93}{si #ENV{exec}|=={geoportail93}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,geoportail93,#ID_GEOPORTAIL93})
+		[(#ID_GEOPORTAIL93|afficher_qui_edite{geoportail93}|non)
+			[(#URL_ECRIRE{geoportail93_edit,id_geoportail93=#ID_GEOPORTAIL93}|icone_verticale{<:geoportail93:icone_modifier_geoportail93:>,geoportail93,edit,right ajax preload})]
+		]
+		[(#ID_GEOPORTAIL93|afficher_qui_edite{geoportail93}|oui)
+			[(#URL_ECRIRE{geoportail93_edit,id_geoportail93=#ID_GEOPORTAIL93}|icone_verticale{#ID_GEOPORTAIL93|afficher_qui_edite{geoportail93},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#ID_ELEMENT_COUCHE_GEOPORTAIL|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{geoportail93-24.png}|balise_img{geoportail93,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{geoportail93,#ID_GEOPORTAIL93}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/geoportail93,id=#ID_GEOPORTAIL93,id_geoportail93=#ID_GEOPORTAIL93,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,geoportail93,#ID_GEOPORTAIL93})
+	[(#ID_GEOPORTAIL93|afficher_qui_edite{geoportail93}|non)
+		[(#URL_ECRIRE{geoportail93_edit,id_geoportail93=#ID_GEOPORTAIL93}|icone_verticale{<:geoportail93:icone_modifier_geoportail93:>,geoportail93,edit,right ajax preload})]
+	]
+	[(#ID_GEOPORTAIL93|afficher_qui_edite{geoportail93}|oui)
+		[(#URL_ECRIRE{geoportail93_edit,id_geoportail93=#ID_GEOPORTAIL93}|icone_verticale{#ID_GEOPORTAIL93|afficher_qui_edite{geoportail93},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,geoportail93,id,#ID_GEOPORTAIL93},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin,#extra');/*\\]\\]>*/</script>
+]
+</BOUCLE_geoportail93>
+[(#ENV**{exec}|=={geoportail93_edit}|?{#INCLURE{fond=prive/squelettes/contenu/geoportail93_edit,redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_geoportail93>

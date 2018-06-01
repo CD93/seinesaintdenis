@@ -1,0 +1,7 @@
+<composition>
+	<nom>Rubrique Agenda COP 21</nom>
+	<description>Composition pour rubriques Agenda COP 21</description>
+	<icon>images/objet-liste-contenus-dates.png</icon>
+	<branche type="article" composition="agendacop21" />
+	<branche type="rubrique" composition="agendacop21" />
+</composition>

@@ -1,0 +1,14 @@
+#SET{debut_artquiz,#ENV{debut_artquiz}|plus{1}}
+<div class="formulaire_spip formulaire_quiz_libre">
+[<div class='reponse_formulaire reponse_formulaire_ok'><h3>(#ENV*{message_ok})</h3></div>]
+[(#ENV{editform}|=={oui}|?{" ",""})
+	<form action='[(#ENV{action}|parametre_url{'debut_artquiz',#GET{debut_artquiz,1}})]' method='post' role="form" name="formulaire_quiz_libre">
+		#ACTION_FORMULAIRE{#ENV{action},#FORM}
+		<div class="form-group">
+			<input type="text" class="form-control" id="reponse" name="reponse" placeholder="votre réponse" />
+			<input type="submit" class="fleche_valider" name="valider" value="Valider" />
+			<input type="hidden" value="non" name="editform" />
+		</div>
+</form>
+]
+</div>

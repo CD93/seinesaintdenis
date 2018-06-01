@@ -1,0 +1,33 @@
+<paquet
+	prefix="geoportail93"
+	categorie="divers"
+	version="1.0.4"
+	etat="dev"
+	compatibilite="[3.0.19;3.1.*]"
+	logo=""
+	documentation=""
+>
+	<!--
+		Paquet genere le 2015-10-30 17:20:16
+	-->
+
+	<nom>Geoportail93</nom>
+
+	<auteur>damien</auteur>
+
+	<licence>GNU/GPL</licence>
+	<necessite nom="saisies"  compatibilite="[1.24.0;]" /> 
+
+
+	<pipeline nom="autoriser" inclure="geoportail93_autorisations.php" /> 
+
+	<pipeline nom="declarer_tables_objets_sql" inclure="base/geoportail93.php" /> 
+	<pipeline nom="declarer_tables_interfaces" inclure="base/geoportail93.php" /> 
+	<pipeline nom="declarer_tables_auxiliaires" inclure="base/geoportail93.php" /> 
+	<pipeline nom="affiche_milieu" inclure="geoportail93_pipelines.php" /> 
+	<pipeline nom="optimiser_base_disparus" inclure="geoportail93_pipelines.php" /> 
+    <pipeline nom="jqueryui_plugins" inclure="geoportail93_pipelines.php" />
+    
+	<menu nom="geoportail93s" titre="geoportail93:titre_geoportail93s" parent="menu_edition" icone="images/geoportail93-16.png" action="geoportail93s" /> 
+	<menu nom="geoportail93_creer" titre="geoportail93:icone_creer_geoportail93" parent="outils_rapides" icone="images/geoportail93-new-16.png" action="geoportail93_edit" parametres="new=oui" /> 
+</paquet>

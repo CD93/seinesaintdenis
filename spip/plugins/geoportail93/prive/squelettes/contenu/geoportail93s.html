@@ -1,0 +1,8 @@
+#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
+<div class="nettoyeur"></div>
+
+<INCLURE{fond=prive/objets/liste/geoportail93s, par=id_element_couche_geoportail, env, ajax, sinon=<:geoportail93:info_aucun_geoportail93:>}>
+
+[(#AUTORISER{creer,geoportail93})
+	[(#URL_ECRIRE{geoportail93_edit,new=oui}|icone_verticale{<:geoportail93:icone_creer_geoportail93:>,geoportail93,new,right})]
+]

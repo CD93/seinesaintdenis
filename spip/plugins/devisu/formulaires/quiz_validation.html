@@ -1,0 +1,16 @@
+<div class="ajax">
+	<div class="formulaire_spip formulaire_quiz_validation">
+		[<div class='reponse_formulaire reponse_formulaire_ok'><h3>(#ENV*{message_ok})</h3></div>]
+		<BOUCLE_cond(CONDITION){si #ENV{editform}|=={oui}}>
+		<p>Merci de votre participation, pour participer au tirage au sort et avoir une chance de gagner les lots mis en jeu, laissez-nous votre adresse e-mail !</p>
+		<form action='#ENV{action}' method='post' role="form" name="formulaire_quiz_validation">
+			#ACTION_FORMULAIRE{#ENV{action},#FORM}
+			<div class="form-group">
+				<input type="email" id="email" name="email" value="#SESSION{email}" />
+				<input type="submit" class="devisu_validation" value="Participer"/>
+				<input type="hidden" value="non" name="editform" />
+			</div>
+		</form>
+		</BOUCLE_cond>
+	</div>
+</div>

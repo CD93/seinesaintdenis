@@ -1,0 +1,41 @@
+[(#SESSION{id_auteur}|oui)
+<div class="no-ajax">
+	<div class="formulaire_spip formulaire_quiz_validation">
+		[<div class='reponse_formulaire reponse_formulaire_ok'><h3>(#ENV*{message_ok})</h3></div>]
+		<p><strong>Quand vous avez fini de jouer, n'oubliez pas d'enregistrer votre progression.</strong></p>
+		<form action='#ENV{action}' method='post' role="form" name="formulaire_quiz_validation" class="form-inline">
+			#ACTION_FORMULAIRE{#ENV{action},#FORM}
+			<div class="form-group">
+				<input type="submit" class="devisu_enregistrer" value="Enregistrer" />
+				<input type="hidden" value="#SESSION{id_auteur}" name="id_auteur"/>
+				<input type="hidden" value="non" name="editform" />
+			</div>
+		</form>
+	</div>
+</div>
+]
+[(#SESSION{id_auteur}|non)
+<p>D&eacute;j&agrave; inscrit, connectez-vous pour pouvoir enregistrer votre progression et valider votre questionnaire.</p>
+<button type="button" id="btninscriptquiz" class="btn btn-default acti">Inscription</button>
+<button type="button" id="btnloginquiz" class="btn btn-default">D&eacute;j&agrave; inscrit</button>
+
+<div id="loginquiz">#LOGIN_PUBLIC{#SELF?debut_artquiz=1}</div>
+<div id="inscriptquiz">#FORMULAIRE_INSCRIPTION</div>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#loginquiz").hide();
+		$("#btnloginquiz").click(function() {
+			$("#loginquiz").show();
+			$("#inscriptquiz").hide();
+			$("#btnloginquiz").addClass("acti");
+			$("#btninscriptquiz").removeClass("acti");
+		});
+		$("#btninscriptquiz").click(function() {
+			$("#loginquiz").hide();
+			$("#inscriptquiz").show();
+			$("#btnloginquiz").removeClass("acti");
+			$("#btninscriptquiz").addClass("acti");
+		});
+	});
+</script>
+]

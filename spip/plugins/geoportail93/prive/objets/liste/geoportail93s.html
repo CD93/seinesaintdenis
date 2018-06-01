@@ -1,0 +1,37 @@
+[(#SET{defaut_tri,#ARRAY{
+	id_element_couche_geoportail,1, 
+	date,-1, 
+	id_geoportail93,1,
+	points,-1
+}})]<B_liste_geoportail93s>
+#ANCRE_PAGINATION
+<div class="liste-objets geoportail93s">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{geoportail93:info_1_geoportail93,geoportail93:info_nb_geoportail93s}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='id_element_couche_geoportail' scope='col'>[(#TRI{id_element_couche_geoportail,<:geoportail93:champ_id_element_couche_geoportail_label:>,ajax})]</th>
+			<th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th> 
+			<th class='id' scope='col'>[(#TRI{id_geoportail93,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_geoportail93s(GEOPORTAIL93S){id_couche_geoportail?}{id_element_couche_geoportail?}{id_mot?}{id_auteur?}{where?}{recherche?}{tri #ENV{par,num id_element_couche_geoportail},#GET{defaut_tri}}{par id_element_couche_geoportail}{pagination #ENV{nb,10}}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='picto'>[(#CHEMIN_IMAGE{geoportail93-16.png}|balise_img)]</td>
+			<td class='id_element_couche_geoportail principale'>[(#LOGO_GEOPORTAIL93|image_reduire{20,26})]<a href="[(#ID_GEOPORTAIL93|generer_url_entite{geoportail93})]" title="<:info_numero_abbreviation|attribut_html:> #ID_GEOPORTAIL93">[(#RANG). ]#ID_ELEMENT_COUCHE_GEOPORTAIL</a></td>
+			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td> 
+			<td class='id'>[(#AUTORISER{modifier,geoportail93,#ID_GEOPORTAIL93}|?{
+				<a href="[(#URL_ECRIRE{geoportail93_edit,id_geoportail93=#ID_GEOPORTAIL93})]">#ID_GEOPORTAIL93</a>,
+				#ID_GEOPORTAIL93
+			})]</td>
+		</tr>
+	</BOUCLE_liste_geoportail93s>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_geoportail93s>[
+<div class="liste-objets geoportail93s caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_geoportail93s>

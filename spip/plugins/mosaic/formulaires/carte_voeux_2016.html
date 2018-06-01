@@ -1,0 +1,190 @@
+
+[<script src="(#CHEMIN{js/jquery.Jcrop.min.js})" type="text/javascript"></script>]
+	<div class="formulaire_spip formulaire_#FORM" id="formulaire_carte_voeux">
+		[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+		[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+		[(#ENV{editable})
+		<form method="post" action="#ENV{action}" role="form" id="formvoeux" enctype="multipart/form-data">
+		<center>
+			<div>
+				#ACTION_FORMULAIRE{#ENV{action}}
+				<button id="chargerimg" class="seul">je choisis ma photo</button>
+				<input type="file" id="imageLoader" name="imageLoader"/>
+				<canvas id="imageCanvas" style="display: none;"></canvas>
+					<div class="[(#ENV**{erreurs}|table_valeur{email}|oui)erreur] suiteform">
+						[
+							<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{email})</span>
+						]<input type='text' class='text form-control' id='email' name='email' placeholder="votre email" value='#ENV*{email}' />
+						<p id="caseaut">
+						
+						<label class="checkbox-inline">
+						<input type="checkbox" name="autho" value="oui" checked="checked" required
+						onchange="this.setCustomValidity(validity.valueMissing ? 'Vous devez accepter les conditions pour participer à la mosa&iuml;que' : '');"
+						> J&rsquo;autorise l&rsquo;utilisation des photographies r&eacute;alis&eacute;es pour la "mosa&iuml;que" du D&eacute;partement de la Seine-Saint-Denis, sur tous les supports de communication du Conseil d&eacute;partemental dans le cadre de la campagne des v&oelig;ux 2016.</label>
+						</p>
+					</div>
+				<input type="hidden" id="x1" name="x1" value="x1" />
+				<input type="hidden" id="y1" name="y1" value="y1" />
+				<input type="hidden" id="x2" name="x2" value="x2" />
+				<input type="hidden" id="y2" name="y2" value="y2" />
+				<input type="hidden" id="w" name="w" value="w" />
+				<input type="hidden" id="h" name="h" value="h" />
+				<input type="hidden" id="base64" name="base64" value="base64" />
+				
+				<p class='suiteform' id="envoyer">
+				[(#CONFIG{mosaic/apriori}|oui) <strong style="color: white;"><big>Votre photo ne sera publi&eacute;e qu'apr&egrave;s validation du D&eacute;partement.</big></strong>]
+				<input type='submit' class='submit' name='envoyer' value="j'envoie ma photo" />
+				</p>
+			</div>
+		</center>
+		</form>
+		]
+	</div>
+
+<script>
+	
+	
+	var image;
+	var imageWidth, imageHeight;
+	var canvas, ctx;
+	var canvas = document.getElementById('imageCanvas');
+	var ctx = canvas.getContext('2d');
+	$(document).ready(function(){
+		$('#imageLoader').hide();
+		$('.suiteform').hide();
+		$("#tourner").click(function(){
+			rotation();
+			return false;
+		});
+		$("#chargerimg").click(function(){
+			$('#imageLoader').click();
+			$("#chargerimg").attr('class', 'passeul');
+			$('.suiteform').show();
+			return false;
+		});
+		var fini = 0;
+		var jcrop_api;
+		var imageLoader = document.getElementById('imageLoader');
+	    imageLoader.addEventListener('change', handleImage, false);
+		
+		var imageWidth = canvas.width ;
+		var imageHeight = canvas.height;
+
+	});
+	function initJcrop(){
+	$('#imageCanvas').Jcrop({
+	        onSelect:   showCoords,
+	        bgOpacity: 0.25,
+	        bgColor: 'white',
+	        aspectRatio: 1,
+	        minSize: [ 200,200 ],
+	        setSelect: [10, 10, 200, 200]
+	      });
+	 };	
+	function showCoords(c) {
+	  $('#x1').val(c.x);
+	  $('#y1').val(c.y);
+	  $('#x2').val(c.x2);
+	  $('#y2').val(c.y2);
+	  $('#w').val(c.w);
+	  $('#h').val(c.h);
+	};
+	function rotation(){
+		var image = new Image()
+		// inversion L et H
+		var l = canvas.width;	// L = ancienne Hauteur
+		var h = canvas.height;// H = ancienne Largeur
+		// nouvelle taille du canvas
+	  	canvas.width  = h;
+	 	canvas.height = l;
+	 	ctx.translate(h, 0);
+	 	ctx.rotate(Math.PI / 2);  // 90° par défaut
+		// toujours le bug sous IOS
+		drawImageIOSFix(ctx, image, l/2*-1+l/2, 0, l, h);
+
+		// Canvas vers Image via base 64
+		image.src = $('#base64').val();	
+		}
+	function handleImage(i, e){
+	    var initial=0;
+	    var tab_fichier = document.getElementById('imageLoader').files;
+		var f = tab_fichier[0];
+			if(f.type.indexOf('image/jpeg') == -1 && f.type.indexOf('image/png') == -1 && f.type.indexOf('image/gif') == -1) {
+			alert('Fichiers JPG, PNG ou GIF uniquement :'+"\n"+'fichier '+f.type+' fourni');
+			return false;
+		}
+		var maxWidth = 1000;
+		var	maxHeight = 1000;
+		var reader = new FileReader();
+	    reader.onload = function(event){
+	        var image = new Image();
+	        image.src = reader.result;
+	        image.onload = function(){
+	            var imageWidth = image.width;
+	            var imageHeight  = image.height;
+	            if(imageWidth > imageHeight && imageWidth > maxWidth)
+						{
+							imageHeight*= maxWidth / imageWidth;
+							imageWidth  = maxWidth;
+
+							imageWidth = Math.round(imageWidth);
+							imageHeight= Math.round(imageHeight);
+						}
+	            else if (imageWidth <= imageHeight && imageWidth > maxWidth)
+						{
+							imageWidth *= maxHeight / imageHeight;
+							imageHeight = maxHeight;
+
+							imageWidth = Math.round(imageWidth);
+							imageHeight= Math.round(imageHeight);
+						}
+
+	            canvas.width = imageWidth;
+	            canvas.height = imageHeight;
+
+				drawImageIOSFix(ctx, this, 0, 0, imageWidth, imageHeight);
+
+	            $("#imageCanvas").show();
+	            initJcrop();
+   				img_base64 = canvas.toDataURL(f.type);
+   				$('#base64').val(img_base64);
+
+	        }
+	        image.src = event.target.result;
+
+	    }
+	    reader.readAsDataURL(f);     
+	}
+	
+	function drawImageIOSFix(ctx, img) {
+		var vertSquashRatio = detectVerticalSquash(img);
+		var arg_count = arguments.length;
+		switch (arg_count) {
+			case 4  : ctx.drawImage (img, arguments[2], arguments[3] / vertSquashRatio); break
+			case 6  : ctx.drawImage (img, arguments[2], arguments[3], arguments[4], arguments[5] / vertSquashRatio); break
+			case 8  : ctx.drawImage (img, arguments[2], arguments[3], arguments[4], arguments[5], arguments[6], arguments[7] / vertSquashRatio); break
+			case 10 : ctx.drawImage (img, arguments[2], arguments[3], arguments[4], arguments[5], arguments[6], arguments[7], arguments[8], arguments[9] / vertSquashRatio); break
+		}
+		// Detects vertical squash in loaded image.
+		// Fixes a bug which squash image vertically while drawing into canvas for some images.
+		// This is a bug in iOS6 (and IOS7) devices. This function from https://github.com/stomita/ios-imagefile-megapixel
+		function detectVerticalSquash(img) {
+			var iw = img.naturalWidth, ih = img.naturalHeight;
+			var canvas = document.createElement ("canvas");
+			canvas.width  = 1;
+			canvas.height = ih;
+			var ctx = canvas.getContext('2d');
+			ctx.drawImage (img, 0, 0);
+			var data = ctx.getImageData(0, 0, 1, ih).data;
+			// search image edge pixel position in case it is squashed vertically.
+			var sy = 0, ey = ih, py = ih;
+			while (py > sy) {
+				var alpha = data[(py - 1) * 4 + 3];
+				if (alpha === 0) {ey = py} else {sy = py};
+				py = (ey + sy) >> 1
+			}
+			var ratio = (py / ih);
+			return (ratio === 0) ? 1 : ratio;
+		}
+	}
+	</script>

@@ -1,0 +1,274 @@
+<link rel="stylesheet" href="#CHEMIN{lib/leaflet/leaflet.css}" ></link>
+<link rel="stylesheet" href="#CHEMIN{lib/leaflet/plugins/leaflet.fullscreen.css}" ></link>
+[<link rel="stylesheet" href="(#CHEMIN{css/cartetrav.css})" type="text/css" />]
+<link rel="stylesheet" href="#CHEMIN{lib/leaflet/plugins/Leaflet.markercluster/dist/MarkerCluster.css}" ></link>
+<link rel="stylesheet" href="#CHEMIN{lib/leaflet/plugins/Leaflet.markercluster/dist/MarkerCluster.Default.css}" ></link>
+<link rel="stylesheet" href="#CHEMIN{lib/leaflet/plugins/Leaflet.defaultextent/dist/leaflet.defaultextent.css}" ></link>
+<link rel="stylesheet" href="#CHEMIN{lib/leaflet/plugins/leaflet-fusesearch-master/src/leaflet.fusesearch.css}" ></link>
+
+<script src="#CHEMIN{lib/leaflet/leaflet.js}" type="text/javascript"></script>
+<script src="#CHEMIN{lib/leaflet/plugins/leaflet.snogylop.js}" type="text/javascript"></script>
+<script src="#CHEMIN{lib/leaflet/plugins/Leaflet.fullscreen.min.js}" type="text/javascript"></script>
+<script src="#CHEMIN{lib/leaflet/plugins/SliderControl.js}" type="text/javascript"></script>
+<script src="#CHEMIN{lib/leaflet/plugins/Leaflet.markercluster/dist/leaflet.markercluster.js}" type="text/javascript"></script>
+<script src="#CHEMIN{lib/leaflet/plugins/Leaflet.defaultextent/dist/leaflet.defaultextent.js}" type="text/javascript"></script>
+<script src="#CHEMIN{lib/leaflet/plugins/Leaflet.FeatureGroup.SubGroup/leaflet.featuregroup.subgroup.js}" type="text/javascript"></script>
+<script src="#CHEMIN{lib/jquery.ui.touch-punch.min.js}" type="text/javascript"></script>
+
+<script src="#CHEMIN{lib/Fuse-master/src/fuse.min.js}" type="text/javascript"></script>
+<script src="#CHEMIN{lib/leaflet/plugins/leaflet-fusesearch-master/src/leaflet.fusesearch.js}" type="text/javascript"></script>
+
+<style>
+#logoPAC{
+	position: absolute; 
+	top:  21px; 
+	left: 60px; 
+	height: 127px; 
+	width: 111px;
+	z-index: 5000;
+	//border: 1px solid #888;
+}	
+</style>
+<div>
+	<!--
+	<div id="logoPAC">
+		<img src="#CHEMIN{images/logo-PAC.png}" alt="" /> 
+	</div>
+	-->
+	<div tabindex="0" class="map leaflet-container leaflet-fade-anim" id="maptrav" style="width: 100%; height: 925px; position: relative;"></div>
+</div>
+
+<script>
+    $(document).ready(function () {
+		var maptrav = L.map('maptrav',{scrollWheelZoom:false,zoomControl:true,opacity:0.5,fullscreenControl: true}).setView([48.90903,2.45506 ], 12);
+		//var mapbox = L.tileLayer('https://api.mapbox.com/styles/v1/guillaume93/cisiwudlv00202yjm5s8s5fyc/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZ3VpbGxhdW1lOTMiLCJhIjoiY2lrcXYwcnowMDAxOXcwbTJrMmRpdG44YSJ9.sCawV-4lhUJ0cM3ObR9hAA');
+		var mapbox = L.tileLayer('https://api.mapbox.com/styles/v1/samuelgodo/citffy63100452ipte4tryk3z/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2FtdWVsZ29kbyIsImEiOiJybVppYVBVIn0.S9oz7e1I5yfvYJuPhrVAyw');
+		//var mapbox = L.tileLayer('https://api.mapbox.com/styles/v1/samuelgodo/cisj0v4ip00ba2xpbn01pu7fp/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2FtdWVsZ29kbyIsImEiOiJybVppYVBVIn0.S9oz7e1I5yfvYJuPhrVAyw');
+		//var osm = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: mbAttr, maxZoom: 18});
+		var bigmapheight = 650;
+			  	var smallmapheight = 300;
+			  	var mapbreakwidth = 720;
+			  	var highzoom = 8;
+			  	var lowzoom = 7;
+			  	var initzoom;
+				//Set initial mapheight, based on the calculated width of the map container
+				if ($("#map").width() > mapbreakwidth) {
+					initzoom = highzoom;
+					$("#map").height(bigmapheight);
+				}
+				else {
+					initzoom = lowzoom;
+					$("#map").height(smallmapheight);
+				};
+		maptrav.on('resize', function(e) {
+				  	if (e.newSize.x < 720) {
+						maptrav.setZoom(11);
+					};
+					if (e.newSize.x > 720) {
+						matrav.setZoom(12);
+					};
+				  });
+		mapbox.addTo(maptrav);
+		var Travaux = L.featureGroup().addTo(maptrav); // feature group ou on va inserer les travaux
+		var fondCD = L.featureGroup().addTo(maptrav); // feature group ou on va inserer les fonds de cartes
+		var geojsonA,geojsonB,geojsonC,geojsonD,geojson31,geojson32,geoJsonA;
+		var ei,ne,nas,pa;
+		var decal = -75;
+		var picto_ei = L.icon({
+			iconUrl: '#CHEMIN{images/picto_parc1.png}',
+			iconSize: [30, 30],
+			iconAnchor: [-75, 0],
+			popupAnchor: [90, 0]
+		});
+		var picto_ne = L.icon({
+			iconUrl: '#CHEMIN{images/picto_parc3.png}',
+			iconSize: [30, 30],
+			iconAnchor: [-15, 0],
+			popupAnchor: [30, -15]	
+		});
+		var picto_nas = L.icon({
+			iconUrl: '#CHEMIN{images/picto_parc2.png}',
+			iconSize: [30, 30],
+			iconAnchor: [-45, 0],
+			popupAnchor: [60, -15]
+		});
+		var picto_pa = L.icon({
+			iconUrl: '#CHEMIN{images/picto_parc4.png}',
+			iconSize: [30, 30],
+			iconAnchor: [-75, 0],
+			popupAnchor: [90, -15]
+		});
+		var gvalbon = L.icon({
+			iconUrl: '#CHEMIN{images/drapeau_parc_valbon.png}',
+			iconSize: [82, 100],
+			iconAnchor: [0, 80],
+			popupAnchor: [30, 30]
+		});
+		var sausset = L.icon({
+			iconUrl: '#CHEMIN{images/drapeau_parc_sausset.png}',
+			iconSize: [97, 100],
+			iconAnchor: [0, 80],
+			popupAnchor: [30, 30]
+		});
+		var guilands = L.icon({
+			iconUrl: '#CHEMIN{images/drapeau_parc_guilands.png}',
+			iconSize: [108, 100],
+			iconAnchor: [0, 80],
+			popupAnchor: [30, 30]
+		});
+		var bergere = L.icon({
+			iconUrl: '#CHEMIN{images/drapeau_parc_bergere.png}',
+			iconSize: [94, 100],
+			iconAnchor: [0, 80],
+			popupAnchor: [30, 30]
+		});
+		var poudrerie = L.icon({
+			iconUrl: '#CHEMIN{images/drapeau_parc_poudrerie.png}',
+			iconSize: [108, 100],
+			iconAnchor: [0, 80],
+			popupAnchor: [30, 30]
+		});
+		var hauteile = L.icon({
+			iconUrl: '#CHEMIN{images/drapeau_parc_hauteile.png}',
+			iconSize: [102, 100],
+			iconAnchor: [0, 80],
+			popupAnchor: [30, 30]
+		});
+		var ilesaintdenis = L.icon({
+			iconUrl: '#CHEMIN{images/drapeau_parc_ilesaintdenis.png}',
+			iconSize: [99, 100],
+			iconAnchor: [0, 80],
+			popupAnchor: [30, 30]
+		});
+		var maussoin = L.icon({
+			iconUrl: '#CHEMIN{images/drapeau_parc_maussoin.png}',
+			iconSize: [85, 100],
+			iconAnchor: [0, 80],
+			popupAnchor: [30, 30]
+		});
+		//on ajoute la limite départementale
+		
+		$.getJSON("https://geoportail93.fr/SERV/DATA/?LAYERS=1049&FORMAT=geojson&SERVICE=wfs&SRS=4326&COL=all&FILTRE=depart%20LIKE%20%27SEINE-SAINT-DENIS%%27", function (geoJson1) {
+		    geojson1 = L.geoJson(geoJson1, {
+		    	style: { color: "#FFF", fillColor: "#fff", weight: 1, fillOpacity:0.9, clickable: false },
+		    	invert: true,
+		    	worldLatLngs: [ L.latLng([90, 360]), L.latLng([90, -180]), L.latLng([-90, -180]), L.latLng([-90, 360]) ]
+		    }).addTo(fondCD); 
+		  	});
+		//on ajoute les limites communales
+		/*
+		$.getJSON("https://geoportail93.fr/SERV/DATA/?LAYERS=1458&FORMAT=geojson&SERVICE=wfs&SRS=4326&COL=all&FILTRE=depart%20LIKE%20%27SEINE-SAINT-DENIS%%27", function (geoJson2) {
+		    geojson2 = L.geoJson(geoJson2, {
+		    	style: { color: "#C0DBD9", weight: 2, opacity: 0.8, fill: false, clickable: false }
+		    }).addTo(fondCD);
+		});
+		*/
+		// les Parcs 
+		$.getJSON("https://geoportail93.fr/SERV/DATA/?LAYERS=1166&FORMAT=geojson&SERVICE=wfs&SRS=4326&COL=id", function (geoJson2) {
+		    geojson2 = L.geoJson(geoJson2, {
+		    	style: { color: "#6ED153", fillColor: "#6ED153", weight: 1, opacity: 0.9,fillOpacity:0.5, clickable: false }
+		    }).addTo(fondCD);
+		});
+		
+		// appelle global
+		var points = $.getJSON("https://test.geoportail93.fr/SERV/DATA/?TYPENAME=1581&FORMAT=GEOJSON&SERVICE=wfs&SRS=4326&COL=descriptif&AGREGE=ARRAY&GROUP=geom,theme,nomespacev");
+		points.then(function(data) {
+			// ESPACES INITIATIVE
+			var ei =L.geoJson(data,{
+			    	filter: function (feature, layer) {
+			    		if (feature.properties.theme =="ESPACES D'INITIATIVES"){
+			    		return true;
+			    		}
+			    	},
+			    	pointToLayer: function (feature, latlng) {
+			    		return L.marker(latlng, {
+			    			icon: picto_ei
+			    		});
+			    	},onEachFeature: bindPopup
+			    }).addTo(Travaux);
+			//  NOUVEAUX EQUIPEMENTS   
+			var ne =L.geoJson(data,{
+			    	filter: function (feature, layer) {
+			    		if (feature.properties.theme =="NOUVEAUX EQUIPEMENTS")
+			    		{
+			    		return true;
+			    		}
+			    	},
+			    	pointToLayer: function (feature, latlng) {
+			    		return L.marker(latlng, {
+			    			icon: L.icon({
+			    					iconUrl: '#CHEMIN{images/picto_parc3.png}',
+			    					iconSize: [30, 30],
+			    					iconAnchor: [-45, 0],
+			    					popupAnchor: [60, 0]
+			    				})
+			    		});
+			    	},onEachFeature: bindPopup
+			    }).addTo(Travaux);
+			   // NOUVELLES ACTIVITES ET SERVICES
+			   var nas =L.geoJson(data,{
+			       	filter: function (feature, layer) {
+			       		if (feature.properties.theme =="NOUVELLES ACTIVITES ET SERVICES"){
+			       		return true;
+			       		}
+			       	},
+			       	pointToLayer: function (feature, latlng) {
+			       		return L.marker(latlng, {
+			       			icon: L.icon({
+			       					iconUrl: '#CHEMIN{images/picto_parc2.png}',
+			       					iconSize: [30, 30],
+			       					iconAnchor: [-15, 0],
+			       					popupAnchor: [30, 0]
+			       				})
+			       		});
+			       	},onEachFeature: bindPopup
+			       }).addTo(Travaux);
+			   // PROJET AMENAGEMENT    
+			  var pa =L.geoJson(data,{
+			      	filter: function (feature, layer) {
+			      		if (feature.properties.theme =="PROJETS D'AMENAGEMENT")return true;
+			      		
+			      	},
+			      	pointToLayer: function (feature, latlng) {
+			      		
+			      		return L.marker(latlng, {
+			      			icon: L.icon({
+			      				iconUrl: '#CHEMIN{images/picto_parc4.png}',
+			      				iconSize: [30, 30],
+			      				iconAnchor: [15, 0],
+			      				popupAnchor: [0, 0]
+			      			})
+			      		});
+			      	},onEachFeature: bindPopup
+			      }).addTo(Travaux);
+			  
+		});// fin de points.then
+				//pour chaque point à cliquer
+		function bindPopup (feature, layer) {
+		    feature.layer = layer;
+			//on lui fait afficher une popup lors d'un click	    
+			var arr = feature.properties;
+		    var popuptxt ="<div class='popupclust'><h3>"+ arr.theme +"</h3>";
+		    popuptxt +=  arr.nomespacev ;
+		    popuptxt +=  "<hr/>" ;
+			popuptxt +="<ul>";
+			for(var i in arr.descriptif)
+			{
+			     popuptxt += '<li class="point">' + arr.descriptif[i] + '</li>';
+			}
+			popuptxt +="</ul>";
+		    popuptxt += '</div>';
+		    layer.bindPopup(popuptxt);
+		}
+		
+		var valbon = L.marker([48.94648,2.40147], {icon: gvalbon}).addTo(Travaux);
+		var guilands = L.marker([48.86277,2.42631], {icon: guilands}).addTo(Travaux);
+		var bergere = L.marker([48.90293,2.45377], {icon: bergere}).addTo(Travaux);
+		var sausset = L.marker([48.96182,2.51047], {icon: sausset}).addTo(Travaux);
+		var hauteile = L.marker([48.85748,2.55974], {icon: hauteile}).addTo(Travaux);
+		var ilesaintdenis = L.marker([48.94824,2.31654], {icon: ilesaintdenis}).addTo(Travaux);
+		var maussoin = L.marker([48.90353,2.53672], {icon: maussoin}).addTo(Travaux);
+		var poudrerie = L.marker([48.93924,2.55606], {icon: poudrerie}).addTo(Travaux);
+
+	});
+</script>

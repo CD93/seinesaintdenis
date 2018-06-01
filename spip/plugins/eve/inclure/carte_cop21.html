@@ -1,0 +1,6 @@
+[(#CONFIG{eve/afftout}|=={oui}|ou{#CONFIG{eve/affune}|=={oui}}|ou{#CONFIG{eve/affcdv}|=={oui}}|ou{#CONFIG{eve/affeee}|=={oui}}|oui)
+	#SET{affcop,oui}
+]
+<BOUCLE_cop(RUBRIQUES){titre=COP 21}{si #GET{affcop}|=={oui}}>
+	<a class="eve" href="#URL_RUBRIQUE"><p>#DESCRIPTIF</p></a>
+</BOUCLE_cop>
