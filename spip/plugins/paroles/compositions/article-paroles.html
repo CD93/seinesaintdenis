@@ -26,7 +26,8 @@ background: -webkit-linear-gradient(left, #b5a694 0%,#e5d2bc 100%); /* Chrome10-
 background: linear-gradient(to right, #b5a694 0%,#e5d2bc 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b5a694', endColorstr='#e5d2bc',GradientType=1 );
 
-		border-top: 1px solid #938676;
+		border-top: 2px solid #938676;
+		border-bottom: 2px solid #938676;
 		font-family: 'PT_serif', georgia;
 	}
 	#paroles .container {
@@ -41,7 +42,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b5a694', end
 		font-size: 4em;
 		background-color: transparent;
 		color: #000;
-		padding: 20px 0 50px 0;
+		padding: 60px 0 50px 0;
 		margin:0;
 		text-align: left;
 	}
@@ -50,8 +51,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b5a694', end
 		font-size: 2.3em;
 		background-color: transparent;
 		color: #000;
-
-		margin:0;
+		margin:21px 0 0 0;
 		text-align: left;
 	}
 	#paroles h4 {
@@ -100,13 +100,22 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b5a694', end
 	display: inline-block;
 	padding-left: 20px;
 }
-.printmail .reseausoc .texte span {
-	font-family: 'PT_serif', georgia;
-	color:#000;
-	text-transform: none;
+.printmail.reseausoc {
+	opacity: 0.8;
 }
-.printmail .reseausoc .texte {
-	border-bottom: 1px solid #e5d2bc;
+.printmail.reseausoc .texte {
+	border: none;
+}
+
+.printmail.reseausoc .texte span {
+	display: none;
+}
+.printmail a, .printmail button {
+    filter: grayscale(100%);
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
 }
 </style>
 </head>
