@@ -1,0 +1,137 @@
+<BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
+<!DOCTYPE html>
+[(#REM) Cf.: http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+]<!--[if lt IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie6"> <![endif]-->
+<!--[if IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie7"> <![endif]-->
+<!--[if IE 8 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie8"> <![endif]-->
+<!--[if IE 9 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js"> <!--<![endif]-->
+<head>
+<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+<title>[(#NOM_SITE_SPIP|textebrut)][ / (#TITRE_PARENT|textebrut)][ / (#TITRE|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
+<INCLURE{fond=inc/head} />
+<link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet">
+<style>
+@font-face {
+	font-family: "PT_Serif";
+	src: url("PT_Serif-Web-Regular.ttf") format("ttf");
+}
+	#paroles{
+		font-size: 1.2em;
+		/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#b5a694+0,e5d2bc+100 */
+background: #b5a694; /* Old browsers */
+background: -moz-linear-gradient(left, #b5a694 0%, #e5d2bc 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(left, #b5a694 0%,#e5d2bc 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to right, #b5a694 0%,#e5d2bc 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b5a694', endColorstr='#e5d2bc',GradientType=1 );
+
+		border-top: 1px solid #938676;
+		font-family: 'PT_serif', georgia;
+	}
+	#paroles .container {
+		max-width: 970px;
+	}
+	#paroles h1 {
+		font-family: 'Amatic SC', Georgia, cursive;
+		font-size: 5em;
+	}
+	#paroles h2 {
+		font-family: 'Amatic SC', Georgia, cursive;
+		font-size: 4em;
+		background-color: transparent;
+		color: #000;
+		padding: 20px 0 50px 0;
+		margin:0;
+		text-align: left;
+	}
+	#paroles h4 {
+		font-family: 'Amatic SC', Georgia, cursive;
+		font-size: 3em;
+		background-color: transparent;
+		color: #fff;
+		padding: 0;
+		margin:0;
+		text-align: left;
+	}
+	#paroles .chapoune {
+		font-family: 'PT_serif', georgia;
+		padding-left: 20px;
+		border-left: 1px solid #938676;
+		margin: 20px 0;
+	}
+	#paroles hr {
+		text-align: center;
+		width: 200px;
+		margin: 20px auto;
+	}
+	#paroles .gbouton{
+		border: 1px solid #938676;
+		margin-bottom: 30px;
+	}
+	#paroles .corps {
+    height: auto;
+    overflow: hidden;
+		padding: 10px;
+}
+</style>
+</head>
+<body>
+<INCLURE{fond=inclure/menu} {env}/>
+<div class="main" id="pagerubrique">
+	<div class="contenu" id="paroles">
+		<div class="container">
+			<div class="col-md-24"> <!-- début dossier une  -->
+				<INCLURE{fond=inclure/bouton-impression}{env} />
+				<div class="corpsune">
+				<B_filariane>
+					<ol class="breadcrumb">
+					<BOUCLE_filariane(HIERARCHIE){id_rubrique}{tout}{si #PROFONDEUR|>{1}} >
+						<li><a href="#URL_RUBRIQUE">#TITRE</a></li>
+					</BOUCLE_filariane>
+					</ol>
+				</B_filariane>
+
+					<h1>#TITRE</h1>
+					[<div class="chapoune">
+
+						(#DESCRIPTIF)
+
+					</div>]
+					#TEXTE
+				</div>
+				<br class="break" />
+				<hr/>
+				<div class="row">
+
+				<h2>Les témoignages</h2>
+					<BOUCLE_tem(ARTICLES){enfants #ID_RUBRIQUE}{par num titre}>
+						<div class="col-md-12">
+						<a class="gbouton" href="#URL_ARTICLE">
+							<div class="artsuite_par2">
+								<div class="logoart">
+									<div class=""></div>
+									[(#LOGO_ARTICLE)]
+								</div>
+								<div class="corps">
+									<h4>#TITRE</h4>
+									#CHAPO
+								</div>
+							</div>
+						</a>
+						</div>
+						[(#COMPTEUR_BOUCLE|modulo{2}|=={0}|?{"<br class='break'/>"})]
+					</BOUCLE_tem>
+
+				</B_tem>
+				</div>
+				<INCLURE{fond=inclure/bouton-partage}{env} />
+			</div><!-- fin dossier une  -->
+
+		</div>
+	</div>
+</div>
+<INCLURE{fond=inclure/footer}{env} />
+</body>
+</html>
+</BOUCLE_rubrique>
