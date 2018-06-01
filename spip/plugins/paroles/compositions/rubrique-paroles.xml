@@ -1,0 +1,6 @@
+<composition>
+	<nom>Rubrique de l'exposition paroles d'invisibles</nom>
+	<description>Composition l'exposition paroles d'invisibles</description>
+	<icon>images/objet-liste-contenus-dates.png</icon>
+	<branche type="article" composition="paroles" />
+</composition>
