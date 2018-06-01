@@ -1,0 +1,30 @@
+[(#ID_OBJET|oui)
+	[(#AUTORISER{modifier,geoportail93,#ID_GEOPORTAIL93}|sinon_interdire_acces)]
+][(#ID_OBJET|non)
+	[(#AUTORISER{creer,geoportail93}|sinon_interdire_acces)]
+]
+ 
+#SET{redirect,#ENV{redirect}|sinon{#ID_GEOPORTAIL93|?{#ID_GEOPORTAIL93|generer_url_entite{geoportail93},#URL_ECRIRE{geoportail93s}}}}
+
+<div class='cadre-formulaire-editer'>
+<div class="entete-formulaire">
+	[(#ID_GEOPORTAIL93|oui)
+	[(#GET{redirect}|icone_verticale{Retour,geoportail93,'',left retour[(#ENV{retourajax,''}|oui)ajax preload]})]
+	]
+	[
+		[(#ID_GEOPORTAIL93|?{<:geoportail93:icone_modifier_geoportail93:>,<:geoportail93:icone_creer_geoportail93:>})]
+		<h1>(#ENV{titre,#INFO_ID_ELEMENT_COUCHE_GEOPORTAIL{geoportail93,#ID_GEOPORTAIL93}|sinon{<:info_sans_titre:>}})</h1>
+	]
+</div>
+
+#SET{redirect,#ENV{redirect,#ID_GEOPORTAIL93|generer_url_entite{geoportail93}}}
+[(#ENV{retourajax,''}|oui)
+	#SET{redirect,'javascript:if (window.jQuery) jQuery(".entete-formulaire .retour a").followLink();'}
+	<div class="ajax">
+]
+		[(#FORMULAIRE_EDITER_GEOPORTAIL93{#ENV{id_geoportail93,oui}, #GET{redirect}, #ENV{associer_objet}})]
+[(#ENV{retourajax,''}|oui)
+	</div>
+	<script type="text/javascript">/*<!\[CDATA\[*/reloadExecPage('#ENV{exec}');/*\]\]>*/</script>
+]
+</div>

@@ -1,0 +1,67 @@
+#CACHE{0}
+#HTTP_HEADER{Content-Type: text/html}
+
+#SET{liste,#ARRAY}
+<BOUCLE_charger(MOSAICS){!par maj}{#ENV{last},#ENV{imgacharger}}{statut='poubelle'}>
+	#SET{liste, #GET{liste}|push{#ID_MOSAIC}}
+</BOUCLE_charger>
+#SET{mix,#ENV{last}|div{#ENV{imgacharger}}|plus{20}}
+<B_ls>
+	<div id="content#ENV{last}" class="suite">
+	<BOUCLE_ls(MOSAICS){id_mosaic IN #GET{liste}}{par hasard}{statut='poubelle'}>
+	[(#SET{taille,#COMPTEUR_BOUCLE|modulo{11}|plus{1}})]
+	[(#SET{illus,#COMPTEUR_BOUCLE|modulo{8}|plus{1}})]
+	[(#SET{picto,#COMPTEUR_BOUCLE|modulo{#GET{mix}}})]
+	[(#TOTAL_BOUCLE|<{60}|oui) 
+		#SET{taille,#COMPTEUR_BOUCLE|modulo{2}|plus{1}}
+		[(#TOTAL_BOUCLE|<{10}|oui) #SET{taille,#COMPTEUR_BOUCLE|modulo{1}|plus{1}}]
+		
+	]
+	[(#GET{picto}|=={#ENV{last}|div{#ENV{imgacharger}}}|oui)
+		[(#GET{taille}|>={5}|oui)
+			<div class="box size11">
+				<a><img src="#CHEMIN{images/illustration_0#GET{illus}.png}" width="500" heigth="500" alt="" /></a>
+			</div>
+		]
+		[(#GET{taille}|<{5}|oui)
+		<div class="box size#GET{taille}#GET{taille}">
+			<a><img src="#CHEMIN{images/illustration_0#GET{illus}.png}" width="500" heigth="500" alt="" /></a>
+		</div>
+		]
+	]
+	[(#GET{taille}|>={5}|oui)
+	<div class="box size11"><a href="#" monid="case#ID_MOSAIC" class="detail" data-toggle="modal" data-target="#detail#ENV{last}"><img src="#URL_SITE_SPIP/mosaic/#FICHIER" width="500" heigth="500" alt="" /></a></div>
+	]
+	[(#GET{taille}|<{5}|oui)
+	<div class="box size#GET{taille}#GET{taille}"><a href="#" monid="case#ID_MOSAIC" class="detail" data-toggle="modal" data-target="#detail#ENV{last}"><img src="#URL_SITE_SPIP/mosaic/#FICHIER" width="500" heigth="500" alt="" /></a></div>
+	]
+
+	</BOUCLE_ls> 
+	</div>
+</B_ls>
+<div class="modal fade" id="detail#ENV{last}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Fermer</span></button>
+        <h4 class="modal-title" id="myModalLabel"></h4>
+      </div>
+      <div class="modal-body">
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+
+var boxes = $("#content[(#ENV{last}) ]div.box");
+$('#content').append(boxes).nested('append',boxes,{minWidth: 110,gutter: 8});
+$('.detail').click(function() {
+	var monid = $(this).attr("monid").substr(4);
+	$( ".modal-body" ).load( "#URL_PAGE{image_mosaic}",{id:monid});
+});
+
+  // une fois tous les traitements effectués,
+  // on remet ajaxready à false 
+  // afin de pouvoir rappeler la fonction
+  $(window).data('ajaxready', true);
+</script>

@@ -1,0 +1,137 @@
+	<link rel="stylesheet" href="#CHEMIN{lib/leaflet.css}" ></link>
+	<style>
+	.leaflet-marker-pane {
+	    z-index: 3;
+	}
+	.leaflet-shadow-pane {
+		z-index: 2;
+	}
+	</style>
+	<div tabindex="0" class="map leaflet-container leaflet-fade-anim" id="map" style="width: 100%; height: 600px; position: relative;"></div>
+	<script src="#CHEMIN{lib/leaflet.js}" type="text/javascript"></script>
+	<script>
+			var map = L.map('map',{scrollWheelZoom:false}).setView([48.90903,2.45506 ], 11);
+
+		L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
+			maxZoom: 18,
+			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+			'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+			'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+			id: 'examples.map-20v6611k'
+		}).addTo(map);
+		var zonesLayer, horsdepLayer, communesLayer;
+
+		var listezonesfinies = new Array(<BOUCLE_listezone(RUBRIQUES){id_parent=#ENV{id}}{tout}{composition="quizfini"}{","}>"#ID_RUBRIQUE"</BOUCLE_listezone>);
+		var listezonesencours = new Array(<BOUCLE_listezoneencours(RUBRIQUES){id_parent=#ENV{id}}{tout}{composition="quiz"}{","}>"#ID_RUBRIQUE"</BOUCLE_listezoneencours>);
+		//var listezonesfinies = new Array("10091","10090");
+		//var listezonesencours = new Array("10092");
+		var listezones = listezonesencours.concat(listezonesfinies);
+		function style(feature) {
+			//alert(feature.properties.numart+"="+$.inArray(feature.properties.numart , listezonesfinies));
+			if ($.inArray(feature.properties.numart , listezonesencours)>=0) {
+				return {
+					    fillColor: "#87cee0",
+					    weight: 2,
+					    opacity: 1,
+					    color: "#555",
+					    fillOpacity: 0.8
+				};
+			} else if($.inArray(feature.properties.numart , listezonesfinies)>=0) {
+				return {
+					    fillColor: "#e7c8a9",
+					    weight: 2,
+					    opacity: 1,
+					    color: "#555",
+					    fillOpacity: 0.8
+				};
+			} else {
+				return {
+				    radius: 2,
+				    fillColor: "#e7c8a9",
+				    color: "#555",
+				    weight: 2,
+				    opacity: 1,
+				    fillOpacity: 0.2
+				};
+			}
+		}
+		function resetHighlight(e) {
+			zonesLayer.resetStyle(e.target);
+		}
+
+		function highlightFeature(e) {
+			var layer = e.target;
+			if ($.inArray(layer.feature.properties.numart , listezonesencours)>=0) {
+			    layer.setStyle({
+			        fillColor: "#72aebd",
+			    });
+		    }else if($.inArray(layer.feature.properties.numart , listezonesfinies)>=0) {
+			    layer.setStyle({
+			        fillColor: "#c88946",
+			    });
+		    }
+		//#a6bddb
+		//#fee8c8
+		    if (!L.Browser.ie && !L.Browser.opera) {
+		        layer.bringToFront();
+		    }
+		}
+
+function affichePopup(feature,layer) {
+	if ($.inArray(feature.properties.numart , listezonesencours)>=0) {
+		var popupContent = "<p><a href='rubrique"+feature.properties.numart+"'>Jouez au quiz de la semaine !</a></p>"
+	} else if ($.inArray(feature.properties.numart , listezonesfinies)>=0) {
+		var popupContent = "<p><a href='rubrique"+feature.properties.numart+"'>Retrouvez le quiz de la semaine du "+feature.properties.datequiz+" !</a></p>"
+	}
+	layer.bindPopup(popupContent).openPopup();
+}
+function preparePopUp(e) {
+	affichePopup(e.target.feature, e.target);
+}
+function onEachFeature(feature, layer) {
+	var index;
+	for	(index = 0; index < listezones.length; index++) {
+		if(feature.properties.numart == listezones[index]) {
+			layer.on({
+	 			mouseover: highlightFeature,
+	 			mouseout: resetHighlight,
+	 			click: preparePopUp
+	 		});
+	 	}
+	}
+}
+		$.ajax({
+			url: "#CHEMIN{json/horsdep.geojson}",
+			dataType: 'json',
+			}).done(function(data) {
+				var horsdepOptions = {
+				    radius: 2,
+				    fillColor: "#ffffff",
+				    color: "#87cee0",
+				    weight: 2,
+				    opacity: 1,
+				    fillOpacity: 0.8
+				};
+				
+				// Add the geojson layer to the map
+				horsdepLayer = L.geoJson(data,{
+				style: horsdepOptions
+				}).addTo(map);
+			}).fail(function(jqXHR, textStatus, errorThrown) {
+			// Nothing to do, there simply will be no overlay
+			});
+
+		$.ajax({
+			url: "#CHEMIN{json/zone-devisu2015.geojson}",
+			dataType: 'json',
+			}).done(function(data) {
+				// Add the geojson layer to the map
+				zonesLayer = L.geoJson(data, {
+					onEachFeature: onEachFeature,
+					style: style
+				}).addTo(map);
+			}).fail(function(jqXHR, textStatus, errorThrown) {
+			// Nothing to do, there simply will be no overlay
+			});
+//map.on('click', function(e) { alert("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng) })
+	</script>

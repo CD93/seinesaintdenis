@@ -1,0 +1,302 @@
+@font-face {
+font-family: 'Myriad Pro Condensed';
+font-style: normal;
+font-weight: normal;
+src: local('Myriad Pro Condensed'), url('MYRIADPRO-COND.woff') format('woff');
+}
+@font-face {
+font-family: 'Myriad Pro';
+font-style: normal;
+font-weight: normal;
+src: local('Myriad Pro'), url('MYRIADPRO-REGULAR.woff') format('woff');
+}
+
+.break {
+	clear: both;
+}
+body {
+	background-color: #f5f5f5;
+	font-family:'Myriad Pro', sans-serif;
+	padding: 0 15px;
+	}
+.slide{
+	background-attachment: fixed;
+	width:100%;
+	height:100%;
+	position: relative;
+	box-shadow:inset 0px 10px 10px rgba(0,0,0,0.3);
+}
+.wrapper{
+	width:960px;
+	height:800px;
+	margin:0 auto;
+	position:relative;
+}
+/* gestion des fonds */
+#slide1 img:first-child{
+	position:absolute;
+	top: 10px;
+	left: 50px;
+}
+#slide1 img:nth-child(2){
+	position:absolute;
+	top:100px;
+	left:200px;
+}
+#slide1 img:nth-child(3){
+	position:absolute;
+	top:250px;
+	left:800px;
+}
+#slide1 img:nth-child(4){
+	position:absolute;
+	top:450px;
+	left:500px;
+}
+/* slide 1 */
+#cadre {
+position:absolute;
+width:1200px;
+height:800px;
+padding: 0;
+margin: 0 auto;
+}
+#photo {
+width: 100%;
+height: 100%;
+}
+
+#bandeau {
+	height: 118px;
+	width: 100%;
+	background-color: #0046ff;
+}
+h1 {
+	margin: 50px;
+	min-height: 797px;
+	padding : 250px 150px 0 160px;
+	max-width: 956px;
+	text-align: center;
+	font-size: 4.3em;
+	color: #0046ff;
+	font-weight: 100;
+	//text-transform: uppercase;
+	letter-spacing: 0.3em;
+	text-align: left;
+	background: transparent url('../images/fond_titre.png') no-repeat center top;
+	line-height: 1.2em;
+}
+h1 p{
+	font-size: 0.6em;
+	letter-spacing: 0.2em;
+	line-height: 0;
+	margin-top: 5px;
+	padding-top: 15px;
+	
+}
+@media (max-width: 1060px) {
+	h1 {
+		padding : 225px 150px 0 150px;
+		font-size: 4em;
+		letter-spacing: 0.2em;
+		line-height: 1.2em;
+		}
+}
+
+@media (max-width: 915px) {
+	h1 {
+		padding : 250px 20px 0 20px;
+		font-size: 3.3em;
+		letter-spacing: 0.2em;
+		line-height: 1.2em;
+		}
+}
+@media (max-width: 590px) {
+	h1 {
+		padding : 250px 10px 0 10px;
+		font-size: 3.3em;
+		//letter-spacing: 0.3em;
+		line-height: 1.1em;
+		}
+}
+#texte {
+	max-width: 1180px;
+	//margin: 15px auto;
+}
+#texte img{
+	float: left;
+	padding-right: 20px;
+}
+#intro {
+	text-align: left;
+	color: #0046ff;
+	font-size: 1.3em;
+	margin: 0px auto 50px auto;
+	padding-top: 40px;
+	text-transform: uppercase;
+	letter-spacing: 0.2em;
+	line-height: 1.2em;
+}
+/* social */
+.printmail {
+	display: block;
+	position : relative;
+	max-width: 1180px;
+}
+
+.printmail.reseausoc .texte span {
+	color: #002A67;
+}
+.printmail button {
+	border: none;
+	background-color: transparent;
+}
+.printmail a, .printmail button {
+	display: inline-block;
+	font-size: 0;
+	float: right;
+	margin: 0 5px;
+	width: 57px;
+	height: 57px;
+}
+
+.printmail a.google {
+	background: #f5f5f5 url('../images/mosaic_BT_googlePlus.png') no-repeat left top;
+}
+.printmail a.facebook {
+	background: #f5f5f5 url('../images/mosaic_BT_facebook.png') no-repeat left top;
+}
+.printmail a.twitter {
+	background: #f5f5f5 url('../images/mosaic_BT_twitter.png') no-repeat left top;
+}
+
+
+#caseaut {
+	text-align: left;
+	max-width: 800px;
+	font-size: 0.8em;
+	color: #fff;
+	padding-top: 10px;
+}
+#leform {
+	margin: 0 auto;
+	max-width: 1180px;
+}
+#formulaire_carte_voeux {
+	margin: 0 auto;
+	max-width: 1172px;
+	min-height: 300px;
+	background-color: #0046ff;
+	margin-bottom: 8px;
+}
+#formvoeux {
+	padding: 15px 0;
+}
+#chargerimg {
+	color:  #062B68;
+	font-size: 1.2em;
+	background-color: #fff;
+	padding: 10px 20px;
+	border-radius: 20px;
+	border: none;
+	margin-top: 120px;
+}
+#chargerimg.passeul {
+	margin-top: 15px;
+	color: #fff;
+	background-color: #0046ff ;
+	border: 1px solid #fff;
+	font-size: 1.1em;
+}
+#chargerimg:hover {
+	border: 5px solid #fff;
+}
+#boite {
+	margin: 0 auto;
+	max-width: 1180px;
+}
+.jcrop-holder {
+	margin: 15px 0;
+	border: 2px solid #000;
+}
+.jcrop-vline,.jcrop-hline{
+	background:#FFF url(../Jcrop.gif);
+	font-size:0;position:absolute;
+}
+#email {
+	max-width: 300px;
+}
+#envoyer input{
+	display: block;
+	marign:15px 0;
+	color:  #062B68;
+	font-size: 1.2em;
+	background-color: #fff;
+	padding: 10px 20px;
+	border-radius: 20px;
+	border: none;
+}
+.box { 	
+-webkit-transition: all 300ms cubic-bezier(1.000, 0.000, 0.000, 1.000); 
+   -moz-transition: all 300ms cubic-bezier(1.000, 0.000, 0.000, 1.000); 
+    -ms-transition: all 300ms cubic-bezier(1.000, 0.000, 0.000, 1.000); 
+     -o-transition: all 300ms cubic-bezier(1.000, 0.000, 0.000, 1.000); 
+        transition: all 300ms cubic-bezier(1.000, 0.000, 0.000, 1.000); /* easeInOutExpo */
+        
+  -webkit-transition-property: left, right, top;
+     -moz-transition-property: left, right, top;
+      -ms-transition-property: left, right, top;
+       -o-transition-property: left, right, top;
+          transition-property: left, right, top;
+        				}
+			
+
+.box a img {
+	width: 100%;
+	height: 100%;
+	display: inline-block;
+	border: 1px solid #eaeaea;
+}
+
+.box a img:hover {
+	border: 4px solid #000;
+}
+.suite {
+	margin-top: 8px;
+}
+#loader img{
+	height: 40px;
+	width: 40px;
+}
+#loader {
+	margin-bottom:50px;
+}
+#content .hidden{
+    display: none;
+}
+#content #loader{
+display: none;
+}
+.modal-lg {
+	width: 515px;
+}
+.jcrop-handle{
+	background-color:#333;
+	border:1px #EEE solid;
+	font-size:1px;
+	height:14px;
+	width:14px;
+}
+.supp {
+	display: block;
+	position: relative;
+	bottom: 65px;
+	left: 10px;
+	z-index: 1000;
+}
+.supp .boutons .monbtn {
+	max-width: 300px;
+	padding: 10px;
+}
+.jcrop-vline{height:100%;width:2px!important;}
+.jcrop-hline{height:2px!important;width:100%;}

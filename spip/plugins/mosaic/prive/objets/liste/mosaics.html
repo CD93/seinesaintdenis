@@ -1,0 +1,38 @@
+[(#SET{defaut_tri,#ARRAY{
+	date,-1, 
+	id_mosaic,1,
+	points,-1
+}})]<B_liste_mosaics>
+#ANCRE_PAGINATION
+<div class="liste-objets mosaics">
+<table class='spip liste'>
+	[<caption><strong class="caption">(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{mosaic:info_1_mosaic,mosaic:info_nb_mosaics}})</strong></caption>]
+	<thead>
+		<tr class='first_row'>
+			<th class='picto' scope='col'></th>
+			<th class='statut' scope='col'>[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
+			<th class='' scope='col'>[(#TRI{,<:mosaic:champ__label:>,ajax})]</th>
+			<th class='date' scope='col'>[(#TRI{date,<:date:>,ajax})]</th> 
+			<th class='id' scope='col'>[(#TRI{id_mosaic,<:info_numero_abbreviation:>,ajax})]</th>
+		</tr>
+	</thead>
+	<tbody>
+	<BOUCLE_liste_mosaics(MOSAICS){id_mot?}{id_auteur?}{where?}{statut?}{recherche?}{tri #ENV{par,num },#GET{defaut_tri}}{par }{pagination #ENV{nb,10}}>
+		<tr class='[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]'>
+			<td class='picto'>[(#CHEMIN_IMAGE{mosaic-16.png}|balise_img)]</td>
+			<td class='statut'>[(#STATUT|puce_statut{mosaic,#ID_MOSAIC})]</td> 
+			<td class=' principale'>[(#LOGO_MOSAIC|image_reduire{20,26})]<a href="[(#ID_MOSAIC|generer_url_entite{mosaic})]" title="<:info_numero_abbreviation|attribut_html:> #ID_MOSAIC">[(#RANG). ]#</a></td>
+			<td class='date secondaire'>[(#DATE|affdate_jourcourt)]</td> 
+			<td class='id'>[(#AUTORISER{modifier,mosaic,#ID_MOSAIC}|?{
+				<a href="[(#URL_ECRIRE{mosaic_edit,id_mosaic=#ID_MOSAIC})]">#ID_MOSAIC</a>,
+				#ID_MOSAIC
+			})]</td>
+		</tr>
+	</BOUCLE_liste_mosaics>
+	</tbody>
+</table>
+[<p class='pagination'>(#PAGINATION{prive})</p>]
+</div>
+</B_liste_mosaics>[
+<div class="liste-objets mosaics caption-wrap"><strong class="caption">(#ENV*{sinon,''})</strong></div>
+]<//B_liste_mosaics>

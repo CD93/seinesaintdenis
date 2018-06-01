@@ -1,0 +1,211 @@
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_geoportail93.php ../plugins/fabrique_auto/.backup/geoportail93/base/geoportail93.php ../plugins/fabrique_auto/geoportail93/base/geoportail93.php
+26c26
+< 	$interfaces['table_des_tables']['geoportails'] = 'geoportails';
+---
+> 	$interfaces['table_des_tables']['geoportail93s'] = 'geoportail93s';
+43,44c43,44
+< 	$tables['spip_geoportails'] = array(
+< 		'type' => 'geoportail',
+---
+> 	$tables['spip_geoportail93s'] = array(
+> 		'type' => 'geoportail93',
+47,48c47,48
+< 			"id_geoportail"      => "bigint(21) NOT NULL",
+< 			"id_couche_geoportail" => "bigint",
+---
+> 			"id_geoportail93"    => "bigint(21) NOT NULL",
+> 			"id_couche_geoportail" => "bigint(21) NOT NULL DEFAULT 0",
+49a50
+> 			"date"               => "datetime NOT NULL DEFAULT '0000-00-00 00:00:00'",
+53c54
+< 			"PRIMARY KEY"        => "id_geoportail",
+---
+> 			"PRIMARY KEY"        => "id_geoportail93",
+55,56c56,57
+< 		'titre' => "'' AS titre, '' AS lang",
+< 		 #'date' => "",
+---
+> 		'titre' => "id_element_couche_geoportail AS titre, '' AS lang",
+> 		'date' => "date",
+60c61
+< 		'tables_jointures'  => array(),
+---
+> 		'tables_jointures'  => array('spip_geoportail93s_liens'),
+68a70,96
+> /**
+>  * Déclaration des tables secondaires (liaisons)
+>  *
+>  * @pipeline declarer_tables_auxiliaires
+>  * @param array $tables
+>  *     Description des tables
+>  * @return array
+>  *     Description complétée des tables
+>  */
+> function geoportail93_declarer_tables_auxiliaires($tables) {
+>
+> 	$tables['spip_geoportail93s_liens'] = array(
+> 		'field' => array(
+> 			"id_geoportail93"    => "bigint(21) DEFAULT '0' NOT NULL",
+> 			"id_objet"           => "bigint(21) DEFAULT '0' NOT NULL",
+> 			"objet"              => "VARCHAR(25) DEFAULT '' NOT NULL",
+> 			"vu"                 => "VARCHAR(6) DEFAULT 'non' NOT NULL"
+> 		),
+> 		'key' => array(
+> 			"PRIMARY KEY"        => "id_geoportail93,id_objet,objet",
+> 			"KEY id_geoportail93" => "id_geoportail93"
+> 		)
+> 	);
+>
+> 	return $tables;
+> }
+>
+Only in ../plugins/fabrique_auto/.backup/geoportail93/formulaires: editer_geoportail.html
+Only in ../plugins/fabrique_auto/.backup/geoportail93/formulaires: editer_geoportail.php
+Only in ../plugins/fabrique_auto/geoportail93/formulaires: editer_geoportail93.html
+Only in ../plugins/fabrique_auto/geoportail93/formulaires: editer_geoportail93.php
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_geoportail93.php ../plugins/fabrique_auto/.backup/geoportail93/geoportail93_autorisations.php ../plugins/fabrique_auto/geoportail93/geoportail93_autorisations.php
+22c22
+< // Objet geoportails
+---
+> // Objet geoportail93s
+26c26
+<  * Autorisation de voir un élément de menu (geoportails)
+---
+>  * Autorisation de voir un élément de menu (geoportail93s)
+35c35
+< function autoriser_geoportails_menu_dist($faire, $type, $id, $qui, $opt){
+---
+> function autoriser_geoportail93s_menu_dist($faire, $type, $id, $qui, $opt){
+41c41
+<  * Autorisation de voir le bouton d'accès rapide de création (geoportail)
+---
+>  * Autorisation de voir le bouton d'accès rapide de création (geoportail93)
+50,51c50,51
+< function autoriser_geoportailcreer_menu_dist($faire, $type, $id, $qui, $opt){
+< 	return autoriser('creer', 'geoportail', '', $qui, $opt);
+---
+> function autoriser_geoportail93creer_menu_dist($faire, $type, $id, $qui, $opt){
+> 	return autoriser('creer', 'geoportail93', '', $qui, $opt);
+55c55
+<  * Autorisation de créer (geoportail)
+---
+>  * Autorisation de créer (geoportail93)
+64c64
+< function autoriser_geoportail_creer_dist($faire, $type, $id, $qui, $opt) {
+---
+> function autoriser_geoportail93_creer_dist($faire, $type, $id, $qui, $opt) {
+69c69
+<  * Autorisation de voir (geoportail)
+---
+>  * Autorisation de voir (geoportail93)
+78c78
+< function autoriser_geoportail_voir_dist($faire, $type, $id, $qui, $opt) {
+---
+> function autoriser_geoportail93_voir_dist($faire, $type, $id, $qui, $opt) {
+83c83
+<  * Autorisation de modifier (geoportail)
+---
+>  * Autorisation de modifier (geoportail93)
+92c92
+< function autoriser_geoportail_modifier_dist($faire, $type, $id, $qui, $opt) {
+---
+> function autoriser_geoportail93_modifier_dist($faire, $type, $id, $qui, $opt) {
+97c97
+<  * Autorisation de supprimer (geoportail)
+---
+>  * Autorisation de supprimer (geoportail93)
+106c106
+< function autoriser_geoportail_supprimer_dist($faire, $type, $id, $qui, $opt) {
+---
+> function autoriser_geoportail93_supprimer_dist($faire, $type, $id, $qui, $opt) {
+110a111,123
+> /**
+>  * Autorisation de lier/délier l'élément (geoportail93s)
+>  *
+>  * @param  string $faire Action demandée
+>  * @param  string $type  Type d'objet sur lequel appliquer l'action
+>  * @param  int    $id    Identifiant de l'objet
+>  * @param  array  $qui   Description de l'auteur demandant l'autorisation
+>  * @param  array  $opt   Options de cette autorisation
+>  * @return bool          true s'il a le droit, false sinon
+> **/
+> function autoriser_associergeoportail93s_dist($faire, $type, $id, $qui, $opt) {
+> 	return $qui['statut'] == '0minirezo' AND !$qui['restreint'];
+> }
+Only in ../plugins/fabrique_auto/geoportail93/: geoportail93_pipelines.php
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_geoportail93.php ../plugins/fabrique_auto/.backup/geoportail93/lang/geoportail93_fr.php ../plugins/fabrique_auto/geoportail93/lang/geoportail93_fr.php
+5a6
+>
+8,9c9,37
+< 	// G
+< 	'geoportail93_titre' => 'Geoportail93',
+---
+> 	// A
+> 	'ajouter_lien_geoportail93' => 'Ajouter ce geoportail93',
+>
+> 	// C
+> 	'champ_id_couche_geoportail_label' => 'id_couche_geoportail',
+> 	'champ_id_element_couche_geoportail_label' => 'élément couche geoportail',
+>
+> 	// I
+> 	'icone_creer_geoportail93' => 'Créer un geoportail93',
+> 	'icone_modifier_geoportail93' => 'Modifier ce geoportail93',
+> 	'info_1_geoportail93' => 'Un geoportail93',
+> 	'info_aucun_geoportail93' => 'Aucun geoportail93',
+> 	'info_geoportail93s_auteur' => 'Les geoportail93s de cet auteur',
+> 	'info_nb_geoportail93s' => '@nb@ geoportail93s',
+>
+> 	// R
+> 	'retirer_lien_geoportail93' => 'Retirer ce geoportail93',
+> 	'retirer_tous_liens_geoportail93s' => 'Retirer tous les geoportail93s',
+>
+> 	// T
+> 	'texte_ajouter_geoportail93' => 'Ajouter un geoportail93',
+> 	'texte_changer_statut_geoportail93' => 'Ce geoportail93 est :',
+> 	'texte_creer_associer_geoportail93' => 'Créer et associer un geoportail93',
+> 	'texte_definir_comme_traduction_geoportail93' => 'Ce geoportail93 est une traduction du geoportail93 numéro :',
+> 	'titre_geoportail93' => 'Geoportail93',
+> 	'titre_geoportail93s' => 'Geoportail93s',
+> 	'titre_geoportail93s_rubrique' => 'Geoportail93s de la rubrique',
+> 	'titre_langue_geoportail93' => 'Langue de ce geoportail93',
+> 	'titre_logo_geoportail93' => 'Logo de ce geoportail93',
+Only in ../plugins/fabrique_auto/.backup/geoportail93/lang: geoportail_fr.php
+diff -r -x . -x .. -x fabrique_diff.diff -x fabrique_geoportail93.php ../plugins/fabrique_auto/.backup/geoportail93/paquet.xml ../plugins/fabrique_auto/geoportail93/paquet.xml
+11c11
+< 		Paquet genere le 2015-10-30 17:13:16
+---
+> 		Paquet genere le 2015-10-30 17:20:16
+25a26,28
+> 	<pipeline nom="declarer_tables_auxiliaires" inclure="base/geoportail93.php" />
+> 	<pipeline nom="affiche_milieu" inclure="geoportail93_pipelines.php" />
+> 	<pipeline nom="optimiser_base_disparus" inclure="geoportail93_pipelines.php" />
+27,28c30,31
+< 	<menu nom="geoportails" titre="geoportail:titre_geoportails" parent="menu_edition" icone="images/geoportail-16.png" action="geoportails" />
+< 	<menu nom="geoportail_creer" titre="geoportail:icone_creer_geoportail" parent="outils_rapides" icone="images/geoportail-new-16.png" action="geoportail_edit" parametres="new=oui" />
+---
+> 	<menu nom="geoportail93s" titre="geoportail93:titre_geoportail93s" parent="menu_edition" icone="images/geoportail93-16.png" action="geoportail93s" />
+> 	<menu nom="geoportail93_creer" titre="geoportail93:icone_creer_geoportail93" parent="outils_rapides" icone="images/geoportail93-new-16.png" action="geoportail93_edit" parametres="new=oui" />
+Only in ../plugins/fabrique_auto/.backup/geoportail93/prive/objets/contenu: geoportail.html
+Only in ../plugins/fabrique_auto/geoportail93/prive/objets/contenu: geoportail93.html
+Only in ../plugins/fabrique_auto/.backup/geoportail93/prive/objets/infos: geoportail.html
+Only in ../plugins/fabrique_auto/geoportail93/prive/objets/infos: geoportail93.html
+Only in ../plugins/fabrique_auto/geoportail93/prive/objets/liste: geoportail93s.html
+Only in ../plugins/fabrique_auto/geoportail93/prive/objets/liste: geoportail93s_associer.html
+Only in ../plugins/fabrique_auto/geoportail93/prive/objets/liste: geoportail93s_associer_fonctions.php
+Only in ../plugins/fabrique_auto/geoportail93/prive/objets/liste: geoportail93s_lies.html
+Only in ../plugins/fabrique_auto/geoportail93/prive/objets/liste: geoportail93s_lies_fonctions.php
+Only in ../plugins/fabrique_auto/.backup/geoportail93/prive/objets/liste: geoportails.html
+Only in ../plugins/fabrique_auto/.backup/geoportail93/prive/objets/liste: geoportails_associer.html
+Only in ../plugins/fabrique_auto/.backup/geoportail93/prive/objets/liste: geoportails_associer_fonctions.php
+Only in ../plugins/fabrique_auto/.backup/geoportail93/prive/objets/liste: geoportails_lies.html
+Only in ../plugins/fabrique_auto/.backup/geoportail93/prive/objets/liste: geoportails_lies_fonctions.php
+Only in ../plugins/fabrique_auto/.backup/geoportail93/prive/squelettes/contenu: geoportail.html
+Only in ../plugins/fabrique_auto/geoportail93/prive/squelettes/contenu: geoportail93.html
+Only in ../plugins/fabrique_auto/geoportail93/prive/squelettes/contenu: geoportail93_edit.html
+Only in ../plugins/fabrique_auto/geoportail93/prive/squelettes/contenu: geoportail93s.html
+Only in ../plugins/fabrique_auto/.backup/geoportail93/prive/squelettes/contenu: geoportail_edit.html
+Only in ../plugins/fabrique_auto/.backup/geoportail93/prive/squelettes/contenu: geoportails.html
+Only in ../plugins/fabrique_auto/geoportail93/saisies: geoportail93s.html
+Only in ../plugins/fabrique_auto/.backup/geoportail93/saisies: geoportails.html
+Only in ../plugins/fabrique_auto/geoportail93/saisies-vues: geoportail93s.html
+Only in ../plugins/fabrique_auto/.backup/geoportail93/saisies-vues: geoportails.html

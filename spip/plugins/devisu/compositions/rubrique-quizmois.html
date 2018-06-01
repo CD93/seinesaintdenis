@@ -1,0 +1,112 @@
+<BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
+<!DOCTYPE html>
+[(#REM) Cf.: http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+]<!--[if lt IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie6"> <![endif]-->
+<!--[if IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie7"> <![endif]-->
+<!--[if IE 8 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie8"> <![endif]-->
+<!--[if IE 9 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js"> <!--<![endif]-->
+<head>
+<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+<title>[(#NOM_SITE_SPIP|textebrut)][ - (#TITRE|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
+<INCLURE{fond=inc/head} />
+</head>
+<body>
+<INCLURE{fond=inclure/menu} {env}/>
+<div class="main" id="pagequiz">
+	<div class="contenu">
+		<div class="container">
+			<div class="col-md-15 fondune"> <!-- début dossier une  -->
+				<INCLURE{fond=inclure/bouton-impression}{env} />
+				<div class="corpsauto">
+					<B_filariane>
+						<ol class="breadcrumb">
+						<BOUCLE_filariane(HIERARCHIE){id_rubrique!=23}{tout}{si #PROFONDEUR|>{1}} >
+							<li><a href="#URL_RUBRIQUE">#TITRE</a></li>
+						</BOUCLE_filariane>
+						</ol>
+					</B_filariane>
+					<h1>#TITRE</h1>
+				</div>
+				<div class="chapoune">
+					<span class="glyphicon glyphicon-minus"></span>
+						#TEXTE
+					<span class="glyphicon glyphicon-minus"></span>
+				</div>
+
+				#SET{listequiz,#ARRAY{}}
+				<BOUCLE_artquizdoc(ARTICLES){id_rubrique}>
+					<BOUCLE_doc(DOCUMENTS){id_article}{extension="csv"}>
+						#SET{listequiz,#GET{listequiz}|push{quiz#ID_DOCUMENT}}
+					</BOUCLE_doc>
+				</BOUCLE_artquizdoc>
+				<B_artquiz>
+				
+					#SET{totquiz,#TOTAL_BOUCLE}
+					<div id="pagination_artquiz"></div>
+				<div class="questionquiz">
+					<ul>
+						<BOUCLE_artquiz(ARTICLES){id_rubrique}{par num titre}{pagination 1}>
+						<li id="question#COMPTEUR_BOUCLE" class="question">
+							<h3>
+							[(#COMPTEUR_BOUCLE|=={1}||?{'',' '})
+							[(#COMPTEUR_BOUCLE|=={22}||?{'',' '})
+							[(#COMPTEUR_BOUCLE|moins{1})] - ]]#TITRE</h3>
+							[(#ENV{debut_artquiz}|non)
+								Cr&eacute;ez votre compte pour vous permettre de jouer &agrave; votre rythme et de sauvegarder vos r&eacute;ponses. Le tout est de valider votre questionnaire avant le 31 ao&ucirc;t !<br/><br/>
+								 
+								A la cl&eacute;, l&rsquo;invitation &agrave; un &eacute;v&eacute;nement exceptionnel organis&eacute; en septembre sp&eacute;cialement pour les gagnants.
+								 <br/><br/>
+									#FORMULAIRE_QUIZ_ENREGISTREMENT{#ID_RUBRIQUE,#GET{listequiz}}
+							]
+							#TEXTE
+						</li>
+						#SET{ctpb,#COMPTEUR_BOUCLE}
+						</BOUCLE_artquiz>
+					</ul>
+					[<hr class="sepacool"/>
+						(#GET{ctpb}|=={1}|?{'',' '})<div class="ajax"><p class="pagination">#PAGINATION{onglet,id_rubrique=#ID_RUBRIQUE}</p></div>
+					]
+					<hr class="sepacool"/>
+					[(#SESSION{id_auteur}|oui)
+						Bonjour <strong>#SESSION{nom}</strong> <a href="#URL_LOGOUT" type="button" class="btn btn-default btn-xs" title="se deconnecter"><span class="glyphicon glyphicon-remove"></span></a><br/>
+					<br class="sam"/>]
+					[(#ENV{debut_artquiz}|oui)
+					<div id="enregistrer_quizz">
+							#FORMULAIRE_QUIZ_ENREGISTREMENT{#ID_RUBRIQUE,#GET{listequiz}}
+					</div>
+					]
+				</div>
+				</B_artquiz>
+				<INCLURE{fond=inclure/bouton-partage}{env} />
+				<div class="row">
+					<BOUCLE_articles_actu(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=10049}>
+						<div class="col-md-12">
+							<a class="gbouton" href="#URL_ARTICLE">
+								<div class="artsuite_par2">
+									<div class="logoart">
+										<div class="triangleblanc"></div>
+										[(#LOGO_ARTICLE)]
+									</div>
+									<div class="corps">
+										<h4>#TITRE</h4>
+										#CHAPO
+									</div>
+								</div>
+							</a>
+						</div>
+					</BOUCLE_articles_actu>
+				</div>
+			</div><!-- fin dossier une  -->
+			<div class="col-md-9">
+				<INCLURE{fond=inclure/carrousseldevisu,id_rubrique=#ID_SECTEUR}{env}/>
+				<INCLURE{fond=inclure/inc-fluxrss-cdt}{ajax} />				
+			</div>
+		</div>
+	</div>
+</div>
+<INCLURE{fond=inclure/footer}{env} />
+</body>
+</html>
+</BOUCLE_rubrique>

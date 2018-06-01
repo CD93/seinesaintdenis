@@ -1,0 +1,25 @@
+<BOUCLE_doc(DOCUMENTS){id_document=#ENV{id_document}}>
+#SET{doc,#URL_DOCUMENT}
+</BOUCLE_doc>
+#SET{debut_artquiz,#ENV{debut_artquiz}|plus{1}}
+	<div class="formulaire_spip formulaire_quiz_choix_multiple">
+		[<div class='reponse_formulaire reponse_formulaire_ok'><h3>(#ENV*{message_ok})</h3></div>]
+		<BOUCLE_cond(CONDITION){si #ENV{editform}|=={oui}}>
+		<form action='[(#ENV{action}|parametre_url{'debut_artquiz',#GET{debut_artquiz,1}})]' method='post' role="form" name="formulaire_quiz_choix_multiple">
+			#ACTION_FORMULAIRE{#ENV{action},#FORM}
+			<div class="form-group">
+				#SET{deux,2}
+				<BOUCLE_csv(DATA){datasource #CHEMIN{#GET{doc}}, csv}{cle>0}>
+				<div class="checkbox">
+				  <label>
+				    <input type="checkbox" name="checkboxCsv[]" value="[(#GET{deux}|pow{#VALEUR{0}})]" />
+				    #VALEUR{1}
+				  </label>
+				</div>
+				</BOUCLE_csv>
+				<input type="submit" class="fleche_valider" name="valider" value="Valider"/>
+				<input type="hidden" value="non" name="editform" />
+			</div>
+		</form>
+		</BOUCLE_cond>
+	</div>

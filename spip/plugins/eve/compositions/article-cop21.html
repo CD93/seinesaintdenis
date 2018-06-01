@@ -1,0 +1,79 @@
+<BOUCLE_article(ARTICLES){id_article}>
+<!DOCTYPE html>
+[(#REM) Cf.: http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+]<!--[if lt IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie6"> <![endif]-->
+<!--[if IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie7"> <![endif]-->
+<!--[if IE 8 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie8"> <![endif]-->
+<!--[if IE 9 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js"> <!--<![endif]-->
+<head>
+<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+<title>[(#NOM_SITE_SPIP|textebrut)][ - (#TITRE_PARENT|textebrut)][ - (#TITRE|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
+<INCLURE{fond=inc/head}{env} />
+</head>
+<body id="cop21art">
+<INCLURE{fond=inclure/menu-emag}{env}/>
+<div class="main">
+	<div class="contenu" id="pagesecteur#ID_RUBRIQUE">
+		<div class="container degrader">
+		
+			<div class="col-md-15 col-md-push-9"> <!-- début dossier une  -->
+			<INCLURE{fond=inclure/bouton-impression}{env} />
+						<div class="sous-rub">
+							<BOUCLE_stag(RUBRIQUES){id_rubrique=10155}>
+							<h4><a [(#TITRE|=={#_article:TITRE_RUBRIQUE}|?{'class="on"',''})] href="#URL_RUBRIQUE"> #TITRE </a></h4>
+							</BOUCLE_stag>
+						</div>
+						<div class="break"></div>
+						<h1><a class="titreimgcop" href="#URL_RUBRIQUE{10155}"></a>#TITRE</h1>
+						<div class="chapoune">
+							<span class="glyphicon glyphicon-minus"></span>
+							#CHAPO 
+							<span class="glyphicon glyphicon-minus"></span>
+						</div>
+						<BOUCLE_notation(MOTS){id_article}{titre=notation}>
+							#FORMULAIRE_NOTATION{article,#ID_ARTICLE}
+							<br/>
+						</BOUCLE_notation>
+						<div id="sommaire">
+						 	#CS_SOMMAIRE
+						</div>
+						<div class="txt-art">
+						#TEXTE
+						</div>
+						<BOUCLE_mot(MOTS){id_article ?}{id_groupe=9}{0,1}>
+						[(#INCLURE{fond=modeles/carte_gis,
+						autocenterandzoom=oui,
+						objets=articlesmots,
+						id=#ID_ARTICLE}{env})]
+						</BOUCLE_mot>
+						[<hr/>(#PS)]
+						<INCLURE{fond=inclure/bouton-partage}{env} />
+						<INCLURE{fond=inclure/bouton-tout-motpicto}{env} />
+			</div> <!-- fin dossier une  -->
+			<div class="col-md-9 col-md-pull-15">
+			<INCLURE{fond=inclure/carroussel-ssd}{id_rubrique}{env}/>
+				<div class="fondpale listessd">
+				<h2>&agrave; lire aussi</h2>
+				<B_autresarts>
+				#ANCRE_PAGINATION
+				<BOUCLE_autresarts(ARTICLES){enfants #ID_RUBRIQUE}{"<hr/>"}{id_article != #ID_ARTICLE}{!par date}{pagination 5}>
+					<div class="alire">
+					 [<a href="#URL_ARTICLE">(#LOGO_ARTICLE|vider_attribut{height}|vider_attribut{width})</a>]
+					 <h4><a href="#URL_ARTICLE">#TITRE</a></h4>
+					 	 #DESCRIPTIF
+					  </div>
+				</BOUCLE_autresarts>
+				<p class="pagination">#PAGINATION</p>
+				</B_autresarts>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<INCLURE{fond=inclure/footer}{env} />
+
+</body>
+</html>
+</BOUCLE_article>

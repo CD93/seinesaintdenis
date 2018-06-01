@@ -1,0 +1,89 @@
+#CACHE{0}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Une mosaïque de v&oelig;ux pour 2017 !</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+[<script src="(#CHEMIN{bootstrap/js/bootstrap.min.js})" type="text/javascript"></script>]
+[<link rel="stylesheet" href="(#CHEMIN{bootstrap/css/bootstrap.min.css})" type="text/css" />]
+[<link rel="stylesheet" href="(#CHEMIN{bootstrap/css/bootstrap-responsive.min.css})" type="text/css" />]
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+<link href='//fonts.googleapis.com/css?family=Merriweather:400,700,900,300italic,300' rel='stylesheet' type='text/css'>
+<link href="#CHEMIN{css/mosaic.css}" rel="stylesheet" type="text/css" media="screen" />
+</head>
+<body>
+<div id="boite">
+<center><a href="#URL_SITE_SPIP" title="site du Département"><img src="#CHEMIN{images/logossd.png}" alt="logo du Conseil Départemental" /></a></center>
+<h1>Une mosaïque de v&oelig;ux pour 2017</h1>
+<h3><a href="#URL_PAGE{mosaic}">Voir la page mosaïque</a></h3>
+[(#AUTORISER{modifier,'mosaic','',#ID_AUTEUR}|oui)
+	<h3><a href="#URL_PAGE{mosaic-dark}">Voir la dark mosaïque</a></h3>
+]
+[(#AUTORISER{modifier,'mosaic','',#ID_AUTEUR}|oui) 
+	[(#CONFIG{mosaic/apriori}|non)
+	<h3><a href="#URL_ECRIRE{configurer_mosaic}">activer la mod&eacute;ration &agrave; priori</a></h3>
+	]
+	[(#CONFIG{mosaic/apriori}|oui)
+	<h3><a href="#URL_ECRIRE{configurer_mosaic}">mod&eacute;ration &agrave; priori activ&eacute;e</a></h3>
+	]
+]
+
+[(#SESSION{id_auteur}|non) <!-- Button trigger modal -->
+<button class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal">
+  Connexion
+</button>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Fermer</span></button>
+      </div>
+      <div class="modal-body">
+       #LOGIN_PUBLIC
+      </div>
+    </div>
+  </div>
+</div>
+]
+[(#SESSION{id_auteur}|oui)
+<a class="btn btn-default btn-xs" href="#URL_LOGOUT">d&eacute;connexion</a>]
+	
+<hr class="break" />
+
+		<B_mosval>
+		#ANCRE_PAGINATION
+		<h4>Photos &agrave; valider</h4>
+		<BOUCLE_mosval(MOSAICS){!par maj}{pagination 60}{statut='encours'}>
+			<div class="col-md-4 col-xs-8">
+				<img src="#URL_SITE_SPIP/mosaic/#FICHIER" width="100%" heigth="100%" alt="" />
+				[(#AUTORISER{modifier,'mosaic','',#ID_AUTEUR}|oui)#FORMULAIRE_VALIDER_MOSAIC{#ID_MOSAIC}]
+				[(#AUTORISER{modifier,'mosaic','',#ID_AUTEUR}|oui)#FORMULAIRE_SUPPRIMER_MOSAIC{#ID_MOSAIC}]
+				<div class="break">&nbsp;</div>
+			</div>
+		</BOUCLE_mosval>
+		<br class="break" />
+		#PAGINATION{prive}
+		<hr/>
+		</B_mosval>
+	<B_mos>
+	#ANCRE_PAGINATION
+	<div id="content">
+	<BOUCLE_mos(MOSAICS){!par maj}{pagination 60}>
+		<div class="col-md-4 col-xs-8">
+			<img src="#URL_SITE_SPIP/mosaic/#FICHIER" width="100%" heigth="100%" alt="" />
+			[(#AUTORISER{supprimer,'mosaic','',#ID_AUTEUR}|oui) #FORMULAIRE_SUPPRIMER_MOSAIC{#ID_MOSAIC}]
+			<div class="break">&nbsp;</div>
+		</div>
+	</BOUCLE_mos>
+	</div>
+	<br class="break" />
+	#PAGINATION{prive}
+	</B_mos>
+</div>
+<script type="text/javascript" >
+</script>
+  
+</body>
+</html>    

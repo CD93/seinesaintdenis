@@ -1,0 +1,13 @@
+<div class='formulaire_spip formulaire_#FORM formulaire_#FORM-#ENV{id_mosaic,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+	<form method='post' action='#ENV{action}'><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type='hidden' name='id_mosaic' value='#ENV{id_mosaic}' />
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons">
+		<button type="submit" class="btn btn-danger">Le r&eacute;sultat obtenu ne me convient pas ?<br/> J'enl&egrave;ve cette image</button>
+		</p>
+	</div></form>
+</div>

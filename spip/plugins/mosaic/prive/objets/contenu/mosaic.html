@@ -1,0 +1,18 @@
+<BOUCLE_mosaic(MOSAICS){id_mosaic}{statut?}>
+
+[<div class="champ contenu_mail[ (#MAIL*|strlen|?{'',vide})]">
+	<label><:mosaic:champ_mail_label:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{mail} mail'>(#MAIL)</span>
+</div>]
+
+[<div class="champ contenu_fichier[ (#FICHIER*|strlen|?{'',vide})]">
+	<label><:mosaic:champ_fichier_label:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{fichier} fichier'>(#FICHIER)</span>
+</div>]
+
+[<div class="champ contenu_interne[ (#INTERNE*|strlen|?{'',vide})]">
+	<label><:mosaic:champ_interne_label:> : </label>
+	<span dir='#LANG_DIR' class='#EDIT{interne} interne'>(#INTERNE)</span>
+</div>]
+
+</BOUCLE_mosaic>

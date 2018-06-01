@@ -1,0 +1,28 @@
+<BOUCLE_une(UNES){id_une=#ENV{id}}{statut?}>
+<div class='infos'>
+[(#SET{texte_objet,<:une:titre_une:>})]
+<div class='numero'><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_UNE</p></div>
+
+[(#FORMULAIRE_INSTITUER_OBJET{unes,#ID_UNE})]
+
+[(#REM)
+
+	Bouton voir en ligne
+
+]
+<BOUCLE_publie(UNES){id_une}>
+	[(#VAL{redirect}
+		|generer_url_action{type=unes&id=#ID_UNE}
+		|parametre_url{var_mode,calcul}
+		|icone_horizontale{<:icone_voir_en_ligne:>,racine})]
+</BOUCLE_publie>
+	[(#AUTORISER{previsualiser,unes,#ID_UNE,'',#ARRAY{statut,#STATUT}})
+		[(#VAL{redirect}
+			|generer_url_action{type=unes&id=#ID_UNE}
+			|parametre_url{var_mode,preview}
+			|icone_horizontale{<:previsualiser:>,preview})]
+	]
+<//B_publie>
+
+</div>
+</BOUCLE_une>

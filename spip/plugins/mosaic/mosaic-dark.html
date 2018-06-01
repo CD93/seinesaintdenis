@@ -1,0 +1,128 @@
+#CACHE{0}
+#SET{imgacharger,60}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Une mosaïque de v&oelig;ux pour 2017 !</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+[<script src="(#CHEMIN{bootstrap/js/bootstrap.min.js})" type="text/javascript"></script>]
+<script src="#CHEMIN{js/jquery.nested.js}"></script>
+[<link rel="stylesheet" href="(#CHEMIN{bootstrap/css/bootstrap.min.css})" type="text/css" />]
+[<link rel="stylesheet" href="(#CHEMIN{bootstrap/css/bootstrap-responsive.min.css})" type="text/css" />]
+	<link rel="image_src" href="#URL_SITE_SPIP/IMG/arton12784.jpg" />
+	<meta property="og:title" content="Une mosaïque de vœux pour 2016"/>
+    <meta property="og:url" content="#URL_PAGE"/>
+    <meta property="og:image" content="#URL_SITE_SPIP/IMG/arton12784.jpg"/>
+    <meta property="og:site_name" content="#NOM_SITE_SPIP"/>
+    <meta property="og:description" content="La Seine-Saint-Denis vous propose de participer à la réalisation de cette mosaïque pour 2016.
+    Selfies, portraits, seuls ou en groupe, avec ou sans message... Participez !"/>
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+[<link rel="stylesheet" href="(#CHEMIN{css/jquery.Jcrop.min.css})" type="text/css" />]
+<link href="#CHEMIN{css/mosaic.css}" rel="stylesheet" type="text/css" media="screen" />
+</head>
+<body>
+<center>
+[(#ENV{acteur}|?{' ',''})
+<a href="https://eacteur.seinesaintdenis.fr"><img src="#CHEMIN{images/logoActeur.png}" alt="logo de e-acteur" /></a>&nbsp;&nbsp;
+]
+<a href="http://seine-saint-denis.fr"><img src="#CHEMIN{images/logossd.png}" alt="logo de la seine-saint-denis" /></a>
+		#SET{reg1,'http[s]*:\/\/'}
+		<div class="break"></div>
+</center>
+<BOUCLE_poub(MOSAICS){!par maj}{statut='poubelle'}>
+#SET{nb,#TOTAL_BOUCLE}
+</BOUCLE_poub>
+<h1>La mosaïque de v&oelig;ux pour 2017 à laquelle vous avez échappé[ ((#GET{nb}))]</h1>
+#SET{imgacharger,60}
+#SET{liste,#ARRAY}
+<BOUCLE_charger(MOSAICS){!par maj}{0,#GET{imgacharger}}{statut='poubelle'}>
+	#SET{liste, #GET{liste}|push{#ID_MOSAIC}}
+</BOUCLE_charger>
+<div id="boite">
+	<div id="content">
+		<BOUCLE_ls(MOSAICS){id_mosaic IN #GET{liste}}{!par maj}{statut='poubelle'}>
+			[(#SET{taille,#COMPTEUR_BOUCLE|modulo{9}|plus{1}})]
+			[(#GET{taille}|>{5}|oui)
+			[(#SET{totalimg,#TOTAL_BOUCLE|plus{7}})]
+			<div class="box size11"><a href="#" monid="case#ID_MOSAIC" class="detail" data-toggle="modal" data-target="#detaill"><img src="#URL_SITE_SPIP/mosaic/#FICHIER" width="500" heigth="500" alt="" /></a></div>
+			]
+			[(#GET{taille}|=={5}|oui)
+			<div class="box size22"><a href="#" monid="case#ID_MOSAIC" class="detail" data-toggle="modal" data-target="#detaill"><img src="#URL_SITE_SPIP/mosaic/#FICHIER" width="500" heigth="500" alt="" /></a></div>
+			]
+			[(#GET{taille}|=={4}|oui)
+			<div class="box size33"><a href="#" monid="case#ID_MOSAIC" class="detail" data-toggle="modal" data-target="#detaill"><img src="#URL_SITE_SPIP/mosaic/#FICHIER" width="500" heigth="500" alt="" /></a></div>
+			]
+			[(#GET{taille}|<{4}|oui)
+			<div class="box size#GET{taille}#GET{taille}"><a href="#" monid="case#ID_MOSAIC" class="detail" data-toggle="modal" data-target="#detaill"><img src="#URL_SITE_SPIP/mosaic/#FICHIER" width="500" heigth="500" alt="" /></a></div>
+			]
+		</BOUCLE_ls>
+	</div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="detaill" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel"></h4>
+      </div>
+      <div class="modal-body">
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" > 
+$(function(){
+	$('#leform').hide();
+	$('#btform').click(function() {
+		$('#leform').show(400);
+	});
+	$('.detail').click(function() {
+		var monid = $(this).attr("monid").substr(4);
+		$( ".modal-body" ).load( "#URL_PAGE{image_mosaic}",{id:monid});
+	});
+	$('#content').nested({minWidth: 110, gutter: 8});
+	[(#GET{totalimg}|<{59}|non) infiniteScroll();]
+});
+     
+      
+function infiniteScroll(){
+  var offset = #GET{imgacharger,60};
+ 
+  // on initialise ajaxready à true au premier chargement de la fonction
+  $(window).data('ajaxready', true);
+	
+  $('#boite').append('<div id="loader"><center><img src="#CHEMIN{default.gif}" height="40" width="40" /></center></div>');
+	
+  var deviceAgent = navigator.userAgent.toLowerCase();
+  var agentID = deviceAgent.match(/(iphone|ipod|ipad)/);
+	
+  $(window).scroll(function() {
+    // On teste si ajaxready vaut false, auquel cas on stoppe la fonction
+    if ($(window).data('ajaxready') == false) return;
+			
+    if($(window).scrollTop() + $(window).height() + 150 > $(document).height()) {
+      // lorsqu'on commence un traitement, on met ajaxready à false
+      $(window).data('ajaxready', false);
+			
+      $('#boite #loader').fadeIn(400);
+      
+      $.get('#URL_PAGE{defilement_infini_dark}',{last:offset,imgacharger:#GET{imgacharger,60}}).done(function(data){
+        if (data != '') {
+          $('#boite #loader').before(data);
+          $('#boite .hidden').fadeIn(400);
+          offset+= #GET{imgacharger,60};
+      }   
+
+					
+        $('#boite #loader').fadeOut(400);			
+      });
+    }
+  });
+};
+</script>
+  
+</body>
+</html>    
