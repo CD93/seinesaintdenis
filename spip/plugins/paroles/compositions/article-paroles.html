@@ -1,0 +1,173 @@
+<BOUCLE_article(ARTICLES){id_article}>
+<!DOCTYPE html>
+[(#REM) Cf.: http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+]<!--[if lt IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie6"> <![endif]-->
+<!--[if IE 7 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie7"> <![endif]-->
+<!--[if IE 8 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie8"> <![endif]-->
+<!--[if IE 9 ]> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js ie ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html dir="#LANG_DIR" lang="#LANG" xmlns="http://www.w3.org/1999/xhtml" xml:lang="#LANG" class="[(#LANG_DIR)][ (#LANG)] no-js"> <!--<![endif]-->
+<head>
+<script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
+<title>[(#NOM_SITE_SPIP|textebrut)][ / (#TITRE_PARENT|textebrut)][ / (#TITRE|textebrut|replace{/,-})]</title>
+[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
+<INCLURE{fond=inc/head}{env} />
+<link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet">
+<style>
+@font-face {
+	font-family: "PT_Serif";
+	src: url("PT_Serif-Web-Regular.ttf") format("ttf");
+}
+	#paroles{
+		font-size: 1.2em;
+		/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#b5a694+0,e5d2bc+100 */
+background: #b5a694; /* Old browsers */
+background: -moz-linear-gradient(left, #b5a694 0%, #e5d2bc 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(left, #b5a694 0%,#e5d2bc 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to right, #b5a694 0%,#e5d2bc 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b5a694', endColorstr='#e5d2bc',GradientType=1 );
+
+		border-top: 2px solid #938676;
+		border-bottom: 2px solid #938676;
+		font-family: 'PT_serif', georgia;
+	}
+	#paroles .container {
+		max-width: 970px;
+	}
+	#paroles h1 {
+		font-family: 'Amatic SC', Georgia, cursive;
+		font-size: 5em;
+	}
+	#paroles h2 {
+		font-family: 'Amatic SC', Georgia, cursive;
+		font-size: 4em;
+		background-color: transparent;
+		color: #000;
+		padding: 60px 0 50px 0;
+		margin:0;
+		text-align: left;
+	}
+	#paroles h3 {
+		font-family: 'Amatic SC', Georgia, cursive;
+		font-size: 2.3em;
+		background-color: transparent;
+		color: #000;
+		margin:21px 0 0 0;
+		text-align: left;
+	}
+	#paroles h4 {
+		font-family: 'Amatic SC', Georgia, cursive;
+		font-size: 3em;
+		background-color: transparent;
+		color: #fff;
+		padding: 0;
+		margin:0;
+		text-align: left;
+	}
+		#paroles h4 a{
+			text-transform: none;
+			font-family: 'Amatic SC', Georgia, cursive;
+			font-size: 0.8em;
+			color:#fff;
+			margin-bottom: 15px;
+			display: inline-block;
+}
+	#paroles .chapoune {
+		font-family: 'PT_serif', georgia;
+		padding-left: 20px;
+		border-left: 1px solid #938676;
+		margin: 20px 0;
+	}
+
+	#paroles hr {
+		text-align: center;
+		width: 200px;
+		margin: 30px auto;
+	}
+	#paroles .gbouton{
+		border: 1px solid #938676;
+		margin-bottom: 30px;
+	}
+	#paroles .corps {
+    height: auto;
+    overflow: hidden;
+		padding: 10px;
+}
+#paroles .texte {
+	font-size: 1.2em;
+}
+#paroles .texte i{
+	font-size: 1em;
+	display: inline-block;
+	padding-left: 20px;
+}
+.printmail.reseausoc {
+	opacity: 0.8;
+}
+.printmail.reseausoc .texte {
+	border: none;
+}
+
+.printmail.reseausoc .texte span {
+	display: none;
+}
+.printmail a, .printmail button {
+    filter: grayscale(100%);
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+}
+</style>
+</head>
+<body>
+<INCLURE{fond=inclure/menu}{edd=#ID_SECTEUR}{env}/>
+<div class="main" id="pagearticle">
+	<div class="contenu" id="paroles">
+		<div class="container">
+			<div class="col-md-24"> <!-- début dossier une  -->
+			<INCLURE{fond=inclure/bouton-impression}{env} />
+			<div class="sous-rub">
+				<BOUCLE_stag(RUBRIQUES){parents}>
+				<h4><a [(#TITRE|=={#_article:TITRE_RUBRIQUE}|?{'class="on"',''})] href="#URL_RUBRIQUE"> #TITRE </a></h4>
+				</BOUCLE_stag>
+			</div>
+			<div class="break"></div>
+			[(#LOGO_ARTICLE)]
+			<h1 class="#EDIT{titre}">#TITRE</h1>
+
+			[<div class="chapoune">
+				<div class="#EDIT{chapo}">(#CHAPO)</div>
+			</div>]
+
+			<div class="texte">#TEXTE</div>
+
+			<INCLURE{fond=inclure/bouton-partage}{env} />
+
+			<h2>Les autres témoignages</h2>
+				<BOUCLE_tem(ARTICLES){id_rubrique}{par num titre}{exclus}>
+					<div class="col-md-12">
+					<a class="gbouton" href="#URL_ARTICLE">
+						<div class="artsuite_par2">
+							<div class="logoart">
+								<div class=""></div>
+								[(#LOGO_ARTICLE)]
+							</div>
+							<div class="corps">
+								<h4>#TITRE</h4>
+								#CHAPO
+							</div>
+						</div>
+					</a>
+					</div>
+					[(#COMPTEUR_BOUCLE|modulo{2}|=={0}|?{"<br class='break'/>"})]
+				</BOUCLE_tem>
+
+			</B_tem>
+			</div> <!-- fin dossier une  -->
+
+	</div>
+</div>
+<INCLURE{fond=inclure/footer}{env} />
+</body>
+</html>
+</BOUCLE_article>
