@@ -1,0 +1,25 @@
+<style>
+	button {
+		background-color: transparent;
+		border: none;
+		padding:0;
+		margin: 0;
+	}
+	.voteok {
+		display: block;
+		height: 128px;
+		width: 128px;
+		background: url(#CHEMIN{images/coeur_rouge.png}) no-repeat top left;
+}
+</style>
+<div class="ajax">
+	[<p class="voteok">(#ENV*{message_ok})</p>]
+[(#ENV*{message_ok}|?{'',' '})
+		<form action='#ENV{action}' method='post' id="form#ENV{id_projet}">
+	<div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<button type="submit" id="submit#ENV{id_projet}"><img src="#CHEMIN{images/coeur_noir.png}" /></button>
+	</div>
+</form>
+]
+</div>
