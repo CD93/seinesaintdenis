@@ -13,4 +13,4 @@
 /spip/plugins/auto
 .DS_Store
 package-lock.json
-config/*.php
+config

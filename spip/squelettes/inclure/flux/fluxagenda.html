@@ -1,4 +1,4 @@
-#SET{url,http://lemag.seinesaintdenis.fr/spip.php?page=fluxagenda}
+#SET{url,https://lemag.seinesaintdenis.fr/spip.php?page=fluxagenda}
 <BOUCLE_art_rdv(DATA)
 {source simplexml, #GET{url}|copie_locale{modif}}
 {datapath root/children/article}{0,1}>

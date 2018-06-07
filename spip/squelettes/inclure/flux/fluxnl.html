@@ -1,4 +1,4 @@
-#SET{url,http://nl.seine-saint-denis.fr/spip.php?page=fluxnl}
+#SET{url,https://nl.seinesaintdenis.fr/spip.php?page=fluxnl}
 <BOUCLE_nlglob(DATA) {source simplexml, #GET{url}|copie_locale{modif}}{datapath root/children/article}>
   <li class="sous-rubrique"><a title="#VALEUR{children/titre/0/text}" href="#VALEUR{children/link/0/text}">#VALEUR{children/titre/0/text}</a></li>
 </BOUCLE_nlglob>
