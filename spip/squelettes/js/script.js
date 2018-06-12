@@ -110,9 +110,9 @@
   			kkeys.push( e.keyCode );
   			if ( kkeys.toString().indexOf( knm ) >= 0 ) {
   				if (Math.round(Math.random()) == 1) {
-  					window.location = "http://seine-saint-denis.fr/2048";
+  					window.location = "https://seinesaintdenis.fr/2048";
   				} else {
-  					window.location = "http://seine-saint-denis.fr/2048";
+  					window.location = "https://seinesaintdenis.fr/2048";
   				}
   			}
   		}, true);

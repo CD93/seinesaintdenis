@@ -94,7 +94,7 @@ function formulaires_adpa_traiter_dist()
 				<br><br>
 				Ceci est <u><b>une estimation</b></u> qui ne peut &ecirc;tre oppos&eacute;e au d&eacute;partement de  la Seine-Saint-Denis.
 				Seul le montant de votre taux de participation figurant sur la d&eacute;cision d\'attribution de l\'A.D.P.A &agrave; domicile engage le d&eacute;partement.
-				<br/><br/><center><a href="http://www.seine-saint-denis.fr/ADPA.html">Effectuer une nouvelle estimation</a><center>
+				<br/><br/><center><a href="https://seinesaintdenis.fr/ADPA.html">Effectuer une nouvelle estimation</a><center>
 				';
 	
 	return $retour;

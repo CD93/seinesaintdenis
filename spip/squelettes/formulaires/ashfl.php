@@ -43,7 +43,7 @@ function formulaires_ashfl_verifier_dist()
 		else if(_request($valeur) < 0)
 			$erreurs[$valeur] = 'Vous devez entrer une valeur positive ou &eacute;gale &agrave; z&eacute;ro';
 	
-	$minimumVieillesse =  708.95; // Valeur a changer toutes les années.
+	$minimumVieillesse =  708.95; // Valeur a changer toutes les annï¿½es.
 	if(_request('aspa') > $minimumVieillesse)
 		$erreurs['aspa'] = 'Les ressources ne peuvent pas &ecirc;tre sup&eacute;rieures &agrave; '.$minimumVieillesse.' &euro;, montant minimum vieillesse pour une personne seule, au 1er avril 2010.';
     
@@ -58,7 +58,7 @@ function formulaires_ashfl_traiter_dist()
 	$retour = array('editable' => true);
 	$ressourceMensuelles = (_request('salaires')+ _request('retraites') + _request('revenusic') + _request('viageres') + _request('revenuscm') + _request('revenusf'))/12;
 	$totalRessource = $ressourceMensuelles + _request('aspa');
-	$minimumVieillesse = 708.95; // Valeur a changer toutes les années.
+	$minimumVieillesse = 708.95; // Valeur a changer toutes les annï¿½es.
 	if($ressourceMensuelles > $minimumVieillesse)	
 	{	
 		$capacaiteContributive = ($ressourceMensuelles - $minimumVieillesse) * 0.90;
@@ -103,7 +103,7 @@ function formulaires_ashfl_traiter_dist()
 	$retour .= 	'<br />
 				<a href="./spip.php?article4">Autre estimation</a>
 				<br />
-				<a href="http://www.seine-saint-denis.fr">Quitter l\'estimation</a>
+				<a href="https://seinesaintdenis.fr">Quitter l\'estimation</a>
 				<br />
 				<br />
 				<b>Rappel :</b> Ceci est une simulation et ne peut engager le D&eacute;partement de la Seine-Saint-Denis. 

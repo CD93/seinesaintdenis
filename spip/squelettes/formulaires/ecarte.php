@@ -27,10 +27,10 @@ function formulaires_ecarte_traiter_dist(){
 	$subject='Bonjour '.$nom_dest.', '.$nom_exp.' vous a envoyé une e-carte !';
 	$subject=utf8_decode($subject);
 	$corp ='
-	<img src="http://www.seine-saint-denis.fr/squelettes/images/voeux2017/E-Carte-2017.jpg"/><br/>
+	<img src="https://seinesaintdenis.fr/squelettes/images/voeux2017/E-Carte-2017.jpg"/><br/>
 	<p class="texte" style="font-size:14px;padding:10px;border:2px solid #ddd; width:522px;font-family:\'Arial Black\', Gadget, sans-serif; color:#66347D;">'
 	.$message.'
-	</p><strong style="font-size:14px;padding:10px;width:522px;font-family:\'Arial Black\', Gadget, sans-serif; color:#66347D;">'.$nom_exp.'</strong><br/><br/><p>Envoy&eacute; depuis <a href="http://www.seine-saint-denis.fr/?page=sommaire&utm_campaign=Voeux_2015&utm_medium=e-mail&utm_source=EmailVoeux">www.seine-saint-denis.fr</a></p>';
+	</p><strong style="font-size:14px;padding:10px;width:522px;font-family:\'Arial Black\', Gadget, sans-serif; color:#66347D;">'.$nom_exp.'</strong><br/><br/><p>Envoy&eacute; depuis <a href="https://seinesaintdenis.fr/?page=sommaire&utm_campaign=Voeux_2015&utm_medium=e-mail&utm_source=EmailVoeux">www.seine-saint-denis.fr</a></p>';
 			
 			$headers  = 'MIME-Version: 1.0' . "\r\n";
 			$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
