@@ -30,7 +30,7 @@ function formulaires_ecarte_traiter_dist(){
 	<img src="https://seinesaintdenis.fr/squelettes/images/voeux2017/E-Carte-2017.jpg"/><br/>
 	<p class="texte" style="font-size:14px;padding:10px;border:2px solid #ddd; width:522px;font-family:\'Arial Black\', Gadget, sans-serif; color:#66347D;">'
 	.$message.'
-	</p><strong style="font-size:14px;padding:10px;width:522px;font-family:\'Arial Black\', Gadget, sans-serif; color:#66347D;">'.$nom_exp.'</strong><br/><br/><p>Envoy&eacute; depuis <a href="https://seinesaintdenis.fr/?page=sommaire&utm_campaign=Voeux_2015&utm_medium=e-mail&utm_source=EmailVoeux">www.seine-saint-denis.fr</a></p>';
+	</p><strong style="font-size:14px;padding:10px;width:522px;font-family:\'Arial Black\', Gadget, sans-serif; color:#66347D;">'.$nom_exp.'</strong><br/><br/><p>Envoy&eacute; depuis <a href="https://seinesaintdenis.fr/?page=sommaire&utm_campaign=Voeux_2015&utm_medium=e-mail&utm_source=EmailVoeux">www.seinesaintdenis.fr</a></p>';
 			
 			$headers  = 'MIME-Version: 1.0' . "\r\n";
 			$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
