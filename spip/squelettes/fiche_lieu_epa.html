@@ -1,0 +1,131 @@
+[(#SET{id,#ENV{monid,#ENV{id,1}}})]
+[(#SET{layer,#ENV{layer_id,533}})]
+#SET{urlgeo,http://geoportail93.fr/SERV/DATA/?LAYERS=#GET{layer}&FORMAT=json&SERVICE=wfs&SRS=4326&COL=ALL&FILTRE=id_geo_serial=#GET{id}}
+
+<style type="text/css">
+	.ligne {
+		display: block;
+	}
+	.alias,.texte {
+		display: inline;
+	}
+	.alias {
+		font-weight: 700;
+		padding-right: 5px;
+	}
+	.alias::after {
+		content: ":";
+	}
+	.nivinfo {
+		border-bottom: 1px solid #333;
+		font-size: 1.1em;
+		margin:10px 0 5px 0;
+		display:block;
+	}
+	.titremodale {
+		text-align: center;
+		font-weight: 700;
+		font-size: 1.2em;
+		margin: 0 auto;
+		padding : 0 0 10px 0;
+	}
+</style>
+<div class="titremodale">Établissement d'accueil</div>
+<BOUCLE_tableau(DATA){source json, #GET{urlgeo}|copie_locale{modif}}>
+<div class="nivinfo">#NOM</div>
+<div class="ligne" style=";">
+	<div class="alias" title="Champ : adresse">Adresse</div><div class="texte" style="position:relative">#ADRESSE[ (#CODE_POSTA)][ (#COMMUNE)]</div></div>
+
+<div class="ligne" style=";">
+	<div class="alias" title="Champ : typologie
+	Type SGBD : varchar
+	Type data : RADIO
+	Nb car : 5
+	Représentation :">Type d'établissement</div><div class="texte" style="position:relative">#TYPOLOGIE</div></div>
+<div class="ligne" style=";"><div class="alias" title="Champ : libelle
+	Type SGBD : varchar
+	Type data : RADIO
+	Nb car : 65
+	Représentation :">Libellé du type d'établissement</div><div class="texte" style="position:relative">#LIBELLE</div></div>
+<div class="ligne" style=";"><div class="alias" title="Champ : statut
+	Type SGBD : varchar
+	Type data : RADIO
+	Nb car : 10
+	Représentation :">Statut de l'établissement</div><div class="texte" style="position:relative">#STATUT</div></div>
+<div class="ligne" style=";"><div class="alias" title="Champ : type_statu
+	Type SGBD : varchar
+	Type data : SELECT
+	Nb car : 16
+	Représentation :">Type et statut de l'établissement</div><div class="texte" style="position:relative">#TYPE_STATU</div></div>
+<div class="ligne" style=";"><div class="alias" title="Champ : habilitati
+	Type SGBD : bool
+	Type data : RADIO
+	Nb car : 1
+	Représentation :">Habilitation agents de service hospitalier</div><div class="texte" style="position:relative">#HABILITATI</div></div>
+<div class="ligne" style=";"><div class="alias" title="Champ : structure_
+	Type SGBD : bool
+	Type data : RADIO
+	Nb car : 1
+	Représentation :">Structure autorisée</div><div class="texte" style="position:relative">#STRUCTURE_</div></div>
+<div class="ligne" style=";"><div class="alias" title="Champ : structure1
+	Type SGBD : bool
+	Type data : RADIO
+	Nb car : 1
+	Représentation :">Structure installée</div><div class="texte" style="position:relative">#STRUCTURE1</div></div><div class="ligne" style=";"><div class="alias" title="Champ : etat
+	Type SGBD : varchar
+	Type data : RADIO
+	Nb car : 8
+	Représentation :">Etablissement existant ou en projet</div><div class="texte" style="position:relative">#ETAT</div></div>
+<div class="ligne" style=";"><div class="alias" title="Champ : id_geo_serial
+	Type SGBD : int4
+	Type data : ENTIER
+	Nb car : 2
+	Représentation :">Id geo serial</div><div class="texte" style="position:relative">#ID_GEO_SERIAL</div></div>
+<div class="nivinfo">Informations sur le lieu de l'action</div>
+<div id="informations_sur_le_lieu_de_l_action" style="display:block;position:relative">
+	<div id="capacite_d_accueil" style="display:block;position:relative">
+		<div class="ligne" style=";"><div class="alias" title="Champ : nb_places_">nombre de places habilitées ASH</div><div class="petit_texte" style="text-align:left;padding:0 5px 5px 6px"><div style="color:inherit;font-size:inherit;line-height:inherit">aide sociale à l'hébergement</div></div><div class="texte" style="position:relative">#NB_PLACES_</div></div>
+		<div class="ligne" style=";"><div class="alias" title="Champ : nb_places1
+			Type SGBD : int8
+			Type data : ENTIER
+			Nb car : 2
+			Représentation :">nombre de places HP autorisées</div><div class="petit_texte" style="text-align:left;padding:0 5px 5px 6px"><div style="color:inherit;font-size:inherit;line-height:inherit">hébergement permanent</div></div><div class="texte" style="position:relative">#NB_PLACES1</div></div>
+		<div class="ligne" style=";"><div class="alias" title="Champ : nb_place_1
+			Type SGBD : int8
+			Type data : ENTIER
+			Nb car : 1
+			Représentation :">nombre de places HT autorisées</div><div class="petit_texte" style="text-align:left;padding:0 5px 5px 6px"><div style="color:inherit;font-size:inherit;line-height:inherit">hébergement temporaire</div></div><div class="texte" style="position:relative">#NB_PLACE_1</div></div>
+		<div class="ligne" style=";"><div class="alias" title="Champ : nb_place_2
+			Type SGBD : int8
+			Type data : ENTIER
+			Nb car : 1
+			Représentation :">nombre de places AJ autorisées</div><div class="petit_texte" style="text-align:left;padding:0 5px 5px 6px"><div style="color:inherit;font-size:inherit;line-height:inherit">accueil de jour</div></div><div class="texte" style="position:relative">#NB_PLACE_2</div></div>
+		<div class="ligne" style=";"><div class="alias" title="Champ : nb_place_3
+			Type SGBD : int8
+			Type data : ENTIER
+			Nb car : 2
+			Représentation :">nombre total de places autorisées</div><div class="texte" style="position:relative">#NB_PLACE_3</div></div>
+		<div class="ligne" style=";"><div class="alias" title="Champ : nb_place_4
+			Type SGBD : int8
+			Type data : ENTIER
+			Nb car : 2
+			Représentation :">nombre de places HP installées</div><div class="petit_texte" style="text-align:left;padding:0 5px 5px 6px"><div style="color:inherit;font-size:inherit;line-height:inherit">hébergement permanent</div></div><div class="texte" style="position:relative">#NB_PLACE_4</div></div>
+		<div class="ligne" style=";"><div class="alias" title="Champ : nb_place_5
+			Type SGBD : int8
+			Type data : ENTIER
+			Nb car : 1
+			Représentation :">nombre de places HT installées</div><div class="petit_texte" style="text-align:left;padding:0 5px 5px 6px"><div style="color:inherit;font-size:inherit;line-height:inherit">hébergement temporaire</div></div><div class="texte" style="position:relative">#NB_PLACE_5</div></div>
+		<div class="ligne" style=";"><div class="alias" title="Champ : nb_place_6
+			Type SGBD : int8
+			Type data : ENTIER
+			Nb car : 1
+			Représentation :">nombre de places AJ installées</div><div class="petit_texte" style="text-align:left;padding:0 5px 5px 6px"><div style="color:inherit;font-size:inherit;line-height:inherit">accueil de jour</div></div><div class="texte" style="position:relative">#NB_PLACE_6</div></div>
+		<div class="ligne" style=";"><div class="alias" title="Champ : nb_place_7
+			Type SGBD : int8
+			Type data : ENTIER
+			Nb car : 2
+			Représentation :">nombre total de places installées</div><div class="texte" style="position:relative">#NB_PLACE_7</div>
+		</div>
+	</div>
+</div>
+</BOUCLE_tableau>
