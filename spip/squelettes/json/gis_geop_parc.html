@@ -1,6 +1,6 @@
 #CACHE{24*3600}
 #SET{url,https://geoportail93.fr/SERV/DATA/?LAYERS=1166&FORMAT=GEOJSON&SERVICE=wfs&SRS=4326&COL=ALL&FILTRE=statut='E'}
-#SET{urlimg,http://geoportail93.fr/SERV/FICHIER/?TYPE=DOCS&LAYER=1166&NEW_L=85&FILE=}
+#SET{urlimg,https://geoportail93.fr/SERV/FICHIER/?TYPE=DOCS&LAYER=1166&NEW_L=85&FILE=}
 <BOUCLE_flux(DATA)
   {source json,#GET{url}|copie_locale{modif}}{datapath features}{","}>
   #SET{photo,""}#SET{plan,""}#SET{tel2,""}#SET{fax,""}#SET{type_accue,""}

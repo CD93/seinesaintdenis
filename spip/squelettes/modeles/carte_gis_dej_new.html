@@ -54,7 +54,7 @@
 			};
 		});
 		map[(#GET{id})].attributionControl.addAttribution('<a href="https://geoportail93.fr">Géoportail93</a>');
-		
+
 		var Travaux = L.featureGroup().addTo(map[(#GET{id})]); // feature group ou on va inserer les travaux
 		var fondCD = L.featureGroup().addTo(map[(#GET{id})]); // feature group ou on va inserer les fonds de cartes
 		var geojson1,geojson11,geojson2,geojson3,geojson31,geojson32;
@@ -63,20 +63,20 @@
 		$.getJSON("#CHEMIN{json/departement-invert.json}", function (geoJson1) {
 		    geojson1 = L.geoJson(geoJson1, {
 		    	style: { color: "#0AABA4", fillColor: "#FFF", weight: 3, fillOpacity:0.8, clickable: false }
-		    }).addTo(fondCD); 
+		    }).addTo(fondCD);
 		  	/*geojson11 = L.geoJson(geoJson1,{
 		  		style: { color: "#0AABA4", fillColor: "#FFF", weight: 3, opacity: 0.9, fillOpacity:0.6, clickable: false }
-		  	}).addTo(fondCD); */ 
+		  	}).addTo(fondCD); */
 		});
 
 		//on ajoute les limites communales
-		
-		$.getJSON("https://geoportail93.fr/SERV/DATA/?LAYERS=1458&FORMAT=geojson&SERVICE=wfs&SRS=4326&COL=all&FILTRE=depart%20LIKE%20%27SEINE-SAINT-DENIS%%27", function (geoJson2) {
+		#SET{urlgeocom,https://geoportail93.fr/SERV/DATA/?LAYERS=1458&FORMAT=geojson&SERVICE=wfs&SRS=4326&COL=all&FILTRE=depart%20LIKE%20%27SEINE-SAINT-DENIS%%27}
+		$.getJSON("[(#GET{urlgeocom}|copie_locale{modif})]", function (geoJson2) {
 		    geojson2 = L.geoJson(geoJson2, {
 		    	style: { color: "#C0DBD9", weight: 2, opacity: 0.8, fill: false, clickable: false }
 		    }).addTo(fondCD);
 		});
-			
+
 		//ajout couche collèges points
 		var pointsCluster = L.markerClusterGroup({
 			spiderfyOnMaxZoom: true,
@@ -106,24 +106,24 @@
 			*/
 		}).on('clustermouseout', function (a) {
 		});
-		
+
 		var group3 = L.featureGroup.subGroup(pointsCluster),
 		group31 = L.featureGroup.subGroup(pointsCluster),
 		group32 = L.featureGroup.subGroup(pointsCluster),
 		control = L.control.layers(null, null, { collapsed: false, position: 'bottomleft' });
-		
+
 		control.addOverlay(group32, '<i class="futur"><img src="#CHEMIN{images/picto-carto/travaux-college-v.png}" width="20px" height="20px" /></i><span> en préparation</span>');
 		control.addOverlay(group31, '<i class="encours"><img src="#CHEMIN{images/picto-carto/travaux-college-o.png}" width="20px" height="20px" /></i><span> en travaux</span>');
 		control.addOverlay(group3, '<i class="passe"><img src="#CHEMIN{images/picto-carto/travaux-college-b.png}" width="20px" height="20px" /></i><span> livrés</span>');
 		control.addTo(map[(#GET{id})]);
-	
+
 		group3.addTo(map[(#GET{id})]); // Adding to map now adds all child layers into the parent group.
 		group31.addTo(map[(#GET{id})]);
 		group32.addTo(map[(#GET{id})]);
-		
+
 		// ajouter un select pour les communes
 		var select_options = '<select id="choixcommune"><option value="0">Choisir une commune</option><option value="1">Aubervilliers</option><option value="2">Aulnay-sous-Bois</option><option value="3">Bagnolet</option><option value="4">Bobigny</option><option value="5">Bondy</option><option value="6">Clichy-sous-Bois</option><option value="7">Coubron</option><option value="8">Drancy</option><option value="9">Dugny</option><option value="10">Epinay-sur-Seine</option><option value="11">Gagny</option><option value="12">Gournay-sur-Marne</option><option value="13">L Ile-Saint-Denis</option><option value="14">La Courneuve</option><option value="15">Le Blanc-Mesnil</option><option value="16">Le Bourget</option><option value="17">Le Pré-Saint-Gervais</option><option value="18">Le Raincy</option><option value="19">Les Lilas</option><option value="20">Les Pavillons-sous-Bois</option><option value="21">Livry-Gargan</option><option value="22">Montfermeil</option><option value="23">Montreuil</option><option value="24">Neuilly-Plaisance</option><option value="25">Neuilly-sur-Marne</option><option value="26">Noisy-le-Grand</option><option value="27">Noisy-le-Sec</option><option value="28">Pantin</option><option value="29">Pierrefitte-sur-Seine</option><option value="30">Romainville</option><option value="31">Rosny-sous-Bois</option><option value="32">Saint-Denis</option><option value="33">Saint-Ouen</option><option value="34">Sevran</option><option value="35">Stains</option><option value="36">Tremblay-en-France</option><option value="37">Vaujours</option><option value="38">Villemomble</option><option value="39">Villepinte</option><option value="40">Villetaneuse</option></select>';
-		
+
 		var ctrl = L.control({position: 'topright'});
 		ctrl.onAdd = function(map[(#GET{id})]) {
 			this._div = L.DomUtil.create('div', 'ctrl_category');
@@ -133,7 +133,7 @@
 			return this._div;
 		}
 		ctrl.addTo(map[(#GET{id})]);
-		
+
 		// ajout du logo
 		var logo = L.control({position: 'topleft'});
 		logo.onAdd = function(map[(#GET{id})]) {
@@ -143,7 +143,7 @@
 			return this._div;
 		}
 		logo.addTo(map[(#GET{id})]);
-		
+
 		function changeHandler(e){
 			switch (e.target.value) {
 				case "1":
@@ -268,10 +268,10 @@
 					break;
 				default:
 					map[(#GET{id})].setView([48.90903,2.45506 ], 12);
-					break;	
+					break;
 			}
-		};		
-		
+		};
+
 		function defineClusterIcon(cluster) {
 			var nbre = cluster.getChildCount();
 			return L.icon({
@@ -295,17 +295,20 @@
 		function choixdate(date_a_confirmer, date_convenue) {
 			if (date_convenue) return new Date(date_convenue.substr(0,4),date_convenue.substr(5,2),date_convenue.substr(8,2));
 			else if (date_a_confirmer) return new Date(date_a_confirmer.substr(0,4),date_a_confirmer.substr(5,2),date_a_confirmer.substr(8,2));
-		}		
+		}
 		function formatdate(date) {
 			var d = new Date(date);
 		    if (!isNaN(d.valueOf())) return date.getDate()+'/'+date.getMonth()+'/'+date.getFullYear();
-		}	
+		}
 		function compareetat(avcmnt) {
 			if (avcmnt.substr(0,1) > 7 ) return "passe";
 			else if (avcmnt.substr(0,1) == 7 ) return "encours";
 			else return "futur";
-		}	
-		$.getJSON("https://geoportail93.fr/SERV/DATA/?LAYERS=1536&FORMAT=geojson&SERVICE=wfs&SRS=4326&COL=ALL", function (geoJson3) {
+		}
+
+
+		#SET{urlgeo,https://geoportail93.fr/SERV/DATA/?LAYERS=1536&FORMAT=geojson&SERVICE=wfs&SRS=4326&COL=ALL}
+		$.getJSON("[(#GET{urlgeo}|copie_locale{modif})]", function (geoJson3) {
 			geojson3 = L.geoJson(geoJson3, {
 				filter: function (feature, layer) {
 					if (feature.properties) {
@@ -334,9 +337,9 @@
 				onEachFeature: bindPopup
 			});
 			geojson3.eachLayer(function (layer) {
-				layer.addTo(group3);					
+				layer.addTo(group3);
 			});
-			
+
 			geojson31 = L.geoJson(geoJson3, {
 				filter: function (feature, layer) {
 					if (feature.properties) {
@@ -365,9 +368,9 @@
 				onEachFeature: bindPopup
 			});
 			geojson31.eachLayer(function (layer) {
-				layer.addTo(group31);	
+				layer.addTo(group31);
 			});
-			
+
 			geojson32 = L.geoJson(geoJson3, {
 				filter: function (feature, layer) {
 					if (feature.properties) {
@@ -396,16 +399,16 @@
 				onEachFeature: bindPopup
 			});
 			geojson32.eachLayer(function (layer) {
-				layer.addTo(group32);				
+				layer.addTo(group32);
 			});
-			
-			
+
+
 		});
 		map[(#GET{id})].addLayer(pointsCluster);
-        
+
         var zoomHome = L.control.defaultExtent({position: 'topleft'});
 		zoomHome.addTo(map[(#GET{id})]);
-		
+
 		//pour chaque point à cliquer
 		function bindPopup(feature, layer) {
 	    	var arr = feature.properties;

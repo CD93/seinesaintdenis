@@ -46,8 +46,8 @@
 		});
 
 		//on ajoute les limites communales
-
-		$.getJSON("https://geoportail93.fr/SERV/DATA/?LAYERS=1458&FORMAT=geojson&SERVICE=wfs&SRS=4326&COL=all&FILTRE=depart%20LIKE%20%27SEINE-SAINT-DENIS%%27", function (geoJson2) {
+		#SET{urlgeocom,https://geoportail93.fr/SERV/DATA/?LAYERS=1458&FORMAT=geojson&SERVICE=wfs&SRS=4326&COL=all&FILTRE=depart%20LIKE%20%27SEINE-SAINT-DENIS%%27}
+		$.getJSON("[(#GET{urlgeocom}|copie_locale{modif})]", function (geoJson2) {
 		    geojson2 = L.geoJson(geoJson2, {
 		    	style: { color: "#C0DBD9", weight: 2, opacity: 0.8, fill: false, clickable: false }
 		    }).addTo(fondCD);
@@ -267,7 +267,8 @@
 			zIndex: 1500
 		});
 
-				$.getJSON("https://geoportail93.fr/SERV/DATA/?LAYERS=533&FORMAT=geojson&SERVICE=wfs&SRS=4326&COL=ALL&MODE_GEO=point", function (geoJson3) {
+		#SET{urlgeo,https://geoportail93.fr/SERV/DATA/?LAYERS=533&FORMAT=geojson&SERVICE=wfs&SRS=4326&COL=ALL&MODE_GEO=point}
+				$.getJSON("[(#GET{urlgeo}|copie_locale{modif})]", function (geoJson3) {
 					geojson31 = L.geoJson(geoJson3, {
 						filter: function (feature, layer) {
 							if (feature.properties) {

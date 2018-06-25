@@ -79,7 +79,9 @@
 				return newdate.getDate()+'/'+newdate.getMonth()+'/'+newdate.getFullYear();
 			} else { return "";}
 		}
-		$.getJSON("https://geoportail93.fr/SERV/DATA/?LAYERS=1612&FORMAT=geojson&SERVICE=wfs&SRS=4326&COL=ALL", function (geoJson3) {
+
+		#SET{urlgeo1,https://geoportail93.fr/SERV/DATA/?LAYERS=1612&FORMAT=geojson&SERVICE=wfs&SRS=4326&COL=ALL}
+		$.getJSON("[(#GET{urlgeo1}|copie_locale{modif})]", function (geoJson3) {
 			geojson31 = L.geoJson(geoJson3, {
 				style: { color: "#3f3be3", fillColor: "#3f3be3", weight: 15, opacity: 1,fillOpacity:1, clickable: false },
 				onEachFeature: onEachFeature
@@ -88,7 +90,9 @@
 				layer.addTo(group31);
 			});
 		});
-			$.getJSON("https://geoportail93.fr/SERV/DATA/?LAYERS=1612&FORMAT=geojson&SERVICE=wfs&SRS=4326&COL=ALL&MODE_GEO=POINT", function (geoJson32) {
+
+		#SET{urlgeo2,https://geoportail93.fr/SERV/DATA/?LAYERS=1612&FORMAT=geojson&SERVICE=wfs&SRS=4326&COL=ALL&MODE_GEO=POINT}		
+			$.getJSON("[(#GET{urlgeo2}|copie_locale{modif})]", function (geoJson32) {
 				geojson32 = L.geoJson(geoJson32, {
 					pointToLayer: function (feature, latlng) {
 						return L.marker(latlng, {

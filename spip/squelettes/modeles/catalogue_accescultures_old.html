@@ -1,8 +1,9 @@
+#SET{url,https://geoportail93.fr/SERV/DATA/?LAYERS=3&FORMAT=json&SERVICE=wfs&SRS=4326&COL=id;nomequipem;commune;categorie;accesslieu;accessli_1;acceslieuh;acceslie_1}
 <div class="form-group">
   	<label for="ville">Choisissez une ville</label>
 	<select class="form-control" id="ville" name="ville">
 			<option value="">toutes</option>
-		<BOUCLE_ville(DATA){source json, "http://geoportail93.fr/SERV/DATA/?LAYERS=3&FORMAT=json&SERVICE=wfs&SRS=4326&COL=id;commune"}{fusion commune}{par commune}>
+		<BOUCLE_ville(DATA){source json, #GET{url}|copie_locale{modif}}{fusion commune}{par commune}>
 		  	<option value="[(#COMMUNE|strtolower|ucfirst)]">[(#COMMUNE|strtolower|ucfirst)]</option>
 		</BOUCLE_ville>
 	</select>
@@ -11,7 +12,7 @@
   	<label for="cate">Choisissez une cat&eacute;gorie</label>
 	<select class="form-control" id="categorie" name="categorie">
 			<option value="">toutes</option>
-		<BOUCLE_theme(DATA){source json, "http://geoportail93.fr/SERV/DATA/?LAYERS=3&FORMAT=json&SERVICE=wfs&SRS=4326&COL=id;categorie"}{fusion categorie}{par categorie}>
+		<BOUCLE_theme(DATA){source json, #GET{url}|copie_locale{modif}}{fusion categorie}{par categorie}>
 		  	<option value="[(#CATEGORIE|strtolower|ucfirst)]">[(#CATEGORIE|strtolower|ucfirst)]</option>
 		</BOUCLE_theme>
 	</select>
@@ -30,9 +31,9 @@
                <th><img src="#CHEMIN{images/pictogrammeoreille.png}" alt="Acces mal-entendant" height="40px" width="40px" /></th>
                <th><img src="#CHEMIN{images/pictogrammevisage.png}" alt="Acces handicap mental"height="40px" width="40px" /></th>
            </tr>
-        </thead> 
+        </thead>
         <tbody>
-		<BOUCLE_tableau(DATA){source json, "http://geoportail93.fr/SERV/DATA/?LAYERS=3&FORMAT=json&SERVICE=wfs&SRS=4326&COL=id;nomequipem;commune;categorie;accessitei;accesnavet;accesslieu;accessli_1"}>
+		<BOUCLE_tableau(DATA){source json, #GET{url}|copie_locale{modif}}>
 			<tr>
 				<td><a href="#" monid="case#ID" class="detail" data-toggle="modal" data-target="#detaill">#VALEUR{nomequipem}</a></td>
 				<td>[(#VALEUR{commune}|strtolower|ucfirst)]</td>
@@ -42,7 +43,7 @@
 				<td>[<center>(#VALEUR{accessitei}|?{&#x025FC;})</center>]</td>
 				<td>[<center>(#VALEUR{accesnavet}|?{&#x025FC;})</center>]</td>
 			</tr>
-			
+
 		</BOUCLE_tableau>
 </tbody>
 </table>
@@ -64,23 +65,23 @@
 <link href="#CHEMIN{js/DataTables-1.10.3/media/css/jquery.dataTables.css}" type="text/css" rel="stylesheet" >
 <script>
 $(document).ready(function() {
-	
+
 	$('.detail').click(function() {
 		var monid = $(this).attr("monid").substr(4);
 		$( ".modal-body" ).load( "#URL_PAGE{fiche_lieu_culture}",{id:monid});
 	});
-	
+
     $('#tableauculture').DataTable( {
     "language": {"url": "#CHEMIN{js/DataTables-1.10.3/media/language/fr_FR.txt}"},
     "bLengthChange": false,
     "bInfo": false,
-    
-    
+
+
         initComplete: function () {
             var api = this.api();
  			var cville = api.column( 1 );
  			var ccat = api.column( 2 );
-            
+
            	$("#ville").on( 'change', function () {
            		var val = $(this).val();
            		cville.search( val ? '^'+val+'$' : '', true, false ).draw();
@@ -89,10 +90,10 @@ $(document).ready(function() {
            		var val = $(this).val();
            		ccat.search( val ? '^'+val+'$' : '', true, false ).draw();
             } );
- 			
+
          }
-         
+
       } );
-	
+
 } );
 </script>

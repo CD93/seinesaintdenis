@@ -167,7 +167,7 @@
 					break;
 				default:
 					map[(#GET{id})].setView([48.90903,2.45506 ], 11);
-					break;	
+					break;
 			}
 		};
 
@@ -175,20 +175,12 @@
 		$.getJSON("#CHEMIN{json/departement-invert.json}", function (geoJson1) {
 		    geojson1 = L.geoJson(geoJson1, {
 		    	style: { color: "#FFF", fillColor: "#fff", weight: 1, fillOpacity:0.9, clickable: false },
-		    }).addTo(fondCD); 
-		});
-		//on ajoute les limites communales
-		/*
-		$.getJSON("https://geoportail93.fr/SERV/DATA/?LAYERS=1458&FORMAT=geojson&SERVICE=wfs&SRS=4326&COL=all&FILTRE=depart%20LIKE%20%27SEINE-SAINT-DENIS%%27", function (geoJson2) {
-		    geojson2 = L.geoJson(geoJson2, {
-		    	style: { color: "#C0DBD9", weight: 2, opacity: 0.8, fill: false, clickable: false }
 		    }).addTo(fondCD);
 		});
-		*/
 				
 		var zoomHome = L.control.defaultExtent({position: 'topleft'});
 		zoomHome.addTo(map[(#GET{id})]);
-		
+
 		// fin de personnalisation de carte_gis
 	});
 /*\]\]>*/

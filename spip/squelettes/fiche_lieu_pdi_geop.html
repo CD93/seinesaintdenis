@@ -1,7 +1,7 @@
 #CACHE{24*3600}
 [(#SET{id,#ENV{monid,#ENV{id,1}}})]
 [(#SET{layer,#ENV{layer_id,1553}})]
-#SET{urlgeo,http://geoportail93.fr/SERV/DATA/?LAYERS=#GET{layer}&FORMAT=json&SERVICE=wfs&SRS=4326&COL=all&FILTRE=id=#GET{id}}
+#SET{urlgeo,https://geoportail93.fr/SERV/DATA/?LAYERS=#GET{layer}&FORMAT=json&SERVICE=wfs&SRS=4326&COL=all&FILTRE=id=#GET{id}}
 <BOUCLE_tableau(DATA){source json, #GET{urlgeo}|copie_locale{modif}}>
 #SET{adresse,#NUM_ADRESSE|concat{" "}|concat{#RUE}|concat{"<br/>"}|concat{#CP}|concat{" "}|concat{#VILLE}}
 <h2>#THEMATIQUE<br/>#CATEGORIE_ACTION</h2>

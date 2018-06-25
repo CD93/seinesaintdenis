@@ -281,16 +281,9 @@
 		    	style: { color: "#FFF", fillColor: "#fff", weight: 1, fillOpacity:0.9, clickable: false },
 		    }).addTo(fondCD);
 		});
-		//on ajoute les limites communales
-		/*
-		$.getJSON("https://geoportail93.fr/SERV/DATA/?LAYERS=1458&FORMAT=geojson&SERVICE=wfs&SRS=4326&COL=all&FILTRE=depart%20LIKE%20%27SEINE-SAINT-DENIS%%27", function (geoJson2) {
-		    geojson2 = L.geoJson(geoJson2, {
-		    	style: { color: "#C0DBD9", weight: 2, opacity: 0.8, fill: false, clickable: false }
-		    }).addTo(fondCD);
-		});
-		*/
 		// les Parcs
-		$.getJSON("https://geoportail93.fr/SERV/DATA/?LAYERS=1166&FORMAT=geojson&SERVICE=wfs&SRS=4326&COL=id", function (geoJson2) {
+		#SET{urlgeo,https://geoportail93.fr/SERV/DATA/?LAYERS=1166&FORMAT=geojson&SERVICE=wfs&SRS=4326&COL=id}
+		$.getJSON("[(#GET{urlgeo}|copie_locale{modif})]", function (geoJson2) {
 		    geojson2 = L.geoJson(geoJson2, {
 		    	style: { color: "#6ED153", fillColor: "#6ED153", weight: 1, opacity: 1,fillOpacity:0.9, clickable: false }
 		    }).addTo(fondCD);
@@ -298,7 +291,9 @@
 
 
 		// appelle global
-		var points = $.getJSON("https://geoportail93.fr/SERV/DATA/?TYPENAME=1581&FORMAT=GEOJSON&SERVICE=wfs&SRS=4326&COL=descriptif&AGREGE=ARRAY&GROUP=geom,theme,nomespacev");
+		#SET{urlgeopt,https://geoportail93.fr/SERV/DATA/?TYPENAME=1581&FORMAT=GEOJSON&SERVICE=wfs&SRS=4326&COL=descriptif&AGREGE=ARRAY&GROUP=geom,theme,nomespacev}
+
+		var points = $.getJSON("[(#GET{urlgeopt}|copie_locale{modif})]");
 		points.then(function(data) {
 			// ESPACES INITIATIVE
 			var ei =L.geoJson(data,{
