@@ -23,7 +23,23 @@
 	point=#GET{point},
 	cluster=#GET{cluster}}
 )]
-
+<style>
+.leaflet-control-layers-list .Culture1 {
+	color: #EF3123;
+}
+.leaflet-control-layers-list .Culture2 {
+	color: #019199;
+}
+.leaflet-control-layers-list .Culture3 {
+	color: #87499C;
+}
+.leaflet-control-layers-list .Culture4 {
+	color: #43AD49;
+}
+.leaflet-control-layers-list .Culture5 {
+	color: #F46F20;
+}
+</style>
 
 <script type="text/javascript">/*<!\[CDATA\[*/
 	$('#map[(#GET{id})]').on('ready', function(){
@@ -60,10 +76,10 @@
 
 		control = L.control.layers(null, null, { collapsed: false, position: 'bottomleft' });
 
-		control.addOverlay(group31, '<span class="Culture1">AJ</span>');
-		control.addOverlay(group32, '<span class="Culture2">FL</span>');
-		control.addOverlay(group33, '<span class="Culture3">EHPAD</span>');
-		control.addOverlay(group34, '<span class="Culture4">USLD</span>');
+		control.addOverlay(group31, '<span class="Culture1">Accueil de Jour</span>');
+		control.addOverlay(group32, '<span class="Culture2">Foyer Logement</span>');
+		control.addOverlay(group33, '<span class="Culture3">Établissement d\'Hébergement Pour Personnes Âgées Dépendantes</span>');
+		control.addOverlay(group34, '<span class="Culture4">Unité de Soins de Longue Durée</span>');
 		control.addTo(map[(#GET{id})]);
 		// Adding to map now adds all child layers into the parent group.
 		group31.addTo(map[(#GET{id})]);
@@ -272,7 +288,7 @@
 					geojson31 = L.geoJson(geoJson3, {
 						filter: function (feature, layer) {
 							if (feature.properties) {
-								if (feature.properties.typologie=="EHPAD") return true;
+								if (feature.properties.typologie=="AJ") return true;
 								else return false;
 							}
 							return false;
@@ -284,7 +300,7 @@
 							    	url: "#URL_PAGE{fiche_lieu_epa}",
 							    	dataType: "html",
 							    	data: {
-							    		monid: feature.properties["id"],
+							    		monid: feature.properties["id_geo_serial"],
 							    		layer_id: 533,
 							    		mini: true,
 							    	}
@@ -303,7 +319,7 @@
 					geojson32 = L.geoJson(geoJson3, {
 						filter: function (feature, layer) {
 							if (feature.properties) {
-								if (feature.properties.typologie=="AJ") return true;
+								if (feature.properties.typologie=="FL") return true;
 								else return false;
 							}
 							return false;
@@ -315,7 +331,7 @@
 							    	url: "#URL_PAGE{fiche_lieu_epa}",
 							    	dataType: "html",
 							    	data: {
-							    		monid: feature.properties["id"],
+							    		monid: feature.properties["id_geo_serial"],
 							    		layer_id: 533,
 							    		mini: true,
 							    	}
@@ -333,7 +349,7 @@
 					geojson33 = L.geoJson(geoJson3, {
 						filter: function (feature, layer) {
 							if (feature.properties) {
-								if (feature.properties.typologie=="FL") return true;
+								if (feature.properties.typologie=="EHPAD") return true;
 								else return false;
 							}
 							return false;
@@ -345,7 +361,7 @@
 								    	url: "#URL_PAGE{fiche_lieu_epa}",
 								    	dataType: "html",
 								    	data: {
-								    		monid: feature.properties["id"],
+								    		monid: feature.properties["id_geo_serial"],
 								    		layer_id: 533,
 								    		mini: true,
 								    	}
@@ -375,7 +391,7 @@
 								    	url: "#URL_PAGE{fiche_lieu_epa}",
 								    	dataType: "html",
 								    	data: {
-								    		monid: feature.properties["id"],
+								    		monid: feature.properties["id_geo_serial"],
 								    		layer_id: 533,
 								    		mini: true,
 								    	}
