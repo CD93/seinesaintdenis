@@ -27,7 +27,10 @@
 			<div class="chapoune">
 				<span class="glyphicon glyphicon-minus"></span>
 				[(#INFO_ID_RUBRIQUE{article,#ENV{id_article}}|=={105}|oui)
-					<p>Cette offre d'emploi n'est plus disponible.</p>
+					<p>
+						Cette offre d'emploi n'est plus disponible.<br/>
+						<a href="#URL_RUBRIQUE{105}">Retrouvez toutes nos offres</a>
+					</p>
 				]
 				[(#INFO_ID_RUBRIQUE{article,#ENV{id_article}}|=={105}|non)
 					<p>La page demand&eacute;e n'existe pas</p>
