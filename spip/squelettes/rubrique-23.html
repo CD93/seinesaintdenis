@@ -19,7 +19,7 @@
 		<div class="container">
 			<div class="col-md-15 fondune"> <!-- début dossier une  -->
 				<INCLURE{fond=inclure/bouton-impression}{env} />
-				<div class="corpsune">				
+				<div class="corpsune">
 					<h1>#TITRE</h1>
 					[<div class="chapoune">
 						<span class="glyphicon glyphicon-minus"></span>
@@ -28,7 +28,9 @@
 					</div>]
 				</div>
 				<div class="row">
-					<BOUCLE_ts_aides(ARTICLES){branche #ID_RUBRIQUE}{par titre}>
+					<B_ts_aides>
+						#ANCRE_PAGINATION
+					<BOUCLE_ts_aides(ARTICLES){branche #ID_RUBRIQUE}{par titre}{pagination 10}>
 						<div class="col-md-24">
 						<a class="gbouton" href="#URL_ARTICLE">
 							<div class="artsuite_par1">
@@ -44,6 +46,8 @@
 						</a>
 						</div>
 					</BOUCLE_ts_aides>
+					<p class="pagination">#PAGINATION</p>
+					</B_ts_aides>
 				</div>
 				<INCLURE{fond=inclure/bouton-partage}{env} />
 			</div><!-- fin dossier une  -->
@@ -52,7 +56,7 @@
 				<div class="titrepoledep">
 					<div class="triangleblanc"></div>
 					<div>Dans <span>&nbsp#TITRE_RUBRIQUE{1}</span></div>
-				</div>			
+				</div>
 				<div class="fondpale lireaussi">
 					<BOUCLE_autresarts(RUBRIQUES){id_parent=1}{"<hr/>"}{par titre}>
 					<div class="artpol">
