@@ -9,7 +9,8 @@
 <script type='text/javascript'>/*<![CDATA[*/(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement);/*]]>*/</script>
 <title>[(#NOM_SITE_SPIP|textebrut)][ - (#SLOGAN_SITE_SPIP|textebrut)]</title>
 [<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
-<INCLURE{fond=inc/head} />
+[<link rel="canonical" href="(#URL_SITE_SPIP)" />]
+<INCLURE{fond=inc/head}{env} />
 </head>
 <body>
 <INCLURE{fond=inclure/menu} />
@@ -21,7 +22,7 @@
 				<a class="abmnt" href="#URL_ARTICLE{10732}"></a>
 				<span class="buttonclose"></span>
 			</div>
-			
+
 			<div class="col-md-15 fondune">
 				<BOUCLE_artdossune(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=7}{0,1}>
 					<a class="gbouton" href="#URL_ARTICLE">
@@ -120,7 +121,7 @@
 							<div class="triangle"></div>
 							#LOGO_ARTICLE
 							</div>
-							
+
 							<div class="corps">
 								<h4>#TITRE</h4>
 								<div class="sous-rub">

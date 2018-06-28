@@ -14,6 +14,8 @@
 [<link rel="stylesheet" href="(#CHEMIN{css/spip.css}|direction_css)" type="text/css" />]
 #INSERT_HEAD_CSS
 <BOUCLE_article(ARTICLES){id_article=#ID_ARTICLE}>
+[<meta name="description" content="(#INTRODUCTION{300}|textebrut)" />]
+[<link rel="canonical" href="(#URL_ARTICLE)" />]
 #SET{intro,(#DESCRIPTIF)}
 <link rel="image_src" href="#URL_SITE_SPIP/[(#LOGO_ARTICLE|image_passe_partout{300,300}
     |image_recadre{300,300,'center','transparent'}|extraire_attribut{src})]" />
@@ -24,6 +26,8 @@
     <meta property="og:description" content="[(#DESCRIPTIF|attribut_html)]"/>
 </BOUCLE_article>
 <BOUCLE_rubtete(RUBRIQUES){id_rubrique=#ID_RUBRIQUE}>
+[<meta name="description" content="(#DESCRIPTIF|sinon{#CHAPO}|sinon{#TEXTE}|sinon{#TITRE}|couper{150}|textebrut)" />]
+[<link rel="canonical" href="(#URL_RUBRIQUE)" />]
 #SET{intro,(#DESCRIPTIF)}
 <link rel="image_src" href="#URL_SITE_SPIP/[(#LOGO_RUBRIQUE|image_passe_partout{300,300}|image_recadre{300,300,'top left','transparent'}|extraire_attribut{src})]" />
 	<meta property="og:title" content="#TITRE"/>
