@@ -17,7 +17,7 @@ function cartoplug_insert_head_css($flux){
 }
 /**
 
- * Ajouter le script leaflet snogyloop au script gis.js appelé par les cartes
+ * Ajouter le script leaflet au script gis.js appelé par les cartes
  *
  * @param $flux
  * @return mixed
@@ -30,13 +30,16 @@ function cartoplug_recuperer_fond($flux) {
 		if (lire_config('auto_compress_js') == 'oui' && function_exists('compacte')) {
 			$ajouts = "\n". compacte(spip_file_get_contents(find_in_path('lib/leaflet/plugins/Leaflet.FeatureGroup.SubGroup/subgroup.js')), 'js');
 			$ajouts .= "\n". compacte(spip_file_get_contents(find_in_path('lib/leaflet/plugins/Leaflet.defaultextent/leaflet.defaultextent.js')), 'js');
+			spip_log("compact",LOG_ERREUR);
 		} else {
 			$ajouts = "\n". spip_file_get_contents(find_in_path('lib/leaflet/plugins/Leaflet.FeatureGroup.SubGroup/subgroup.js'));
 			$ajouts .= "\n". spip_file_get_contents(find_in_path('lib/leaflet/plugins/Leaflet.defaultextent/leaflet.defaultextent.js'));
+			spip_log("noncompact",LOG_ERREUR);
 		}
 		$flux['data']['texte'] .= $ajouts;
 	}
 	return $flux;
 }
+
 
 ?>

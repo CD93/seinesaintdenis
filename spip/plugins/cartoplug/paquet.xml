@@ -1,5 +1,5 @@
 <paquet
-	prefix="Cartoplug"
+	prefix="cartoplug"
 	categorie="divers"
 	version="1.0.0"
 	etat="dev"
@@ -12,7 +12,7 @@
 		Paquet genere le 2015-09-25 11:54:01
 	-->
 
-	<nom><Cartoplug></nom>
+	<nom>Cartoplug</nom>
 
 	<auteur>damien</auteur>
 

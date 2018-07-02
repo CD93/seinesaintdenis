@@ -107,9 +107,9 @@
 		}).on('clustermouseout', function (a) {
 		});
 
-		var group3 = L.featureGroup.subGroup(pointsCluster),
-		group31 = L.featureGroup.subGroup(pointsCluster),
-		group32 = L.featureGroup.subGroup(pointsCluster),
+		var group3 = L.featureGroup(pointsCluster),
+		group31 = L.featureGroup(pointsCluster),
+		group32 = L.featureGroup(pointsCluster),
 		control = L.control.layers(null, null, { collapsed: false, position: 'bottomleft' });
 
 		control.addOverlay(group32, '<i class="futur"><img src="#CHEMIN{images/picto-carto/travaux-college-v.png}" width="20px" height="20px" /></i><span> en préparation</span>');
@@ -406,8 +406,8 @@
 		});
 		map[(#GET{id})].addLayer(pointsCluster);
 
-        var zoomHome = L.control.defaultExtent({position: 'topleft'});
-		zoomHome.addTo(map[(#GET{id})]);
+      //  var zoomHome = L.control.defaultExtent({position: 'topleft'});
+		//zoomHome.addTo(map[(#GET{id})]);
 
 		//pour chaque point à cliquer
 		function bindPopup(feature, layer) {

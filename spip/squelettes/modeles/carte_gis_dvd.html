@@ -70,8 +70,10 @@
 		  	}).addTo(fondCD); */
 		});
 
-		var group3 = L.featureGroup.subGroup(Travaux),
-		group31 = L.featureGroup.subGroup(Travaux),
+		//var group3 = L.featureGroup.subGroup(Travaux),
+		//group31 = L.featureGroup.subGroup(Travaux),
+		var group3 = L.featureGroup(Travaux),
+		group31 = L.featureGroup(Travaux),
 
 		control = L.control.layers(null, null, { collapsed: false, position: 'bottomleft' });
 
@@ -87,7 +89,7 @@
 				return newdate.getDate()+'/'+newdate.getMonth()+'/'+newdate.getFullYear();
 			} else { return "";}
 		}
-		#SET{urlgeo,https://geoportail93.fr/SERV/DATA/?LAYERS=1296&FORMAT=geojson&SERVICE=wfs&SRS=4326&COL=ALL}		
+		#SET{urlgeo,https://geoportail93.fr/SERV/DATA/?LAYERS=1296&FORMAT=geojson&SERVICE=wfs&SRS=4326&COL=ALL}
 		$.getJSON("[(#GET{urlgeo}|copie_locale{modif})]", function (geoJson3) {
 			geojson3 = L.geoJson(geoJson3, {
 				filter: function (feature, layer) {
@@ -157,8 +159,8 @@
 		});
 		map[(#GET{id})].addLayer(Travaux);
 
-        var zoomHome = L.control.defaultExtent({position: 'topleft'});
-		zoomHome.addTo(map[(#GET{id})]);
+    //    var zoomHome = L.control.defaultExtent({position: 'topleft'});
+		//zoomHome.addTo(map[(#GET{id})]);
 
 		//pour chaque point à cliquer
 		function onEachFeature(feature, layer) {
