@@ -306,8 +306,7 @@
 			else return "futur";
 		}
 
-
-		#SET{urlgeo,https://geoportail93.fr/SERV/DATA/?LAYERS=1536&FORMAT=geojson&SERVICE=wfs&SRS=4326&COL=ALL}
+		#SET{urlgeo,https://geoportail93.fr/SERV/DATA/?LAYERS=1536&FORMAT=geojson&SERVICE=wfs&SRS=4326&COL=all}
 		$.getJSON("[(#GET{urlgeo}|copie_locale{modif})]", function (geoJson3) {
 			geojson3 = L.geoJson(geoJson3, {
 				filter: function (feature, layer) {

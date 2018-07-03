@@ -23,6 +23,7 @@
 	point=#GET{point},
 	cluster=#GET{cluster}}
 )]
+[<link rel="stylesheet" href="(#CHEMIN{css/cartetrav.css})" type="text/css" />]
 
 <script type="text/javascript">/*<!\[CDATA\[*/
 	$('#map[(#GET{id})]').on('ready', function(){
@@ -68,8 +69,8 @@
 		});
 
 
-		var group3 = L.featureGroup.subGroup(Travaux),
-		group31 = L.featureGroup.subGroup(Travaux),
+		var group3 = L.featureGroup(Travaux),
+		group31 = L.featureGroup(Travaux),
 		control = L.control.layers(null, null, { collapsed: false, position: 'bottomleft' });
 
 		group31.addTo(map[(#GET{id})]);
@@ -91,7 +92,7 @@
 			});
 		});
 
-		#SET{urlgeo2,https://geoportail93.fr/SERV/DATA/?LAYERS=1612&FORMAT=geojson&SERVICE=wfs&SRS=4326&COL=ALL&MODE_GEO=POINT}		
+		#SET{urlgeo2,https://geoportail93.fr/SERV/DATA/?LAYERS=1612&FORMAT=geojson&SERVICE=wfs&SRS=4326&COL=ALL&MODE_GEO=POINT}
 			$.getJSON("[(#GET{urlgeo2}|copie_locale{modif})]", function (geoJson32) {
 				geojson32 = L.geoJson(geoJson32, {
 					pointToLayer: function (feature, latlng) {
@@ -123,10 +124,10 @@
 		});
 		map[(#GET{id})].addLayer(Travaux);
 
-    var zoomHome = L.control.defaultExtent({position: 'topleft'});
-		zoomHome.addTo(map[(#GET{id})]);
+    //var zoomHome = L.control.defaultExtent({position: 'topleft'});
+		//zoomHome.addTo(map[(#GET{id})]);
 
-		var info = L.control.defaultExtent({position: 'topright'});
+		var info = L.control({position: 'topright'});
 		info.onAdd = function (map) {
 
 				this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
