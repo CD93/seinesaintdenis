@@ -94,16 +94,6 @@
   );
   var navigators = new Array(iPhone, iPad, Android);
   var userAgent = navigator.userAgent;
-  for (var index in navigators) {
-    if ((userAgent.indexOf(navigators[index][0]) == 42) && (getCookie('cookssdmob') == null)) {
-    	createCookie("cookssdmob", "1", 7);
-    	if (confirm("Téléchargez l'application gratuite de Seine-Saint-Denis.fr")) {
-    	  window.location.href = navigators[index][1];
-    	} else {
-  	  window.location.href = navigators[index][2];
-  	}
-    }
-  }
   	if ( window.addEventListener ) {
   		var kkeys = [], knm = "38,38,40,40,37,39,37,39,66,65";
   		window.addEventListener("keydown", function(e){
@@ -147,7 +137,7 @@
   	    // Le code HTML de la demande de consentement
   	    // Vous pouvez modifier le contenu ainsi que le style
   	    div.innerHTML =
-          '<div style="margin:5px;background-color:#ffffff;color:grey;font-size:12px;">Ce site utilise un outil de statistique. En continuant à naviguer, vous nous autorisez à déposer des cookies à des fins de mesure d\'audience. Pour vous opposer à ce dépôt vous pouvez voir les <a href="/Mentions-legales">Mentions légales</a>.</div>';
+          '<div style="margin:5px;background-color:#ffffff;color:grey;font-size:12px;">Ce site utilise un outil de statistique externe. Vous pouvez <a href="#optout" onclick="gaOptout();">vous opposer à ce dépôt</a> ou <a href="#optin" onclick="gaOptIn();">l\'accepter</a>.</div>';
   	    bodytag.insertBefore(div,bodytag.firstChild); // Ajoute la bannière juste au début de la page
   	    document.getElementsByTagName('body')[0].className+=' cookiebanner';
   	}
@@ -193,22 +183,21 @@
   	    window[disableStr] = true;
   	    deleteAnalyticsCookies();
   	}
-
+    // La fonction d'opt-in
+  	function gaOptin() {
+      document.cookie = 'hasConsent=true; '+ getCookieExpireDate() +' ; path=/';
+      document.getElementById('cookie-banner').style.display='none';
+    }
 
 
   	//Ce bout de code vérifie que le consentement n'a pas déjà été obtenu avant d'afficher
   	// la baniére
   	var consentCookie =  getCookie('hasConsent');
-  	if (!consentCookie) {//L'utilisateur n'a pas encore de cookie de consentement
-  	 var referrer_host = document.referrer.split('/')[2];
-  	   if ( referrer_host != document.location.hostname ) { //si il vient d'un autre site
+  	if (!consentCookie||consentCookie==null) {//L'utilisateur n'a pas encore de cookie de consentement
   	   //on désactive le tracking et on affiche la demande de consentement
-  	     window[disableStr] = true;
-  	     window[disableStr] = true;
-  	     window.onload = askConsent;
-  	   } else { //sinon on lui dépose un cookie
-  	      document.cookie = 'hasConsent=true; '+ getCookieExpireDate() +' ; path=/';
-  	   }
+	     window[disableStr] = true;
+       window[disableStr] = true;
+  	   window.onload = askConsent;
   	}
 
   	// Il vous reste à insérer votre tag javascript ici

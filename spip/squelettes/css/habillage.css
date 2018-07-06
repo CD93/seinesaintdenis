@@ -203,7 +203,10 @@ box-sizing: content-box;
 .marge-gauche {
 	margin-left: 12%;
 }
-
+.eloigner {
+	position: absolute;
+	left: -7000px;
+}
 /* header */
 header.enhaut {
 	margin-bottom: 0;

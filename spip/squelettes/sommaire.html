@@ -19,7 +19,7 @@
 		<div class="actu">
 			<div class="container">
 				<div id="abnmtemag">
-					<a class="abmnt" href="#URL_ARTICLE{10732}"></a>
+					<a class="abmnt" href="#URL_ARTICLE{10732}"><span class="eloigner">Je m'abonne au magazine</span></a>
 					<span class="buttonclose"></span>
 				</div>
 
@@ -29,7 +29,7 @@
 						<div class="artune">
 								<div class="logogune">
 								<div class="triangle"></div>
-								[(#LOGO_ARTICLE)]</div>
+								[(#LOGO_ARTICLE_NORMAL|image_responsive{230/345/690})]</div>
 							<div class="corpsune">
 								<h4 class="#EDIT{titre}">#TITRE</h4>
 
@@ -58,19 +58,19 @@
 								<BOUCLE_motbreve(MOTS){id_breve}>
 								[(#ID_MOT|=={206}|?{
 									[(#URL_SITE|?{' ',''})
-									<a href='#URL_SITE'><img src='squelettes/images/breve_ssd.png'/>#_breve:TEXTE</a>]
+									<a href='#URL_SITE'><img src='squelettes/images/breve_ssd.png' alt=""/>#_breve:TEXTE</a>]
 									[(#URL_SITE|?{'',' '})
-									<img src='squelettes/images/breve_ssd.png'/>EN BREF&nbsp;&nbsp;#_breve:TEXTE]
+									<img src='squelettes/images/breve_ssd.png' alt=""/>EN BREF&nbsp;&nbsp;#_breve:TEXTE]
 								})]
 								[(#ID_MOT|=={211}|?{
-									<a href='#URL_SITE' target="_blank"><img src='squelettes/images/main.png'/>#_breve:TEXTE</a>
+									<a href='#URL_SITE' target="_blank"><img src='squelettes/images/main.png' alt=""/>#_breve:TEXTE</a>
 								})]
-								[(#ID_MOT|=={207}|?{<a href='https://twitter.com/@seinesaintdenis' target='_blank'><img src='squelettes/images/breve_twitter.png'/>#_breve:TEXTE</a>})]
+								[(#ID_MOT|=={207}|?{<a href='https://twitter.com/@seinesaintdenis' target='_blank'><img src='squelettes/images/breve_twitter.png' alt=""/>#_breve:TEXTE</a>})]
 								[(#ID_MOT|=={205}|?{
 									[(#URL_SITE|?{' ',''})
-									<a href='#URL_SITE' target='_blank'><img src='squelettes/images/breve_fb.png'/>#_breve:TEXTE</a>]
+									<a href='#URL_SITE' target='_blank'><img src='squelettes/images/breve_fb.png' alt=""/>#_breve:TEXTE</a>]
 									[(#URL_SITE|?{'',' '})
-									<a href='https://www.facebook.com/seinesaintdenisledepartement' target='_blanck'><img src='squelettes/images/breve_fb.png'/>#_breve:TEXTE</a>]
+									<a href='https://www.facebook.com/seinesaintdenisledepartement' target='_blanck'><img src='squelettes/images/breve_fb.png' alt=""/>#_breve:TEXTE</a>]
 								})]
 								</BOUCLE_motbreve>
 									<a href='#URL_SITE'><span>EN BREF&nbsp;&nbsp;</span>#_breve:TEXTE*</a>
@@ -94,7 +94,7 @@
 							<div class="artsuite_par2">
 								<div class="logoart">
 								<div class="triangle"></div>
-								<span class="#EDIT{logo}">#LOGO_ARTICLE</span>
+								<span class="#EDIT{logo}">[(#LOGO_ARTICLE_NORMAL|image_responsive{230/345/690})]</span>
 								</div>
 								<div class="corps">
 									<h4 class="#EDIT{titre}">#TITRE</h4>
@@ -114,7 +114,7 @@
 							<div class="artsuite_par3">
 								<div class="logoart">
 								<div class="triangle"></div>
-								<span class="#EDIT{logo}">#LOGO_ARTICLE</span>
+								<span class="#EDIT{logo}">[(#LOGO_ARTICLE_NORMAL|image_responsive{230/345/690})]</span>
 								</div>
 
 								<div class="corps">
@@ -135,7 +135,7 @@
 							<div class="artsuite_par3">
 								<div class="logoart">
 								<div class="triangle"></div>
-								<span class="#EDIT{logo}">#LOGO_ARTICLE</span>
+								<span class="#EDIT{logo}">[(#LOGO_ARTICLE_NORMAL|image_responsive)]</span>
 								</div>
 								<div class="corps">
 										<h4 class="#EDIT{titre}">#TITRE</h4>
