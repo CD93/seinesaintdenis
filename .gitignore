@@ -3,6 +3,7 @@
 /spip
 !/spip
 /spip/*
+!/spip/.htaccess
 !/spip/service-worker.js
 !/spip/sw.js
 !/spip/manifest.json
