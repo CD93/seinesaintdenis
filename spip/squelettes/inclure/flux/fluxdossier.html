@@ -8,10 +8,10 @@
 		<a href="#VALEUR{children/link/0/text}" target="_blank">les dossiers</a>
 	</div>
 	<h2 class="alaune">Cette semaine</h2>
-	<a href="#VALEUR{children/link/0/text}" target="_blank"><img src="[(#VALEUR{children/image/0/text}|copie_locale)]" /></a>
-	<h4>
-		<a href="#VALEUR{children/link/0/text}" target="_blank">[(#VALEUR{children/titre/0/text}|supprimer_numero)]</a>
-	</h4>
+	<a href="#VALEUR{children/link/0/text}" target="_blank">
+		<img src="[(#VALEUR{children/image/0/text}|copie_locale)]" alt=""/>
+		[<h4>(#VALEUR{children/titre/0/text}|supprimer_numero)</h4>]
+	</a>
 	#VALEUR{children/description/0/text}
 </div>
 </BOUCLE_actu_emagpub>

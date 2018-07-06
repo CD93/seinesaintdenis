@@ -4,8 +4,10 @@
 {datapath root/children/article}>
   <div class="item [(#COMPTEUR_BOUCLE|=={1}|?{'active',''})]">
   <h2 >#VALEUR{children/theme/0/text}</h2>
-  <a href="#VALEUR{children/link/0/text}" target="_blank"><img src="[(#VALEUR{children/image/0/text}|copie_locale)]" /></a>
-  <h4><a href="#VALEUR{children/link/0/text}" target="_blank">#VALEUR{children/titre/0/text}</a></h4>
+  <a href="#VALEUR{children/link/0/text}" target="_blank">
+    <img src="[(#VALEUR{children/image/0/text}|copie_locale)]" alt=""/>
+    <h4>#VALEUR{children/titre/0/text}</h4>
+  </a>
   <p class="datecarrou">#VALEUR{children/date/0/text}</p>
   <p class="pascop">#VALEUR{children/description/0/text}</p>
   [(#VALEUR{children/media/0/text}|=={"video"}|?{///&nbsp;<span class="glyphicon glyphicon-facetime-video"></span>})]
