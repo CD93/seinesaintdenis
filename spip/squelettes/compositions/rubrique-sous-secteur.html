@@ -42,7 +42,7 @@
 							<div class="artsuite_par2">
 								<div class="logoart">
 									<div class="triangleblanc"></div>
-									[(#LOGO_RUBRIQUE)]
+									[(#LOGO_RUBRIQUE|image_responsive{230/345/460/690})]
 								</div>
 								<div class="corps">
 									<h4>#TITRE</h4>
@@ -51,13 +51,13 @@
 							</div>
 						</a>
 						</div>
-					</BOUCLE_les_aides>			
+					</BOUCLE_les_aides>
 				</div>
 				<INCLURE{fond=inclure/bouton-partage}{env} />
 			</div><!-- fin dossier une  -->
 			<div class="col-md-9">
 				<INCLURE{fond=inclure/carroussel}{id_rubrique=#ID_SECTEUR}{env}/>
-						
+
 				<INCLURE{fond=inclure/alireaussi}{env}{ajax}/>
 			</div>
 		</div>

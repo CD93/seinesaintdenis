@@ -17,7 +17,7 @@
 <div class="main">
 	<div class="contenu">
 		<div class="container degrader">
-		
+
 			<div class="col-md-15 col-md-push-9"> <!-- début dossier une  -->
 			<INCLURE{fond=inclure/bouton-impression}{env} />
 						<div class="sous-rub">
@@ -27,7 +27,7 @@
 						</div>
 						<div class="break"></div>
 						<h1>#TITRE</h1>
-			
+
 						<div class="chapoune">
 							<span class="glyphicon glyphicon-minus"></span>
 							#CHAPO
@@ -64,7 +64,7 @@
 				</BOUCLE_filtrebadge>
 				</B_filtrebadge>
 					<div class="alire">
-					 [<a href="#URL_ARTICLE">(#LOGO_ARTICLE|vider_attribut{height}|vider_attribut{width})</a>]
+					 [<a href="#URL_ARTICLE">(#LOGO_ARTICLE|image_responsive{230/345/460/690})</a>]
 					 <h4><a href="#URL_ARTICLE">#TITRE</a></h4>
 					 	 #DESCRIPTIF
 					  </div>

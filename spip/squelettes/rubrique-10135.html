@@ -38,16 +38,16 @@
 					<h2 class="">ON Y &Eacute;TAIT</h2>
 					<div class="pointillehaut">
 						<BOUCLE_onyetait(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=10027}{0,2}{'<hr class="sepacool"/>'}>
-							[<a href="#URL_ARTICLE">(#LOGO_ARTICLE|vider_attribut{height}|vider_attribut{width})</a>]
+							[<a href="#URL_ARTICLE">(#LOGO_ARTICLE|image_responsive{230/345/460/690})</a>]
 							<p class="datecarrou">[(#DATE|affdate)]</p>
 							<h3><a href="#URL_ARTICLE">#TITRE</a></h3>
 						</BOUCLE_onyetait>
 						<div class="break" ></div>
-					</div>	
+					</div>
 				</div><!--fin onyetaitboite -->
 				<div class="ttactu"><i class='glyphicon glyphicon-play'></i><a href="#URL_RUBRIQUE{10026}">Toute l'actualit&eacute;…</a></div>
 			</div>
-			
+
 		</div>
 	</div>
 
@@ -90,8 +90,8 @@
 		</div>
 	</div>
 	<div class="sousbreves">
-		<div class="container">	
-		
+		<div class="container">
+
 	<div class="col-md-8">
 		<a class="rdvtit" href="#URL_RUBRIQUE{73}">Rendez-vous</a>
 		<div class="hoverimg row">
@@ -100,7 +100,7 @@
 				<a class="rdv-lien" href="#URL_ARTICLE">
 					<div class="rdv">
 						<div class="imgwrap">
-							[(#LOGO_ARTICLE|vider_attribut{height}|vider_attribut{width})]
+							[(#LOGO_ARTICLE|image_responsive{230/345/460/690})]
 						</div>
 						<div class="caption-front par1">
 							<span class="date">#SURTITRE</span>
@@ -135,7 +135,7 @@
 			<a class="rdv-lien" href="#URL_ARTICLE">
 				<div class="rdv">
 					<div class="imgwrap">
-						[(#LOGO_ARTICLE|vider_attribut{height}|vider_attribut{width})]
+						[(#LOGO_ARTICLE|image_responsive{230/345/460/690})]
 					</div>
 					<div class="caption-front par2">
 						<span class="date">#SURTITRE</span>
@@ -170,7 +170,7 @@
 	<div class="col-md-8">
 	<h2 class="noir enimages">[(#SURTITRE|?{#SURTITRE,#GET{desc}})]</h2>
 	<a href="#URL_PAGE{modal-video}" data-toggle="modal" data-target="#myModalabtTop">
-		[(#LOGO_ARTICLE|vider_attribut{height}|vider_attribut{width})]
+		[(#LOGO_ARTICLE|image_responsive{230/345/460/690})]
 		<h3>#TITRE</h3></a>
 		#DESCRIPTIF
 	</div>
@@ -183,13 +183,13 @@
 	    </div><!-- /.modal-dialog -->
 	</div><!-- /.modal -->
 	</div>
-</div>	
+</div>
 <div class="surbreves">
 	<div class="container">
 		<hr class='col-md-24 margefine' />
 		<div class="row">
 			<div class="col-md-24">
-				<BOUCLE_selection1(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=23}{0,3}>	
+				<BOUCLE_selection1(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=23}{0,3}>
 					<div class="col-md-8">
 					<BOUCLE_art1(ARTICLES){id_article=#ID_ARTICLE}>
 					#SET{type,'vert'}
@@ -213,7 +213,7 @@
 						[(#GET{type}|=={lechiffre}|?{'',' '})
 						<h2 class="#GET{type}">[(#SURTITRE|?{#SURTITRE,#GET{desc}})]</h2>
 						<a href="#URL_ARTICLE">
-							[(#LOGO_ARTICLE|vider_attribut{height}|vider_attribut{width})]
+							[(#LOGO_ARTICLE|image_responsive{230/345/460/690})]
 							<h3>#TITRE</h3>
 						</a>
 						[(#DESCRIPTIF*|concat{#GET{ico}}|propre)]
@@ -223,7 +223,7 @@
 					</div>
 				</BOUCLE_selection1>
 				</div>
-			</div>		
+			</div>
 	</div>
 </div>
 	<div class="surbreves">
@@ -231,7 +231,7 @@
 						<hr class='col-md-24 margefine' />
 		<div class="row">
 			<div class="col-md-24">
-				<BOUCLE_selection(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=23}{3,15}>	
+				<BOUCLE_selection(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=23}{3,15}>
 					<div class="col-md-8">
 					<BOUCLE_art(ARTICLES){id_article=#ID_ARTICLE}>
 					#SET{type,'vert'}
@@ -255,7 +255,7 @@
 						[(#GET{type}|=={lechiffre}|?{'',' '})
 						<h2 class="#GET{type}">[(#SURTITRE|?{#SURTITRE,#GET{desc}})]</h2>
 						<a href="#URL_ARTICLE">
-							[(#LOGO_ARTICLE|vider_attribut{height}|vider_attribut{width})]
+							[(#LOGO_ARTICLE|image_responsive{230/345/460/690})]
 							<h3>#TITRE</h3>
 						</a>
 						#DESCRIPTIF
@@ -266,7 +266,7 @@
 					[(#COMPTEUR_BOUCLE|modulo{3}|=={0}|oui)
 					[(#COMPTEUR_BOUCLE|!={#TOTAL_BOUCLE}|oui)
 						<hr class='col-md-24 margefine' />
-					]] 
+					]]
 				</BOUCLE_selection>
 			</div>
 		</div>

@@ -41,7 +41,7 @@
 							<div class="artsuite_par2">
 								<div class="logoart">
 									<div class="triangleblanc"></div>
-									[(#LOGO_ARTICLE)]
+									[(#LOGO_ARTICLE|image_responsive{230/345/460/690})]
 								</div>
 								<div class="corps">
 									<h4>#TITRE</h4>
@@ -59,7 +59,7 @@
 				<div class="titrepoledep">
 					<div class="triangleblanc"></div>
 					<div>Dans <span>&nbsp#TITRE_SECTEUR</span></div>
-				</div>			
+				</div>
 				<div class="fondpale lireaussi">
 					<BOUCLE_autresarts(RUBRIQUES){meme_parent}{"<hr/>"}{id_rubrique != #ID_RUBRIQUE}{par titre}>
 					<div class="artpol">

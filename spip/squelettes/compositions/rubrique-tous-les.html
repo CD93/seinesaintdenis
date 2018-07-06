@@ -27,7 +27,7 @@
 					<BOUCLE_selevenement(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=10026}{0,1}>
 					<h2 class="evenement">[(#SURTITRE|?{#SURTITRE,&Eacute;V&Eacute;NEMENT})]</h2>
 					<div class="pointillehaut">
-						[(#LOGO_ARTICLE|#URL_ARTICLE)]
+							[<a href="#URL_ARTICLE">(#LOGO_ARTICLE|image_responsive{230/345/460/690})</a>]
 						  <h4><a href="#URL_ARTICLE">#TITRE</a></h4>
 						  #DESCRIPTIF*<BOUCLE_type1(MOTS){id_groupe=3}{id_article}>
 						   [(#ID_MOT|=={3}|?{///&nbsp;<span class="glyphicon glyphicon-facetime-video"></span>})]
@@ -39,18 +39,18 @@
 						<h2 class="">ON Y &Eacute;TAIT</h2>
 						<div class="pointillehaut">
 							<BOUCLE_onyetait(ARTICLES pb_selection){par date}{spip_pb_selection.id_rubrique=10027}{0,2}{'<hr class="sepacool"/>'}>
-								[<a href="#URL_ARTICLE">(#LOGO_ARTICLE|vider_attribut{height}|vider_attribut{width})</a>]
+								[<a href="#URL_ARTICLE">(#LOGO_ARTICLE|image_responsive{230/345/460/690})</a>]
 								<p class="datecarrou">[(#DATE|affdate)]</p>
 								<h3><a href="#URL_ARTICLE">#TITRE</a></h3>
 							</BOUCLE_onyetait>
 							<div class="break" ></div>
-						</div>							
+						</div>
 					</div><!--fin onyetaitboite -->
 					<BOUCLE_selevenement1(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=10026}{1,20}>
 					<div class="boiteactu">
 						<a href="#URL_RUBRIQUE{10026}" title="tous les '&eacute;v&eacute;nements'"><h2 class="evenement">&Eacute;V&Eacute;NEMENT</h2></a>
 						<div class="pointillehaut">
-							[(#LOGO_ARTICLE|#URL_ARTICLE)]
+							[<a href="#URL_ARTICLE">(#LOGO_ARTICLE|image_responsive{230/345/460/690})</a>]
 							<h4><a href="#URL_ARTICLE">#TITRE</a></h4>
 							#DESCRIPTIF*<BOUCLE_type3(MOTS){id_groupe=3}{id_article}>
 							 [(#ID_MOT|=={3}|?{///&nbsp;<span class="glyphicon glyphicon-facetime-video"></span>})]

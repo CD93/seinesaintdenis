@@ -46,10 +46,10 @@
 								</div>
 							</a>
 							</div>
-						</BOUCLE_les_aides>	
+						</BOUCLE_les_aides>
 						</div>
 					</BOUCLE_st_aides>
-				</BOUCLE_tt_aides>		
+				</BOUCLE_tt_aides>
 				</div>
 				<div class="printmail reseausoc">
 					<a href="" class="google">google+</a>
@@ -66,14 +66,14 @@
 						<ol class="carousel-indicators">
 							<BOUCLE_compteur(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=10029}{0,5}>
 							<li data-target="#carousel-actu-emag" data-slide-to="[(#COMPTEUR_BOUCLE|moins{1})]" [(#COMPTEUR_BOUCLE|=={1}|?{'class="active"',''})]></li>
-							</BOUCLE_compteur>	
+							</BOUCLE_compteur>
 						</ol>
 						<!-- Wrapper for slides -->
 						<div class="carousel-inner">
 						<BOUCLE_actu_emag2(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=10029}{0,5}>
 							<div class="item [(#COMPTEUR_BOUCLE|=={1}|?{'active',''})]">
 						    	<h2 class="bleu #GET{type}">[(#SURTITRE|?{#SURTITRE,#GET{type}})]</h2>
-						    		[(#LOGO_ARTICLE|#URL_ARTICLE)]
+						    		[<a href="#URL_ARTICLE">(#LOGO_ARTICLE|image_responsive{230/345/460/690})</a>]
 						    		<span class="datecarrou">[(#DATE|affdate)]</span>
 						    		<h4><a href="#URL_ARTICLE">#TITRE</a></h4>
 						    		#DESCRIPTIF
@@ -87,7 +87,7 @@
 				<div class="titrepoledep">
 					<div class="triangleblanc"></div>
 					<div>à lire aussi</div>
-				</div>			
+				</div>
 				<div class="fondpale lireaussi">
 					<BOUCLE_autresarts(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=7}{"<hr/>"}>
 					<div class="artpol">

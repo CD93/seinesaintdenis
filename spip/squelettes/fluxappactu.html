@@ -1,4 +1,4 @@
-[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]<?xml 
+[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]<?xml
 version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
 	<BOUCLE_rub(RUBRIQUES){id_rubrique=10026}>
@@ -10,7 +10,7 @@ version="1.0" encoding="UTF-8"?>
         <BOUCLE_art(ARTICLES){id_rubrique}{0,10}{!par date}>
         <item>
             <title>[(#TITRE|texte_backend)]</title>
-            <description>[(#LOGO_ARTICLE|image_reduire{390}|texte_backend)] [(#CHAPO|texte_backend)]</description>
+            <description>[(#LOGO_ARTICLE|texte_backend)] [(#CHAPO|texte_backend)]</description>
             <pubDate>[(#DATE|date_iso)]</pubDate>
             <link>[(#URL_ARTICLE|url_absolue)]</link>
         </item>

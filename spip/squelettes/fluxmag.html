@@ -1,9 +1,9 @@
-<articles>	
+<articles>
 <BOUCLE_rub(RUBRIQUES){id_rubrique=#ENV{id_rubrique,10002}}{tout}>
         <BOUCLE_art(ARTICLES spip_pb_selection){spip_pb_selection.id_rubrique=#ID_RUBRIQUE}{0,3}{par ordre}>
         <article>
             <titre>[(#TITRE|texte_backend)]</titre>
-            <image>[(#LOGO_ARTICLE|image_reduire{390}|extraire_attribut{src}|url_absolue)] </image>
+            <image>[(#LOGO_ARTICLE|extraire_attribut{src}|url_absolue)] </image>
             <description>[(#CHAPO|texte_backend)]</description>
             <date>[(#DATE|date_iso)]</date>
             <link>[(#URL_ARTICLE|url_absolue)]</link>

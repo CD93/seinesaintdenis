@@ -28,7 +28,7 @@
 								<div class="logoart">
 									<div class="triangleblanc"></div>
 								</div>
-								#LOGO_RUBRIQUE
+								[(#LOGO_RUBRIQUE|image_responsive{230/345/460/690})]
 								<div class="corps">
 									<h4>#TITRE</h4>
 									#DESCRIPTIF
@@ -36,9 +36,9 @@
 							</div>
 						</a>
 						</div>
-					</BOUCLE_les_aides_rub>	
+					</BOUCLE_les_aides_rub>
 					<div class="col-md-24">#PAGINATION</div>
-					</B_les_aides_rub>		
+					</B_les_aides_rub>
 				</div>
 				<div class="row">
 					<BOUCLE_les_aides_art1(ARTICLES){id_secteur IN 2,3,4,5,6}{recherche}{!par points}{doublons rechart}>
@@ -64,10 +64,10 @@
 						</a>
 						</div>
 					</BOUCLE_les_aides_art>
-					
+
 					<div class="col-md-24">#PAGINATION</div>
 					</div>
-					</B_les_aides_art>								
+					</B_les_aides_art>
 				</div>
 				<div class="row">
 					<B_rechaut>
@@ -96,7 +96,7 @@
 				<h2>Dans les dossiers de l'emag</h2>
 				<BOUCLE_rubune(RUBRIQUES){id_secteur=10002}{recherche}{"<hr class='sepacool'/>"}{0,5}>
 					<BOUCLE_artprinc(ARTICLES pb_selection){par ordre}{spip_pb_selection.id_rubrique=#ID_RUBRIQUE}{0,1}{doublons}>
-					<a href="#URL_RUBRIQUE">#LOGO_ARTICLE</a>
+					<a href="#URL_RUBRIQUE">[(#LOGO_ARTICLE|image_responsive{230/345/460/690})]</a>
 					</BOUCLE_artprinc>
 					<div>
 						<h4><a href="#URL_RUBRIQUE">#TITRE</a></h4>
@@ -110,7 +110,7 @@
 				#ANCRE_PAGINATION
 				<div>
 				<BOUCLE_rechemag(ARTICLES){id_rubrique=10026}{recherche}{!par points}{'<hr class="sepacool"/>'}{doublons emagart}{pagination 5}>
-					[(#COMPTEUR_BOUCLE|<={2}|?{<a href="#URL_ARTICLE">#LOGO_ARTICLE</a>})]
+					[(#COMPTEUR_BOUCLE|<={2}|?{<a href="#URL_ARTICLE">[(#LOGO_ARTICLE|image_responsive{230/345/460/690})]</a>})]
 					<div>
 						<h4><a href="#URL_ARTICLE">#TITRE</a></h4>
 						#DESCRIPTIF
@@ -120,7 +120,7 @@
 				<div class="col-md-24">#PAGINATION</div>
 				<div class="col-md-24"><hr class="sepacool"/></div>
 				</B_rechemag>
-				
+
 				<BOUCLE_rubuneart(ARTICLES){id_secteur=10002}{recherche}{"<hr class='sepacool'/>"}{doublons emagart}{pagination 5}>
 					<div>
 						<h4><a href="#URL_ARTICLE">#TITRE</a></h4>
@@ -138,7 +138,7 @@
 						<a class="rdv-lien" href="#URL_ARTICLE">
 							<div class="rdv">
 								<div class="imgwrap">
-									[(#LOGO_ARTICLE|vider_attribut{height}|vider_attribut{width})]
+									[(#LOGO_ARTICLE|image_responsive{230/345/460/690})]
 								</div>
 								<div class="caption-front par1">
 									<span class="date">#SURTITRE</span>
@@ -174,7 +174,7 @@
 					<a class="rdv-lien" href="#URL_ARTICLE">
 						<div class="rdv">
 							<div class="imgwrap">
-								[(#LOGO_ARTICLE|vider_attribut{height}|vider_attribut{width})]
+								[(#LOGO_ARTICLE|image_responsive{230/345/460/690})]
 							</div>
 							<div class="caption-front par2">
 								<span class="date">#SURTITRE</span>
@@ -203,9 +203,9 @@
 			</div>
 			</B_art_rdv_2>
 			</div>
-			
+
 		</div>
-	</div>	
+	</div>
 </div>
 <INCLURE{fond=inclure/footer}{env} />
 <script type="text/javascript">
