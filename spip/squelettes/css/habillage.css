@@ -10,6 +10,10 @@ img {
 	max-width: 100%;
 }
 
+.date {
+	display: none;
+}
+
 /* vidéos responsive avec le script fitvids.js */
 
 video {
@@ -3219,5 +3223,126 @@ div.cs_sommaire_titre_sans_fond {
 		margin: 0px auto;
 		max-width: 290px;
 		left: -23px;
+	}
+}
+
+@media print {
+	body {
+		width: auto !important;
+		margin: auto !important;
+		font-family: sans-serif;
+		font-size: 12pt;
+		line-height: 14pt;
+		background-color: #FFFFFF !important;
+		color: #000000 !important;
+	}
+	.container,
+	header.enhaut,
+	#main {
+		width: auto !important;
+		margin: auto !important;
+		float: none !important;
+		display: block !important;
+		text-align: left !important;
+	}
+	p,
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6,
+	blockquote,
+	ul,
+	ol {
+		color: #000000 !important;
+		/*  margin: auto!important; */
+	}
+	.print {
+		display: block;
+		/* affichage des éléments de classe print */
+	}
+	p,
+	blockquote {
+		orphans: 3;
+		widows: 3;
+	}
+	h1 {
+		font-size: 16pt;
+	}
+	h2 {
+		font-size: 14pt;
+	}
+	h3 {
+		font-size: 13pt;
+	}
+	blockquote,
+	figure {
+		page-break-inside: avoid;
+	}
+	h2 {
+		page-break-before: always;
+	}
+	h1,
+	h2,
+	h3,
+	caption {
+		page-break-after: avoid;
+	}
+	a {
+		color: #000000 !important;
+		text-decoration: none !important;
+	}
+	#cookie-banner,
+	#spip-admin,
+	footer#footer,
+	.printmail,
+	.titrepoledep,
+	.lireaussi,
+	.actuemag {
+		display: none;
+	}
+	header.enhaut>* {
+		display: none;
+	}
+	header.enhaut .mnt .logoCG {
+		display: block;
+	}
+	figure picture {
+		padding-bottom: 0 !important;
+	}
+	figure picture.conteneur_image_responsive_h {
+		padding-bottom: 0 !important;
+	}
+	figure picture img {
+		width: 150px !important;
+		height: auto !important;
+		margin: 0 !important;
+	}
+	figure figcaption,
+	figure span {
+		display: inline-block;
+	}
+	figure {
+		width: auto !important;
+		display: inline-block !important;
+		margin: 10pt !important;
+		max-width: none !important;
+		text-align: left !important;
+		height: auto !important;
+	}
+	div.vignette {
+		max-width: 150px;
+	}
+	section .diaporama {
+		background-color: #FFFFFF !important;
+	}
+	a[href]:after {
+		/*  content: " (url : " attr(href) ")"; /* affichage des URL des liens */
+		content: "";
+		font-size: 0.8em;
+	}
+	#spip-admin.spip-admin-float {
+		display: none;
 	}
 }
