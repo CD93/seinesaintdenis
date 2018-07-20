@@ -52,6 +52,7 @@
 .close {
 	float: right;
 }
+.leaflet-control.logoControl {clear: none;}
 </style>
 <script type="text/javascript">/*<!\[CDATA\[*/
 	$('#map[(#GET{id})]').on('ready', function(){
@@ -94,48 +95,58 @@
 		var picto_vd = L.icon({
 			iconUrl: '#CHEMIN{images/picto-carto/marker-g1.png}',
 			shadowUrl: '#CHEMIN{images/picto-carto/marker-shadow.png}',
-			shadowSize:   [15, 15],
-		    shadowAnchor: [6, 20],
-			iconSize: [12, 20],
-			iconAnchor: [5, 20],
-			popupAnchor: [0, -15],
+			shadowSize:   [20, 20],
+		  shadowAnchor: [8, 26],
+			iconSize: [16, 26],
+			iconAnchor: [6, 26],
+			popupAnchor: [0, -20],
 			fillOpacity:1,
 			zIndex: 1500
 		});
 		var picto_cls = L.icon({
 			iconUrl: '#CHEMIN{images/picto-carto/marker-g2.png}',
 			shadowUrl: '#CHEMIN{images/picto-carto/marker-shadow.png}',
-			shadowSize:   [15, 15],
-			shadowAnchor: [6, 20],
-			iconSize: [12, 20],
-			iconAnchor: [5, 20],
-			popupAnchor: [0, -15],
+			shadowSize:   [20, 20],
+		  shadowAnchor: [8, 26],
+			iconSize: [16, 26],
+			iconAnchor: [6, 26],
+			popupAnchor: [0, -20],
 			fillOpacity:1,
 			zIndex: 1500
 		});
 		var picto_ve = L.icon({
 			iconUrl: '#CHEMIN{images/picto-carto/marker-g3.png}',
 			shadowUrl: '#CHEMIN{images/picto-carto/marker-shadow.png}',
-			shadowSize:   [15, 15],
-			shadowAnchor: [6, 20],
-			iconSize: [12, 20],
-			iconAnchor: [5, 20],
-			popupAnchor: [0, -15],
+			shadowSize:   [20, 20],
+		  shadowAnchor: [8, 26],
+			iconSize: [16, 26],
+			iconAnchor: [6, 26],
+			popupAnchor: [0, -20],
 			fillOpacity:1,
 			zIndex: 1500
 		});
 		var picto_vh = L.icon({
 			iconUrl: '#CHEMIN{images/picto-carto/marker-g4.png}',
 			shadowUrl: '#CHEMIN{images/picto-carto/marker-shadow.png}',
-			shadowSize:   [15, 15],
-			shadowAnchor: [6, 20],
-			iconSize: [12, 20],
-			iconAnchor: [5, 20],
-			popupAnchor: [0, -15],
+			shadowSize:   [20, 20],
+		  shadowAnchor: [8, 26],
+			iconSize: [16, 26],
+			iconAnchor: [6, 26],
+			popupAnchor: [0, -20],
 			fillOpacity:1,
 			zIndex: 1500
 		});
-
+		var picto_sh = L.icon({
+			iconUrl: '#CHEMIN{images/picto-carto/marker-g5.png}',
+			shadowUrl: '#CHEMIN{images/picto-carto/marker-shadow.png}',
+			shadowSize:   [20, 20],
+		  shadowAnchor: [8, 26],
+			iconSize: [16, 26],
+			iconAnchor: [6, 26],
+			popupAnchor: [0, -20],
+			fillOpacity:1,
+			zIndex: 1500
+		});
 		// ajouter un select pour les communes
 		var select_options = '<select id="choixcommune"><option value="0">Choisir une commune</option><option value="1">Aubervilliers</option><option value="2">Aulnay-sous-Bois</option><option value="3">Bagnolet</option><option value="4">Bobigny</option><option value="5">Bondy</option><option value="6">Clichy-sous-Bois</option><option value="7">Coubron</option><option value="8">Drancy</option><option value="9">Dugny</option><option value="10">Epinay-sur-Seine</option><option value="11">Gagny</option><option value="12">Gournay-sur-Marne</option><option value="13">L Ile-Saint-Denis</option><option value="14">La Courneuve</option><option value="15">Le Blanc-Mesnil</option><option value="16">Le Bourget</option><option value="17">Le Pré-Saint-Gervais</option><option value="18">Le Raincy</option><option value="19">Les Lilas</option><option value="20">Les Pavillons-sous-Bois</option><option value="21">Livry-Gargan</option><option value="22">Montfermeil</option><option value="23">Montreuil</option><option value="24">Neuilly-Plaisance</option><option value="25">Neuilly-sur-Marne</option><option value="26">Noisy-le-Grand</option><option value="27">Noisy-le-Sec</option><option value="28">Pantin</option><option value="29">Pierrefitte-sur-Seine</option><option value="30">Romainville</option><option value="31">Rosny-sous-Bois</option><option value="32">Saint-Denis</option><option value="33">Saint-Ouen</option><option value="34">Sevran</option><option value="35">Stains</option><option value="36">Tremblay-en-France</option><option value="37">Vaujours</option><option value="38">Villemomble</option><option value="39">Villepinte</option><option value="40">Villetaneuse</option></select>';
 
@@ -282,48 +293,6 @@
 		    	style: { color: "#FFF", fillColor: "#fff", weight: 0.5, fillOpacity:0.7, clickable: false },
 		    }).addTo(fondCD);
 		});
-		// les Bassins Gérontologiques
-		#SET{urlbassin,https://geoportail93.fr/SERV/DATA/?TYPENAME=1092&FORMAT=GEOJSON&SERVICE=wfs&SRS=4326&COL=all}
-		var bassins = $.getJSON("[(#GET{urlbassin}|copie_locale{modif})]");
-		bassins.then(function(data) {
-			// Nord Ouest
-			var no =L.geoJson(data,{
-				filter: function (feature, layer) {
-		    		if (feature.properties.code_bassin =="BG 931"){
-			    		return true;
-			    	}
-			    },
-				style: { color: "#FF8000", weight: 2, opacity: 1, fill: false, clickable: false },
-		    }).addTo(fondCD);
-			// Sud Ouest
-			var so =L.geoJson(data,{
-				filter: function (feature, layer) {
-					if (feature.properties.code_bassin =="BG 933"){
-			    		return true;
-			    	}
-			    },
-				style: { color: "#4848FF", fill: false, weight: 2, opacity: 1, clickable: false },
-			}).addTo(fondCD);
-			// Nord Est
-			var ne =L.geoJson(data,{
-				filter: function (feature, layer) {
-					if (feature.properties.code_bassin =="BG 932"){
-			    		return true;
-			    	}
-			    },
-				style: { color: "#5BB700", fill: false, weight: 2, opacity: 1, clickable: false },
-			}).addTo(fondCD);
-			// Sud Est
-			var se =L.geoJson(data,{
-				filter: function (feature, layer) {
-					if (feature.properties.code_bassin =="BG 934"){
-			    		return true;
-			    	}
-			    },
-				style: { color: "#FF3535", fill: false, weight: 2, opacity: 1, clickable: false },
-			}).addTo(fondCD);
-
-		});// fin de bassins.then
 
 		//ajout couche des actions points
 		var pointsCluster = L.markerClusterGroup({
@@ -340,27 +309,30 @@
 			group31 = L.featureGroup(),
 			group32 = L.featureGroup(),
 			group33 = L.featureGroup(),
+			group34 = L.featureGroup(),
 			control = L.control.layers(null, null, { collapsed: false, position: 'bottomleft' });
 
-			control.addOverlay(group33, '<i class="futur"><img src="#CHEMIN{images/picto-carto/marker-g3.png}" width="12px" height="20px" /></i><span> visites en EHPAD</span>');
-			control.addOverlay(group32, '<i class="futur"><img src="#CHEMIN{images/picto-carto/marker-g1.png}" width="12px" height="20px" /></i><span> visites à domicile</span>');
-			control.addOverlay(group31, '<i class="encours"><img src="#CHEMIN{images/picto-carto/marker-g4.png}" width="12px" height="20px" /></i><span> visites à l\'hôpital</span>');
-			control.addOverlay(group30, '<i class="passe"><img src="#CHEMIN{images/picto-carto/marker-g2.png}" width="12px" height="20px" /></i><span> création de lien social</span>');
+			control.addOverlay(group30, '<i class="futur"><img src="#CHEMIN{images/picto-carto/marker-g1.png}" width="12px" height="20px" /></i><span> Constructions neuves</span>');
+			control.addOverlay(group31, '<i class="futur"><img src="#CHEMIN{images/picto-carto/marker-g2.png}" width="12px" height="20px" /></i><span> Reconstructions</span>');
+			control.addOverlay(group32, '<i class="encours"><img src="#CHEMIN{images/picto-carto/marker-g3.png}" width="12px" height="20px" /></i><span> Opérations de rénovations</span>');
+			control.addOverlay(group33, '<i class="passe"><img src="#CHEMIN{images/picto-carto/marker-g4.png}" width="12px" height="20px" /></i><span> Rénovations énergétiques et fonctionnelles</span>');
+			control.addOverlay(group34, '<i class="passe"><img src="#CHEMIN{images/picto-carto/marker-g5.png}" width="12px" height="20px" /></i><span> Rénovation lourde</span>');
 			control.addTo(map[(#GET{id})]);
 
 			group30.addTo(map[(#GET{id})]); // Adding to map now adds all child layers into the parent group.
 			group31.addTo(map[(#GET{id})]);
 			group32.addTo(map[(#GET{id})]);
 			group33.addTo(map[(#GET{id})]);
+			group34.addTo(map[(#GET{id})]);
 
-		// les Actions contre l'isolement
-		#SET{urlactions,https://geoportail93.fr/SERV/DATA/?TYPENAME=1619&FORMAT=GEOJSON&SERVICE=wfs&SRS=4326&COL=ALL}
+		// le PAC
+		#SET{urlactions,https://geoportail93.fr/SERV/DATA/?TYPENAME=1650&FORMAT=GEOJSON&SERVICE=wfs&SRS=4326&COL=ALL}
 		var actions = $.getJSON("[(#GET{urlactions}|copie_locale{modif})]");
 		actions.then(function(data) {
-			// Visites à domicile
+			// Constructions neuves
 			var vd =L.geoJson(data,{
 		    	filter: function (feature, layer) {
-		    		if (feature.properties.type_action =="Visites à domicile"){
+		    		if (feature.properties.nature_des_travaux =="Constructions neuves"){
 		    		return true;
 		    		}
 		    	},
@@ -370,14 +342,14 @@
 						zIndexOffset: 1800,
 						riseOnHover: true,
 						riseOffset: 3000,
-						title: "Visites à domicile"
+						title: "Constructions neuves"
 					});
 		    	},onEachFeature: bindPopup
-		    }).addTo(group32);
-		    // Création de lien social
+		    }).addTo(group30);
+		    // Reconstructions
 		    var cls =L.geoJson(data,{
 		    	filter: function (feature, layer) {
-		    		if (feature.properties.type_action =="Création de lien social"){
+		    		if (feature.properties.nature_des_travaux =="Reconstructions"){
 		    		return true;
 		    		}
 		    	},
@@ -387,17 +359,17 @@
 		    			zIndexOffset: 1800,
 		    			riseOnHover: true,
 		    			riseOffset: 3000,
-		    			title: "Création de lien social"
+		    			title: "Reconstructions"
 		    		});
 		    	},onEachFeature: bindPopup
 		    });
 		    cls.eachLayer(function (layer) {
-		    	layer.addTo(group30);
+		    	layer.addTo(group31);
 		    });
-		    // Visites en EHPAD
+		    // Opérations de rénovations
 		    var ve =L.geoJson(data,{
 		    	filter: function (feature, layer) {
-		    		if (feature.properties.type_action =="Visites en EHPAD"){
+		    		if (feature.properties.nature_des_travaux =="Opérations de rénovations"){
 		    		return true;
 		    		}
 		    	},
@@ -407,14 +379,14 @@
 		    			zIndexOffset: 1800,
 		    			riseOnHover: true,
 		    			riseOffset: 3000,
-		    			title: "Visites en EHPAD"
+		    			title: "Opérations de rénovations"
 		    		});
 		    	},onEachFeature: bindPopup
-		    }).addTo(group33);
-		    // Visites à l'hôpital
+		    }).addTo(group32);
+		    // Rénovations énergétiques et fonctionnelles
 		    var vh =L.geoJson(data,{
 		    	filter: function (feature, layer) {
-		    		if (feature.properties.type_action =="Visites à l'hôpital"){
+		    		if (feature.properties.nature_des_travaux =="Rénovations énergétiques et fonctionnelles"){
 		    		return true;
 		    		}
 		    	},
@@ -424,10 +396,27 @@
 		    			zIndexOffset: 1800,
 		    			riseOnHover: true,
 		    			riseOffset: 3000,
-		    			title: "Visites à l'hôpital"
+		    			title: "Rénovations énergétiques et fonctionnelles"
 		    		});
 		    	},onEachFeature: bindPopup
-		    }).addTo(group31);
+		    }).addTo(group33);
+				// Rénovation lourde
+		    var vh =L.geoJson(data,{
+		    	filter: function (feature, layer) {
+		    		if (feature.properties.nature_des_travaux =="Rénovation lourde"){
+		    		return true;
+		    		}
+		    	},
+		    	pointToLayer: function (feature, latlng) {
+		    		return L.marker(latlng, {
+		    			icon: picto_sh,
+		    			zIndexOffset: 1800,
+		    			riseOnHover: true,
+		    			riseOffset: 3000,
+		    			title: "Rénovation lourde"
+		    		});
+		    	},onEachFeature: bindPopup
+		    }).addTo(group34);
 		});// fin de actions.then
 
 		map[(#GET{id})].addLayer(pointsCluster);
@@ -436,6 +425,16 @@
 		//zoomHome.addTo(map[(#GET{id})]);
 
 		// ajout du logo
+		var logo = L.control({position: 'topleft',zindex:1700});
+		logo.onAdd = function(map[(#GET{id})]) {
+			this._div = L.DomUtil.create('div', 'logoControl');
+			var img_log = '<div id="logoPAC"><img src="#CHEMIN{images/picto-carto/logo-PAC.png}" /></div>';
+			this._div.innerHTML = img_log;
+			return this._div;
+		}
+		logo.addTo(map[(#GET{id})]);
+		// ajout du logo
+		/*
 		var legende = L.control({position: 'bottomleft'});
 		legende.onAdd = function(map[(#GET{id})]) {
 			this._div = L.DomUtil.create('div', 'legend');
@@ -449,7 +448,7 @@
 			return this._div;
 		}
 		legende.addTo(map[(#GET{id})]);
-
+		*/
 		function defineClusterIcon(cluster) {
 			var nbre = cluster.getChildCount();
 			var prop = eval(1+(nbre/10));
@@ -473,11 +472,11 @@
 		    feature.layer = layer;
 			//on lui fait afficher une popup lors d'un click
 			var arr = feature.properties;
-		    var popuptxt ="<div class='popupclust'><h3>"+ arr.type_action +" ("+arr.ville_lieu_action+")"+"</h3>";
-			popuptxt += '<span class="point">' + arr.structure_referente + '</span>';
-			popuptxt += '<br/><span class="point">' + arr.referent_action + '</span>';
-			popuptxt += '<br/><span class="point">' + arr.tel_referent_action + '</span>';
-			popuptxt += '<br/><span class="point">' + arr.mail_referent_action + '</span>';
+		    var popuptxt ="<div class='popupclust'><h3>"+ arr.titre +"<br/>("+arr.commune+")"+"</h3>";
+			popuptxt += '<span class="point">' + arr.nature_des_travaux + '</span>';
+			popuptxt += '<br/><span class="point">' + arr.precision + '</span>';
+			popuptxt += '<br/><span class="point">' + arr.zone_concernee + '</span>';
+			popuptxt += '<br/><span class="point">' + arr.date_de_livraison + '</span>';
 			popuptxt += '</div>';
 		    layer.bindPopup(popuptxt);
 		}

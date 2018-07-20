@@ -120,8 +120,8 @@
 		}).on('clustermouseout', function (a) {
 		});
 
-		var group3 = L.featureGroup.subGroup(pointsCluster),
-		group31 = L.featureGroup.subGroup(pointsCluster),
+		var group3 = L.featureGroup(),
+		group31 = L.featureGroup.(),
 		//group32 = L.featureGroup.subGroup(pointsCluster),
 		control = L.control.layers(null, null, { collapsed: false, position: 'bottomleft' });
 
