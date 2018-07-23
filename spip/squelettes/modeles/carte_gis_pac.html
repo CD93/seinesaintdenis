@@ -472,10 +472,10 @@
 			//on lui fait afficher une popup lors d'un click
 			var arr = feature.properties;
 		    var popuptxt ="<div class='popupclust'><h3>"+ arr.titre +"<br/>("+arr.commune+")"+"</h3>";
-			popuptxt += '<span class="point">' + arr.nature_des_travaux + '</span>';
-			popuptxt += '<br/><span class="point">' + arr.precision + '</span>';
-			popuptxt += '<br/><span class="point">' + arr.zone_concernee + '</span>';
-			popuptxt += '<br/><span class="point">date de livraison: ' + arr.date_de_livraison + '</span>';
+			popuptxt += '<span class="point"><b>nature : </b>' + arr.nature_des_travaux + '</span>';
+			 popuptxt += '<br/><span class="point"><b>précision : </b>' + arr.precision + '</span>';
+			popuptxt += '<br/><span class="point"><b>zone concernée : </b>' + arr.zone_concernee + '</span>';
+			popuptxt += '<br/><span class="point"><b>date de livraison : </b>' + arr.date_de_livraison + '</span>';
 			popuptxt += '</div>';
 		    layer.bindPopup(popuptxt);
 		}
