@@ -37,13 +37,13 @@ function formulaires_cpf_traiter_dist()
 	$enfants_charge = _request('enfantcharge');
 	$totrev = _request('revenus');
 	$enfants_handi = _request('enfanthandicap');
-	//ces 5 paramètres suivants sont à réactualiser en janvier de chaque année
+	//ces 5 paramï¿½tres suivants sont ï¿½ rï¿½actualiser en janvier de chaque annï¿½e
 	$plancher = 550;
 	$plafond = 5200;
 	$minimum_horaire = 0.33;
 	$maximum_horaire = 2.74;
 	$taux_effort_tab = array(1=>0.6, 2=>0.5,3=>0.4,4=>0.30,5=>0.30,6=>0.30,7=>0.30,8=>0.20);
-	//fin des paramètres à réactualiser
+	//fin des paramï¿½tres ï¿½ rï¿½actualiser
 	$nb_enf_total = $enfants_charge+$enfants_handi;
 	$taux_effort = $taux_effort_tab[$nb_enf_total];
 	$prix_horaire = round($totrev*($taux_effort/1000),2);
@@ -51,6 +51,6 @@ function formulaires_cpf_traiter_dist()
 	$prix_journee = $prix_horaire_final*10;
 	$reponse = "votre prix de journ&eacute;e est de ".$prix_journee." Euros" ;
 	$reponse .= "<br/><small>les r&eacute;sultats obtenus &agrave; partir de cet outil de simulation n'ont qu'une valeur indicative et non contractuelle.</small>";
-	return $reponse;
+	return array('message_ok'=>$reponse);
 }
 ?>
